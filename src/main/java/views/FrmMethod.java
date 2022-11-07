@@ -98,6 +98,11 @@ public class FrmMethod extends javax.swing.JFrame {
         jButton1.setText("Đăng nhập");
         jButton1.setBorderPainted(false);
         jButton1.setFocusPainted(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel10.setText("Quên mật khẩu ?");
@@ -233,6 +238,16 @@ public class FrmMethod extends javax.swing.JFrame {
             System.exit(0);
         }
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String username = txt_username.getText();
+        String password = new String(txt_password.getPassword());
+        if(username.isEmpty()){
+            helper.error(this, "Tên người dùng không được để trống!");
+        }else if(password.isEmpty()){
+            helper.error(this, "Mật khẩu không được để trống!");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
