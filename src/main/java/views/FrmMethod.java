@@ -1,5 +1,6 @@
 package views;
 
+import models.NguoiDung;
 import services.INguoiDungService;
 import services.impl.NguoiDungService;
 import utilities.Helper;
@@ -9,16 +10,16 @@ import utilities.Helper;
  * @author VU NGUYEN HUONG
  */
 public class FrmMethod extends javax.swing.JFrame {
-    
+
     Helper helper = new Helper();
     INguoiDungService iNguoiDungService = new NguoiDungService();
-    
+
     public FrmMethod() {
         initComponents();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -36,7 +37,7 @@ public class FrmMethod extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         txt_username = new javax.swing.JTextField();
         txt_password = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        btn_dangnhap = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -94,14 +95,14 @@ public class FrmMethod extends javax.swing.JFrame {
 
         txt_password.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 0));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Đăng nhập");
-        jButton1.setBorderPainted(false);
-        jButton1.setFocusPainted(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_dangnhap.setBackground(new java.awt.Color(0, 0, 0));
+        btn_dangnhap.setForeground(new java.awt.Color(255, 255, 255));
+        btn_dangnhap.setText("Đăng nhập");
+        btn_dangnhap.setBorderPainted(false);
+        btn_dangnhap.setFocusPainted(false);
+        btn_dangnhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_dangnhapActionPerformed(evt);
             }
         });
 
@@ -134,7 +135,7 @@ public class FrmMethod extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
+                            .addComponent(btn_dangnhap, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
                             .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -156,7 +157,7 @@ public class FrmMethod extends javax.swing.JFrame {
                     .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_dangnhap, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel10)
                 .addGap(41, 41, 41))
@@ -240,15 +241,30 @@ public class FrmMethod extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabel4MouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_dangnhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dangnhapActionPerformed
         String username = txt_username.getText();
         String password = new String(txt_password.getPassword());
-        if(username.isEmpty()){
+        if (username.isEmpty()) {
             helper.error(this, "Tên người dùng không được để trống!");
-        }else if(password.isEmpty()){
+        } else if (password.isEmpty()) {
             helper.error(this, "Mật khẩu không được để trống!");
+        } else {
+            if (iNguoiDungService.getObj(username) == null) {
+                helper.error(this, "Tên người dùng không tồn tại!");
+            } else {
+                NguoiDung nd = iNguoiDungService.getObj(username);
+                if (!nd.getMatKhau().equals(password)) {
+                    helper.error(this, "Mật khẩu không chính xác!");
+                    return;
+                }
+                if (nd.getMa().equals(username) && nd.getMatKhau().equals(password)) {
+                    helper.alert(this, "Đăng nhập thành công!");
+                    this.dispose();
+                    new Main().setVisible(true);
+                }
+            }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btn_dangnhapActionPerformed
 
     /**
      * @param args the command line arguments
@@ -286,7 +302,7 @@ public class FrmMethod extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btn_dangnhap;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
