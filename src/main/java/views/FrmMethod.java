@@ -16,6 +16,7 @@ public class FrmMethod extends javax.swing.JFrame {
     public FrmMethod() {
         initComponents();
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
     
     @SuppressWarnings("unchecked")
