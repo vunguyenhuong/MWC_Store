@@ -1,0 +1,5 @@
+utilities\JpaUtils.class
+application\Application.class
+utilities\HibernateUtil.class
+utilities\Migrator.class
+utilities\Helper.class
