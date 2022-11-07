@@ -207,8 +207,8 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jPasswordField1" pref="231" max="32767" attributes="0"/>
-                          <Component id="jTextField1" max="32767" attributes="0"/>
+                          <Component id="txt_password" pref="231" max="32767" attributes="0"/>
+                          <Component id="txt_username" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                   </Group>
@@ -243,12 +243,12 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextField1" linkSize="2" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                          <Component id="txt_username" linkSize="2" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                           <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jPasswordField1" linkSize="2" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="txt_password" linkSize="2" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                           <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -281,14 +281,14 @@
                 <Property name="text" type="java.lang.String" value="SIGN IN"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField1">
+            <Component class="javax.swing.JTextField" name="txt_username">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JPasswordField" name="jPasswordField1">
+            <Component class="javax.swing.JPasswordField" name="txt_password">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>

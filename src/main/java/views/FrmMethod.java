@@ -1,5 +1,7 @@
 package views;
 
+import services.INguoiDungService;
+import services.impl.NguoiDungService;
 import utilities.Helper;
 
 /**
@@ -9,6 +11,7 @@ import utilities.Helper;
 public class FrmMethod extends javax.swing.JFrame {
     
     Helper helper = new Helper();
+    INguoiDungService iNguoiDungService = new NguoiDungService();
     
     public FrmMethod() {
         initComponents();
@@ -30,8 +33,8 @@ public class FrmMethod extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txt_username = new javax.swing.JTextField();
+        txt_password = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -86,9 +89,9 @@ public class FrmMethod extends javax.swing.JFrame {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("SIGN IN");
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txt_username.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jPasswordField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txt_password.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jButton1.setBackground(new java.awt.Color(0, 0, 0));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -114,8 +117,8 @@ public class FrmMethod extends javax.swing.JFrame {
                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
-                    .addComponent(jTextField1))
+                    .addComponent(txt_password, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+                    .addComponent(txt_username))
                 .addGap(55, 55, 55))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,11 +143,11 @@ public class FrmMethod extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -153,7 +156,7 @@ public class FrmMethod extends javax.swing.JFrame {
                 .addGap(41, 41, 41))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jPasswordField1, jTextField1});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txt_password, txt_username});
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -282,7 +285,7 @@ public class FrmMethod extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField txt_password;
+    private javax.swing.JTextField txt_username;
     // End of variables declaration//GEN-END:variables
 }
