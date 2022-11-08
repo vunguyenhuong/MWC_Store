@@ -38,7 +38,7 @@ public class FrmMethod extends javax.swing.JFrame {
         txt_username = new javax.swing.JTextField();
         txt_password = new javax.swing.JPasswordField();
         btn_dangnhap = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
+        lbl_forgotPassword = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
 
@@ -106,8 +106,13 @@ public class FrmMethod extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel10.setText("Quên mật khẩu ?");
+        lbl_forgotPassword.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl_forgotPassword.setText("Quên mật khẩu ?");
+        lbl_forgotPassword.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_forgotPasswordMouseClicked(evt);
+            }
+        });
 
         jLabel11.setText("Username");
 
@@ -137,7 +142,7 @@ public class FrmMethod extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(btn_dangnhap, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
                             .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(lbl_forgotPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -159,7 +164,7 @@ public class FrmMethod extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_dangnhap, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel10)
+                .addComponent(lbl_forgotPassword)
                 .addGap(41, 41, 41))
         );
 
@@ -260,11 +265,15 @@ public class FrmMethod extends javax.swing.JFrame {
                 if (nd.getMa().equals(username) && nd.getMatKhau().equals(password)) {
                     helper.alert(this, "Đăng nhập thành công!");
                     this.dispose();
-                    new Main().setVisible(true);
+                    new FrmHome(nd).setVisible(true);
                 }
             }
         }
     }//GEN-LAST:event_btn_dangnhapActionPerformed
+
+    private void lbl_forgotPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_forgotPasswordMouseClicked
+        new FrmResetPassword().setVisible(true);
+    }//GEN-LAST:event_lbl_forgotPasswordMouseClicked
 
     /**
      * @param args the command line arguments
@@ -304,7 +313,6 @@ public class FrmMethod extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_dangnhap;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
@@ -317,6 +325,7 @@ public class FrmMethod extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lbl_forgotPassword;
     private javax.swing.JPasswordField txt_password;
     private javax.swing.JTextField txt_username;
     // End of variables declaration//GEN-END:variables

@@ -29,8 +29,8 @@ import lombok.Setter;
 public class NguoiDung implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @Column(name = "Ma")
     private String ma;

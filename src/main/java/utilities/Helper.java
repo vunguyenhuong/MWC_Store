@@ -81,4 +81,9 @@ public class Helper {
             return false;
         }
     }
+    
+    public String input(Component component,String message,String title){
+        String result = JOptionPane.showInputDialog(component, message, title, 0);
+        return result;
+    }
 }
