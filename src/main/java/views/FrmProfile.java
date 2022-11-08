@@ -3,15 +3,20 @@ package views;
 import javax.swing.ImageIcon;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import models.NguoiDung;
+import services.INguoiDungService;
+import services.impl.NguoiDungService;
+import utilities.Helper;
 
 /**
  *
  * @author VU NGUYEN HUONG
  */
 public class FrmProfile extends javax.swing.JInternalFrame {
-    
-    private NguoiDung nguoidung = new NguoiDung();
-    
+
+    private INguoiDungService iNguoiDungService = new NguoiDungService();
+    private NguoiDung nguoidung;
+    private Helper helper = new Helper();
+
     public FrmProfile(NguoiDung nd) {
         initComponents();
         this.nguoidung = nd;
@@ -32,10 +37,13 @@ public class FrmProfile extends javax.swing.JInternalFrame {
         } else {
             rd_nu.setSelected(true);
         }
-        lbl_chucvu.setText(nd.getChucVu().getTen());
+        try {
+            lbl_chucvu.setText(nd.getChucVu().getTen());
+        } catch (Exception e) {
+        }
         imageAvatar.setImage(new ImageIcon("images/" + nd.getHinhAnh()));
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -60,13 +68,16 @@ public class FrmProfile extends javax.swing.JInternalFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txt_oldPassword = new javax.swing.JPasswordField();
         jLabel10 = new javax.swing.JLabel();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        txt_newPassword = new javax.swing.JPasswordField();
         jLabel11 = new javax.swing.JLabel();
-        jPasswordField3 = new javax.swing.JPasswordField();
+        txt_reNewPassword = new javax.swing.JPasswordField();
         jButton2 = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
+        lbl_err_renewpass = new javax.swing.JLabel();
+        lbl_err_newpass = new javax.swing.JLabel();
+        lbl_err_oldpass = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -114,14 +125,50 @@ public class FrmProfile extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Mật khẩu hiện tại");
 
+        txt_oldPassword.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txt_oldPasswordCaretUpdate(evt);
+            }
+        });
+
         jLabel10.setText("Mật khẩu mới");
 
+        txt_newPassword.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txt_newPasswordCaretUpdate(evt);
+            }
+        });
+
         jLabel11.setText("Xác nhận mật khẩu mới");
+
+        txt_reNewPassword.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txt_reNewPasswordCaretUpdate(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(102, 102, 102));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("SUBMIT");
         jButton2.setBorderPainted(false);
+        jButton2.setFocusPainted(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        lbl_err_renewpass.setFont(lbl_err_renewpass.getFont().deriveFont(lbl_err_renewpass.getFont().getSize()-1f));
+        lbl_err_renewpass.setForeground(java.awt.Color.red);
+        lbl_err_renewpass.setText(" ");
+
+        lbl_err_newpass.setFont(lbl_err_newpass.getFont().deriveFont(lbl_err_newpass.getFont().getSize()-1f));
+        lbl_err_newpass.setForeground(java.awt.Color.red);
+        lbl_err_newpass.setText(" ");
+
+        lbl_err_oldpass.setFont(lbl_err_oldpass.getFont().deriveFont(lbl_err_oldpass.getFont().getSize()-1f));
+        lbl_err_oldpass.setForeground(java.awt.Color.red);
+        lbl_err_oldpass.setText(" ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -166,35 +213,31 @@ public class FrmProfile extends javax.swing.JInternalFrame {
                                             .addComponent(rd_nu))))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(imageAvatar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lbl_chucvu, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)))
+                                    .addComponent(lbl_chucvu, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                                    .addComponent(imageAvatar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel8)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel9)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_reNewPassword)
+                            .addComponent(jLabel11)
+                            .addComponent(txt_newPassword)
+                            .addComponent(txt_oldPassword)
+                            .addComponent(lbl_err_renewpass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl_err_newpass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl_err_oldpass, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 26, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel2, jLabel3, jLabel4, jLabel5, jLabel6, jLabel7});
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel10, jLabel11, jLabel9});
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jPasswordField1, jPasswordField2, jPasswordField3});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,35 +279,87 @@ public class FrmProfile extends javax.swing.JInternalFrame {
                         .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txt_oldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl_err_oldpass)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_newPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl_err_newpass)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_reNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl_err_renewpass)
+                                .addGap(12, 12, 12)
                                 .addComponent(jButton2))
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(146, Short.MAX_VALUE))
+                .addContainerGap(154, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel2, jLabel3, jLabel4, jLabel5, jLabel6, jLabel7});
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton1, jButton2, jPasswordField1, jPasswordField2, jPasswordField3, rd_nam, rd_nu, txt_diachi, txt_email, txt_ma, txt_sdt, txt_ten});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton1, jButton2, rd_nam, rd_nu, txt_diachi, txt_email, txt_ma, txt_newPassword, txt_oldPassword, txt_reNewPassword, txt_sdt, txt_ten});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+
+    private void txt_oldPasswordCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_oldPasswordCaretUpdate
+        String oldPass = new String(txt_oldPassword.getPassword());
+        if (!oldPass.equals(nguoidung.getMatKhau())) {
+            lbl_err_oldpass.setText("Mật khẩu không chính xác!");
+        } else {
+            lbl_err_oldpass.setText(" ");
+        }
+    }//GEN-LAST:event_txt_oldPasswordCaretUpdate
+
+    private void txt_newPasswordCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_newPasswordCaretUpdate
+        if (txt_newPassword.getPassword().length < 8) {
+            lbl_err_newpass.setText("Tối thiểu 8 kí tự!");
+        } else {
+            lbl_err_newpass.setText(" ");
+        }
+    }//GEN-LAST:event_txt_newPasswordCaretUpdate
+
+    private void txt_reNewPasswordCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_reNewPasswordCaretUpdate
+        String newPass = new String(txt_newPassword.getPassword());
+        String reNewPass = new String(txt_reNewPassword.getPassword());
+        if (!reNewPass.equals(newPass)) {
+            lbl_err_renewpass.setText("Xác nhận mật khẩu không khớp!");
+        } else {
+            lbl_err_renewpass.setText(" ");
+        }
+    }//GEN-LAST:event_txt_reNewPasswordCaretUpdate
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String oldPass = new String(txt_oldPassword.getPassword());
+        String newPass = new String(txt_newPassword.getPassword());
+        String reNewPass = new String(txt_reNewPassword.getPassword());
+        if (oldPass.equals(nguoidung.getMatKhau()) && newPass.length() >= 8 && newPass.equals(reNewPass)) {
+            if (helper.confirm(this, "Xác nhận đổi mật khẩu ?")) {
+                nguoidung.setMatKhau(reNewPass);
+                iNguoiDungService.save(nguoidung);
+                helper.alert(this, "Mật khẩu đã được thay đổi!");
+                txt_oldPassword.setText("");
+                txt_newPassword.setText("");
+                txt_reNewPassword.setText("");
+            }
+        } else {
+            helper.error(this, "Không thành công!");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -282,17 +377,20 @@ public class FrmProfile extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JPasswordField jPasswordField3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lbl_chucvu;
+    private javax.swing.JLabel lbl_err_newpass;
+    private javax.swing.JLabel lbl_err_oldpass;
+    private javax.swing.JLabel lbl_err_renewpass;
     private javax.swing.JRadioButton rd_nam;
     private javax.swing.JRadioButton rd_nu;
     private javax.swing.JTextField txt_diachi;
     private javax.swing.JTextField txt_email;
     private javax.swing.JTextField txt_ma;
+    private javax.swing.JPasswordField txt_newPassword;
+    private javax.swing.JPasswordField txt_oldPassword;
+    private javax.swing.JPasswordField txt_reNewPassword;
     private javax.swing.JTextField txt_sdt;
     private javax.swing.JTextField txt_ten;
     // End of variables declaration//GEN-END:variables

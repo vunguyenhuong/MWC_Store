@@ -34,5 +34,12 @@
        
         <mapping class="models.ChucVu"/>
         <mapping class="models.NguoiDung"/>
+        <mapping class="models.ChatLieu"/>
+        <mapping class="models.Dep"/>
+        <mapping class="models.LoaiDep"/>
+        <mapping class="models.NhaSX"/>
+        <mapping class="models.MauSac"/>
+        <mapping class="models.Size"/>
+        <mapping class="models.ChiTietDep"/>
     </session-factory>
 </hibernate-configuration>
