@@ -43,7 +43,7 @@ public class SendMailUltil {
             Transport.send(message);
 
             System.out.println("Done");
-            return "Mật khẩu đã được đặt lại! Vui lòng kiểm tra Email!";
+            return "Mật khẩu đã được đặt lại! Vui lòng kiểm tra hòm thư!";
         } catch (MessagingException e) {
 //            e.printStackTrace();
             return "Email không tồn tại!";
