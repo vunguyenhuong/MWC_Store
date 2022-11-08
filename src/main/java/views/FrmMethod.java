@@ -52,6 +52,7 @@ public class FrmMethod extends javax.swing.JFrame {
         txt_password = new javax.swing.JPasswordField();
         txt_username = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
+        chk_showpass = new javax.swing.JCheckBox();
         jPanel4 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -150,6 +151,15 @@ public class FrmMethod extends javax.swing.JFrame {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("SIGN IN");
 
+        chk_showpass.setBackground(new java.awt.Color(255, 255, 255));
+        chk_showpass.setText("Show Password");
+        chk_showpass.setFocusPainted(false);
+        chk_showpass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chk_showpassActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -164,7 +174,9 @@ public class FrmMethod extends javax.swing.JFrame {
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(chk_showpass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txt_password, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(jPanel5Layout.createSequentialGroup()
@@ -195,11 +207,13 @@ public class FrmMethod extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(chk_showpass)
+                .addGap(9, 9, 9)
                 .addComponent(btn_dangnhap, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lbl_forgotPassword)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         main.add(jPanel5, "signin");
@@ -407,6 +421,16 @@ public class FrmMethod extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_reset_submitActionPerformed
 
+    private void chk_showpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chk_showpassActionPerformed
+        if(chk_showpass.isSelected()){
+            txt_password.setEchoChar((char)0);
+            chk_showpass.setForeground(Color.RED);
+        }else{
+            txt_password.setEchoChar('\u25cf');
+            chk_showpass.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_chk_showpassActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -419,6 +443,7 @@ public class FrmMethod extends javax.swing.JFrame {
     private javax.swing.JButton btn_dangnhap;
     private javax.swing.JButton btn_reset_cancel;
     private javax.swing.JButton btn_reset_submit;
+    private javax.swing.JCheckBox chk_showpass;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
