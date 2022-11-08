@@ -4,6 +4,7 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import models.NguoiDung;
+import utilities.Helper;
 import utilities.ImageUltil;
 
 
@@ -14,11 +15,14 @@ import utilities.ImageUltil;
 public class FrmHome extends javax.swing.JFrame {
     
     ImageUltil imageUltil = new ImageUltil();
+    private Helper helper = new Helper();
+    private NguoiDung nguoidung = new NguoiDung();
     
     public FrmHome(NguoiDung nd) {
         initComponents();
         setLocationRelativeTo(null);
         setExtendedState(MAXIMIZED_BOTH);
+        this.nguoidung = nd;
         lbl_tenUser.setText(nd.getTen());
         lbl_role.setText(nd.getChucVu().getTen());
         imageAvatar.setImage(new ImageIcon("images/"+nd.getHinhAnh()));
@@ -63,7 +67,7 @@ public class FrmHome extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         dangxuat = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        deskpane = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,6 +76,11 @@ public class FrmHome extends javax.swing.JFrame {
         jPanel2.setBackground(java.awt.Color.black);
 
         imageAvatar.setGradientColor1(new java.awt.Color(51, 51, 255));
+        imageAvatar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                imageAvatarMouseClicked(evt);
+            }
+        });
 
         lbl_tenUser.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_tenUser.setForeground(java.awt.Color.orange);
@@ -258,6 +267,11 @@ public class FrmHome extends javax.swing.JFrame {
         );
 
         dangxuat.setBackground(new java.awt.Color(102, 102, 102));
+        dangxuat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dangxuatMouseClicked(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -333,14 +347,14 @@ public class FrmHome extends javax.swing.JFrame {
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {banhang, home, qlhoadon, qlnhanvien, qlsanpham});
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout deskpaneLayout = new javax.swing.GroupLayout(deskpane);
+        deskpane.setLayout(deskpaneLayout);
+        deskpaneLayout.setHorizontalGroup(
+            deskpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 870, Short.MAX_VALUE)
         );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        deskpaneLayout.setVerticalGroup(
+            deskpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
@@ -351,12 +365,12 @@ public class FrmHome extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDesktopPane1))
+                .addComponent(deskpane))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jDesktopPane1)
+            .addComponent(deskpane)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -397,6 +411,19 @@ public class FrmHome extends javax.swing.JFrame {
         effectNav(thongke,qlhoadon,qlnhanvien, home, banhang, qlsanpham);
     }//GEN-LAST:event_thongkeMouseClicked
 
+    private void imageAvatarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageAvatarMouseClicked
+        deskpane.removeAll();
+        deskpane.add(new FrmProfile(nguoidung)).setVisible(true);
+    }//GEN-LAST:event_imageAvatarMouseClicked
+
+    private void dangxuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dangxuatMouseClicked
+        if(helper.confirm(this, "Bạn có chắc muốn đăng xuất ?")){
+            helper.alert(this, "Đăng xuất thành công!");
+            this.dispose();
+            new SplashScreen().setVisible(true);
+        }
+    }//GEN-LAST:event_dangxuatMouseClicked
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -409,9 +436,9 @@ public class FrmHome extends javax.swing.JFrame {
     private javax.swing.JPanel banhang;
     private javax.swing.ButtonGroup buttonGroup;
     private javax.swing.JPanel dangxuat;
+    private javax.swing.JDesktopPane deskpane;
     private javax.swing.JPanel home;
     private utilities.ImageAvatar imageAvatar;
-    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

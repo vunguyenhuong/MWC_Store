@@ -8,13 +8,13 @@ import utilities.SendMailUltil;
  *
  * @author VU NGUYEN HUONG
  */
-public class TestQRWebcam extends javax.swing.JFrame {
+public class TQWC extends javax.swing.JFrame {
 
     QRCodeWebcam qRCodeWebcam = new QRCodeWebcam();
     SendMailUltil sendMailUltil = new SendMailUltil();
     Helper helper = new Helper();
     
-    public TestQRWebcam() {
+    public TQWC() {
         initComponents();
         qRCodeWebcam.initWebcam(pn_webcam);
         setLocationRelativeTo(null);
@@ -125,7 +125,7 @@ public class TestQRWebcam extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TestQRWebcam().setVisible(true);
+                new TQWC().setVisible(true);
             }
         });
     }
