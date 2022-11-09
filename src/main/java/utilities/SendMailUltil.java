@@ -19,7 +19,7 @@ public class SendMailUltil {
 
     public String sendMail(String email, String newPassWord) {
         final String username = "reset.mwcstore@gmail.com";
-        final String password = "gialpqmuyhqulten";
+        final String password = "zaffcvobubmhckcx";
 
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -48,5 +48,10 @@ public class SendMailUltil {
 //            e.printStackTrace();
             return "Email không tồn tại!";
         }
+    }
+    
+    public static void main(String[] args) {
+        SendMailUltil smu = new SendMailUltil();
+        smu.sendMail("doanhcvph22977@fpt.edu.vn", "huongdeptrai");
     }
 }
