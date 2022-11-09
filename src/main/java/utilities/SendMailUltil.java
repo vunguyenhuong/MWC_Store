@@ -19,7 +19,7 @@ public class SendMailUltil {
 
     public String sendMail(String email, String newPassWord) {
         final String username = "reset.mwcstore@gmail.com";
-        final String password = "zaffcvobubmhckcx";
+        final String password = "pdcehhhjsvwnrfrr";
 
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -45,13 +45,13 @@ public class SendMailUltil {
             System.out.println("Done");
             return "Mật khẩu đã được đặt lại! Vui lòng kiểm tra hòm thư!";
         } catch (MessagingException e) {
-//            e.printStackTrace();
+            e.printStackTrace();
             return "Email không tồn tại!";
         }
     }
     
-    public static void main(String[] args) {
-        SendMailUltil smu = new SendMailUltil();
-        smu.sendMail("doanhcvph22977@fpt.edu.vn", "huongdeptrai");
-    }
+//    public static void main(String[] args) {
+//        SendMailUltil smu = new SendMailUltil();
+//        smu.sendMail("chiltkph26384@fpt.edu.vn", "huongdeptrai");
+//    }
 }
