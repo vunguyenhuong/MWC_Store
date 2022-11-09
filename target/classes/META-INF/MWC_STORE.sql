@@ -72,7 +72,6 @@ CREATE TABLE CHITIETDEP (
 	IdChatLieu INT,
 	IdNsx INT,
 	IdSize INT,
-	KichCo INT DEFAULT NULL,
 	MoTa NVARCHAR(50) DEFAULT NULL,
 	SoLuong INT,
 	GiaNhap DECIMAL(20,0) DEFAULT NULL,
@@ -136,7 +135,6 @@ CREATE TABLE HOADONCHITIET (
 )
 
 
-
 ALTER TABLE CHITIETDEP ADD CONSTRAINT FK_CTD_DEP FOREIGN KEY (IdDep) REFERENCES Dep(Id)
 
 ALTER TABLE CHITIETDEP ADD CONSTRAINT FK_CTD_LOAIDEP FOREIGN KEY (IdLoaiDep) REFERENCES LoaiDep(Id)
@@ -161,8 +159,15 @@ INSERT INTO CHUCVU (Ma, Ten) VALUES ('CV02',N'Nhân viên')
 
 INSERT INTO NGUOIDUNG
              (IdCV, Ma, Ten, Email, Sdt, DiaChi, GioiTinh, MatKhau, TrangThai, HinhAnh)
-VALUES ('1','huongvn','Vũ Nguyên Hướng','huongvnph27229@fpt.edu.vn','0395080513',N'Nam Định',0,'123456',0,'mtkh.jpg')
+VALUES ('1','huongvn',N'Vũ Nguyên Hướng','huongvnph27229@fpt.edu.vn','0395080513',N'Nam Định',0,'123456',0,'mtkh.jpg')
+
+INSERT INTO NGUOIDUNG
+             (IdCV, Ma, Ten, Email, Sdt, DiaChi, GioiTinh, MatKhau, TrangThai, HinhAnh)
+VALUES ('1','kimchi',N'Lại Thị Kim Chi','chiltkph26384@fpt.edu.vn','0999888999',N'Nam Định',0,'123456',0,'kimchi.jpg')
+
 
 SELECT * FROM CHUCVU
 
 SELECT * FROM NGUOIDUNG
+
+select * from CHITIETDEP

@@ -14,7 +14,7 @@ public interface ISizeService {
     
     boolean delete(Size s);
     
-    Size getObject(String ma);
+    Size getObj(String ma);
     
-    List<Size> getSearch(String ten);
+    List<Size> findByName(String ten);
 }

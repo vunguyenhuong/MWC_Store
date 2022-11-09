@@ -7,17 +7,16 @@ import models.NguoiDung;
 import utilities.Helper;
 import utilities.ImageUltil;
 
-
 /**
  *
  * @author Vũ Nguyên Hướng
  */
 public class FrmHome extends javax.swing.JFrame {
-    
+
     ImageUltil imageUltil = new ImageUltil();
     private Helper helper = new Helper();
     private NguoiDung nguoidung = new NguoiDung();
-    
+
     public FrmHome(NguoiDung nd) {
         initComponents();
         setLocationRelativeTo(null);
@@ -25,7 +24,7 @@ public class FrmHome extends javax.swing.JFrame {
         this.nguoidung = nd;
         lbl_tenUser.setText(nd.getTen());
         lbl_role.setText(nd.getChucVu().getTen());
-        imageAvatar.setImage(new ImageIcon("images/"+nd.getHinhAnh()));
+        imageAvatar.setImage(new ImageIcon("images/users/" + nd.getHinhAnh()));
     }
 
     public FrmHome() {
@@ -34,7 +33,7 @@ public class FrmHome extends javax.swing.JFrame {
         setExtendedState(MAXIMIZED_BOTH);
     }
 
-    private void effectNav(JPanel pn_goc, JPanel pn1, JPanel pn2, JPanel pn3,JPanel pn4,JPanel pn5) {
+    private void effectNav(JPanel pn_goc, JPanel pn1, JPanel pn2, JPanel pn3, JPanel pn4, JPanel pn5) {
         pn_goc.setBackground(Color.GRAY);
         pn1.setBackground(Color.BLACK);
         pn2.setBackground(Color.BLACK);
@@ -347,6 +346,8 @@ public class FrmHome extends javax.swing.JFrame {
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {banhang, home, qlhoadon, qlnhanvien, qlsanpham});
 
+        deskpane.setBackground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout deskpaneLayout = new javax.swing.GroupLayout(deskpane);
         deskpane.setLayout(deskpaneLayout);
         deskpaneLayout.setHorizontalGroup(
@@ -355,7 +356,7 @@ public class FrmHome extends javax.swing.JFrame {
         );
         deskpaneLayout.setVerticalGroup(
             deskpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 753, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -388,36 +389,43 @@ public class FrmHome extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeMouseClicked
-        effectNav(home, banhang, qlsanpham, qlnhanvien,qlhoadon,thongke);
+        effectNav(home, banhang, qlsanpham, qlnhanvien, qlhoadon, thongke);
+        deskpane.removeAll();
+        deskpane.add(new FrmWelcome()).setVisible(true);
     }//GEN-LAST:event_homeMouseClicked
 
     private void banhangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_banhangMouseClicked
-        effectNav(banhang, home, qlsanpham, qlnhanvien,qlhoadon,thongke);
+        effectNav(banhang, home, qlsanpham, qlnhanvien, qlhoadon, thongke);
     }//GEN-LAST:event_banhangMouseClicked
 
     private void qlsanphamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_qlsanphamMouseClicked
-        effectNav(qlsanpham, home, banhang, qlnhanvien,qlhoadon,thongke);
+        effectNav(qlsanpham, home, banhang, qlnhanvien, qlhoadon, thongke);
     }//GEN-LAST:event_qlsanphamMouseClicked
 
     private void qlnhanvienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_qlnhanvienMouseClicked
-        effectNav(qlnhanvien, home, banhang, qlsanpham,qlhoadon,thongke);
+        effectNav(qlnhanvien, home, banhang, qlsanpham, qlhoadon, thongke);
     }//GEN-LAST:event_qlnhanvienMouseClicked
 
     private void qlhoadonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_qlhoadonMouseClicked
-        effectNav(qlhoadon,qlnhanvien, home, banhang, qlsanpham,thongke);
+        effectNav(qlhoadon, qlnhanvien, home, banhang, qlsanpham, thongke);
     }//GEN-LAST:event_qlhoadonMouseClicked
 
     private void thongkeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_thongkeMouseClicked
-        effectNav(thongke,qlhoadon,qlnhanvien, home, banhang, qlsanpham);
+        effectNav(thongke, qlhoadon, qlnhanvien, home, banhang, qlsanpham);
     }//GEN-LAST:event_thongkeMouseClicked
 
     private void imageAvatarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageAvatarMouseClicked
         deskpane.removeAll();
         deskpane.add(new FrmProfile(nguoidung)).setVisible(true);
+        home.setBackground(Color.BLACK);
+        banhang.setBackground(Color.BLACK);
+        qlsanpham.setBackground(Color.BLACK);
+        qlhoadon.setBackground(Color.BLACK);
+        qlnhanvien.setBackground(Color.BLACK);
     }//GEN-LAST:event_imageAvatarMouseClicked
 
     private void dangxuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dangxuatMouseClicked
-        if(helper.confirm(this, "Bạn có chắc muốn đăng xuất ?")){
+        if (helper.confirm(this, "Bạn có chắc muốn đăng xuất ?")) {
             helper.alert(this, "Đăng xuất thành công!");
             this.dispose();
             new SplashScreen().setVisible(true);

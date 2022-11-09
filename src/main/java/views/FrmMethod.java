@@ -3,7 +3,6 @@ package views;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.UUID;
-import javax.swing.UIManager;
 import models.NguoiDung;
 import services.INguoiDungService;
 import services.impl.NguoiDungService;
@@ -144,8 +143,10 @@ public class FrmMethod extends javax.swing.JFrame {
         });
 
         txt_password.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txt_password.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         txt_username.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txt_username.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -422,10 +423,10 @@ public class FrmMethod extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_reset_submitActionPerformed
 
     private void chk_showpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chk_showpassActionPerformed
-        if(chk_showpass.isSelected()){
-            txt_password.setEchoChar((char)0);
+        if (chk_showpass.isSelected()) {
+            txt_password.setEchoChar((char) 0);
             chk_showpass.setForeground(Color.RED);
-        }else{
+        } else {
             txt_password.setEchoChar('\u25cf');
             chk_showpass.setForeground(Color.BLACK);
         }

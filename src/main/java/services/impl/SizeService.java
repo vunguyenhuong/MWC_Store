@@ -30,12 +30,12 @@ public class SizeService implements ISizeService {
     }
 
     @Override
-    public Size getObject(String ma) {
+    public Size getObj(String ma) {
         return repo.getObject(ma);
     }
 
     @Override
-    public List<Size> getSearch(String ten) {
+    public List<Size> findByName(String ten) {
         return repo.getSearch(ten);
     }
 

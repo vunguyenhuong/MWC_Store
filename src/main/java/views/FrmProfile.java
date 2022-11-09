@@ -41,7 +41,7 @@ public class FrmProfile extends javax.swing.JInternalFrame {
             lbl_chucvu.setText(nd.getChucVu().getTen());
         } catch (Exception e) {
         }
-        imageAvatar.setImage(new ImageIcon("images/" + nd.getHinhAnh()));
+        imageAvatar.setImage(new ImageIcon("images/users/" + nd.getHinhAnh()));
     }
 
     @SuppressWarnings("unchecked")
