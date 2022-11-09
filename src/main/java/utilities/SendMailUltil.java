@@ -50,15 +50,10 @@ public class SendMailUltil {
         }
     }
     
-<<<<<<< HEAD
+
 //    public static void main(String[] args) {
 //        SendMailUltil smu = new SendMailUltil();
 //        smu.sendMail("chiltkph26384@fpt.edu.vn", "huongdeptrai");
 //    }
-=======
-    public static void main(String[] args) {
-        SendMailUltil smu = new SendMailUltil();
-        smu.sendMail("doanhcvph22977@fpt.edu.vn", "huongdeptrai");
-    }
->>>>>>> parent of 661c4a7 (up Application)
-}
+
+}   
