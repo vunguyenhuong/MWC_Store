@@ -22,7 +22,7 @@ public class ChiTietDepRepository {
 
     public static void main(String[] args) {
         ChiTietDepRepository ctdr = new ChiTietDepRepository();
-        System.out.println(ctdr.getAll().size());
+        System.out.println(ctdr.getAll());
     }
 
     public boolean save(ChiTietDep ctd) {
