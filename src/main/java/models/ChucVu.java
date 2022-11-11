@@ -20,7 +20,6 @@ import lombok.Setter;
  *
  * @author VU NGUYEN HUONG
  */
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -28,18 +27,24 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "ChucVu")
-public class ChucVu implements Serializable{
-    
+public class ChucVu implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
+
     @Column(name = "Ma")
     private String ma;
-    
+
     @Column(name = "Ten")
     private String ten;
-    
-    @OneToMany(mappedBy = "chucVu",fetch = FetchType.LAZY)
+
+    @OneToMany(mappedBy = "chucVu", fetch = FetchType.LAZY)
     List<NguoiDung> listNguoiDung;
+
+    @Override
+    public String toString() {
+        return ten;
+    }
+
 }

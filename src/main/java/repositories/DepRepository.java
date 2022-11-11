@@ -18,7 +18,6 @@ public class DepRepository {
     public List<Dep> getAll() {
         Query query = session.createQuery("SELECT d FROM Dep d");
         List<Dep> list = query.getResultList();
-
         return list;
     }
 
@@ -35,7 +34,7 @@ public class DepRepository {
         return false;
     }
 
-    public Dep getById(String ma) {
+    public Dep getObj(String ma) {
         Dep dep = null;
 
         try {
@@ -43,9 +42,7 @@ public class DepRepository {
             query.setParameter("ma", ma);
             dep = (Dep) query.getSingleResult();
         } catch (Exception e) {
-            e.printStackTrace();
         }
-
         return dep;
     }
 }

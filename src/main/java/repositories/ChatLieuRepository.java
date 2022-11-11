@@ -57,7 +57,6 @@ public class ChatLieuRepository {
             query.setParameter("ma", ma);
             s = (ChatLieu) query.getSingleResult();
         } catch (Exception e) {
-            e.printStackTrace();
         }
         return s;
     }

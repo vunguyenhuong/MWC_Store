@@ -23,12 +23,12 @@ public class FrmWelcome extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        imageAvatar1 = new utilities.ImageAvatar();
-        imageAvatar2 = new utilities.ImageAvatar();
-        imageAvatar3 = new utilities.ImageAvatar();
-        imageAvatar4 = new utilities.ImageAvatar();
-        imageAvatar5 = new utilities.ImageAvatar();
-        imageAvatar6 = new utilities.ImageAvatar();
+        imageAvatar1 = new swing.ImageAvatar();
+        imageAvatar2 = new swing.ImageAvatar();
+        imageAvatar3 = new swing.ImageAvatar();
+        imageAvatar4 = new swing.ImageAvatar();
+        imageAvatar5 = new swing.ImageAvatar();
+        imageAvatar6 = new swing.ImageAvatar();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -163,12 +163,12 @@ public class FrmWelcome extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private utilities.ImageAvatar imageAvatar1;
-    private utilities.ImageAvatar imageAvatar2;
-    private utilities.ImageAvatar imageAvatar3;
-    private utilities.ImageAvatar imageAvatar4;
-    private utilities.ImageAvatar imageAvatar5;
-    private utilities.ImageAvatar imageAvatar6;
+    private swing.ImageAvatar imageAvatar1;
+    private swing.ImageAvatar imageAvatar2;
+    private swing.ImageAvatar imageAvatar3;
+    private swing.ImageAvatar imageAvatar4;
+    private swing.ImageAvatar imageAvatar5;
+    private swing.ImageAvatar imageAvatar6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

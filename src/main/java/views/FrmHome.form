@@ -83,11 +83,11 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Component id="imageAvatar" max="32767" attributes="0"/>
-                          <Component id="qlhoadon" alignment="1" max="32767" attributes="0"/>
+                          <Component id="bh" alignment="1" max="32767" attributes="0"/>
                           <Component id="home" linkSize="2" alignment="1" max="32767" attributes="0"/>
-                          <Component id="banhang" linkSize="2" alignment="1" max="32767" attributes="0"/>
-                          <Component id="qlsanpham" linkSize="2" alignment="1" max="32767" attributes="0"/>
-                          <Component id="qlnhanvien" linkSize="2" alignment="1" max="32767" attributes="0"/>
+                          <Component id="nv" linkSize="2" alignment="1" max="32767" attributes="0"/>
+                          <Component id="sp" linkSize="2" alignment="1" max="32767" attributes="0"/>
+                          <Component id="hd" linkSize="2" alignment="1" max="32767" attributes="0"/>
                           <Component id="thongke" alignment="0" max="32767" attributes="0"/>
                           <Component id="dangxuat" max="32767" attributes="0"/>
                       </Group>
@@ -107,13 +107,13 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="home" linkSize="1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="banhang" linkSize="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="nv" linkSize="1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="qlsanpham" linkSize="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="sp" linkSize="1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="qlnhanvien" linkSize="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="hd" linkSize="1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="qlhoadon" linkSize="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="bh" linkSize="1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="thongke" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="141" max="32767" attributes="0"/>
@@ -123,7 +123,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="utilities.ImageAvatar" name="imageAvatar">
+            <Container class="swing.ImageAvatar" name="imageAvatar">
               <Properties>
                 <Property name="gradientColor1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="33" red="33" type="rgb"/>
@@ -206,14 +206,14 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="banhang">
+            <Container class="javax.swing.JPanel" name="nv">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="banhangMouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="nvMouseClicked"/>
               </Events>
 
               <Layout>
@@ -246,19 +246,19 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="B&#xe1;n h&#xe0;ng"/>
+                    <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; nh&#xe2;n vi&#xea;n"/>
                   </Properties>
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="qlsanpham">
+            <Container class="javax.swing.JPanel" name="sp">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="qlsanphamMouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="spMouseClicked"/>
               </Events>
 
               <Layout>
@@ -296,14 +296,14 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="qlnhanvien">
+            <Container class="javax.swing.JPanel" name="hd">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="qlnhanvienMouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="hdMouseClicked"/>
               </Events>
 
               <Layout>
@@ -336,19 +336,19 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; nh&#xe2;n vi&#xea;n"/>
+                    <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; h&#xf3;a &#x111;&#x1a1;n"/>
                   </Properties>
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="qlhoadon">
+            <Container class="javax.swing.JPanel" name="bh">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="qlhoadonMouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bhMouseClicked"/>
               </Events>
 
               <Layout>
@@ -381,7 +381,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; h&#xf3;a &#x111;&#x1a1;n"/>
+                    <Property name="text" type="java.lang.String" value="B&#xe1;n h&#xe0;ng"/>
                   </Properties>
                 </Component>
               </SubComponents>

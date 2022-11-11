@@ -14,17 +14,15 @@ public class NhaSXRepository {
     private Transaction tra = se.getTransaction();
 
     public List<NhaSX> getAll() {
-        List<NhaSX> list = new ArrayList<>();
         Query query = se.createQuery("SELECT n FROM NhaSX n");
-        list = query.getResultList();
+        List<NhaSX> list = query.getResultList();
         return list;
     }
 
-    public List<NhaSX> search(String ma) {
-        Query query = se.createQuery("SELECT n FROM NhaSX n WHERE n.ma like :Ma");
-        query.setParameter("Ma", "%" + ma + "%");
+    public List<NhaSX> findByName(String ten) {
+        Query query = se.createQuery("SELECT n FROM NhaSX n WHERE n.ten like :ten");
+        query.setParameter("ten", "%" + ten + "%");
         List<NhaSX> list = query.getResultList();
-        list = query.getResultList();
         return list;
     }
 

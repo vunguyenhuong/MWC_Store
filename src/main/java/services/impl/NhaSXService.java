@@ -33,7 +33,7 @@ public class NhaSXService implements INhaSXService{
     }
 
     @Override
-    public List<NhaSX> search(String ma) {
-        return repo.search(ma);
+    public List<NhaSX> findByName(String ten) {
+        return repo.findByName(ten);
     }
 }

@@ -13,5 +13,5 @@ public interface IDepService {
 
     boolean save(Dep dep);
 
-    Dep getByMa(String ma);
+    Dep getObj(String ma);
 }

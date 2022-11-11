@@ -109,7 +109,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="utilities.ImageAvatar" name="imageAvatar1">
+    <Container class="swing.ImageAvatar" name="imageAvatar1">
       <Properties>
         <Property name="gradientColor1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="99" green="99" red="ff" type="rgb"/>
@@ -126,7 +126,7 @@
         <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
     </Container>
-    <Container class="utilities.ImageAvatar" name="imageAvatar2">
+    <Container class="swing.ImageAvatar" name="imageAvatar2">
       <Properties>
         <Property name="gradientColor1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="99" green="99" red="ff" type="rgb"/>
@@ -143,7 +143,7 @@
         <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
     </Container>
-    <Container class="utilities.ImageAvatar" name="imageAvatar3">
+    <Container class="swing.ImageAvatar" name="imageAvatar3">
       <Properties>
         <Property name="gradientColor1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="99" green="99" red="ff" type="rgb"/>
@@ -160,7 +160,7 @@
         <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
     </Container>
-    <Container class="utilities.ImageAvatar" name="imageAvatar4">
+    <Container class="swing.ImageAvatar" name="imageAvatar4">
       <Properties>
         <Property name="gradientColor1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="99" green="99" red="ff" type="rgb"/>
@@ -177,7 +177,7 @@
         <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
     </Container>
-    <Container class="utilities.ImageAvatar" name="imageAvatar5">
+    <Container class="swing.ImageAvatar" name="imageAvatar5">
       <Properties>
         <Property name="gradientColor1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="99" green="99" red="ff" type="rgb"/>
@@ -194,7 +194,7 @@
         <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
     </Container>
-    <Container class="utilities.ImageAvatar" name="imageAvatar6">
+    <Container class="swing.ImageAvatar" name="imageAvatar6">
       <Properties>
         <Property name="gradientColor1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="99" green="99" red="ff" type="rgb"/>

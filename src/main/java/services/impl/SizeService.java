@@ -1,6 +1,5 @@
 package services.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import models.Size;
 import repositories.SizeRepository;

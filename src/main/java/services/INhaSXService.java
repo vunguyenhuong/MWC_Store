@@ -11,7 +11,7 @@ public interface INhaSXService {
 
     List<NhaSX> getAll();
 
-    List<NhaSX> search(String ma);
+    List<NhaSX> findByName(String ten);
 
     boolean save(NhaSX nsx);
 

@@ -10,6 +10,7 @@ import jakarta.mail.Session;
 import jakarta.mail.Transport;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
+import java.util.Date;
 
 /**
  *
@@ -17,9 +18,10 @@ import jakarta.mail.internet.MimeMessage;
  */
 public class SendMailUltil {
 
-    public String sendMail(String email, String newPassWord) {
+    public String sendEmail(String toEmail, String subject, String body) {
+
         final String username = "reset.mwcstore@gmail.com";
-        final String password = "zaffcvobubmhckcx";
+        final String password = "pdcehhhjsvwnrfrr";
 
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -34,26 +36,36 @@ public class SendMailUltil {
         });
 
         try {
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("reset.mwcstore@gmail.com"));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
-            message.setSubject("[MWC_STORE] Mat khau da duoc dat lai!");
-            message.setText("Xin chao, mat khau moi cua ban la: " + newPassWord);
+            MimeMessage msg = new MimeMessage(session);
 
-            Transport.send(message);
+            msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
+            msg.addHeader("format", "flowed");
+            msg.addHeader("Content-Transfer-Encoding", "8bit");
 
-            System.out.println("Done");
-            return "Mật khẩu đã được đặt lại! Vui lòng kiểm tra hòm thư!";
-        } catch (MessagingException e) {
-//            e.printStackTrace();
-            return "Email không tồn tại!";
+            msg.setFrom(new InternetAddress("reset.mwcstore@gmail.com", "[MWC STORE]"));
+
+            msg.setReplyTo(InternetAddress.parse("reset.mwcstore@gmail.com", false));
+
+            msg.setSubject(subject, "UTF-8");
+
+            msg.setText(body, "UTF-8");
+
+            msg.setSentDate(new Date());
+
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
+            System.out.println("Message is ready");
+            Transport.send(msg);
+
+            System.out.println("Successfully!!");
+            return "Success!";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Failed!";
         }
     }
-    
 
-//    public static void main(String[] args) {
-//        SendMailUltil smu = new SendMailUltil();
-//        smu.sendMail("chiltkph26384@fpt.edu.vn", "huongdeptrai");
-//    }
-
-}   
+    public static void main(String[] args) {
+        SendMailUltil smu = new SendMailUltil();
+        smu.sendEmail("huongvnph27229@fpt.edu.vn", "Hướng đẹp trai", "Vũ Nguyên Hướng\n Lại Thị Kim Chi\n Vũ Thị Kim Chi\n Lại Nguyên Hướng");
+    }
+}
