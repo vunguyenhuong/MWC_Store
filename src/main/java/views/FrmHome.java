@@ -1,9 +1,26 @@
 package views;
 
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamPanel;
+import com.github.sarxos.webcam.WebcamResolution;
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.LuminanceSource;
+import com.google.zxing.MultiFormatReader;
+import com.google.zxing.NotFoundException;
+import com.google.zxing.Result;
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
+import com.google.zxing.common.HybridBinarizer;
+import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.image.BufferedImage;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import models.NguoiDung;
+import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import utilities.Helper;
 import utilities.ImageUltil;
 
@@ -11,11 +28,13 @@ import utilities.ImageUltil;
  *
  * @author Vũ Nguyên Hướng
  */
-public class FrmHome extends javax.swing.JFrame {
-
+public class FrmHome extends javax.swing.JFrame{
+    
     ImageUltil imageUltil = new ImageUltil();
     private Helper helper = new Helper();
     private NguoiDung nguoidung = new NguoiDung();
+
+    private CardLayout cardLayout;
 
     public FrmHome(NguoiDung nd) {
         initComponents();
@@ -25,12 +44,16 @@ public class FrmHome extends javax.swing.JFrame {
         lbl_tenUser.setText(nd.getTen());
         lbl_role.setText(nd.getChucVu().getTen());
         imageAvatar.setImage(new ImageIcon("images/users/" + nd.getHinhAnh()));
+        cardLayout = (CardLayout) main.getLayout();
+        cardLayout.show(main, "general");
     }
 
     public FrmHome() {
         initComponents();
         setLocationRelativeTo(null);
         setExtendedState(MAXIMIZED_BOTH);
+        cardLayout = (CardLayout) main.getLayout();
+        cardLayout.show(main, "general");
     }
 
     private void effectNav(JPanel pn_goc, JPanel pn1, JPanel pn2, JPanel pn3, JPanel pn4, JPanel pn5) {
@@ -66,7 +89,10 @@ public class FrmHome extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         dangxuat = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        main = new javax.swing.JPanel();
         deskpane = new javax.swing.JDesktopPane();
+        pn_banhang = new javax.swing.JPanel();
+        pn_webcam = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -340,11 +366,13 @@ public class FrmHome extends javax.swing.JFrame {
                 .addComponent(bh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(thongke, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(dangxuat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {bh, hd, home, nv, sp});
+
+        main.setLayout(new java.awt.CardLayout());
 
         deskpane.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -359,6 +387,29 @@ public class FrmHome extends javax.swing.JFrame {
             .addGap(0, 753, Short.MAX_VALUE)
         );
 
+        main.add(deskpane, "general");
+
+        pn_webcam.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        javax.swing.GroupLayout pn_banhangLayout = new javax.swing.GroupLayout(pn_banhang);
+        pn_banhang.setLayout(pn_banhangLayout);
+        pn_banhangLayout.setHorizontalGroup(
+            pn_banhangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pn_banhangLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pn_webcam, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(591, Short.MAX_VALUE))
+        );
+        pn_banhangLayout.setVerticalGroup(
+            pn_banhangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pn_banhangLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pn_webcam, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(567, Short.MAX_VALUE))
+        );
+
+        main.add(pn_banhang, "banhang");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -366,12 +417,12 @@ public class FrmHome extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(deskpane))
+                .addComponent(main, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(deskpane)
+            .addComponent(main, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -390,28 +441,37 @@ public class FrmHome extends javax.swing.JFrame {
 
     private void homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeMouseClicked
         effectNav(home, nv, sp, hd, bh, thongke);
+        cardLayout.show(main, "general");
         deskpane.removeAll();
         deskpane.add(new FrmWelcome()).setVisible(true);
     }//GEN-LAST:event_homeMouseClicked
 
     private void nvMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nvMouseClicked
         effectNav(nv, home, sp, hd, bh, thongke);
+        cardLayout.show(main, "general");
+        deskpane.add(new FrmQLNhanVien()).setVisible(true);
     }//GEN-LAST:event_nvMouseClicked
 
     private void spMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_spMouseClicked
         effectNav(sp, home, nv, hd, bh, thongke);
+        cardLayout.show(main, "general");
+        deskpane.removeAll();
+        deskpane.add(new FrmChiTietDep()).setVisible(true);
     }//GEN-LAST:event_spMouseClicked
 
     private void hdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hdMouseClicked
         effectNav(hd, home, nv, sp, bh, thongke);
+        cardLayout.show(main, "general");
     }//GEN-LAST:event_hdMouseClicked
 
     private void bhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bhMouseClicked
         effectNav(bh, hd, home, nv, sp, thongke);
+        cardLayout.show(main, "banhang");
     }//GEN-LAST:event_bhMouseClicked
 
     private void thongkeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_thongkeMouseClicked
         effectNav(thongke, bh, hd, home, nv, sp);
+        cardLayout.show(main, "general");
     }//GEN-LAST:event_thongkeMouseClicked
 
     private void imageAvatarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageAvatarMouseClicked
@@ -459,8 +519,12 @@ public class FrmHome extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lbl_role;
     private javax.swing.JLabel lbl_tenUser;
+    private javax.swing.JPanel main;
     private javax.swing.JPanel nv;
+    private javax.swing.JPanel pn_banhang;
+    private javax.swing.JPanel pn_webcam;
     private javax.swing.JPanel sp;
     private javax.swing.JPanel thongke;
     // End of variables declaration//GEN-END:variables
+
 }
