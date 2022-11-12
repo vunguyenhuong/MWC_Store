@@ -1,6 +1,7 @@
 package models;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -61,10 +62,10 @@ public class ChiTietDep implements Serializable{
     private int soLuong;
     
     @Column
-    private int giaNhap;
+    private BigDecimal giaNhap;
     
     @Column
-    private int giaBan;
+    private BigDecimal giaBan;
     
     @Column
     @Temporal(TemporalType.DATE)
