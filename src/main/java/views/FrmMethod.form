@@ -585,6 +585,7 @@
                     <Property name="selectionColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="cc" green="cc" red="cc" type="rgb"/>
                     </Property>
+                    <Property name="showAndHide" type="boolean" value="true"/>
                   </Properties>
                 </Component>
                 <Component class="swing.Button" name="button4">

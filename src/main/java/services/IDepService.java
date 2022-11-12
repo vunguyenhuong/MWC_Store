@@ -14,4 +14,6 @@ public interface IDepService {
     boolean save(Dep dep);
 
     Dep getObj(String ma);
+    
+    List<Dep> getObjByName(String ten);
 }

@@ -1,13 +1,18 @@
 package views;
 
+import java.io.File;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 import models.*;
 import services.IChiTietDepService;
 import services.impl.ChiTietDepService;
+import utilities.ExportSP;
+import utilities.Helper;
 import utilities.ImageUltil;
 
 /**
@@ -15,6 +20,8 @@ import utilities.ImageUltil;
  * @author VU NGUYEN HUONG
  */
 public class FrmChiTietDep extends javax.swing.JInternalFrame {
+    
+    private Helper helper = new Helper();
     
     private DefaultTableModel defaultTableModel;
     private IChiTietDepService iChiTietDepService = new ChiTietDepService();
@@ -131,6 +138,7 @@ public class FrmChiTietDep extends javax.swing.JInternalFrame {
         button1 = new swing.Button();
         button2 = new swing.Button();
         button3 = new swing.Button();
+        btn_exportExcel = new swing.Button();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -231,6 +239,16 @@ public class FrmChiTietDep extends javax.swing.JInternalFrame {
         button3.setText("Xóa");
         button3.setFocusPainted(false);
 
+        btn_exportExcel.setBackground(new java.awt.Color(0, 126, 0));
+        btn_exportExcel.setForeground(new java.awt.Color(255, 255, 255));
+        btn_exportExcel.setText("Export Excel");
+        btn_exportExcel.setFocusPainted(false);
+        btn_exportExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_exportExcelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -275,8 +293,10 @@ public class FrmChiTietDep extends javax.swing.JInternalFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txt_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbl_total)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbl_total, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_exportExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -313,11 +333,13 @@ public class FrmChiTietDep extends javax.swing.JInternalFrame {
                     .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txt_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_total))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lbl_total)
+                        .addComponent(btn_exportExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(14, 14, 14)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
 
@@ -337,7 +359,29 @@ public class FrmChiTietDep extends javax.swing.JInternalFrame {
         loadData(iChiTietDepService.findByName(txt_timkiem.getText()));
     }//GEN-LAST:event_txt_timkiemCaretUpdate
 
+    private void btn_exportExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_exportExcelActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(".xlsx","xlsx");
+        fileChooser.setFileFilter(filter);
+        fileChooser.setDialogTitle("Export Excel");
+        int result = fileChooser.showSaveDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File fileToSave = fileChooser.getSelectedFile();
+            try {
+                if(helper.confirm(this, "File Path: "+fileToSave.getAbsolutePath() +filter.getDescription()+". Xác nhận xuất file ?")){
+                    ExportSP.writeExcel(iChiTietDepService.getAll(), fileToSave.getAbsolutePath() +filter.getDescription());
+                helper.alert(this, "Xuất File thành công!");
+                }
+            } catch (Exception e) {
+               e.printStackTrace();
+               helper.alert(this, "Xuất File thất bại!");
+            }
+            System.out.println("Save as file: " + fileToSave.getAbsolutePath() +filter.getDescription());
+        }
+    }//GEN-LAST:event_btn_exportExcelActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private swing.Button btn_exportExcel;
     private swing.Button button1;
     private swing.Button button2;
     private swing.Button button3;
