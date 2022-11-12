@@ -50,10 +50,10 @@ public class RadioButtonCustom extends JRadioButton {
     }
 
     public void isSelected(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        isSelected(i);
     }
 
     public void clearSelection() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        clearSelection();
     }
 }

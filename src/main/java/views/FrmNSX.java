@@ -268,7 +268,7 @@ public class FrmNSX extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_ThemActionPerformed
 
     private void btn_XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaActionPerformed
-         int row = tblBang.getSelectedRow();
+        int row = tblBang.getSelectedRow();
         NhaSX n = iNhaSXService.getObj(tblBang.getValueAt(row, 1).toString());
         iNhaSXService.delete(n);
         loadToTable(iNhaSXService.getAll());
