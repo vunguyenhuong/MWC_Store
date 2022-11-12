@@ -31,5 +31,11 @@ public class DepService implements IDepService {
     public Dep getObj(String ma) {
         return this.depRepository.getObj(ma);
     }
+
+    @Override
+    public List<Dep> getObjByName(String ten) {
+        return this.depRepository.findByName(ten);
+    }
+    
     
 }

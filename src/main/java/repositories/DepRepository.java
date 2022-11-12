@@ -42,7 +42,15 @@ public class DepRepository {
             query.setParameter("ma", ma);
             dep = (Dep) query.getSingleResult();
         } catch (Exception e) {
+            
         }
         return dep;
+    }
+    
+    public List<Dep> findByName(String ten) {
+        Query query = session.createQuery("SELECT d FROM Dep d WHERE d.ten LIKE :ten");
+        query.setParameter("ten", "%" + ten + "%");
+        List<Dep> list = query.getResultList();
+        return list;
     }
 }
