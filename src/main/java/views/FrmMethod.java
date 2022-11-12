@@ -329,6 +329,7 @@ public class FrmMethod extends javax.swing.JFrame {
         txt_reg_password.setLabelText("Mật khẩu");
         txt_reg_password.setLineColor(new java.awt.Color(102, 102, 102));
         txt_reg_password.setSelectionColor(new java.awt.Color(204, 204, 204));
+        txt_reg_password.setShowAndHide(true);
 
         button4.setBackground(new java.awt.Color(0, 0, 0));
         button4.setForeground(new java.awt.Color(255, 255, 255));
