@@ -4,7 +4,7 @@ import views.SplashScreen;
 
 /**
  *
- * @author VU NGUYEN HUONG
+ * @author Vũ Nguyên Hướng
  */
 public class Application {
 
