@@ -17,7 +17,7 @@ Hoàng Vĩnh Giang
 Cao Văn Doanh
 
 
-## Trường cao đẳng FPT POLYTECHNIC
+## Trường Cao đẳng FPT POLYTECHNIC
 
 Địa chỉ: Tòa nhà FPT Polytechnic, P. Trịnh Văn Bô, Xuân Phương, Nam Từ Liêm, Hà Nội
 
