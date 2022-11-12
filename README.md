@@ -4,8 +4,6 @@ Man Women And Choices.
 
 ## Thành viên trong nhóm
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
-
 Vũ Nguyên Hướng - PH27229
 
 Lại Thị Kim Chi - PH26384
@@ -18,28 +16,33 @@ Hoàng Vĩnh Giang
 
 Cao Văn Doanh
 
-## Usage
 
-```python
-import foobar
+## Trường cao đẳng FPT POLYTECHNIC
 
-# returns 'words'
-foobar.pluralize('word')
+Địa chỉ: Tòa nhà FPT Polytechnic, P. Trịnh Văn Bô, Xuân Phương, Nam Từ Liêm, Hà Nội
 
-# returns 'geese'
-foobar.pluralize('goose')
+"Cao đẳng thực hành [FPT Polytechnic](https://www.facebook.com/fpt.poly) ra đời với sứ mệnh cung cấp dịch vụ đào tạo tốt trên các tiêu chí: phù hợp với năng lực học tập của sinh viên; đáp ứng nhu cầu lớn của doanh nghiệp; và cung cấp dịch vụ đào tạo chuẩn mực dựa trên các chuẩn đã được công nhận. Với tỷ lệ 97,7% sinh viên có việc làm ngay sau khi tốt nghiệp."
 
-# returns 'phenomenon'
-foobar.singularize('phenomena')
+
+## Hello World
+
+```java
+package application;
+
+import hello.world;
+
+/**
+ *
+ * @author Vũ Nguyên Hướng
+ */
+ 
+ public class Application {
+       public static void main(String[] args) {
+            System.out.println("KimChiCute");
+        }
+}
 ```
 
-## Contributing
+## Contact
 
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
-
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
+[Facebook: Vũ Nguyên Hướng](https://www.facebook.com/VuNguyenHuong.Official)
