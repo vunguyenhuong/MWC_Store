@@ -12,6 +12,7 @@ import models.*;
 import services.IChiTietDepService;
 import services.impl.ChiTietDepService;
 import utilities.ExportSP;
+import utilities.Helper;
 import utilities.ImageUltil;
 
 /**
@@ -19,6 +20,8 @@ import utilities.ImageUltil;
  * @author VU NGUYEN HUONG
  */
 public class FrmChiTietDep extends javax.swing.JInternalFrame {
+    
+    private Helper helper = new Helper();
     
     private DefaultTableModel defaultTableModel;
     private IChiTietDepService iChiTietDepService = new ChiTietDepService();
@@ -365,9 +368,13 @@ public class FrmChiTietDep extends javax.swing.JInternalFrame {
         if (result == JFileChooser.APPROVE_OPTION) {
             File fileToSave = fileChooser.getSelectedFile();
             try {
-                ExportSP.writeExcel(iChiTietDepService.getAll(), fileToSave.getAbsolutePath() +filter.getDescription());
+                if(helper.confirm(this, "File Path: "+fileToSave.getAbsolutePath() +filter.getDescription()+". Xác nhận xuất file ?")){
+                    ExportSP.writeExcel(iChiTietDepService.getAll(), fileToSave.getAbsolutePath() +filter.getDescription());
+                helper.alert(this, "Xuất File thành công!");
+                }
             } catch (Exception e) {
                e.printStackTrace();
+               helper.alert(this, "Xuất File thất bại!");
             }
             System.out.println("Save as file: " + fileToSave.getAbsolutePath() +filter.getDescription());
         }
