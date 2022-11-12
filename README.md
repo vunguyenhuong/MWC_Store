@@ -10,11 +10,11 @@ Lại Thị Kim Chi - PH26384
 
 Dương Văn Cảnh - PH23043
 
-Hoàng Vĩnh Giang
+Hoàng Vĩnh Giang - 23041
 
-Đặng Thanh Phương
+Đặng Thanh Phương - 23038
 
-Cao Văn Doanh
+Cao Văn Doanh - PH22977
 
 
 ## Trường Cao đẳng FPT POLYTECHNIC
