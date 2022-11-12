@@ -29,35 +29,29 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "ChatLieu")
-public class ChatLieu implements Serializable {
-
+public class ChatLieu implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
+    
     @Column(name = "Ma")
     private String ma;
-
+    
     @Column(name = "Ten")
     private String ten;
-
+    
     @Column
     @Temporal(TemporalType.DATE)
     private Date ngayThem;
-
+    
     @Column
     @Temporal(TemporalType.DATE)
     private Date ngaySuaCuoi;
-
+    
     @Column(name = "TrangThai")
     private int trangThai;
-
-    @OneToMany(mappedBy = "chatLieu", fetch = FetchType.LAZY)
+    
+    @OneToMany(mappedBy = "chatLieu",fetch = FetchType.LAZY)
     List<ChiTietDep> listCTDep;
-
-    @Override
-    public String toString() {
-        return ten;
-    }
-
+    
 }

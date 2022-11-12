@@ -191,15 +191,15 @@ SET IDENTITY_INSERT [dbo].[CHUCVU] OFF
 GO
 SET IDENTITY_INSERT [dbo].[DEP] ON 
 GO
-INSERT [dbo].[DEP] ([Id], [Ma], [Ten], [HinhAnh], [NgayThem], [NgaySuaCuoi], [TrangThai]) VALUES (1, N'SP01', N'Tổ ong 36 lỗ', N'1.jpg', CAST(N'2022-11-11' AS Date), CAST(N'2022-11-11' AS Date), 0)
+INSERT [dbo].[DEP] ([Id], [Ma], [Ten], [HinhAnh], [NgayThem], [NgaySuaCuoi], [TrangThai]) VALUES (1, N'SP01', N'Tổ ong 36 lỗ', N'1.png', CAST(N'2022-11-11' AS Date), CAST(N'2022-11-11' AS Date), 0)
 GO
-INSERT [dbo].[DEP] ([Id], [Ma], [Ten], [HinhAnh], [NgayThem], [NgaySuaCuoi], [TrangThai]) VALUES (2, N'SP02', N'Tông lào VN', N'2.jpg', CAST(N'2022-11-11' AS Date), CAST(N'2022-11-11' AS Date), 0)
+INSERT [dbo].[DEP] ([Id], [Ma], [Ten], [HinhAnh], [NgayThem], [NgaySuaCuoi], [TrangThai]) VALUES (2, N'SP02', N'Tông lào VN', N'2,png', CAST(N'2022-11-11' AS Date), CAST(N'2022-11-11' AS Date), 0)
 GO
-INSERT [dbo].[DEP] ([Id], [Ma], [Ten], [HinhAnh], [NgayThem], [NgaySuaCuoi], [TrangThai]) VALUES (3, N'SP03', N'Crocs Unisex', N'3.jpg', CAST(N'2022-11-11' AS Date), CAST(N'2022-11-11' AS Date), 0)
+INSERT [dbo].[DEP] ([Id], [Ma], [Ten], [HinhAnh], [NgayThem], [NgaySuaCuoi], [TrangThai]) VALUES (3, N'SP03', N'Crocs Unisex', N'3,png', CAST(N'2022-11-11' AS Date), CAST(N'2022-11-11' AS Date), 0)
 GO
-INSERT [dbo].[DEP] ([Id], [Ma], [Ten], [HinhAnh], [NgayThem], [NgaySuaCuoi], [TrangThai]) VALUES (4, N'SP04', N'Tổ ong 72 lỗ', N'4.jpg', CAST(N'2022-11-11' AS Date), CAST(N'2022-11-11' AS Date), 0)
+INSERT [dbo].[DEP] ([Id], [Ma], [Ten], [HinhAnh], [NgayThem], [NgaySuaCuoi], [TrangThai]) VALUES (4, N'SP04', N'Tổ ong 72 lỗ', N'4,png', CAST(N'2022-11-11' AS Date), CAST(N'2022-11-11' AS Date), 0)
 GO
-INSERT [dbo].[DEP] ([Id], [Ma], [Ten], [HinhAnh], [NgayThem], [NgaySuaCuoi], [TrangThai]) VALUES (5, N'SP05', N'Dép bánh mì', N'5.jpg', CAST(N'2022-11-11' AS Date), CAST(N'2022-11-11' AS Date), 0)
+INSERT [dbo].[DEP] ([Id], [Ma], [Ten], [HinhAnh], [NgayThem], [NgaySuaCuoi], [TrangThai]) VALUES (5, N'SP05', N'Dép bánh mì', N'5,png', CAST(N'2022-11-11' AS Date), CAST(N'2022-11-11' AS Date), 0)
 GO
 SET IDENTITY_INSERT [dbo].[DEP] OFF
 GO

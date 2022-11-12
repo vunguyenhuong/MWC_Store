@@ -60,11 +60,11 @@ public class FrmProfile extends javax.swing.JInternalFrame {
         lbl_err_oldpass = new javax.swing.JLabel();
         btn_sua = new swing.Button();
         btn_changePass = new swing.Button();
-        txt_ma = new swing.TextField();
-        txt_ten = new swing.TextField();
-        txt_email = new swing.TextField();
-        txt_sdt = new swing.TextField();
-        txt_diachi = new swing.TextField();
+        txt_ma = new swing.TextField_1();
+        txt_ten = new swing.TextField_1();
+        txt_email = new swing.TextField_1();
+        txt_sdt = new swing.TextField_1();
+        txt_diachi = new swing.TextField_1();
         rd_nam = new swing.RadioButtonCustom();
         rd_nu = new swing.RadioButtonCustom();
         txt_oldPassword = new swing.PasswordField();
@@ -370,14 +370,14 @@ public class FrmProfile extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lbl_err_renewpass;
     private swing.RadioButtonCustom rd_nam;
     private swing.RadioButtonCustom rd_nu;
-    private swing.TextField txt_diachi;
-    private swing.TextField txt_email;
-    private swing.TextField txt_ma;
+    private swing.TextField_1 txt_diachi;
+    private swing.TextField_1 txt_email;
+    private swing.TextField_1 txt_ma;
     private swing.PasswordField txt_newPassword;
     private swing.PasswordField txt_oldPassword;
     private swing.PasswordField txt_reNewPassword;
-    private swing.TextField txt_sdt;
-    private swing.TextField txt_ten;
+    private swing.TextField_1 txt_sdt;
+    private swing.TextField_1 txt_ten;
     private javax.swing.JTextArea txt_thongbao;
     // End of variables declaration//GEN-END:variables
 }

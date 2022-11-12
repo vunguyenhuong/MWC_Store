@@ -13,12 +13,12 @@ import utilities.HibernateUtil;
  *
  * @author tt
  */
-public class MauSacRepository {
+public class MauSauRepository {
 
     private Session session = HibernateUtil.getSessionFactory().openSession();
     private Transaction transaction = session.getTransaction();
 
-    public List<MauSac> getAll() {
+    public List<MauSac> getAllCV() {
         Query query = session.createQuery("SELECT m FROM MauSac m");
         List<MauSac> list = query.getResultList();
         return list;

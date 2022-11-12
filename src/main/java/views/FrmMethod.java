@@ -62,22 +62,22 @@ public class FrmMethod extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         lbl_forgotPassword = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        txt_username = new swing.TextField();
+        txt_username = new swing.TextField_1();
         txt_password = new swing.PasswordField();
         button1 = new swing.Button();
         button6 = new swing.Button();
         pn_reset = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         lbl_reset_capcha = new javax.swing.JLabel();
-        txt_reset_username = new swing.TextField();
-        txt_reset_email = new swing.TextField();
-        txt_reset_capcha = new swing.TextField();
+        txt_reset_username = new swing.TextField_1();
+        txt_reset_email = new swing.TextField_1();
+        txt_reset_capcha = new swing.TextField_1();
         button2 = new swing.Button();
         button3 = new swing.Button();
         pn_register = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
-        txt_reg_user = new swing.TextField();
-        txt_reg_email = new swing.TextField();
+        txt_reg_user = new swing.TextField_1();
+        txt_reg_email = new swing.TextField_1();
         txt_reg_password = new swing.PasswordField();
         button4 = new swing.Button();
         button5 = new swing.Button();
@@ -561,12 +561,12 @@ public class FrmMethod extends javax.swing.JFrame {
     private javax.swing.JPanel pn_reset;
     private javax.swing.JPanel pn_signin;
     private swing.PasswordField txt_password;
-    private swing.TextField txt_reg_email;
+    private swing.TextField_1 txt_reg_email;
     private swing.PasswordField txt_reg_password;
-    private swing.TextField txt_reg_user;
-    private swing.TextField txt_reset_capcha;
-    private swing.TextField txt_reset_email;
-    private swing.TextField txt_reset_username;
-    private swing.TextField txt_username;
+    private swing.TextField_1 txt_reg_user;
+    private swing.TextField_1 txt_reset_capcha;
+    private swing.TextField_1 txt_reset_email;
+    private swing.TextField_1 txt_reset_username;
+    private swing.TextField_1 txt_username;
     // End of variables declaration//GEN-END:variables
 }
