@@ -84,7 +84,7 @@ public class PasswordField extends JPasswordField {
                     if (new Rectangle(x, 0, 30, 30).contains(me.getPoint())) {
                         hide = !hide;
                         if (hide) {
-                            setEchoChar('*');
+                            setEchoChar('\u25cf');
                         } else {
                             setEchoChar((char) 0);
                         }

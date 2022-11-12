@@ -274,7 +274,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_changePassActionPerformed"/>
       </Events>
     </Component>
-    <Component class="swing.TextField_1" name="txt_ma">
+    <Component class="swing.TextField" name="txt_ma">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
         <Property name="labelText" type="java.lang.String" value="M&#xe3;"/>
@@ -286,7 +286,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="swing.TextField_1" name="txt_ten">
+    <Component class="swing.TextField" name="txt_ten">
       <Properties>
         <Property name="labelText" type="java.lang.String" value="T&#xea;n"/>
         <Property name="lineColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -297,7 +297,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="swing.TextField_1" name="txt_email">
+    <Component class="swing.TextField" name="txt_email">
       <Properties>
         <Property name="labelText" type="java.lang.String" value="Email"/>
         <Property name="lineColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -308,7 +308,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="swing.TextField_1" name="txt_sdt">
+    <Component class="swing.TextField" name="txt_sdt">
       <Properties>
         <Property name="labelText" type="java.lang.String" value="S&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i"/>
         <Property name="lineColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -319,7 +319,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="swing.TextField_1" name="txt_diachi">
+    <Component class="swing.TextField" name="txt_diachi">
       <Properties>
         <Property name="labelText" type="java.lang.String" value="&#x110;&#x1ecb;a ch&#x1ec9;"/>
         <Property name="lineColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">

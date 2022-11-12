@@ -289,7 +289,7 @@
                     <Property name="text" type="java.lang.String" value="SIGN IN"/>
                   </Properties>
                 </Component>
-                <Component class="swing.TextField_1" name="txt_username">
+                <Component class="swing.TextField" name="txt_username">
                   <Properties>
                     <Property name="labelText" type="java.lang.String" value="T&#xea;n &#x111;&#x103;ng nh&#x1ead;p"/>
                     <Property name="lineColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -422,7 +422,7 @@
                     <Property name="text" type="java.lang.String" value="Capcha here"/>
                   </Properties>
                 </Component>
-                <Component class="swing.TextField_1" name="txt_reset_username">
+                <Component class="swing.TextField" name="txt_reset_username">
                   <Properties>
                     <Property name="labelText" type="java.lang.String" value="T&#xea;n &#x111;&#x103;ng nh&#x1ead;p"/>
                     <Property name="lineColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -433,7 +433,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="swing.TextField_1" name="txt_reset_email">
+                <Component class="swing.TextField" name="txt_reset_email">
                   <Properties>
                     <Property name="labelText" type="java.lang.String" value="Email"/>
                     <Property name="lineColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -444,7 +444,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="swing.TextField_1" name="txt_reset_capcha">
+                <Component class="swing.TextField" name="txt_reset_capcha">
                   <Properties>
                     <Property name="labelText" type="java.lang.String" value="Capcha"/>
                     <Property name="lineColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -554,7 +554,7 @@
                     <Property name="text" type="java.lang.String" value="REGISTER"/>
                   </Properties>
                 </Component>
-                <Component class="swing.TextField_1" name="txt_reg_user">
+                <Component class="swing.TextField" name="txt_reg_user">
                   <Properties>
                     <Property name="labelText" type="java.lang.String" value="T&#xea;n &#x111;&#x103;ng nh&#x1ead;p"/>
                     <Property name="lineColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -565,7 +565,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="swing.TextField_1" name="txt_reg_email">
+                <Component class="swing.TextField" name="txt_reg_email">
                   <Properties>
                     <Property name="labelText" type="java.lang.String" value="Email"/>
                     <Property name="lineColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">

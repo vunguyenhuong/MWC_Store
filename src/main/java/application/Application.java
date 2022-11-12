@@ -13,3 +13,4 @@ public class Application {
         new SplashScreen().setVisible(true);
     }
 }
+
