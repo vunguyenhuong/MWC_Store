@@ -10,9 +10,9 @@ Lại Thị Kim Chi - PH26384
 
 Dương Văn Cảnh - PH23043
 
-Hoàng Vĩnh Giang - 23041
+Hoàng Vĩnh Giang - PH23041
 
-Đặng Thanh Phương - 23038
+Đặng Thanh Phương - PH23038
 
 Cao Văn Doanh - PH22977
 
