@@ -3,13 +3,16 @@ services\IChucVuService.class
 views\FrmHome$3.class
 views\SplashScreen$1.class
 repositories\ChucVuRepository.class
+views\FrmChiTietDep.class
 services\INguoiDungService.class
 utilities\ExportPDFUltil.class
 services\impl\ChucVuService.class
 utilities\QRCodeWebcam.class
 application\Application.class
 models\NguoiDung.class
+views\FrmMethod$8.class
 views\FrmMethod$2.class
+services\impl\DepService.class
 views\SplashScreen.class
 utilities\SendMailUltil.class
 views\FrmHome.class
@@ -21,13 +24,21 @@ utilities\ImageUltil.class
 views\FrmMethod$3.class
 views\FrmHome$1.class
 services\impl\NguoiDungService.class
+repositories\DepRepository.class
 views\FrmMethod$6.class
 views\FrmMethod$5.class
 models\ChucVu.class
 views\SplashScreen$2.class
+models\ChiTietDep.class
 utilities\Helper.class
+views\FrmChiTietDep$1.class
 views\FrmHome$6.class
 views\FrmHome$5.class
 views\FrmMethod$4.class
 utilities\HibernateUtil.class
+<<<<<<< HEAD
+views\FrmChiTietDep$2.class
+=======
+repositories\SizeRepository.class
+>>>>>>> 55c934048dd127d86f544baa631e6910923e9a0e
 views\FrmMethod.class

@@ -13,13 +13,14 @@ import services.IMauSacService;
  *
  * @author tt
  */
-public class MauSacService implements IMauSacService{
+public class MauSacService implements IMauSacService {
+
     private MauSacRepository repo;
 
     public MauSacService() {
-        repo  = new MauSacRepository();
+        repo = new MauSacRepository();
     }
-    
+
     @Override
     public List<MauSac> getAll() {
         return repo.getAll();
@@ -34,10 +35,10 @@ public class MauSacService implements IMauSacService{
     public MauSac getObj(String ma) {
         return repo.getObj(ma);
     }
-    
-    
-    
 
-   
-    
+    @Override
+    public List<MauSac> findByName(String ten) {
+        return repo.findByName(ten);
+    }
+
 }
