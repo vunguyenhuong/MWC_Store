@@ -23,101 +23,113 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Component id="btn_Them" min="-2" pref="80" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                      <Component id="btn_Capnhat" min="-2" pref="80" max="-2" attributes="0"/>
+                      <EmptySpace min="42" pref="391" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txt_Ma1" min="-2" pref="189" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="txt_Ten" min="-2" pref="186" max="-2" attributes="0"/>
+                      <Component id="txt_Timkiem" min="-2" pref="350" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="144" max="-2" attributes="0"/>
+                      <Component id="lbl_Total" pref="83" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   </Group>
-              </Group>
-              <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="rd_Ngungnhap" min="-2" max="-2" attributes="0"/>
-                  <Component id="rd_Dangnhap" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane1" pref="568" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="btn_Capnhat" min="-2" pref="80" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                              <Component id="btn_Xoa" min="-2" pref="80" max="-2" attributes="0"/>
+                              <Component id="txt_Ma1" min="-2" pref="189" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="txt_Ten" min="-2" pref="189" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="txt_Timkiem" min="-2" pref="350" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="txt_Ngaythem" min="-2" pref="189" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="txt_NgaySua" min="-2" pref="189" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
-                      <Component id="lbl_Total" pref="50" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="txt_Ngaythem" min="-2" pref="189" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="rd_Dangnhap" min="-2" max="-2" attributes="0"/>
+                          <Component id="rd_Ngungnhap" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="228" max="-2" attributes="0"/>
-              <Component id="txt_NgaySua" min="-2" pref="189" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane1" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txt_Ma1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="rd_Dangnhap" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txt_Ten" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txt_Ma1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                       <Component id="rd_Ngungnhap" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
-                      <Component id="btn_Xoa" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txt_Ngaythem" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txt_NgaySua" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_Ngaythem" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btn_Them" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="btn_Capnhat" alignment="1" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btn_Them" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_Capnhat" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="txt_Timkiem" min="-2" max="-2" attributes="0"/>
                   <Component id="lbl_Total" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="246" max="-2" attributes="0"/>
-              <EmptySpace pref="28" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" pref="300" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
+    <Component class="swing.Button" name="btn_Them">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="99" green="99" red="99" type="rgb"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="label" type="java.lang.String" value="Th&#xea;m"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ThemActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="swing.TextField" name="txt_Timkiem">
+      <Properties>
+        <Property name="labelText" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m"/>
+      </Properties>
+      <Events>
+        <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="txt_TimkiemCaretUpdate"/>
+      </Events>
+    </Component>
     <Component class="swing.Button" name="btn_Capnhat">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -132,21 +144,29 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_CapnhatActionPerformed"/>
       </Events>
     </Component>
+    <Component class="javax.swing.JLabel" name="lbl_Total">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="0" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Total: 0"/>
+      </Properties>
+    </Component>
     <Component class="swing.TextField" name="txt_Ten">
       <Properties>
-        <Property name="labelText" type="java.lang.String" value="T&#xea;n NSX"/>
+        <Property name="labelText" type="java.lang.String" value="T&#xea;n NSX :"/>
       </Properties>
     </Component>
     <Component class="swing.RadioButtonCustom" name="rd_Ngungnhap">
       <Properties>
-        <Property name="text" type="java.lang.String" value=" Ng&#x1eeb;ng nh&#x1ead;p h&#xe0;ng"/>
+        <Property name="text" type="java.lang.String" value=" Ng&#x1eeb;ng kinh doanh"/>
         <Property name="actionCommand" type="java.lang.String" value=""/>
       </Properties>
     </Component>
     <Component class="swing.RadioButtonCustom" name="rd_Dangnhap">
       <Properties>
         <Property name="selected" type="boolean" value="true"/>
-        <Property name="text" type="java.lang.String" value="&#x110;ang nh&#x1ead;p h&#xe0;ng"/>
+        <Property name="text" type="java.lang.String" value="&#x110;ang kinh doanh"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -175,50 +195,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="swing.Button" name="btn_Them">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="99" green="99" red="99" type="rgb"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-        </Property>
-        <Property name="label" type="java.lang.String" value="Th&#xea;m"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ThemActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="swing.TextField" name="txt_Timkiem">
-      <Properties>
-        <Property name="labelText" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m"/>
-      </Properties>
-      <Events>
-        <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="txt_TimkiemCaretUpdate"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lbl_Total">
-      <Properties>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="33" green="0" red="ff" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Total: 0"/>
-      </Properties>
-    </Component>
-    <Component class="swing.Button" name="btn_Xoa">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="99" green="99" red="99" type="rgb"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_XoaActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="swing.TextField" name="txt_Ma1">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>

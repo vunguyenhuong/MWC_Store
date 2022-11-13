@@ -9,6 +9,7 @@ services\impl\ChucVuService.class
 utilities\QRCodeWebcam.class
 application\Application.class
 models\NguoiDung.class
+views\FrmMethod$8.class
 views\FrmMethod$2.class
 views\SplashScreen.class
 utilities\SendMailUltil.class
@@ -30,4 +31,5 @@ views\FrmHome$6.class
 views\FrmHome$5.class
 views\FrmMethod$4.class
 utilities\HibernateUtil.class
+repositories\SizeRepository.class
 views\FrmMethod.class
