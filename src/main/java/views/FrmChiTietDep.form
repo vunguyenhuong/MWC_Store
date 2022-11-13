@@ -77,11 +77,11 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="button2" min="-2" pref="99" max="-2" attributes="0"/>
+                                      <Component id="btn_ctd_them" min="-2" pref="99" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="button1" min="-2" pref="99" max="-2" attributes="0"/>
+                                      <Component id="btn_ctd_capnhat" min="-2" pref="99" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="button3" min="-2" pref="99" max="-2" attributes="0"/>
+                                      <Component id="btn_ctd_xoa" min="-2" pref="99" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="txt_timkiem" min="-2" pref="311" max="-2" attributes="0"/>
                               </Group>
@@ -171,9 +171,9 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="button1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="button2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="button3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_ctd_capnhat" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_ctd_them" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_ctd_xoa" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -432,7 +432,7 @@
                 <Property name="text" type="java.lang.String" value="Total: 0"/>
               </Properties>
             </Component>
-            <Component class="swing.Button" name="button1">
+            <Component class="swing.Button" name="btn_ctd_capnhat">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="99" green="99" red="99" type="rgb"/>
@@ -443,8 +443,11 @@
                 <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t"/>
                 <Property name="focusPainted" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ctd_capnhatActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="swing.Button" name="button2">
+            <Component class="swing.Button" name="btn_ctd_them">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="99" green="99" red="99" type="rgb"/>
@@ -455,8 +458,11 @@
                 <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
                 <Property name="focusPainted" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ctd_themActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="swing.Button" name="button3">
+            <Component class="swing.Button" name="btn_ctd_xoa">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="99" green="99" red="99" type="rgb"/>
@@ -467,6 +473,9 @@
                 <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
                 <Property name="focusPainted" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ctd_xoaActionPerformed"/>
+              </Events>
             </Component>
             <Component class="swing.Button" name="btn_exportExcel">
               <Properties>
