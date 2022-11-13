@@ -36,9 +36,6 @@ views\FrmHome$6.class
 views\FrmHome$5.class
 views\FrmMethod$4.class
 utilities\HibernateUtil.class
-<<<<<<< HEAD
-views\FrmChiTietDep$2.class
-=======
 repositories\SizeRepository.class
->>>>>>> 55c934048dd127d86f544baa631e6910923e9a0e
+views\FrmChiTietDep$2.class
 views\FrmMethod.class
