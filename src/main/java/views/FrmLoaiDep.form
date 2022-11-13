@@ -29,10 +29,7 @@
                   <Component id="jScrollPane1" min="-2" pref="588" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txt_NgayThem" pref="182" max="32767" attributes="0"/>
-                              <Component id="txt_Ma" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="txt_Ma" min="-2" pref="182" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                               <Component id="btn_Them" min="-2" max="-2" attributes="0"/>
@@ -48,10 +45,7 @@
                               <Component id="lbl_Total" min="-2" pref="54" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txt_Ten" max="32767" attributes="0"/>
-                                  <Component id="txt_NgaySuaCuoi" pref="170" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="txt_Ten" min="-2" pref="170" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="rd_DangKinhDoanh" min="-2" pref="134" max="-2" attributes="0"/>
@@ -75,11 +69,7 @@
                   <Component id="rd_DangKinhDoanh" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txt_NgayThem" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txt_NgaySuaCuoi" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="rd_NgungKinhDoanh" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="rd_NgungKinhDoanh" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
@@ -96,17 +86,12 @@
               </Group>
               <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="179" max="-2" attributes="0"/>
-              <EmptySpace pref="65" max="32767" attributes="0"/>
+              <EmptySpace pref="91" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="swing.TextField" name="txt_NgayThem">
-      <Properties>
-        <Property name="labelText" type="java.lang.String" value="Ng&#xe0;y Th&#xea;m:"/>
-      </Properties>
-    </Component>
     <Component class="swing.TextField" name="txt_Ma">
       <Properties>
         <Property name="labelText" type="java.lang.String" value="M&#xe3;:"/>
@@ -213,11 +198,6 @@
     <Component class="swing.TextField" name="txt_Ten">
       <Properties>
         <Property name="labelText" type="java.lang.String" value="T&#xea;n:"/>
-      </Properties>
-    </Component>
-    <Component class="swing.TextField" name="txt_NgaySuaCuoi">
-      <Properties>
-        <Property name="labelText" type="java.lang.String" value="Ng&#xe0;y S&#x1eed;a Cu&#x1ed1;i:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbl_Total">

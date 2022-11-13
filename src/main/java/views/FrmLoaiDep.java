@@ -92,7 +92,6 @@ public class FrmLoaiDep extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txt_NgayThem = new swing.TextField();
         txt_Ma = new swing.TextField();
         rd_DangKinhDoanh = new swing.RadioButtonCustom();
         rd_NgungKinhDoanh = new swing.RadioButtonCustom();
@@ -102,12 +101,9 @@ public class FrmLoaiDep extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_Table = new javax.swing.JTable();
         txt_Ten = new swing.TextField();
-        txt_NgaySuaCuoi = new swing.TextField();
         lbl_Total = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        txt_NgayThem.setLabelText("Ngày Thêm:");
 
         txt_Ma.setLabelText("Mã:");
 
@@ -157,8 +153,6 @@ public class FrmLoaiDep extends javax.swing.JFrame {
 
         txt_Ten.setLabelText("Tên:");
 
-        txt_NgaySuaCuoi.setLabelText("Ngày Sửa Cuối:");
-
         lbl_Total.setBackground(new java.awt.Color(204, 204, 204));
         lbl_Total.setForeground(new java.awt.Color(255, 0, 0));
         lbl_Total.setText("Total: 0");
@@ -173,9 +167,7 @@ public class FrmLoaiDep extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txt_NgayThem, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
-                                .addComponent(txt_Ma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txt_Ma, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(8, 8, 8)
                                 .addComponent(btn_Them, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,9 +180,7 @@ public class FrmLoaiDep extends javax.swing.JFrame {
                                 .addGap(45, 45, 45)
                                 .addComponent(lbl_Total, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txt_Ten, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txt_NgaySuaCuoi, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
+                                .addComponent(txt_Ten, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(34, 34, 34)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(rd_DangKinhDoanh, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -206,10 +196,7 @@ public class FrmLoaiDep extends javax.swing.JFrame {
                     .addComponent(txt_Ten, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rd_DangKinhDoanh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_NgayThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_NgaySuaCuoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rd_NgungKinhDoanh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(rd_NgungKinhDoanh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
@@ -222,7 +209,7 @@ public class FrmLoaiDep extends javax.swing.JFrame {
                         .addComponent(lbl_Total)))
                 .addGap(70, 70, 70)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
 
         pack();
@@ -233,8 +220,6 @@ public class FrmLoaiDep extends javax.swing.JFrame {
         LoaiDep loaidep = loaidepSV.getAll().get(row);
         txt_Ma.setText(loaidep.getMa());
         txt_Ten.setText(loaidep.getTen());
-        txt_NgayThem.setText(loaidep.getNgayThem().toString());
-        txt_NgaySuaCuoi.setText(loaidep.getNgaySuaCuoi().toString());
         rd_DangKinhDoanh.setSelected(loaidep.getTrangThai()==0);
         rd_DangKinhDoanh.setSelected(loaidep.getTrangThai()==1);
     }//GEN-LAST:event_tb_TableMouseClicked
@@ -316,8 +301,6 @@ public class FrmLoaiDep extends javax.swing.JFrame {
     private swing.RadioButtonCustom rd_NgungKinhDoanh;
     private javax.swing.JTable tb_Table;
     private swing.TextField txt_Ma;
-    private swing.TextField txt_NgaySuaCuoi;
-    private swing.TextField txt_NgayThem;
     private swing.TextField txt_Ten;
     private swing.TextField txt_TimKiem;
     // End of variables declaration//GEN-END:variables
