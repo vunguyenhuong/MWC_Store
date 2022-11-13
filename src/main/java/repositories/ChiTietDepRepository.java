@@ -17,7 +17,10 @@ public class ChiTietDepRepository {
     private Transaction transaction = session.getTransaction();
 
     public List<ChiTietDep> getAll() {
-        return session.createCriteria(ChiTietDep.class).list();
+        Query query = session.createQuery("SELECT c FROM ChiTietDep c");
+        List<ChiTietDep> list = query.getResultList();
+        return list;
+//return session.createCriteria(ChiTietDep.class).list();
     }
 
     public static void main(String[] args) {
@@ -28,7 +31,7 @@ public class ChiTietDepRepository {
     public boolean save(ChiTietDep ctd) {
         try {
             transaction.begin();
-            session.delete(ctd);
+            session.save(ctd);
             transaction.commit();
             return true;
         } catch (Exception e) {
