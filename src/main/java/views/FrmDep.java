@@ -309,7 +309,6 @@ public class FrmDep extends javax.swing.JFrame {
         d.setHinhAnh(dep.getHinhAnh());
         long millis = System.currentTimeMillis();
         java.sql.Date date = new java.sql.Date(millis);
-        d.setNgayThem(date);
         d.setNgaySuaCuoi(date);
         d.setTrangThai(dep.getTrangThai());
         
