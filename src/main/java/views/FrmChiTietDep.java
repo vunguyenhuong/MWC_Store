@@ -49,7 +49,7 @@ public class FrmChiTietDep extends javax.swing.JInternalFrame {
             this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
             BasicInternalFrameUI bi = (BasicInternalFrameUI) this.getUI();
             bi.setNorthPane(null);
-        } catch (Exception e) {    
+        } catch (Exception e) {
         }
         iNhaSXService = new NhaSXService();
         iMauSacService = new MauSacService();
@@ -1001,13 +1001,13 @@ public class FrmChiTietDep extends javax.swing.JInternalFrame {
             }
             iChiTietDepService.save(ctd);
             loadData();
-            checkSearchCT=0;
+            checkSearchCT = 0;
             helper.alert(this, "Sửa thành công!");
         }
     }//GEN-LAST:event_btn_ctd_capnhatActionPerformed
 
     private void btn_ctd_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ctd_xoaActionPerformed
-         int row = tb_table.getSelectedRow();
+        int row = tb_table.getSelectedRow();
         if (row == -1) {
             helper.error(this, "Vui lòng chọn dòng cần sửa!");
         } else {
@@ -1017,10 +1017,10 @@ public class FrmChiTietDep extends javax.swing.JInternalFrame {
             } else {
                 ctd = iChiTietDepService.findByName(txt_timkiem.getText()).get(row);
             }
-            if(helper.confirm(this, "Xác nhận xóa")){
+            if (helper.confirm(this, "Xác nhận xóa")) {
                 iChiTietDepService.delete(ctd);
                 loadData();
-                checkSearchCT=0;
+                checkSearchCT = 0;
                 helper.alert(this, "Xóa thành công!");
             }
         }

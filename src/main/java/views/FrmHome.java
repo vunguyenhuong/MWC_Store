@@ -14,13 +14,18 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import models.NguoiDung;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
+import services.INguoiDungService;
+import services.impl.NguoiDungService;
 import utilities.Helper;
 import utilities.ImageUltil;
 
@@ -28,9 +33,11 @@ import utilities.ImageUltil;
  *
  * @author Vũ Nguyên Hướng
  */
-public class FrmHome extends javax.swing.JFrame{
-    
+public class FrmHome extends javax.swing.JFrame {
+
+    private INguoiDungService iNguoiDungService = new NguoiDungService();
     ImageUltil imageUltil = new ImageUltil();
+    private String fileName;
     private Helper helper = new Helper();
     private NguoiDung nguoidung = new NguoiDung();
 
@@ -46,6 +53,22 @@ public class FrmHome extends javax.swing.JFrame{
         imageAvatar.setImage(new ImageIcon("images/users/" + nd.getHinhAnh()));
         cardLayout = (CardLayout) main.getLayout();
         cardLayout.show(main, "general");
+        txt_ma.setText(nd.getMa());
+        txt_ten.setText(nd.getTen());
+        txt_email.setText(nd.getEmail());
+        txt_sdt.setText(nd.getSdt());
+        txt_diachi.setText(nd.getDiaChi());
+        if (nd.getGioiTinh() == 0) {
+            rd_nam.setSelected(true);
+        } else {
+            rd_nu.setSelected(true);
+        }
+        try {
+            lbl_chucvu.setText(nd.getChucVu().getTen());
+        } catch (Exception e) {
+        }
+        imageAvatar.setImage(new ImageIcon("images/users/" + nd.getHinhAnh()));
+        imageAvatar1.setImage(new ImageIcon("images/users/" + nd.getHinhAnh()));
     }
 
     public FrmHome() {
@@ -70,6 +93,7 @@ public class FrmHome extends javax.swing.JFrame{
     private void initComponents() {
 
         buttonGroup = new javax.swing.ButtonGroup();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         imageAvatar = new swing.ImageAvatar();
@@ -90,6 +114,31 @@ public class FrmHome extends javax.swing.JFrame{
         dangxuat = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         main = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jSeparator1 = new javax.swing.JSeparator();
+        txt_sdt = new swing.TextField();
+        txt_email = new swing.TextField();
+        jLabel8 = new javax.swing.JLabel();
+        txt_ma = new swing.TextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txt_thongbao = new javax.swing.JTextArea();
+        btn_changePass = new swing.Button();
+        jLabel9 = new javax.swing.JLabel();
+        btn_sua = new swing.Button();
+        txt_reNewPassword = new swing.PasswordField();
+        lbl_err_oldpass = new javax.swing.JLabel();
+        txt_newPassword = new swing.PasswordField();
+        lbl_err_newpass = new javax.swing.JLabel();
+        txt_oldPassword = new swing.PasswordField();
+        lbl_err_renewpass = new javax.swing.JLabel();
+        rd_nu = new swing.RadioButtonCustom();
+        jSeparator2 = new javax.swing.JSeparator();
+        rd_nam = new swing.RadioButtonCustom();
+        jLabel10 = new javax.swing.JLabel();
+        txt_diachi = new swing.TextField();
+        lbl_chucvu = new javax.swing.JLabel();
+        imageAvatar1 = new swing.ImageAvatar();
+        txt_ten = new swing.TextField();
         deskpane = new javax.swing.JDesktopPane();
         pn_banhang = new javax.swing.JPanel();
         pn_webcam = new javax.swing.JPanel();
@@ -374,13 +423,240 @@ public class FrmHome extends javax.swing.JFrame{
 
         main.setLayout(new java.awt.CardLayout());
 
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        txt_sdt.setLabelText("Số điện thoại");
+        txt_sdt.setLineColor(new java.awt.Color(153, 153, 255));
+        txt_sdt.setSelectionColor(new java.awt.Color(153, 153, 255));
+
+        txt_email.setLabelText("Email");
+        txt_email.setLineColor(new java.awt.Color(153, 153, 255));
+        txt_email.setSelectionColor(new java.awt.Color(153, 153, 255));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel8.setText("THÔNG TIN CÁ NHÂN");
+
+        txt_ma.setEditable(false);
+        txt_ma.setLabelText("Mã");
+        txt_ma.setLineColor(new java.awt.Color(153, 153, 255));
+        txt_ma.setSelectionColor(new java.awt.Color(153, 153, 255));
+
+        txt_thongbao.setColumns(20);
+        txt_thongbao.setRows(5);
+        jScrollPane1.setViewportView(txt_thongbao);
+
+        btn_changePass.setBackground(new java.awt.Color(102, 102, 102));
+        btn_changePass.setForeground(new java.awt.Color(255, 255, 255));
+        btn_changePass.setText("SUBMIT");
+        btn_changePass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_changePassActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel9.setText("THÔNG BÁO");
+
+        btn_sua.setBackground(new java.awt.Color(102, 102, 102));
+        btn_sua.setForeground(new java.awt.Color(255, 255, 255));
+        btn_sua.setText("Chỉnh sửa thông tin cá nhân");
+        btn_sua.setFocusPainted(false);
+        btn_sua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_suaActionPerformed(evt);
+            }
+        });
+
+        txt_reNewPassword.setLabelText("Xác nhận mật khẩu mới");
+        txt_reNewPassword.setLineColor(new java.awt.Color(153, 153, 255));
+        txt_reNewPassword.setSelectionColor(new java.awt.Color(153, 153, 255));
+        txt_reNewPassword.setShowAndHide(true);
+        txt_reNewPassword.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txt_reNewPasswordCaretUpdate(evt);
+            }
+        });
+
+        lbl_err_oldpass.setFont(lbl_err_oldpass.getFont().deriveFont(lbl_err_oldpass.getFont().getSize()-1f));
+        lbl_err_oldpass.setForeground(java.awt.Color.red);
+        lbl_err_oldpass.setText(" ");
+
+        txt_newPassword.setLabelText("Mật khẩu mới");
+        txt_newPassword.setLineColor(new java.awt.Color(153, 153, 255));
+        txt_newPassword.setSelectionColor(new java.awt.Color(153, 153, 255));
+        txt_newPassword.setShowAndHide(true);
+        txt_newPassword.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txt_newPasswordCaretUpdate(evt);
+            }
+        });
+
+        lbl_err_newpass.setFont(lbl_err_newpass.getFont().deriveFont(lbl_err_newpass.getFont().getSize()-1f));
+        lbl_err_newpass.setForeground(java.awt.Color.red);
+        lbl_err_newpass.setText(" ");
+
+        txt_oldPassword.setLabelText("Mật khẩu hiện tại");
+        txt_oldPassword.setLineColor(new java.awt.Color(153, 153, 255));
+        txt_oldPassword.setSelectionColor(new java.awt.Color(153, 153, 255));
+        txt_oldPassword.setShowAndHide(true);
+        txt_oldPassword.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txt_oldPasswordCaretUpdate(evt);
+            }
+        });
+
+        lbl_err_renewpass.setFont(lbl_err_renewpass.getFont().deriveFont(lbl_err_renewpass.getFont().getSize()-1f));
+        lbl_err_renewpass.setForeground(java.awt.Color.red);
+        lbl_err_renewpass.setText(" ");
+
+        buttonGroup1.add(rd_nu);
+        rd_nu.setText("Nữ");
+        rd_nu.setFocusPainted(false);
+
+        buttonGroup1.add(rd_nam);
+        rd_nam.setText("Nam");
+        rd_nam.setFocusPainted(false);
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel10.setText("ĐỔI MẬT KHẨU");
+
+        txt_diachi.setLabelText("Địa chỉ");
+        txt_diachi.setLineColor(new java.awt.Color(153, 153, 255));
+        txt_diachi.setSelectionColor(new java.awt.Color(153, 153, 255));
+
+        lbl_chucvu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbl_chucvu.setForeground(java.awt.Color.red);
+        lbl_chucvu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_chucvu.setText("Chức vụ");
+
+        imageAvatar1.setGradientColor1(new java.awt.Color(255, 51, 51));
+        imageAvatar1.setGradientColor2(new java.awt.Color(51, 0, 255));
+        imageAvatar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                imageAvatar1MouseClicked(evt);
+            }
+        });
+
+        txt_ten.setLabelText("Tên");
+        txt_ten.setLineColor(new java.awt.Color(153, 153, 255));
+        txt_ten.setSelectionColor(new java.awt.Color(153, 153, 255));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator2)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                                .addGap(9, 9, 9)
+                                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                                        .addComponent(rd_nam, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(18, 18, 18)
+                                                        .addComponent(rd_nu, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addComponent(txt_diachi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(txt_email, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(txt_ten, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(txt_ma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(txt_sdt, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(18, 18, 18)
+                                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(lbl_chucvu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lbl_err_oldpass, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                                    .addComponent(lbl_err_newpass, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                                    .addComponent(txt_reNewPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                                    .addComponent(lbl_err_renewpass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txt_oldPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                                    .addComponent(txt_newPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                                    .addComponent(jLabel10)
+                                    .addComponent(btn_changePass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(jLabel8)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(txt_ma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_ten, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_sdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_diachi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(rd_nam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(rd_nu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lbl_chucvu, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jSeparator1)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_oldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl_err_oldpass)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_newPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl_err_newpass)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_reNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl_err_renewpass)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_changePass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        main.add(jPanel3, "ttcanhan");
+
         deskpane.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout deskpaneLayout = new javax.swing.GroupLayout(deskpane);
         deskpane.setLayout(deskpaneLayout);
         deskpaneLayout.setHorizontalGroup(
             deskpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 870, Short.MAX_VALUE)
+            .addGap(0, 920, Short.MAX_VALUE)
         );
         deskpaneLayout.setVerticalGroup(
             deskpaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -398,7 +674,7 @@ public class FrmHome extends javax.swing.JFrame{
             .addGroup(pn_banhangLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pn_webcam, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(591, Short.MAX_VALUE))
+                .addContainerGap(641, Short.MAX_VALUE))
         );
         pn_banhangLayout.setVerticalGroup(
             pn_banhangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -448,8 +724,12 @@ public class FrmHome extends javax.swing.JFrame{
 
     private void nvMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nvMouseClicked
         effectNav(nv, home, sp, hd, bh, thongke);
-        cardLayout.show(main, "general");
-        deskpane.add(new FrmQLNhanVien()).setVisible(true);
+        if (nguoidung.getChucVu().getTen().equals("Nhân viên")) {
+            helper.error(this, "Bạn không có quyền truy cập chức năng này!");
+        } else {
+            cardLayout.show(main, "general");
+            deskpane.add(new FrmQLNhanVien()).setVisible(true);
+        }
     }//GEN-LAST:event_nvMouseClicked
 
     private void spMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_spMouseClicked
@@ -475,13 +755,14 @@ public class FrmHome extends javax.swing.JFrame{
     }//GEN-LAST:event_thongkeMouseClicked
 
     private void imageAvatarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageAvatarMouseClicked
-        deskpane.removeAll();
-        deskpane.add(new FrmProfile(nguoidung)).setVisible(true);
+//        deskpane.removeAll();
+//        deskpane.add(new FrmProfile(nguoidung)).setVisible(true);
         home.setBackground(Color.BLACK);
         nv.setBackground(Color.BLACK);
         sp.setBackground(Color.BLACK);
         bh.setBackground(Color.BLACK);
         hd.setBackground(Color.BLACK);
+        cardLayout.show(main, "ttcanhan");
     }//GEN-LAST:event_imageAvatarMouseClicked
 
     private void dangxuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dangxuatMouseClicked
@@ -491,6 +772,84 @@ public class FrmHome extends javax.swing.JFrame{
             new SplashScreen().setVisible(true);
         }
     }//GEN-LAST:event_dangxuatMouseClicked
+
+    private void btn_changePassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_changePassActionPerformed
+        String oldPass = new String(txt_oldPassword.getPassword());
+        String newPass = new String(txt_newPassword.getPassword());
+        String reNewPass = new String(txt_reNewPassword.getPassword());
+        if (oldPass.equals(nguoidung.getMatKhau()) && newPass.length() >= 8 && newPass.equals(reNewPass)) {
+            if (helper.confirm(this, "Xác nhận đổi mật khẩu ?")) {
+                nguoidung.setMatKhau(reNewPass);
+                iNguoiDungService.save(nguoidung);
+                helper.alert(this, "Mật khẩu đã được thay đổi!");
+                txt_oldPassword.setText("");
+                txt_newPassword.setText("");
+                txt_reNewPassword.setText("");
+            }
+        } else {
+            helper.error(this, "Không thành công!");
+        }
+    }//GEN-LAST:event_btn_changePassActionPerformed
+
+    private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
+        nguoidung.setHinhAnh(fileName);
+        nguoidung.setTen(txt_ten.getText());
+        nguoidung.setEmail(txt_email.getText());
+        nguoidung.setSdt(txt_sdt.getText());
+        nguoidung.setDiaChi(txt_diachi.getText());
+        if (rd_nam.isSelected()) {
+            nguoidung.setGioiTinh(0);
+        } else {
+            nguoidung.setGioiTinh(1);
+        }
+        iNguoiDungService.save(nguoidung);
+        helper.alert(this, "Cập nhật thông tin thành công!");
+        imageAvatar.setImage(new ImageIcon("images/users/" + nguoidung.getHinhAnh()));
+    }//GEN-LAST:event_btn_suaActionPerformed
+
+    private void txt_reNewPasswordCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_reNewPasswordCaretUpdate
+        String newPass = new String(txt_newPassword.getPassword());
+        String reNewPass = new String(txt_reNewPassword.getPassword());
+        if (!reNewPass.equals(newPass)) {
+            lbl_err_renewpass.setText("Xác nhận mật khẩu không khớp!");
+        } else {
+            lbl_err_renewpass.setText(" ");
+        }
+    }//GEN-LAST:event_txt_reNewPasswordCaretUpdate
+
+    private void txt_newPasswordCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_newPasswordCaretUpdate
+        if (txt_newPassword.getPassword().length < 8) {
+            lbl_err_newpass.setText("Tối thiểu 8 kí tự!");
+        } else {
+            lbl_err_newpass.setText(" ");
+        }
+    }//GEN-LAST:event_txt_newPasswordCaretUpdate
+
+    private void txt_oldPasswordCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_oldPasswordCaretUpdate
+        String oldPass = new String(txt_oldPassword.getPassword());
+        if (!oldPass.equals(nguoidung.getMatKhau())) {
+            lbl_err_oldpass.setText("Mật khẩu không chính xác!");
+        } else {
+            lbl_err_oldpass.setText(" ");
+        }
+    }//GEN-LAST:event_txt_oldPasswordCaretUpdate
+
+    private void imageAvatar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageAvatar1MouseClicked
+        JFileChooser fileChooser = new JFileChooser("images/users/");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("*jpg", "jpg");
+        fileChooser.setFileFilter(filter);
+        int result = fileChooser.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            try {
+                File file = new File(fileChooser.getSelectedFile().getPath());
+                file.renameTo(new File("images/users/" + file.getName()));
+                fileName = file.getName();
+                imageAvatar1.setImage(new ImageIcon("images/users/" + file.getName()));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_imageAvatar1MouseClicked
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -502,29 +861,55 @@ public class FrmHome extends javax.swing.JFrame{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bh;
+    private swing.Button btn_changePass;
+    private swing.Button btn_sua;
     private javax.swing.ButtonGroup buttonGroup;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel dangxuat;
     private javax.swing.JDesktopPane deskpane;
     private javax.swing.JPanel hd;
     private javax.swing.JPanel home;
     private swing.ImageAvatar imageAvatar;
+    private swing.ImageAvatar imageAvatar1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lbl_chucvu;
+    private javax.swing.JLabel lbl_err_newpass;
+    private javax.swing.JLabel lbl_err_oldpass;
+    private javax.swing.JLabel lbl_err_renewpass;
     private javax.swing.JLabel lbl_role;
     private javax.swing.JLabel lbl_tenUser;
     private javax.swing.JPanel main;
     private javax.swing.JPanel nv;
     private javax.swing.JPanel pn_banhang;
     private javax.swing.JPanel pn_webcam;
+    private swing.RadioButtonCustom rd_nam;
+    private swing.RadioButtonCustom rd_nu;
     private javax.swing.JPanel sp;
     private javax.swing.JPanel thongke;
+    private swing.TextField txt_diachi;
+    private swing.TextField txt_email;
+    private swing.TextField txt_ma;
+    private swing.PasswordField txt_newPassword;
+    private swing.PasswordField txt_oldPassword;
+    private swing.PasswordField txt_reNewPassword;
+    private swing.TextField txt_sdt;
+    private swing.TextField txt_ten;
+    private javax.swing.JTextArea txt_thongbao;
     // End of variables declaration//GEN-END:variables
 
 }
