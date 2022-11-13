@@ -244,8 +244,6 @@ public class FrmLoaiDep extends javax.swing.JFrame {
         LoaiDep loaidep = getForm();
         LoaiDep loai = loaidepSV.getObj(txt_Ma.getText().trim());
         loai.setTen(loaidep.getTen());
-        loai.setNgayThem(loaidep.getNgayThem());
-        loai.setNgaySuaCuoi(loai.getNgaySuaCuoi());
         loai.setTrangThai(loaidep.getTrangThai());
         this.loaidepSV.save(loai);
         LoadTabale(loaidepSV.getAll());
