@@ -28,5 +28,10 @@ public class LoaiDepService implements ILoaiDepService {
     public LoaiDep getObj(String ma) {
         return loaiDepRepository.getObj(ma);
     }
+
+    @Override
+    public List<LoaiDep> findByName(String ten) {
+        return loaiDepRepository.findByName(ten);
+    }
     
 }

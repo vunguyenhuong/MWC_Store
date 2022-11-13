@@ -41,5 +41,6 @@
         <mapping class="models.MauSac"/>
         <mapping class="models.Size"/>
         <mapping class="models.ChiTietDep"/>
+        <mapping class="models.LoaiDep"/>
     </session-factory>
 </hibernate-configuration>
