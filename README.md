@@ -1,6 +1,8 @@
-# MWC_Store
+# MWC_Store - Man Women And Choices.
 
-Man Women And Choices.
+# Nguyên tắc làm việc
+
+Share code ra bên ngoài là có lỗi với chính bản thân và với các thành viên khác!
 
 ## Thành viên trong nhóm
 
