@@ -14,4 +14,6 @@ public interface ILoaiDepService {
     boolean save(LoaiDep ld);
 
     LoaiDep getObj(String ma);
+    
+    List<LoaiDep> findByName(String ten);
 }
