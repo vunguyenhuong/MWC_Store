@@ -14,4 +14,6 @@ public interface IMauSacService {
     boolean save(MauSac ms);
 
     MauSac getObj(String ma);
+
+    List<MauSac> findByName(String ten);
 }

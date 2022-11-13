@@ -48,4 +48,12 @@ public class RadioButtonCustom extends JRadioButton {
         }
         g2.dispose();
     }
+
+    public void isSelected(int i) {
+        isSelected(i);
+    }
+
+    public void clearSelection() {
+        clearSelection();
+    }
 }
