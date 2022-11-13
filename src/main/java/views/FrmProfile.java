@@ -1,6 +1,10 @@
 package views;
 
+import java.awt.Image;
+import java.io.File;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import models.NguoiDung;
 import services.INguoiDungService;
@@ -16,6 +20,7 @@ public class FrmProfile extends javax.swing.JInternalFrame {
     private INguoiDungService iNguoiDungService = new NguoiDungService();
     private NguoiDung nguoidung;
     private Helper helper = new Helper();
+    private String fileName;
 
     public FrmProfile(NguoiDung nd) {
         initComponents();
@@ -81,6 +86,11 @@ public class FrmProfile extends javax.swing.JInternalFrame {
 
         imageAvatar.setGradientColor1(new java.awt.Color(255, 51, 51));
         imageAvatar.setGradientColor2(new java.awt.Color(51, 0, 255));
+        imageAvatar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                imageAvatarMouseClicked(evt);
+            }
+        });
 
         lbl_chucvu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_chucvu.setForeground(java.awt.Color.red);
@@ -304,7 +314,8 @@ public class FrmProfile extends javax.swing.JInternalFrame {
 
 
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
-        // TODO add your handling code here:
+        nguoidung.setHinhAnh(fileName);
+        iNguoiDungService.save(nguoidung);
     }//GEN-LAST:event_btn_suaActionPerformed
 
     private void btn_changePassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_changePassActionPerformed
@@ -351,6 +362,23 @@ public class FrmProfile extends javax.swing.JInternalFrame {
             lbl_err_renewpass.setText(" ");
         }
     }//GEN-LAST:event_txt_reNewPasswordCaretUpdate
+
+    private void imageAvatarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageAvatarMouseClicked
+         JFileChooser fileChooser = new JFileChooser("images/users/");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("*jpg", "jpg");
+        fileChooser.setFileFilter(filter);
+        int result = fileChooser.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            try {
+                File file = new File(fileChooser.getSelectedFile().getPath());
+                file.renameTo(new File("images/users/" + file.getName()));
+                fileName = file.getName();
+                imageAvatar.setImage(new ImageIcon("images/users/" + file.getName()));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_imageAvatarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

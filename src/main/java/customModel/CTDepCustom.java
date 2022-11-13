@@ -16,13 +16,13 @@ import models.Size;
  *
  * @author VU NGUYEN HUONG
  */
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 
 public class CTDepCustom {
+
     private ChiTietDep ctd;
     private Dep dep;
     private LoaiDep loaiDep;
