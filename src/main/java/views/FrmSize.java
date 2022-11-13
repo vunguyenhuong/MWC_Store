@@ -15,7 +15,7 @@ import utilities.Helper;
  *
  * @author KenTizz
  */
-public class SizeFrame extends javax.swing.JFrame {
+public class FrmSize extends javax.swing.JFrame {
 
     /**
      * Creates new form SizeFrame
@@ -26,7 +26,7 @@ public class SizeFrame extends javax.swing.JFrame {
     private ButtonGroup group = new ButtonGroup();
     private SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 
-    public SizeFrame() {
+    public FrmSize() {
         initComponents();
         tb_DanhSach.getTableHeader().setReorderingAllowed(false);
         group.add(rd_DangKinhDoanh);
@@ -280,20 +280,21 @@ public class SizeFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SizeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmSize.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SizeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmSize.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SizeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmSize.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SizeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmSize.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SizeFrame().setVisible(true);
+                new FrmSize().setVisible(true);
             }
         });
     }

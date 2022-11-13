@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="title" type="java.lang.String" value="M&#xe0;u s&#x1eaf;c"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -23,46 +28,31 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="btn_Them" min="-2" pref="80" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                      <Component id="btn_Capnhat" min="-2" pref="80" max="-2" attributes="0"/>
-                      <EmptySpace min="42" pref="391" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="txt_Timkiem" min="-2" pref="350" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="144" max="-2" attributes="0"/>
-                      <Component id="lbl_Total" pref="83" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="txt_Ma1" min="-2" pref="189" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="txt_Ten" min="-2" pref="189" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="txt_Ngaythem" min="-2" pref="189" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="txt_NgaySua" min="-2" pref="189" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="txt_Ten" pref="189" max="32767" attributes="0"/>
+                          <Component id="txt_Ma" alignment="0" pref="189" max="32767" attributes="0"/>
+                          <Component id="txt_Timkiem" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="rd_Dangnhap" min="-2" max="-2" attributes="0"/>
-                          <Component id="rd_Ngungnhap" min="-2" max="-2" attributes="0"/>
+                          <Component id="rd_dangkd" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="rd_ngungkd" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl_Total" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="btn_Them" min="-2" pref="80" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btn_Capnhat" min="-2" pref="80" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="533" max="32767" attributes="0"/>
                   </Group>
               </Group>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -70,39 +60,35 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txt_Ma1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="rd_Dangnhap" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txt_Ten" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                      <Component id="rd_Ngungnhap" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="197" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txt_NgaySua" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txt_Ngaythem" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_Ma" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="rd_dangkd" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txt_Ten" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="rd_ngungkd" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txt_Timkiem" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl_Total" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btn_Them" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_Capnhat" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btn_Them" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btn_Capnhat" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="txt_Timkiem" min="-2" max="-2" attributes="0"/>
-                  <Component id="lbl_Total" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="300" max="32767" attributes="0"/>
-              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -154,17 +140,23 @@
     </Component>
     <Component class="swing.TextField" name="txt_Ten">
       <Properties>
-        <Property name="labelText" type="java.lang.String" value="T&#xea;n NSX :"/>
+        <Property name="labelText" type="java.lang.String" value="T&#xea;n m&#xe0;u s&#x1eaf;c"/>
       </Properties>
     </Component>
-    <Component class="swing.RadioButtonCustom" name="rd_Ngungnhap">
+    <Component class="swing.RadioButtonCustom" name="rd_ngungkd">
       <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value=" Ng&#x1eeb;ng kinh doanh"/>
         <Property name="actionCommand" type="java.lang.String" value=""/>
       </Properties>
     </Component>
-    <Component class="swing.RadioButtonCustom" name="rd_Dangnhap">
+    <Component class="swing.RadioButtonCustom" name="rd_dangkd">
       <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
         <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="&#x110;ang kinh doanh"/>
       </Properties>
@@ -179,14 +171,45 @@
         <Component class="javax.swing.JTable" name="tblBang">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="6" rowCount="0">
-                <Column editable="false" title="STT" type="java.lang.Object"/>
+              <Table columnCount="5" rowCount="0">
                 <Column editable="false" title="M&#xe3;" type="java.lang.Object"/>
                 <Column editable="false" title="T&#xea;n" type="java.lang.Object"/>
                 <Column editable="false" title="Ng&#xe0;y th&#xea;m" type="java.lang.Object"/>
                 <Column editable="false" title="Ng&#xe0;y  s&#x1eed;a cu&#x1ed1;i" type="java.lang.Object"/>
                 <Column editable="false" title="Tr&#x1ea1;ng th&#xe1;i" type="java.lang.Object"/>
               </Table>
+            </Property>
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+              <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+              </TableColumnModel>
+            </Property>
+            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
           <Events>
@@ -195,25 +218,11 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="swing.TextField" name="txt_Ma1">
+    <Component class="swing.TextField" name="txt_Ma">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
         <Property name="labelText" type="java.lang.String" value="M&#xe3; :"/>
-      </Properties>
-    </Component>
-    <Component class="swing.TextField" name="txt_Ngaythem">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-        <Property name="toolTipText" type="java.lang.String" value=""/>
-        <Property name="labelText" type="java.lang.String" value="Ng&#xe0;y Th&#xea;m :"/>
-      </Properties>
-    </Component>
-    <Component class="swing.TextField" name="txt_NgaySua">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-        <Property name="toolTipText" type="java.lang.String" value=""/>
-        <Property name="labelText" type="java.lang.String" value="Ng&#xe0;y S&#x1eed;a Cu&#x1ed1;i :"/>
       </Properties>
     </Component>
   </SubComponents>
