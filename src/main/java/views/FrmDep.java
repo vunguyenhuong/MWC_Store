@@ -73,6 +73,9 @@ public class FrmDep extends javax.swing.JFrame {
     }
 
     private Dep getDataFromInput() {
+        
+        int index = tblDep.getSelectedRow();
+        
         String ma = txtMa.getText().trim();
         String ten = txtTen.getText().trim();
         int trangthai;
@@ -90,6 +93,14 @@ public class FrmDep extends javax.swing.JFrame {
             trangthai = 0;
         } else {
             trangthai = 1;
+        }
+        
+        String tenAnh = tblDep.getValueAt(index, 2).toString();
+        
+        if (fileName == null) {
+            fileName = tenAnh;
+        } else {
+            fileName = fileName;
         }
 
         if (lblHinhAnh.getIcon() == null) {
@@ -306,7 +317,7 @@ public class FrmDep extends javax.swing.JFrame {
         
         Dep d = this.iDepService.getObj(txtMa.getText().trim());
         d.setTen(dep.getTen());
-        d.setHinhAnh(dep.getHinhAnh());
+        d.setHinhAnh(fileName);
         long millis = System.currentTimeMillis();
         java.sql.Date date = new java.sql.Date(millis);
         d.setNgaySuaCuoi(date);
