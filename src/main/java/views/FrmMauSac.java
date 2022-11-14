@@ -229,7 +229,7 @@ public class FrmMauSac extends javax.swing.JFrame {
         }
         iMauSacService.save(m);
         loadToTable(iMauSacService.getAll());
-        helper.alert(this, "Sửa thành công!");     
+        helper.alert(this, "Sửa thành công!");
     }//GEN-LAST:event_btn_CapnhatActionPerformed
 
     private void tblBangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBangMouseClicked
