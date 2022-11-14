@@ -37,5 +37,9 @@ public class DepService implements IDepService {
         return this.depRepository.findByName(ten);
     }
     
+    @Override
+    public Dep getObjById(int id) {
+        return depRepository.getObjById(id);
+    }
     
 }

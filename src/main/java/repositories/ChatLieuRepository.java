@@ -68,4 +68,16 @@ public class ChatLieuRepository {
         list = query.getResultList();
         return list;
     }
+    
+    public ChatLieu getObjById(int id) {
+        ChatLieu cl = null;
+        try {
+            Query query = session.createQuery("SELECT cl FROM ChatLieu cl WHERE cl.id = :id");
+            query.setParameter("id", id);
+            cl = (ChatLieu) query.getSingleResult();
+        } catch (Exception e) {
+        }
+        return cl;
+    }
+    
 }
