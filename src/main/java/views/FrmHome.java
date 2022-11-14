@@ -723,10 +723,10 @@ public class FrmHome extends javax.swing.JFrame {
     }//GEN-LAST:event_homeMouseClicked
 
     private void nvMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nvMouseClicked
-        effectNav(nv, home, sp, hd, bh, thongke);
         if (nguoidung.getChucVu().getTen().equals("Nhân viên")) {
             helper.error(this, "Bạn không có quyền truy cập chức năng này!");
         } else {
+            effectNav(nv, home, sp, hd, bh, thongke);
             cardLayout.show(main, "general");
             deskpane.add(new FrmQLNhanVien()).setVisible(true);
         }
@@ -750,8 +750,12 @@ public class FrmHome extends javax.swing.JFrame {
     }//GEN-LAST:event_bhMouseClicked
 
     private void thongkeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_thongkeMouseClicked
-        effectNav(thongke, bh, hd, home, nv, sp);
-        cardLayout.show(main, "general");
+        if (nguoidung.getChucVu().getTen().equals("Nhân viên")) {
+            helper.error(this, "Bạn không có quyền truy cập chức năng này!");
+        } else {
+            effectNav(thongke, bh, hd, home, nv, sp);
+            cardLayout.show(main, "general");
+        }
     }//GEN-LAST:event_thongkeMouseClicked
 
     private void imageAvatarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageAvatarMouseClicked
@@ -802,9 +806,13 @@ public class FrmHome extends javax.swing.JFrame {
         } else {
             nguoidung.setGioiTinh(1);
         }
-        iNguoiDungService.save(nguoidung);
-        helper.alert(this, "Cập nhật thông tin thành công!");
-        imageAvatar.setImage(new ImageIcon("images/users/" + nguoidung.getHinhAnh()));
+        if (fileName == null) {
+            helper.error(this, "Vui lòng chọn hình ảnh!");
+        } else {
+            iNguoiDungService.save(nguoidung);
+            imageAvatar.setImage(new ImageIcon("images/users/" + nguoidung.getHinhAnh()));
+            helper.alert(this, "Cập nhật thông tin thành công!");
+        }
     }//GEN-LAST:event_btn_suaActionPerformed
 
     private void txt_reNewPasswordCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_reNewPasswordCaretUpdate
