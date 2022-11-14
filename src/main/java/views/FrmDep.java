@@ -78,15 +78,12 @@ public class FrmDep extends javax.swing.JFrame {
 
         int index = tblDep.getSelectedRow();
 
-//        String ma = txtMa.getText().trim();
         String ten = txtTen.getText().trim();
         int trangthai;
 
-//        if (helper.checkNull(txtMa, "Mã đang trống") || helper.checkNull(txtTen, "Tên đang trống")) {
-//            return null;
-//        }
         String result;
-        for (int i = 5; i < iDepService.getList().size() + 1; i++) {
+        for (int i = 1; i < iDepService.getList().size() + 1; i++) {
+
             result = "SP0" + i;
             if (iDepService.getObj(result) == null) {
                 dep.setMa(result);
@@ -118,7 +115,6 @@ public class FrmDep extends javax.swing.JFrame {
             return null;
         }
 
-//        dep.setMa(ma);
         dep.setTen(ten);
         dep.setHinhAnh(fileName);
         long millis = System.currentTimeMillis();

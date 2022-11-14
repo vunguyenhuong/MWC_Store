@@ -57,7 +57,7 @@ public class LoaiDepRepository {
         LoaiDep ld = null;
         try {
             Query query = session.createQuery("SELECT n FROM LoaiDep n WHERE n.id = :id");
-            query.setParameter("ma", id);
+            query.setParameter("id", id);
             ld = (LoaiDep) query.getSingleResult();
         } catch (Exception e) {
         }

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import models.ChiTietDep;
@@ -140,6 +141,8 @@ public class ExportSP {
     }
 
     private static void writeBook(ChiTietDep c, Row row) {
+        
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 
         Cell cell = row.createCell(COLUMN_TEN);
         cell.setCellValue(c.getDep().getTen());
@@ -172,10 +175,10 @@ public class ExportSP {
         cell.setCellValue(c.getGiaBan().doubleValue());
 
         cell = row.createCell(COLUMN_NGAYTHEM);
-        cell.setCellValue(c.getNgayThem().toString());
+        cell.setCellValue(format.format(c.getNgayThem()));
 
         cell = row.createCell(COLUMN_NGAYSUA);
-        cell.setCellValue(c.getNgaySuaCuoi().toString());
+        cell.setCellValue(format.format(c.getNgaySuaCuoi()));
 
         cell = row.createCell(COLUMN_TRANGTHAI);
         if (c.getTrangThai() == 0) {
