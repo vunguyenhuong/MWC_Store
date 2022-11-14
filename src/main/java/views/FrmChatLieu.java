@@ -238,7 +238,7 @@ public class FrmChatLieu extends javax.swing.JFrame {
         ChatLieu cl = getdata();
         String result;
         for (int i = 1; i < chatLieuService.getListSize().size() + 1; i++) {
-            result = "CL0" + i;
+            result = "CL" + i;
             if (chatLieuService.getObject(result) == null) {
                 cl.setMa(result);
                 break;
