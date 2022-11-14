@@ -90,6 +90,7 @@
   <SubComponents>
     <Component class="swing.TextField" name="txtMa">
       <Properties>
+        <Property name="editable" type="boolean" value="false"/>
         <Property name="labelText" type="java.lang.String" value="M&#xe3;"/>
       </Properties>
     </Component>
