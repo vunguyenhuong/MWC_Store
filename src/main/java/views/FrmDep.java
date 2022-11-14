@@ -45,7 +45,7 @@ public class FrmDep extends javax.swing.JFrame {
         loadDataToTable(this.iDepService.getList());
 
         this.helper = new Helper();
-        
+
         tblDep.getTableHeader().setReorderingAllowed(false);
     }
 
@@ -74,14 +74,26 @@ public class FrmDep extends javax.swing.JFrame {
 
     private Dep getDataFromInput() {
         
+        Dep dep = new Dep();
+
         int index = tblDep.getSelectedRow();
-        
-        String ma = txtMa.getText().trim();
+
+//        String ma = txtMa.getText().trim();
         String ten = txtTen.getText().trim();
         int trangthai;
 
-        if (helper.checkNull(txtMa, "Mã đang trống") || helper.checkNull(txtTen, "Tên đang trống")) {
-            return null;
+//        if (helper.checkNull(txtMa, "Mã đang trống") || helper.checkNull(txtTen, "Tên đang trống")) {
+//            return null;
+//        }
+        String result;
+        for (int i = 1; i < iDepService.getList().size() + 1; i++) {
+            result = "SP0" + i;
+            if (iDepService.getObj(result) == null) {
+                dep.setMa(result);
+                break;
+            } else {
+                continue;
+            }
         }
 
         if (rdoDangkinhdoanh.isSelected() == false && rdoNgungkinhdoanh.isSelected() == false) {
@@ -94,11 +106,9 @@ public class FrmDep extends javax.swing.JFrame {
         } else {
             trangthai = 1;
         }
-        
-        String tenAnh = tblDep.getValueAt(index, 2).toString();
-        
+
         if (fileName == null) {
-            fileName = tenAnh;
+            fileName = tblDep.getValueAt(index, 2).toString();
         } else {
             fileName = fileName;
         }
@@ -107,11 +117,8 @@ public class FrmDep extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Vui lòng đính kèm ảnh !", "Warning", JOptionPane.WARNING_MESSAGE);
             return null;
         }
-       
 
-        Dep dep = new Dep();
-
-        dep.setMa(ma);
+//        dep.setMa(ma);
         dep.setTen(ten);
         dep.setHinhAnh(fileName);
         long millis = System.currentTimeMillis();
@@ -273,18 +280,18 @@ public class FrmDep extends javax.swing.JFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         Dep dep = this.getDataFromInput();
-        
+
         if (dep == null) {
             return;
         }
-        
+
         this.iDepService.save(dep);
         this.loadDataToTable(this.iDepService.getList());
         helper.alert(this, "Thêm thành công");
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void lblHinhAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHinhAnhMouseClicked
-         JFileChooser fileChooser = new JFileChooser("images/products/");
+        JFileChooser fileChooser = new JFileChooser("images/products/");
         FileNameExtensionFilter filter = new FileNameExtensionFilter("*jpg", "jpg");
         fileChooser.setFileFilter(filter);
         int result = fileChooser.showOpenDialog(null);
@@ -307,14 +314,14 @@ public class FrmDep extends javax.swing.JFrame {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         int index = tblDep.getSelectedRow();
-        
+
         if (index == -1) {
             JOptionPane.showMessageDialog(this, "Hãy chọn 1 sản phẩm");
             return;
         }
-        
+
         Dep dep = this.getDataFromInput();
-        
+
         Dep d = this.iDepService.getObj(txtMa.getText().trim());
         d.setTen(dep.getTen());
         d.setHinhAnh(fileName);
@@ -322,7 +329,7 @@ public class FrmDep extends javax.swing.JFrame {
         java.sql.Date date = new java.sql.Date(millis);
         d.setNgaySuaCuoi(date);
         d.setTrangThai(dep.getTrangThai());
-        
+
         this.iDepService.save(d);
         loadDataToTable(this.iDepService.getList());
         JOptionPane.showMessageDialog(this, "Đã cập nhật");
