@@ -26,8 +26,7 @@ public class FrmLoaiDep extends javax.swing.JFrame {
     private Helper helper;
     private SimpleDateFormat formatD = new SimpleDateFormat("dd-MM-yyyy");
     private ButtonGroup btn = new ButtonGroup();
-    
-    
+
     public FrmLoaiDep() {
         initComponents();
         loaidepSV = new LoaiDepService();
@@ -37,24 +36,23 @@ public class FrmLoaiDep extends javax.swing.JFrame {
         LoadTabale(loaidepSV.getAll());
         setLocationRelativeTo(null);
     }
-    
-    public void LoadTabale(List<LoaiDep> list){
+
+    public void LoadTabale(List<LoaiDep> list) {
         int stt = 1;
         defaultTableModel = (DefaultTableModel) tb_Table.getModel();
         defaultTableModel.setRowCount(0);
         for (LoaiDep x : list) {
             Object[] row = {
-                stt++,x.getMa(),x.getTen(),formatD.format(x.getNgayThem()),formatD.format(x.getNgaySuaCuoi()),
-                x.getTrangThai()==0?"Đang Kinh Doanh" : "Ngừng Kinh Doanh"
+                stt++, x.getMa(), x.getTen(), formatD.format(x.getNgayThem()), formatD.format(x.getNgaySuaCuoi()),
+                x.getTrangThai() == 0 ? "Đang Kinh Doanh" : "Ngừng Kinh Doanh"
             };
             defaultTableModel.addRow(row);
         }
         lbl_Total.setText("Total:" + list.size());
     }
+
     private boolean checkNull() {
-        if (helper.checkNull(txt_Ma, "Mã")
-                || helper.checkRegex(txt_Ma, "^\\w[a-zA-Z@#0-9.]*$", "Mã không chứa dấu cách!")
-                || helper.checkNull(txt_Ten, "Tên")
+        if (helper.checkNull(txt_Ten, "Tên")
                 || helper.checkRegex(txt_Ten, "(\\S+ )*\\S+", "Tên không hợp lệ!")) {
             return true;
         } else if (!rd_DangKinhDoanh.isSelected() && !rd_NgungKinhDoanh.isSelected()) {
@@ -64,23 +62,32 @@ public class FrmLoaiDep extends javax.swing.JFrame {
         return false;
 
     }
-    private LoaiDep getForm(){
+
+    private LoaiDep getForm() {
         LoaiDep loaiDep = new LoaiDep();
-        String ma = txt_Ma.getText();
+        String result;
+        for (int i = 0; i < loaidepSV.getAll().size() + 1; i++) {
+            result = "LD" + i;
+            if (loaidepSV.getObj(result) == null) {
+                loaiDep.setMa(result);
+                break;
+            } else {
+                continue;
+            }
+        }
         String ten = txt_Ten.getText();
         int trangthai;
-        if(rd_DangKinhDoanh.isSelected()){
-            trangthai=0;
-        }else{
-            trangthai=1;
+        if (rd_DangKinhDoanh.isSelected()) {
+            trangthai = 0;
+        } else {
+            trangthai = 1;
         }
-        loaiDep.setMa(ma);
         loaiDep.setTen(ten);
         loaiDep.setNgayThem(new Date());
         loaiDep.setNgaySuaCuoi(new Date());
         loaiDep.setTrangThai(trangthai);
         return loaiDep;
-        
+
     }
 
     /**
@@ -105,6 +112,7 @@ public class FrmLoaiDep extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        txt_Ma.setEditable(false);
         txt_Ma.setLabelText("Mã:");
 
         rd_DangKinhDoanh.setSelected(true);
@@ -220,13 +228,13 @@ public class FrmLoaiDep extends javax.swing.JFrame {
         LoaiDep loaidep = loaidepSV.getAll().get(row);
         txt_Ma.setText(loaidep.getMa());
         txt_Ten.setText(loaidep.getTen());
-        rd_DangKinhDoanh.setSelected(loaidep.getTrangThai()==0);
-        rd_DangKinhDoanh.setSelected(loaidep.getTrangThai()==1);
+        rd_DangKinhDoanh.setSelected(loaidep.getTrangThai() == 0);
+        rd_DangKinhDoanh.setSelected(loaidep.getTrangThai() == 1);
     }//GEN-LAST:event_tb_TableMouseClicked
 
     private void btn_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemActionPerformed
-        
-        if(checkNull()){
+
+        if (checkNull()) {
             return;
         }
         LoaiDep loaidep = getForm();
@@ -237,7 +245,7 @@ public class FrmLoaiDep extends javax.swing.JFrame {
 
     private void btn_CapNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CapNhapActionPerformed
         int row = tb_Table.getSelectedRow();
-        if(row==-1){
+        if (row == -1) {
             JOptionPane.showMessageDialog(this, "Chon 1 dong de cap nhap");
             return;
         }
@@ -289,7 +297,7 @@ public class FrmLoaiDep extends javax.swing.JFrame {
             }
         });
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private swing.Button btn_CapNhap;
