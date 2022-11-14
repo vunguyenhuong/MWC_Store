@@ -23,12 +23,14 @@ public class MauSacRepository {
         List<MauSac> list = query.getResultList();
         return list;
     }
+
     public List<MauSac> findByName(String ten) {
         Query query = session.createQuery("SELECT n FROM MauSac n WHERE n.ten like :ten");
         query.setParameter("ten", "%" + ten + "%");
         List<MauSac> list = query.getResultList();
         return list;
     }
+
     public boolean save(MauSac ms) {
         try {
             transaction.begin();
@@ -42,11 +44,22 @@ public class MauSacRepository {
         }
     }
 
-     public MauSac getObj(String ma) {
+    public MauSac getObj(String ma) {
         MauSac n = null;
         try {
             Query query = session.createQuery("SELECT n FROM MauSac n WHERE n.ma = :ma");
             query.setParameter("ma", ma);
+            n = (MauSac) query.getSingleResult();
+        } catch (Exception e) {
+        }
+        return n;
+    }
+
+    public MauSac getObjectById(int id) {
+        MauSac n = null;
+        try {
+            Query query = session.createQuery("SELECT n FROM MauSac n WHERE n.id = :id");
+            query.setParameter("id", id);
             n = (MauSac) query.getSingleResult();
         } catch (Exception e) {
         }

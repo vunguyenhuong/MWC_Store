@@ -17,4 +17,6 @@ public interface IChatLieuService {
     ChatLieu getObject(String ma);
     
     List<ChatLieu> getSearch(String ten);
+    
+    public ChatLieu getObjById(int id);
 }

@@ -37,5 +37,10 @@ public class ChatLieuService implements IChatLieuService {
     public List<ChatLieu> getSearch(String ten) {
         return repo.findByName(ten);
     }
+    
+    @Override
+    public ChatLieu getObjById(int id) {
+        return repo.getObjById(id);
+    }
 
 }

@@ -45,11 +45,23 @@ public class LoaiDepRepository {
         }
         return ld;
     }
-    public List<LoaiDep> findByName(String ten){
+
+    public List<LoaiDep> findByName(String ten) {
         Query query = session.createQuery("SELECT n FROM LoaiDep n WHERE n.ten like :ten");
         query.setParameter("ten", "%" + ten + "%");
         List<LoaiDep> list = query.getResultList();
         return list;
+    }
+
+    public LoaiDep getObjectById(int id) {
+        LoaiDep ld = null;
+        try {
+            Query query = session.createQuery("SELECT n FROM LoaiDep n WHERE n.id = :id");
+            query.setParameter("ma", id);
+            ld = (LoaiDep) query.getSingleResult();
+        } catch (Exception e) {
+        }
+        return ld;
     }
 
 }
