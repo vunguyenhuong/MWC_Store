@@ -18,4 +18,5 @@ public interface IDepService {
     List<Dep> getObjByName(String ten);
     
     public Dep getObjById(int id);
+    
 }

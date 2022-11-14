@@ -53,4 +53,16 @@ public class DepRepository {
         List<Dep> list = query.getResultList();
         return list;
     }
+    
+    public Dep getObjById(int id) {
+        Dep d = null;
+        try {
+            Query query = session.createQuery("SELECT d FROM Dep d WHERE d.id = :id");
+            query.setParameter("id", id);
+            d = (Dep) query.getSingleResult();
+        } catch (Exception e) {
+        }
+        return d;
+        }
+    
 }
