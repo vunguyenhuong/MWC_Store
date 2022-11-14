@@ -189,10 +189,6 @@ public class FrmMauSac extends javax.swing.JFrame {
             }
         }
         if (iMauSacService.getObj(txt_Ma.getText()) == null) {
-//            if (iMauSacService.getObj(txt_Ma.getText()) != null) {
-//                JOptionPane.showMessageDialog(this, "Da ton tai !");
-//                return;
-//            }
             m.setMa(txt_Ma.getText());
             m.setTen(txt_Ten.getText());
             m.setNgayThem(new Date());

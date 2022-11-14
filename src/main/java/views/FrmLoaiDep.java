@@ -240,13 +240,13 @@ public class FrmLoaiDep extends javax.swing.JFrame {
         LoaiDep loaidep = getForm();
         this.loaidepSV.save(loaidep);
         LoadTabale(loaidepSV.getAll());
-        helper.alert(this, "Them thanh cong");
+        helper.alert(this, "Thêm thành công");
     }//GEN-LAST:event_btn_ThemActionPerformed
 
     private void btn_CapNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CapNhapActionPerformed
         int row = tb_Table.getSelectedRow();
         if (row == -1) {
-            JOptionPane.showMessageDialog(this, "Chon 1 dong de cap nhap");
+            JOptionPane.showMessageDialog(this, "Chọn 1 dòng sản phẩm");
             return;
         }
         LoaiDep loaidep = getForm();
@@ -256,7 +256,7 @@ public class FrmLoaiDep extends javax.swing.JFrame {
         loai.setTrangThai(loaidep.getTrangThai());
         this.loaidepSV.save(loai);
         LoadTabale(loaidepSV.getAll());
-        JOptionPane.showMessageDialog(this, "Sua thanh cong");
+        JOptionPane.showMessageDialog(this, "Sửa thành công");
     }//GEN-LAST:event_btn_CapNhapActionPerformed
 
     private void txt_TimKiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_TimKiemCaretUpdate
