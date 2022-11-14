@@ -38,4 +38,9 @@ public class SizeService implements ISizeService {
         return repo.getSearch(ten);
     }
 
+    @Override
+    public Size getObjById(int id) {
+        return repo.getObjById(id);
+    }
+
 }

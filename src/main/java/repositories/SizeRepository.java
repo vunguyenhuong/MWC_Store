@@ -69,4 +69,15 @@ public class SizeRepository {
         list = query.getResultList();
         return list;
     }
+    
+    public Size getObjById(int id){
+        Size sz = null;
+        try {
+            Query query = session.createQuery("SELECT sz FROM Size sz WHERE sz.id = :id ");
+            query.setParameter("id", id);
+            sz = (Size) query.getSingleResult();
+        } catch (Exception e) {
+        }
+        return sz;
+    }
 }

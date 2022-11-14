@@ -62,4 +62,14 @@ public class NhaSXRepository {
         }
         return nx;
     }
+    public NhaSX getObjById(int id){
+        NhaSX nsx = null;
+        try {
+            Query query = se.createQuery(" SELECT s FROM NhaSX s WHERE s.id = :id ");
+            query.setParameter("id", id);
+            nsx = (NhaSX) query.getSingleResult();
+        } catch (Exception e) {
+        }
+        return nsx;
+    }
 }
