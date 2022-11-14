@@ -56,7 +56,7 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
 
     private void initRegister(ActionListener eventRegister) {
         register.setLayout(new MigLayout("wrap", "push[center]push", "push[]25[]10[]10[]1[]25[]push"));
-        JLabel label = new JLabel("Create Account");
+        JLabel label = new JLabel("REGISTER");
         label.setFont(new Font("sansserif", 1, 30));
         label.setForeground(new Color(176, 196, 222));
         register.add(label);
@@ -82,6 +82,7 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
         cmd.setForeground(new Color(250, 250, 250));
         cmd.addActionListener(eventRegister);
         cmd.setText("SIGN UP");
+        cmd.setFocusPainted(false);
         register.add(cmd, "w 40%, h 40");
         cmd.addActionListener(new ActionListener() {
             @Override
@@ -101,7 +102,7 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
 
     private void initLogin(ActionListener eventLogin, ActionListener eventReset) {
         login.setLayout(new MigLayout("wrap", "push[center]push", "push[]25[]10[]10[]25[]push"));
-        JLabel label = new JLabel("Sign In");
+        JLabel label = new JLabel("SIGN IN");
         label.setFont(new Font("sansserif", 1, 30));
         label.setForeground(new Color(176, 196, 222));
         login.add(label);
@@ -119,12 +120,15 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
         cmdForget.setContentAreaFilled(false);
         cmdForget.setCursor(new Cursor(Cursor.HAND_CURSOR));
         cmdForget.addActionListener(eventReset);
+        cmdForget.setFocusPainted(false);
+        cmdForget.setBorderPainted(false);
         login.add(cmdForget);
         ButtonUI cmd = new ButtonUI();
         cmd.setBackground(new Color(176, 196, 222));
         cmd.setForeground(new Color(255, 255, 255));
         cmd.addActionListener(eventLogin);
         cmd.setText("SIGN IN");
+        cmd.setFocusPainted(false);
         login.add(cmd, "w 40%, h 40");
         cmd.addActionListener(new ActionListener() {
             @Override

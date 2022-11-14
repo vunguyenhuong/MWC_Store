@@ -42,57 +42,6 @@ public class MainResetPassFrame extends javax.swing.JFrame {
         init();
     }
 
-    public void init() {
-        reset.setLayout(new MigLayout("wrap", "push[center]push", "push[]25[]10[]1[]1[]25[]10[]push"));
-        JLabel label = new JLabel("Reset Password");
-        label.setFont(new Font("sansserif", 1, 30));
-        label.setForeground(new Color(176, 196, 222));
-        reset.add(label);
-        txtUser.setPrefixIcon(new ImageIcon(getClass().getResource("/icons/use.png")));
-        txtUser.setHint("Tên đăng nhập");
-        reset.add(txtUser, "w 60%");
-        txtEmail.setPrefixIcon(new ImageIcon(getClass().getResource("/icons/mail.png")));
-        txtEmail.setHint("Email");
-        reset.add(txtEmail, "w 60%");
-        lblcapCha.setText(UUID.randomUUID().toString().substring(30, 36));
-        lblcapCha.setFont(new Font("sansserif", 1, 15));
-        lblcapCha.setForeground(new Color(255, 0, 0));
-        reset.add(lblcapCha, "w 60%");
-        txtcapcha.setPrefixIcon(new ImageIcon(getClass().getResource("/icons/capcha.png")));
-        txtcapcha.setHint("Capcha");
-        reset.add(txtcapcha, "w 60%");
-        ButtonUI submit = new ButtonUI();
-        submit.setForeground(new Color(250, 250, 250));
-        submit.setBackground(new Color(176, 196, 222));
-        reset.add(submit);
-        submit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String userName = txtUser.getText().trim();
-                String email = txtEmail.getText().trim();
-                String capcha = lblcapCha.getText().trim();
-                String newPassword = UUID.randomUUID().toString().substring(0, 8);
-                NguoiDung nd = iNguoiDungService.getObj(userName);
-                resetPass();
-            }
-        });
-        submit.setText("SUBMIT");
-        reset.add(submit, "w 40%, h 40");
-        ButtonUI cancel = new ButtonUI();
-        cancel.setBackground(new Color(176, 196, 222));
-        cancel.setForeground(new Color(250, 250, 250));
-        cancel.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new MainLoginFrame().setVisible(true);
-                dispose();
-            }
-        });
-        cancel.setText("CANCEL");
-        reset.add(cancel, "w 40%, h 40");
-
-    }
-
     public void resetPass() {
         String userName = txtUser.getText().trim();
         String email = txtEmail.getText().trim();
@@ -108,9 +57,9 @@ public class MainResetPassFrame extends javax.swing.JFrame {
                     helper.error(this, "Mã capcha không chính xác!");
                 } else {
                     if (helper.confirm(this, "Mật khẩu mới sẽ được gửi đến " + email + ". Chọn YES để xác nhận!")) {
+                        helper.alert(this, mailUltil.sendEmail(email, "[MWC_STORE] Mật khẩu đã được đặt lại!", "Xin chào, mật khẩu mới của bạn là: " + newPassword));
                         nd.setMatKhau(newPassword);
                         iNguoiDungService.save(nd);
-                        helper.alert(this, mailUltil.sendEmail(email, "[MWC_STORE] Mật khẩu đã được đặt lại!", "Xin chào, mật khẩu mới của bạn là: " + newPassword));
                         lblcapCha.setText(UUID.randomUUID().toString().substring(30, 36));
                     }
                 }
@@ -208,37 +157,6 @@ public class MainResetPassFrame extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainResetPassFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainResetPassFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainResetPassFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainResetPassFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainResetPassFrame().setVisible(true);
@@ -253,4 +171,57 @@ public class MainResetPassFrame extends javax.swing.JFrame {
     private javax.swing.JPanel reset;
     private javax.swing.JPanel title;
     // End of variables declaration//GEN-END:variables
+
+    public void init() {
+        reset.setLayout(new MigLayout("wrap", "push[center]push", "push[]25[]10[]1[]1[]25[]10[]push"));
+        JLabel label = new JLabel("Reset Password");
+        label.setFont(new Font("sansserif", 1, 30));
+        label.setForeground(new Color(176, 196, 222));
+        reset.add(label);
+        txtUser.setPrefixIcon(new ImageIcon(getClass().getResource("/icons/use.png")));
+        txtUser.setHint("Tên đăng nhập");
+        reset.add(txtUser, "w 60%");
+        txtEmail.setPrefixIcon(new ImageIcon(getClass().getResource("/icons/mail.png")));
+        txtEmail.setHint("Email");
+        reset.add(txtEmail, "w 60%");
+        lblcapCha.setText(UUID.randomUUID().toString().substring(30, 36));
+        lblcapCha.setFont(new Font("sansserif", 1, 15));
+        lblcapCha.setForeground(new Color(255, 0, 0));
+        reset.add(lblcapCha, "w 60%");
+        txtcapcha.setPrefixIcon(new ImageIcon(getClass().getResource("/icons/capcha.png")));
+        txtcapcha.setHint("Capcha");
+        reset.add(txtcapcha, "w 60%");
+        ButtonUI submit = new ButtonUI();
+        submit.setForeground(new Color(250, 250, 250));
+        submit.setBackground(new Color(176, 196, 222));
+        submit.setFocusPainted(false);
+        reset.add(submit);
+        submit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String userName = txtUser.getText().trim();
+                String email = txtEmail.getText().trim();
+                String capcha = lblcapCha.getText().trim();
+                String newPassword = UUID.randomUUID().toString().substring(0, 8);
+                NguoiDung nd = iNguoiDungService.getObj(userName);
+                resetPass();
+            }
+        });
+        submit.setText("SUBMIT");
+        reset.add(submit, "w 40%, h 40");
+        ButtonUI cancel = new ButtonUI();
+        cancel.setBackground(new Color(176, 196, 222));
+        cancel.setForeground(new Color(250, 250, 250));
+        cancel.setFocusPainted(false);
+        cancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new MainLoginFrame().setVisible(true);
+                dispose();
+            }
+        });
+        cancel.setText("CANCEL");
+        reset.add(cancel, "w 40%, h 40");
+
+    }
 }

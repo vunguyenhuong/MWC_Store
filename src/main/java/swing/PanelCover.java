@@ -49,6 +49,7 @@ public class PanelCover extends javax.swing.JPanel {
         button.setBackground(new Color(255, 255, 255));
         button.setForeground(new Color(255, 255, 255));
         button.setText("SIGN IN");
+        button.setFocusPainted(false);
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -122,15 +123,15 @@ public class PanelCover extends javax.swing.JPanel {
     private void login(boolean login) {
         if (this.isLogin != login) {
             if (login) {
-                title.setText("hello, Friend!");
-                description.setText("Enter your personal details");
-                description1.setText("and start journey with us");
-                button.setText("SIGN UP");
+                title.setText("MWC STORE");
+                description.setText("Man Women And Choices");
+                description1.setText("\"Sự lựa chọn hoàn hảo\"");
+                button.setText("Đăng ký");
             } else {
                 title.setText("Welcome Back!");
                 description.setText("To keep connected with us please");
                 description1.setText("login with your personal info");
-                button.setText("SIGN IN");
+                button.setText("Đăng nhập");
             }
             this.isLogin = login;
         }
