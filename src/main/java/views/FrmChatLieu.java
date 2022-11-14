@@ -237,7 +237,7 @@ public class FrmChatLieu extends javax.swing.JFrame {
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
         ChatLieu cl = getdata();
         String result;
-        for (int i = 0; i < chatLieuService.getListSize().size() + 1; i++) {
+        for (int i = 1; i < chatLieuService.getListSize().size() + 1; i++) {
             result = "CL" + i;
             if (chatLieuService.getObject(result) == null) {
                 cl.setMa(result);

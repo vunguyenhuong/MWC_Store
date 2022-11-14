@@ -179,8 +179,8 @@ public class FrmMauSac extends javax.swing.JFrame {
             return;
         }
         String result;
-        for (int i = 0; i < iMauSacService.getAll().size() + 1; i++) {
-            result = "NX" + i;
+        for (int i = 1; i < iMauSacService.getAll().size() + 1; i++) {
+            result = "MS0" + i;
             if (iMauSacService.getObj(result) == null) {
                 m.setMa(result);
                 break;

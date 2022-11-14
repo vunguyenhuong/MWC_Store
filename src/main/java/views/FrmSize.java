@@ -53,9 +53,6 @@ public class FrmSize extends javax.swing.JFrame {
 
         if (helper.checkNull(txt_KichCo, "Kích cỡ")) {
             return true;
-        } else if (!rd_DangKinhDoanh.isSelected() && !rd_NgungKinhDoanh.isSelected()) {
-            helper.error(this, "chưa chọn trạng thái");
-            return true;
         } else {
             try {
                 float f = Float.parseFloat(txt_KichCo.getText().trim());
@@ -70,7 +67,7 @@ public class FrmSize extends javax.swing.JFrame {
     public void clear() {
         txt_Ma.setText("");
         txt_KichCo.setText("");
-        group.clearSelection();
+        rd_DangKinhDoanh.setSelected(true);
     }
 
     /**
@@ -119,6 +116,7 @@ public class FrmSize extends javax.swing.JFrame {
         txt_Ma.setToolTipText("");
         txt_Ma.setLabelText("Mã :");
 
+        rd_DangKinhDoanh.setSelected(true);
         rd_DangKinhDoanh.setText("Đang kinh doanh");
 
         rd_NgungKinhDoanh.setText("Ngừng kinh doanh");
@@ -214,8 +212,8 @@ public class FrmSize extends javax.swing.JFrame {
             return;
         }
         String result;
-        for (int i = 0; i < sizeService.getListSize().size() + 1; i++) {
-            result = "Size" + i;
+        for (int i = 1; i < sizeService.getListSize().size() + 1; i++) {
+            result = "S" + i;
             if (sizeService.getObj(result) == null) {
                 size.setMa(result);
                 break;
@@ -223,7 +221,7 @@ public class FrmSize extends javax.swing.JFrame {
                 continue;
             }
         }
-        size.setKichCo(Float.valueOf(txt_KichCo.getText()));
+        size.setKichCo(Float.parseFloat(txt_KichCo.getText()));
         size.setNgayThem(new Date());
         size.setNgaySuaCuoi(new Date());
         if (rd_DangKinhDoanh.isSelected()) {
