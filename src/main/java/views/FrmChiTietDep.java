@@ -23,25 +23,25 @@ import utilities.ImageUltil;
  * @author VU NGUYEN HUONG
  */
 public class FrmChiTietDep extends javax.swing.JInternalFrame {
-    
+
     private Helper helper = new Helper();
     private ImageUltil imageUltil = new ImageUltil();
     private SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-    
+
     private DefaultTableModel defaultTableModel;
-    private IChiTietDepService iChiTietDepService = new ChiTietDepService();
-    private IMauSacService iMauSacService = new MauSacService();
-    private INhaSXService iNhaSXService = new NhaSXService();
-    
+    private IChiTietDepService iChiTietDepService;
+    private IMauSacService iMauSacService;
+    private INhaSXService iNhaSXService;
+
     private IQLDepService iQLDepService = new QLDepService();
-    
+
     private DefaultComboBoxModel<Dep> comboDep = new DefaultComboBoxModel<>();
     private DefaultComboBoxModel<LoaiDep> comboLoaiDep = new DefaultComboBoxModel<>();
     private DefaultComboBoxModel<ChatLieu> comboChatLieu = new DefaultComboBoxModel<>();
     private DefaultComboBoxModel<MauSac> comboMauSac = new DefaultComboBoxModel<>();
     private DefaultComboBoxModel<Size> comboSize = new DefaultComboBoxModel<>();
     private DefaultComboBoxModel<NhaSX> comboNSX = new DefaultComboBoxModel<>();
-    
+
     public FrmChiTietDep() {
         initComponents();
         try {
@@ -49,36 +49,39 @@ public class FrmChiTietDep extends javax.swing.JInternalFrame {
             this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
             BasicInternalFrameUI bi = (BasicInternalFrameUI) this.getUI();
             bi.setNorthPane(null);
-        } catch (Exception e) {
+        } catch (Exception e) {    
         }
+        iNhaSXService = new NhaSXService();
+        iMauSacService = new MauSacService();
+        iChiTietDepService = new ChiTietDepService();
         loadData();
     }
 
-//    private void loadDataChiTiet(List<CTDepCustom> list) {
-//        int stt = 1;
-//        defaultTableModel = (DefaultTableModel) tb_table.getModel();
-//        defaultTableModel.setRowCount(0);
-//        for (CTDepCustom x : list) {
-//            defaultTableModel.addRow(new Object[]{
-//                stt++, x.getDep().getTen(), x.getLoaiDep().getTen(), x.getMauSac().getTen(), x.getChatLieu().getTen(), x.getNhaSX().getTen(), x.getSize().getKichCo(), x.getCtd().getMoTa(), x.getCtd().getSoLuong(), x.getCtd().getGiaNhap(), x.getCtd().getGiaBan(), x.getCtd().getTrangThai()
-//            });
-//        }
-//        lbl_total.setText("Total: " + list.size());
-//    }
-    private void loadData(List<ChiTietDep> list) {
+    private void loadDataChiTiet(List<CTDepCustom> list) {
         int stt = 1;
         defaultTableModel = (DefaultTableModel) tb_table.getModel();
         defaultTableModel.setRowCount(0);
-        for (ChiTietDep x : list) {
+        for (CTDepCustom x : list) {
             defaultTableModel.addRow(new Object[]{
-                stt++, x.getDep().getTen(), x.getLoaiDep().getTen(), x.getMauSac().getTen(), x.getChatLieu().getTen(), x.getNhaSX().getTen(), x.getSize().getKichCo(), x.getMoTa(), x.getSoLuong(), x.getGiaNhap(), x.getGiaBan(), x.getTrangThai()
+                stt++, x.getDep().getTen(), x.getLoaiDep().getTen(), x.getMauSac().getTen(), x.getChatLieu().getTen(), x.getNhaSX().getTen(), x.getSize().getKichCo(), x.getCtd().getMoTa(), x.getCtd().getSoLuong(), x.getCtd().getGiaNhap(), x.getCtd().getGiaBan(), x.getCtd().getTrangThai()
             });
         }
         lbl_total.setText("Total: " + list.size());
     }
-    
+//    private void loadData(List<ChiTietDep> list) {
+//        int stt = 1;
+//        defaultTableModel = (DefaultTableModel) tb_table.getModel();
+//        defaultTableModel.setRowCount(0);
+//        for (ChiTietDep x : list) {
+//            defaultTableModel.addRow(new Object[]{
+//                stt++, x.getDep().getTen(), x.getLoaiDep().getTen(), x.getMauSac().getTen(), x.getChatLieu().getTen(), x.getNhaSX().getTen(), x.getSize().getKichCo(), x.getMoTa(), x.getSoLuong(), x.getGiaNhap(), x.getGiaBan(), x.getTrangThai()
+//            });
+//        }
+//        lbl_total.setText("Total: " + list.size());
+//    }
+
     private void loadData() {
-        loadData(iChiTietDepService.getAll());
+//        loadData(iChiTietDepService.getAll());
         loadDataMauSac(iMauSacService.getAll());
         loadDataNSX(iNhaSXService.getAll());
         addCbDep();
@@ -87,9 +90,9 @@ public class FrmChiTietDep extends javax.swing.JInternalFrame {
         addCbMauSac();
         addCbSize();
         addCbNhaSX();
-//        loadDataChiTiet(iQLDepService.getAll());
+        loadDataChiTiet(iQLDepService.getAll());
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -116,9 +119,9 @@ public class FrmChiTietDep extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_table = new javax.swing.JTable();
         lbl_total = new javax.swing.JLabel();
-        button1 = new swing.Button();
-        button2 = new swing.Button();
-        button3 = new swing.Button();
+        btn_ctd_capnhat = new swing.Button();
+        btn_ctd_them = new swing.Button();
+        btn_ctd_xoa = new swing.Button();
         btn_exportExcel = new swing.Button();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -243,20 +246,35 @@ public class FrmChiTietDep extends javax.swing.JInternalFrame {
         lbl_total.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_total.setText("Total: 0");
 
-        button1.setBackground(new java.awt.Color(153, 153, 153));
-        button1.setForeground(new java.awt.Color(255, 255, 255));
-        button1.setText("Cập nhật");
-        button1.setFocusPainted(false);
+        btn_ctd_capnhat.setBackground(new java.awt.Color(153, 153, 153));
+        btn_ctd_capnhat.setForeground(new java.awt.Color(255, 255, 255));
+        btn_ctd_capnhat.setText("Cập nhật");
+        btn_ctd_capnhat.setFocusPainted(false);
+        btn_ctd_capnhat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ctd_capnhatActionPerformed(evt);
+            }
+        });
 
-        button2.setBackground(new java.awt.Color(153, 153, 153));
-        button2.setForeground(new java.awt.Color(255, 255, 255));
-        button2.setText("Thêm");
-        button2.setFocusPainted(false);
+        btn_ctd_them.setBackground(new java.awt.Color(153, 153, 153));
+        btn_ctd_them.setForeground(new java.awt.Color(255, 255, 255));
+        btn_ctd_them.setText("Thêm");
+        btn_ctd_them.setFocusPainted(false);
+        btn_ctd_them.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ctd_themActionPerformed(evt);
+            }
+        });
 
-        button3.setBackground(new java.awt.Color(153, 153, 153));
-        button3.setForeground(new java.awt.Color(255, 255, 255));
-        button3.setText("Xóa");
-        button3.setFocusPainted(false);
+        btn_ctd_xoa.setBackground(new java.awt.Color(153, 153, 153));
+        btn_ctd_xoa.setForeground(new java.awt.Color(255, 255, 255));
+        btn_ctd_xoa.setText("Xóa");
+        btn_ctd_xoa.setFocusPainted(false);
+        btn_ctd_xoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ctd_xoaActionPerformed(evt);
+            }
+        });
 
         btn_exportExcel.setBackground(new java.awt.Color(0, 126, 0));
         btn_exportExcel.setForeground(new java.awt.Color(255, 255, 255));
@@ -279,11 +297,11 @@ public class FrmChiTietDep extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_ctd_them, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_ctd_capnhat, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btn_ctd_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txt_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(lbl_total)
@@ -355,9 +373,9 @@ public class FrmChiTietDep extends javax.swing.JInternalFrame {
                                         .addComponent(rd_ct_ngungkd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_ctd_capnhat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_ctd_them, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_ctd_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -758,13 +776,23 @@ public class FrmChiTietDep extends javax.swing.JInternalFrame {
         txt_gianhap.setText(ctd.getGiaNhap().toString());
         txt_giaban.setText(ctd.getGiaBan().toString());
         sp_soluong.setValue(ctd.getSoLuong());
+        if (ctd.getTrangThai() == 0) {
+            rd_ct_dangkd.setSelected(true);
+        } else {
+            rd_ct_ngungkd.setSelected(true);
+        }
         lbl_image.setIcon(imageUltil.resizeIcon(new ImageIcon("images/products/" + ctd.getDep().getHinhAnh()), lbl_image.getWidth(), lbl_image.getHeight()));
         System.out.println(ctd.getDep().getHinhAnh());
     }//GEN-LAST:event_tb_tableMouseClicked
 
     private void txt_timkiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_timkiemCaretUpdate
-//        loadDataChiTiet(iQLDepService.findByName(txt_timkiem.getText()));
-        loadData(iChiTietDepService.findByName(txt_timkiem.getText()));
+//        loadData(iChiTietDepService.findByName(txt_timkiem.getText()));
+        loadDataChiTiet(iQLDepService.findByName(txt_timkiem.getText()));
+        if (iChiTietDepService.findByName(txt_timkiem.getText()).size() == iChiTietDepService.getAll().size()) {
+            checkSearchCT = 0;
+        } else {
+            checkSearchCT = 1;
+        }
     }//GEN-LAST:event_txt_timkiemCaretUpdate
 
     private void btn_exportExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_exportExcelActionPerformed
@@ -798,7 +826,7 @@ public class FrmChiTietDep extends javax.swing.JInternalFrame {
         if (checkNullMS()) {
             return;
         }
-        
+
         m.setTen(txt_ms_ten.getText());
         m.setNgaySuaCuoi(new Date());
         if (rd_ms_dangkd.isSelected()) {
@@ -852,7 +880,7 @@ public class FrmChiTietDep extends javax.swing.JInternalFrame {
             iMauSacService.save(m);
             loadData();
             helper.alert(this, "Thêm thành công!");
-            
+
         }
     }//GEN-LAST:event_btn_ms_themActionPerformed
 
@@ -911,7 +939,7 @@ public class FrmChiTietDep extends javax.swing.JInternalFrame {
             iNhaSXService.save(n);
             loadData();
             helper.alert(this, "Thêm thành công!");
-            
+
         }
     }//GEN-LAST:event_btn_nsx_themActionPerformed
 
@@ -919,15 +947,94 @@ public class FrmChiTietDep extends javax.swing.JInternalFrame {
         loadDataNSX(iNhaSXService.findByName(txt_nsx_timkiem.getText()));
     }//GEN-LAST:event_txt_nsx_timkiemCaretUpdate
 
+    private void btn_ctd_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ctd_themActionPerformed
+        ChiTietDep ctd = new ChiTietDep();
+        ctd.setDep((Dep) comboDep.getSelectedItem());
+        ctd.setLoaiDep((LoaiDep) comboLoaiDep.getSelectedItem());
+        ctd.setMauSac((MauSac) comboMauSac.getSelectedItem());
+        ctd.setChatLieu((ChatLieu) comboChatLieu.getSelectedItem());
+        ctd.setNhaSX((NhaSX) comboNSX.getSelectedItem());
+        ctd.setSize((Size) comboSize.getSelectedItem());
+        ctd.setMoTa(txt_mota.getText());
+        ctd.setSoLuong((int) sp_soluong.getValue());
+        ctd.setGiaNhap(helper.convertToDecimal(txt_gianhap, "Error!"));
+        ctd.setGiaBan(helper.convertToDecimal(txt_giaban, "Error!"));
+        ctd.setNgayThem(new Date());
+        ctd.setNgaySuaCuoi(new Date());
+        if (rd_ct_dangkd.isSelected()) {
+            ctd.setTrangThai(0);
+        } else {
+            ctd.setTrangThai(1);
+        }
+        iChiTietDepService.save(ctd);
+        loadData();
+        helper.alert(this, "Thêm thành công!");
+    }//GEN-LAST:event_btn_ctd_themActionPerformed
+
+    private int checkSearchCT = 0;
+    private void btn_ctd_capnhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ctd_capnhatActionPerformed
+        int row = tb_table.getSelectedRow();
+        if (row == -1) {
+            helper.error(this, "Vui lòng chọn dòng cần sửa!");
+        } else {
+            ChiTietDep ctd;
+            if (checkSearchCT == 0) {
+                ctd = iChiTietDepService.getAll().get(row);
+            } else {
+                ctd = iChiTietDepService.findByName(txt_timkiem.getText()).get(row);
+            }
+            ctd.setDep((Dep) comboDep.getSelectedItem());
+            ctd.setLoaiDep((LoaiDep) comboLoaiDep.getSelectedItem());
+            ctd.setMauSac((MauSac) comboMauSac.getSelectedItem());
+            ctd.setChatLieu((ChatLieu) comboChatLieu.getSelectedItem());
+            ctd.setNhaSX((NhaSX) comboNSX.getSelectedItem());
+            ctd.setSize((Size) comboSize.getSelectedItem());
+            ctd.setMoTa(txt_mota.getText());
+            ctd.setSoLuong((int) sp_soluong.getValue());
+            ctd.setGiaNhap(helper.convertToDecimal(txt_gianhap, "Error!"));
+            ctd.setGiaBan(helper.convertToDecimal(txt_giaban, "Error!"));
+            ctd.setNgaySuaCuoi(new Date());
+            if (rd_ct_dangkd.isSelected()) {
+                ctd.setTrangThai(0);
+            } else {
+                ctd.setTrangThai(1);
+            }
+            iChiTietDepService.save(ctd);
+            loadData();
+            checkSearchCT=0;
+            helper.alert(this, "Sửa thành công!");
+        }
+    }//GEN-LAST:event_btn_ctd_capnhatActionPerformed
+
+    private void btn_ctd_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ctd_xoaActionPerformed
+         int row = tb_table.getSelectedRow();
+        if (row == -1) {
+            helper.error(this, "Vui lòng chọn dòng cần sửa!");
+        } else {
+            ChiTietDep ctd;
+            if (checkSearchCT == 0) {
+                ctd = iChiTietDepService.getAll().get(row);
+            } else {
+                ctd = iChiTietDepService.findByName(txt_timkiem.getText()).get(row);
+            }
+            if(helper.confirm(this, "Xác nhận xóa")){
+                iChiTietDepService.delete(ctd);
+                loadData();
+                checkSearchCT=0;
+                helper.alert(this, "Xóa thành công!");
+            }
+        }
+    }//GEN-LAST:event_btn_ctd_xoaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private swing.Button btn_ctd_capnhat;
+    private swing.Button btn_ctd_them;
+    private swing.Button btn_ctd_xoa;
     private swing.Button btn_exportExcel;
     private swing.Button btn_ms_capnhat;
     private swing.Button btn_ms_them;
     private swing.Button btn_nsx_capnhat;
     private swing.Button btn_nsx_them;
-    private swing.Button button1;
-    private swing.Button button2;
-    private swing.Button button3;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonMS;
     private swing.Combobox cb_chatlieu;
@@ -986,7 +1093,7 @@ public class FrmChiTietDep extends javax.swing.JInternalFrame {
             comboDep.addElement(x);
         }
     }
-    
+
     private void addCbLoaiDep() {
         cb_loaidep.setModel((DefaultComboBoxModel) comboLoaiDep);
         cb_loaidep.removeAllItems();
@@ -994,7 +1101,7 @@ public class FrmChiTietDep extends javax.swing.JInternalFrame {
             comboLoaiDep.addElement(x);
         }
     }
-    
+
     private void addCbChatLieu() {
         cb_chatlieu.setModel((DefaultComboBoxModel) comboChatLieu);
         cb_chatlieu.removeAllItems();
@@ -1002,7 +1109,7 @@ public class FrmChiTietDep extends javax.swing.JInternalFrame {
             comboChatLieu.addElement(x);
         }
     }
-    
+
     private void addCbMauSac() {
         cb_mausac.setModel((DefaultComboBoxModel) comboMauSac);
         cb_mausac.removeAllItems();
@@ -1010,7 +1117,7 @@ public class FrmChiTietDep extends javax.swing.JInternalFrame {
             comboMauSac.addElement(x);
         }
     }
-    
+
     private void addCbSize() {
         cb_size.setModel((DefaultComboBoxModel) comboSize);
         cb_size.removeAllItems();
@@ -1018,7 +1125,7 @@ public class FrmChiTietDep extends javax.swing.JInternalFrame {
             comboSize.addElement(x);
         }
     }
-    
+
     private void addCbNhaSX() {
         cb_nsx.setModel((DefaultComboBoxModel) comboNSX);
         cb_nsx.removeAllItems();
@@ -1042,7 +1149,7 @@ public class FrmChiTietDep extends javax.swing.JInternalFrame {
         }
         lbl_ms_total.setText("Total: " + list.size());
     }
-    
+
     private boolean checkNullMS() {
         if (helper.checkNull(txt_ms_ten, "Tên")
                 || helper.checkRegex(txt_ms_ten, "(\\S+ )*\\S+", "Tên không hợp lệ!")) {
@@ -1052,7 +1159,7 @@ public class FrmChiTietDep extends javax.swing.JInternalFrame {
             return true;
         }
         return false;
-        
+
     }
 
 //    NHÀ SẢN XUẤT
@@ -1070,7 +1177,7 @@ public class FrmChiTietDep extends javax.swing.JInternalFrame {
         }
         lbl_nsx_total.setText("Total: " + list.size());
     }
-    
+
     private boolean checkNullNSX() {
         if (helper.checkNull(txt_nsx_ten, "Tên")
                 || helper.checkRegex(txt_nsx_ten, "(\\S+ )*\\S+", "Tên không hợp lệ!")) {
@@ -1080,6 +1187,6 @@ public class FrmChiTietDep extends javax.swing.JInternalFrame {
             return true;
         }
         return false;
-        
+
     }
 }
