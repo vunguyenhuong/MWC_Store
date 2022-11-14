@@ -2,6 +2,7 @@ repositories\NguoiDungRepository.class
 services\IChucVuService.class
 views\FrmChatLieu$1.class
 <<<<<<< HEAD
+<<<<<<< HEAD
 views\MainLoginFrame$2.class
 views\FrmMauSac$3.class
 utilities\QRCodeWebcam.class
@@ -16,24 +17,39 @@ views\MainResetPassFrame$1.class
 views\FrmHome$1.class
 views\MainResetPassFrame$2.class
 =======
+=======
+views\MainLoginFrame$2.class
+>>>>>>> 62ad2a7b7865bca4fd14306761681f039e865ec0
 views\FrmMauSac$3.class
 utilities\QRCodeWebcam.class
 models\NguoiDung.class
+views\MainLoginFrame$3.class
+swing\PanelLoginAndRegister$2.class
 views\FrmMauSac$4.class
 utilities\SendMailUltil.class
 views\FrmMauSac.class
+views\MainLoginFrame$1.class
 views\FrmHome$1.class
+<<<<<<< HEAD
 >>>>>>> 370194f19d09e91022e36836ca3cc7afe048dd0f
+=======
+views\MainResetPassFrame$2.class
+>>>>>>> 62ad2a7b7865bca4fd14306761681f039e865ec0
 utilities\Helper.class
 views\FrmChiTietDep$1.class
+views\MainResetPassFrame$3.class
 views\FrmMauSac$2.class
 repositories\SizeRepository.class
 views\FrmChiTietDep$2.class
 views\FrmMauSac$1.class
 <<<<<<< HEAD
+<<<<<<< HEAD
 views\MainLoginFrame$5.class
 =======
 >>>>>>> 370194f19d09e91022e36836ca3cc7afe048dd0f
+=======
+views\MainLoginFrame$5.class
+>>>>>>> 62ad2a7b7865bca4fd14306761681f039e865ec0
 views\FrmHome$3.class
 views\SplashScreen$1.class
 repositories\ChucVuRepository.class
@@ -47,9 +63,13 @@ views\FrmMethod$8.class
 views\FrmMethod$2.class
 services\impl\DepService.class
 <<<<<<< HEAD
+<<<<<<< HEAD
 swing\PanelLoginAndRegister$1.class
 =======
 >>>>>>> 370194f19d09e91022e36836ca3cc7afe048dd0f
+=======
+swing\PanelLoginAndRegister$1.class
+>>>>>>> 62ad2a7b7865bca4fd14306761681f039e865ec0
 views\SplashScreen.class
 views\FrmHome.class
 utilities\SendMailUltil$1.class
