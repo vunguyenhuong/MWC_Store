@@ -153,6 +153,7 @@
     </Component>
     <Component class="swing.RadioButtonCustom" name="rd_DangKinhDoanh">
       <Properties>
+        <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="&#x110;ang kinh doanh"/>
       </Properties>
     </Component>

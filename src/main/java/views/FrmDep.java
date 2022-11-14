@@ -73,7 +73,7 @@ public class FrmDep extends javax.swing.JFrame {
     }
 
     private Dep getDataFromInput() {
-        
+
         Dep dep = new Dep();
 
         int index = tblDep.getSelectedRow();
@@ -86,7 +86,7 @@ public class FrmDep extends javax.swing.JFrame {
 //            return null;
 //        }
         String result;
-        for (int i = 1; i < iDepService.getList().size() + 1; i++) {
+        for (int i = 5; i < iDepService.getList().size() + 1; i++) {
             result = "SP0" + i;
             if (iDepService.getObj(result) == null) {
                 dep.setMa(result);
@@ -231,7 +231,7 @@ public class FrmDep extends javax.swing.JFrame {
                         .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 6, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
