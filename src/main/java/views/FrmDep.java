@@ -152,6 +152,7 @@ public class FrmDep extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        txtMa.setEditable(false);
         txtMa.setLabelText("Mã");
 
         txtTen.setLabelText("Tên");
