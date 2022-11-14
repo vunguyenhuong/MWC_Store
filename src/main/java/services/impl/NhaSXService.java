@@ -36,4 +36,9 @@ public class NhaSXService implements INhaSXService{
     public List<NhaSX> findByName(String ten) {
         return repo.findByName(ten);
     }
+
+    @Override
+    public NhaSX getObjById(int id) {
+        return repo.getObjById(id);
+    }
 }

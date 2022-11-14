@@ -17,4 +17,6 @@ public interface ISizeService {
     Size getObj(String ma);
     
     List<Size> findByName(String ten);
+    
+    Size getObjById(int id);
 }

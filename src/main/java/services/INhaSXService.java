@@ -18,4 +18,6 @@ public interface INhaSXService {
     boolean delete(NhaSX nsx);
 
     NhaSX getObj(String ma);
+    
+    NhaSX getObjById(int id);
 }

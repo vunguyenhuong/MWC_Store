@@ -15,5 +15,7 @@ public interface IMauSacService {
 
     MauSac getObj(String ma);
 
+    MauSac getObjectById(int id);
+
     List<MauSac> findByName(String ten);
 }

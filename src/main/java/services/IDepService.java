@@ -16,4 +16,7 @@ public interface IDepService {
     Dep getObj(String ma);
     
     List<Dep> getObjByName(String ten);
+    
+    public Dep getObjById(int id);
+    
 }
