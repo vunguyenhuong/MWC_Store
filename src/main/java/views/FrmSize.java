@@ -214,8 +214,8 @@ public class FrmSize extends javax.swing.JFrame {
             return;
         }
         String result;
-        for (int i = 0; i < sizeService.getListSize().size() + 1; i++) {
-            result = "Size" + i;
+        for (int i = 36; i < sizeService.getListSize().size() + 1; i++) {
+            result = "S" + i;
             if (sizeService.getObj(result) == null) {
                 size.setMa(result);
                 break;
@@ -223,7 +223,7 @@ public class FrmSize extends javax.swing.JFrame {
                 continue;
             }
         }
-        size.setKichCo(Float.valueOf(txt_KichCo.getText()));
+        size.setKichCo(Float.parseFloat(txt_KichCo.getText()));
         size.setNgayThem(new Date());
         size.setNgaySuaCuoi(new Date());
         if (rd_DangKinhDoanh.isSelected()) {
