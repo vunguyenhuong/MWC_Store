@@ -82,7 +82,7 @@ public class FrmDep extends javax.swing.JFrame {
         int trangthai;
 
         String result;
-        for (int i = 5; i < iDepService.getList().size() + 1; i++) {
+        for (int i = 1; i < iDepService.getList().size() + 1; i++) {
 
             result = "SP0" + i;
             if (iDepService.getObj(result) == null) {
