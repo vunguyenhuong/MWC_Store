@@ -6,7 +6,9 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
+import javax.swing.event.AncestorListener;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -94,7 +96,10 @@ public class Menu extends javax.swing.JPanel {
             }
         }
     }
-
+        public void addMenuEvent(ActionListener event) {
+        AncestorListener listener = null;
+        profile1.addAncestorListener(listener);
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

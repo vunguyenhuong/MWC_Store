@@ -162,6 +162,12 @@ public class MainHome extends javax.swing.JFrame {
                 }
             }
         });
+        menu.addMenuEvent(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                main.showForm(new HomeFrame());
+            }
+        });
         //  Init google icon font
         //  Start with this form
         main.showForm(new HomeFrame());
