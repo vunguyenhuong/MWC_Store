@@ -9,9 +9,9 @@ import models.NguoiDung;
  * @author KenTizz
  */
 public class Header extends javax.swing.JPanel {
-    
+
     private NguoiDung nguoidung = new NguoiDung();
-    
+
     public Header(NguoiDung nd) {
         initComponents();
         cmdMenu.setIcon(new ImageIcon(getClass().getResource("/icons/menu.png")));
@@ -20,15 +20,16 @@ public class Header extends javax.swing.JPanel {
         lbl_role.setText(nd.getChucVu().getTen());
         imageAvatar.setIcon(new ImageIcon("images/users/" + nd.getHinhAnh()));
     }
-    
+
     public Header() {
         initComponents();
+        cmdMenu.setIcon(new ImageIcon(getClass().getResource("/icons/menu.png")));
     }
-    
+
     public void addMenuEvent(ActionListener event) {
         cmdMenu.addActionListener(event);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
