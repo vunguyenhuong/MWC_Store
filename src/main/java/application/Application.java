@@ -9,6 +9,7 @@ import views.SplashScreen;
 public class Application {
 
     public static void main(String[] args) {
+        //<editor-fold>
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -25,6 +26,7 @@ public class Application {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         new SplashScreen().setVisible(true);
     }
 }
