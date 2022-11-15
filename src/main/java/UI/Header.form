@@ -58,11 +58,6 @@
   </Layout>
   <SubComponents>
     <Component class="UI.Button" name="cmdMenu">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/icons/menu.png"/>
-        </Property>
-      </Properties>
     </Component>
     <Container class="UI.ImageAvatar" name="imageAvatar">
 
