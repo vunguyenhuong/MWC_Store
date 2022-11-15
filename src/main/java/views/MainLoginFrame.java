@@ -177,7 +177,8 @@ public class MainLoginFrame extends javax.swing.JFrame {
                             try {
                                 loading.setVisible(true);
                                 Thread.sleep(2350);
-                                new FrmHome(nd).setVisible(true);
+//                                new FrmHome(nd).setVisible(true);
+                                new MainHome(nd).setVisible(true);
                                 dispose();
                             } catch (InterruptedException e) {
                                 System.err.println(e);
