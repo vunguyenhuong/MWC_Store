@@ -9,25 +9,26 @@ import models.NguoiDung;
  * @author KenTizz
  */
 public class Header extends javax.swing.JPanel {
-
+    
     private NguoiDung nguoidung = new NguoiDung();
-
+    
     public Header(NguoiDung nd) {
         initComponents();
+        cmdMenu.setIcon(new ImageIcon(getClass().getResource("/icons/menu.png")));
         this.nguoidung = nd;
         lbl_tenUser.setText(nd.getTen());
         lbl_role.setText(nd.getChucVu().getTen());
         imageAvatar.setIcon(new ImageIcon("images/users/" + nd.getHinhAnh()));
     }
-
+    
     public Header() {
         initComponents();
     }
-
+    
     public void addMenuEvent(ActionListener event) {
         cmdMenu.addActionListener(event);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -39,8 +40,6 @@ public class Header extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
 
         setBackground(new java.awt.Color(255, 255, 255));
-
-        cmdMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/menu.png"))); // NOI18N
 
         lbl_tenUser.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         lbl_tenUser.setForeground(new java.awt.Color(127, 127, 127));
