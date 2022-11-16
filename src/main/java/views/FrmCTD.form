@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <Properties>
+    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+    </Property>
+  </Properties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel2" alignment="0" min="-2" pref="411" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txt_gianhap" alignment="0" pref="185" max="32767" attributes="0"/>
+                                  <Component id="txt_mota" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="txt_giaban" min="-2" pref="185" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="rd_ct_ngungkd" min="-2" pref="185" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="sp_soluong" min="-2" pref="185" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="rd_ct_dangkd" min="-2" pref="185" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="cb_dep" alignment="0" pref="185" max="32767" attributes="0"/>
+                                  <Component id="cb_chatlieu" alignment="0" pref="185" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="cb_nsx" alignment="0" min="-2" pref="185" max="-2" attributes="0"/>
+                                  <Component id="cb_loaidep" alignment="0" min="-2" pref="185" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="cb_mausac" alignment="0" min="-2" pref="185" max="-2" attributes="0"/>
+                                  <Component id="cb_size" alignment="0" min="-2" pref="185" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="188" max="32767" attributes="0"/>
+                      <Component id="lbl_image" min="-2" pref="173" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="txt_timkiem" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="btn_ctd_them" min="-2" pref="99" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btn_ctd_capnhat" min="-2" pref="99" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btn_ctd_xoa" min="-2" pref="99" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="lbl_total" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btn_exportExcel1" min="-2" pref="99" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btn_exportExcel" min="-2" pref="99" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                              <Component id="cb_chatlieu" linkSize="1" min="-2" pref="47" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="cb_dep" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="cb_mausac" linkSize="1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="cb_size" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cb_nsx" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="cb_loaidep" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="sp_soluong" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_mota" linkSize="2" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
+                          <Component id="rd_ct_dangkd" linkSize="2" alignment="3" min="-2" pref="52" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txt_gianhap" linkSize="2" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+                          <Component id="txt_giaban" linkSize="2" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                          <Component id="rd_ct_ngungkd" alignment="3" min="-2" pref="52" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Component id="lbl_image" min="-2" pref="210" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btn_ctd_capnhat" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_ctd_them" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_ctd_xoa" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txt_timkiem" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_total" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_exportExcel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_exportExcel1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane1" pref="184" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="tb_table">
+          <Properties>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+              <Table columnCount="12" rowCount="0">
+                <Column editable="true" title="STT" type="java.lang.Object"/>
+                <Column editable="true" title="T&#xea;n" type="java.lang.Object"/>
+                <Column editable="true" title="Lo&#x1ea1;i" type="java.lang.Object"/>
+                <Column editable="true" title="M&#xe0;u s&#x1eaf;c" type="java.lang.Object"/>
+                <Column editable="true" title="Ch&#x1ea5;t li&#x1ec7;u" type="java.lang.Object"/>
+                <Column editable="true" title="NSX" type="java.lang.Object"/>
+                <Column editable="true" title="Size" type="java.lang.Object"/>
+                <Column editable="true" title="M&#xf4; t&#x1ea3;" type="java.lang.Object"/>
+                <Column editable="true" title="S&#x1ed1; l&#x1b0;&#x1ee3;ng" type="java.lang.Object"/>
+                <Column editable="true" title="Gi&#xe1; nh&#x1ead;p" type="java.lang.Object"/>
+                <Column editable="true" title="Gi&#xe1; b&#xe1;n" type="java.lang.Object"/>
+                <Column editable="true" title="Tr&#x1ea1;ng th&#xe1;i" type="java.lang.Object"/>
+              </Table>
+            </Property>
+            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tb_tableMouseClicked"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="lbl_image">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value=" "/>
+      </Properties>
+    </Component>
+    <Component class="swing.RadioButtonCustom" name="rd_ct_ngungkd">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ng&#x1eeb;ng kinh doanh"/>
+        <Property name="focusPainted" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="swing.Combobox" name="cb_loaidep">
+      <Properties>
+        <Property name="focusable" type="boolean" value="false"/>
+        <Property name="labeText" type="java.lang.String" value="Lo&#x1ea1;i d&#xe9;p"/>
+        <Property name="lineColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="66" green="66" red="66" type="rgb"/>
+        </Property>
+        <Property name="requestFocusEnabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="swing.RadioButtonCustom" name="rd_ct_dangkd">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#x110;ang kinh doanh"/>
+        <Property name="focusPainted" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_total">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" id="red" palette="1" red="ff" type="palette"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="Total: 0"/>
+      </Properties>
+    </Component>
+    <Component class="swing.Button" name="btn_exportExcel1">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="7e" red="0" type="rgb"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Import Excel"/>
+        <Property name="focusPainted" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_exportExcel1ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="swing.Spinner" name="sp_soluong">
+      <Properties>
+        <Property name="labelText" type="java.lang.String" value="S&#x1ed1; l&#x1b0;&#x1ee3;ng"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="TH&#xd4;NG TIN S&#x1ea2;N PH&#x1ea8;M"/>
+      </Properties>
+    </Component>
+    <Component class="swing.Button" name="btn_ctd_capnhat">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="99" green="99" red="99" type="rgb"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t"/>
+        <Property name="focusPainted" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ctd_capnhatActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="swing.Combobox" name="cb_mausac">
+      <Properties>
+        <Property name="focusable" type="boolean" value="false"/>
+        <Property name="labeText" type="java.lang.String" value="M&#xe0;u s&#x1eaf;c"/>
+        <Property name="lineColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="66" green="66" red="66" type="rgb"/>
+        </Property>
+        <Property name="requestFocusEnabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="swing.TextField" name="txt_timkiem">
+      <Properties>
+        <Property name="labelText" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m"/>
+        <Property name="lineColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="66" green="66" red="66" type="rgb"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="txt_timkiemCaretUpdate"/>
+      </Events>
+    </Component>
+    <Component class="swing.TextField" name="txt_giaban">
+      <Properties>
+        <Property name="labelText" type="java.lang.String" value="Gi&#xe1; b&#xe1;n"/>
+        <Property name="lineColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="66" green="66" red="66" type="rgb"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="swing.Button" name="btn_ctd_them">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="99" green="99" red="99" type="rgb"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
+        <Property name="focusPainted" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ctd_themActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="swing.Combobox" name="cb_chatlieu">
+      <Properties>
+        <Property name="focusable" type="boolean" value="false"/>
+        <Property name="labeText" type="java.lang.String" value="Ch&#x1ea5;t li&#x1ec7;u"/>
+        <Property name="lineColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="66" green="66" red="66" type="rgb"/>
+        </Property>
+        <Property name="requestFocusEnabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="swing.Combobox" name="cb_size">
+      <Properties>
+        <Property name="focusable" type="boolean" value="false"/>
+        <Property name="labeText" type="java.lang.String" value="Size"/>
+        <Property name="lineColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="66" green="66" red="66" type="rgb"/>
+        </Property>
+        <Property name="requestFocusEnabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="swing.TextField" name="txt_gianhap">
+      <Properties>
+        <Property name="labelText" type="java.lang.String" value="Gi&#xe1; nh&#x1ead;p"/>
+        <Property name="lineColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="66" green="66" red="66" type="rgb"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="swing.Button" name="btn_ctd_xoa">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="99" green="99" red="99" type="rgb"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
+        <Property name="focusPainted" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ctd_xoaActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="swing.Combobox" name="cb_nsx">
+      <Properties>
+        <Property name="focusable" type="boolean" value="false"/>
+        <Property name="labeText" type="java.lang.String" value="Nh&#xe0; s&#x1ea3;n xu&#x1ea5;t"/>
+        <Property name="lineColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="66" green="66" red="66" type="rgb"/>
+        </Property>
+        <Property name="requestFocusEnabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="swing.Combobox" name="cb_dep">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+        <Property name="focusable" type="boolean" value="false"/>
+        <Property name="labeText" type="java.lang.String" value="D&#xe9;p"/>
+        <Property name="lineColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="66" green="66" red="66" type="rgb"/>
+        </Property>
+        <Property name="requestFocusEnabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="swing.TextField" name="txt_mota">
+      <Properties>
+        <Property name="labelText" type="java.lang.String" value="M&#xf4; t&#x1ea3;"/>
+        <Property name="lineColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="66" green="66" red="66" type="rgb"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="swing.Button" name="btn_exportExcel">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="7e" red="0" type="rgb"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Export Excel"/>
+        <Property name="focusPainted" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_exportExcelActionPerformed"/>
+      </Events>
+    </Component>
+  </SubComponents>
+</Form>

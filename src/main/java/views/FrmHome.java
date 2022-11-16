@@ -33,7 +33,12 @@ import utilities.ImageUltil;
  *
  * @author Vũ Nguyên Hướng
  */
-public class FrmHome extends javax.swing.JFrame {
+public class FrmHome extends javax.swing.JFrame implements Runnable,ThreadFactory{
+    
+    private static final long serialVersionUID = 6441489157408381878L;
+    private Executor executor = Executors.newSingleThreadExecutor(this);
+    private Webcam webcam = null;
+    private WebcamPanel panel = null;
 
     private INguoiDungService iNguoiDungService = new NguoiDungService();
     ImageUltil imageUltil = new ImageUltil();
@@ -920,4 +925,70 @@ public class FrmHome extends javax.swing.JFrame {
     private javax.swing.JTextArea txt_thongbao;
     // End of variables declaration//GEN-END:variables
 
+        public void initWebcam(JPanel panelShow) {
+        Dimension size = WebcamResolution.QVGA.getSize();
+        webcam = Webcam.getWebcams().get(0); //0 is default webcam
+        webcam.setViewSize(size);
+
+        panel = new WebcamPanel(webcam);
+        panel.setPreferredSize(size);
+        panel.setFPSDisplayed(true);
+        panel.setMirrored(true);
+
+        panelShow.add(panel, new AbsoluteConstraints(0, 0, panelShow.getWidth(), panelShow.getHeight()));
+
+        executor.execute(this);
+    }
+
+    @Override
+    public void run() {
+        do {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            Result result = null;
+            BufferedImage image = null;
+
+            if (webcam.isOpen()) {
+
+                if ((image = webcam.getImage()) == null) {
+                    continue;
+                }
+
+                LuminanceSource source = new BufferedImageLuminanceSource(image);
+                BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+
+                try {
+                    result = new MultiFormatReader().decode(bitmap);
+                } catch (NotFoundException e) {
+                    // fall thru, it means there is no QR code in image
+                }
+            }
+
+            if (result != null) {
+                try {
+//                    String maSP = result.getText().replace("VuNguyenHuong05102003", "");
+//                    for (int i = 0; i < tb_sanpham.getRowCount(); i++) {
+//                        if (tb_sanpham.getValueAt(i, 1).equals(maSP)) {
+//                            tb_sanpham.setRowSelectionInterval(i, i);
+//                            helper.alert(this, "Đã tìm thấy " + maSP);
+//                            addSanPham();
+//                        }
+//                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        } while (true);
+    }
+
+    @Override
+    public Thread newThread(Runnable r) {
+        Thread t = new Thread(r, "example-runner");
+        t.setDaemon(true);
+        return t;
+    }
 }
