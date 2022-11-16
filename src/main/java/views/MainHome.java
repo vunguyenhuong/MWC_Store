@@ -83,6 +83,7 @@ public class MainHome extends javax.swing.JFrame {
 // Chất liệu
                     } else if (subMenuIndex == 5) {
 // Màu sắc
+                        main.showForm(new FrmMS());
                     } else if (subMenuIndex == 6) {
 // NSX
                     }
