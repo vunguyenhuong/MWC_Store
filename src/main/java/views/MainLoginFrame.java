@@ -35,7 +35,6 @@ public class MainLoginFrame extends javax.swing.JFrame {
     public MainLoginFrame() {
         initComponents();
         init();
-        setExtendedState(MAXIMIZED_HORIZ);
     }
 
     private void init() {
