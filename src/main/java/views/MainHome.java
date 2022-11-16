@@ -59,21 +59,32 @@ public class MainHome extends javax.swing.JFrame {
                     if (subMenuIndex == 0) {
                         main.showForm(new Form1(nguoiDung));
                     } else if (subMenuIndex == 1) {
-
+// Đổi MK
                     }
                 }
                 if (menuIndex == 1) {
                     if (subMenuIndex == 0) {
-
+// QLNV
                     } else if (subMenuIndex == 1) {
-
+// abc
                     }
                 }
                 if (menuIndex == 2) {
                     if (subMenuIndex == 0) {
-
+// CTSPFrmCTD
+                        main.showForm(new FrmCTD());
                     } else if (subMenuIndex == 1) {
-
+// Dép
+                    } else if (subMenuIndex == 2) {
+// Loại dép
+                    } else if (subMenuIndex == 3) {
+// Size
+                    } else if (subMenuIndex == 4) {
+// Chất liệu
+                    } else if (subMenuIndex == 5) {
+// Màu sắc
+                    } else if (subMenuIndex == 6) {
+// NSX
                     }
                 }
                 if (menuIndex == 3) {
@@ -182,7 +193,7 @@ public class MainHome extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        bg.setBackground(new java.awt.Color(245, 245, 245));
+        bg.setBackground(new java.awt.Color(255, 255, 255));
         bg.setOpaque(true);
 
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
