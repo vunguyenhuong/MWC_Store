@@ -1,6 +1,6 @@
 package application;
 
-import views.SplashScreen;
+import views.MainLoginFrame;
 
 /**
  *
@@ -27,6 +27,6 @@ public class Application {
             java.util.logging.Logger.getLogger(Application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        new SplashScreen().setVisible(true);
+        new MainLoginFrame().setVisible(true);
     }
 }

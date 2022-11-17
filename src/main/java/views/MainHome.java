@@ -74,7 +74,7 @@ public class MainHome extends javax.swing.JFrame {
                 if (menuIndex == 2) {
                     if (subMenuIndex == 0) {
 // CTSPFrmCTD
-                        main.showForm(new FrmCTD());
+//                        main.showForm(new FrmCTD());
                     } else if (subMenuIndex == 1) {
 // Dép
                     } else if (subMenuIndex == 2) {
@@ -85,7 +85,7 @@ public class MainHome extends javax.swing.JFrame {
 // Chất liệu
                     } else if (subMenuIndex == 5) {
 // Màu sắc
-                        main.showForm(new FrmMS());
+//                        main.showForm(new FrmMS());
                     } else if (subMenuIndex == 6) {
 // NSX
                     }

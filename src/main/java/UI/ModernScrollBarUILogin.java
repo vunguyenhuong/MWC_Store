@@ -1,5 +1,6 @@
 package UI;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -11,13 +12,9 @@ import javax.swing.JComponent;
 import javax.swing.JScrollBar;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
-/**
- *
- * @author KenTizz
- */
-public class ModernScrollBarUI extends BasicScrollBarUI {
+public class ModernScrollBarUILogin extends BasicScrollBarUI {
 
-    private final int THUMB_SIZE = 80;
+    private final int THUMB_SIZE = 40;
 
     @Override
     protected Dimension getMaximumThumbSize() {
@@ -49,7 +46,29 @@ public class ModernScrollBarUI extends BasicScrollBarUI {
 
     @Override
     protected void paintTrack(Graphics grphcs, JComponent jc, Rectangle rctngl) {
-
+        Graphics2D g2 = (Graphics2D) grphcs;
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        int orientation = scrollbar.getOrientation();
+        int size;
+        int x;
+        int y;
+        int width;
+        int height;
+        if (orientation == JScrollBar.VERTICAL) {
+            size = rctngl.width / 2;
+            x = rctngl.x + ((rctngl.width - size) / 2);
+            y = rctngl.y;
+            width = size;
+            height = rctngl.height;
+        } else {
+            size = rctngl.height / 2;
+            y = rctngl.y + ((rctngl.height - size) / 2);
+            x = 0;
+            width = rctngl.width;
+            height = size;
+        }
+        g2.setColor(new Color(240, 240, 240));
+        g2.fillRect(x, y, width, height);
     }
 
     @Override
@@ -68,7 +87,7 @@ public class ModernScrollBarUI extends BasicScrollBarUI {
             width -= 16;
         }
         g2.setColor(scrollbar.getForeground());
-        g2.fillRoundRect(x, y, width, height, 1, 1);
+        g2.fillRoundRect(x, y, width, height, 10, 10);
     }
 
     private class ScrollBarButton extends JButton {

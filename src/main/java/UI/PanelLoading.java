@@ -1,4 +1,4 @@
-package swing;
+package UI;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
@@ -9,9 +9,9 @@ import javax.swing.ImageIcon;
 
 public class PanelLoading extends javax.swing.JPanel {
 
-    public PanelLoading() {
+    public PanelLoading(ImageIcon icon) {
         initComponents();
-        jLabel1.setIcon(new ImageIcon("images/suportUI/loading.gif"));
+        jLabel1.setIcon(icon);
         setOpaque(false);
         setFocusCycleRoot(true);
         setVisible(false);

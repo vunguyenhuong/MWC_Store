@@ -3,6 +3,7 @@ package swing;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -16,7 +17,7 @@ import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
-public class ButtonUI extends JButton {
+public class ButtonLG extends JButton {
 
     public Color getEffectColor() {
         return effectColor;
@@ -33,7 +34,7 @@ public class ButtonUI extends JButton {
     private float alpha;
     private Color effectColor = new Color(255, 255, 255);
 
-    public ButtonUI() {
+    public ButtonLG() {
         setContentAreaFilled(false);
         setBorder(new EmptyBorder(5, 0, 5, 0));
         setBackground(Color.WHITE);
@@ -72,10 +73,18 @@ public class ButtonUI extends JButton {
         int width = getWidth();
         int height = getHeight();
         BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2 = img.createGraphics();
+//        Graphics2D g2 = img.createGraphics();
+//        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+//        g2.setColor(getBackground());
+//        g2.fillRoundRect(0, 0, width, height, height, height);
+//        GradientPaint gra = new GradientPaint(0, 0, new Color(85, 184, 236), 0, getHeight(), new Color(190, 89, 255));
+//        g2.setPaint(gra);
+        Graphics2D g2 = (Graphics2D) grphcs;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setColor(getBackground());
-        g2.fillRoundRect(0, 0, width, height, height, height);
+        GradientPaint gra = new GradientPaint(0, 0, new Color(190, 89, 255), getWidth(), 0, new Color(85, 184, 236));
+        g2.setPaint(gra);
+        g2.fillRoundRect(0, 0, width, height, height, height); // bo goc tron
+        super.paintComponent(grphcs);
         if (pressedPoint != null) {
             g2.setColor(effectColor);
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, alpha));

@@ -778,7 +778,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable,ThreadFactor
         if (helper.confirm(this, "Bạn có chắc muốn đăng xuất ?")) {
             helper.alert(this, "Đăng xuất thành công!");
             this.dispose();
-            new SplashScreen().setVisible(true);
+//            new SplashScreen().setVisible(true);
         }
     }//GEN-LAST:event_dangxuatMouseClicked
 

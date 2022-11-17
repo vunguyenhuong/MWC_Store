@@ -7,6 +7,10 @@ import java.awt.Insets;
 import javax.swing.JProgressBar;
 import javax.swing.plaf.basic.BasicProgressBarUI;
 
+/**
+ *
+ * @author KenTizz
+ */
 public class ProgressBarCustom extends JProgressBar {
 
     public Color getColorString() {

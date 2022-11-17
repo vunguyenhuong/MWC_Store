@@ -2,7 +2,6 @@ package utilities;
 
 import jakarta.mail.Authenticator;
 import jakarta.mail.Message;
-import jakarta.mail.MessagingException;
 import jakarta.mail.PasswordAuthentication;
 import java.util.Properties;
 
@@ -30,6 +29,7 @@ public class SendMailUltil {
         prop.put("mail.smtp.starttls.enable", "true"); //TLS
 
         Session session = Session.getInstance(prop, new Authenticator() {
+            @Override
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(username, password);
             }

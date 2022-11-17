@@ -1,16 +1,17 @@
 package views;
 
-import swing.Message;
-import swing.PanelCover;
-import swing.PanelLoading;
-import swing.PanelLoginAndRegister;
+import UI.Message;
+import UI.PanelCover;
+import UI.PanelLoading;
+import UI.PanelLoginAndResetPass;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
+import java.util.UUID;
+import javax.swing.ImageIcon;
 import javax.swing.JLayeredPane;
-import models.ChucVu;
 import models.NguoiDung;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
@@ -18,15 +19,26 @@ import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import services.INguoiDungService;
 import services.impl.NguoiDungService;
+import utilities.Helper;
+import utilities.SendMailUltil;
 
+/**
+ *
+ * @author KenTizz
+ */
 public class MainLoginFrame extends javax.swing.JFrame {
 
     private final DecimalFormat df = new DecimalFormat("##0.###", DecimalFormatSymbols.getInstance(Locale.US));
     INguoiDungService iNguoiDungService = new NguoiDungService();
     private MigLayout layout;
     private PanelCover cover;
-    private PanelLoading loading;
-    private PanelLoginAndRegister loginAndRegister;
+    String icon1 = "images/suportUI/loading1.gif";
+    String icon2 = "images/suportUI/loading.gif";
+    private final PanelLoading loading1 = new PanelLoading(new ImageIcon(icon1));
+    private final PanelLoading loading2 = new PanelLoading(new ImageIcon(icon2));
+    private PanelLoginAndResetPass loginAndRegister;
+    private final Helper helper = new Helper();
+    SendMailUltil mailUltil = new SendMailUltil();
     private boolean isLogin;
     private final double addSize = 30;
     private final double coverSize = 40;
@@ -40,13 +52,6 @@ public class MainLoginFrame extends javax.swing.JFrame {
     private void init() {
         layout = new MigLayout("fill, insets 0");
         cover = new PanelCover();
-        loading = new PanelLoading();
-        ActionListener eventRegister = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                register();
-            }
-        };
         ActionListener eventLogin = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -56,12 +61,10 @@ public class MainLoginFrame extends javax.swing.JFrame {
         ActionListener eventReset = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                new PanelLoading().setVisible(true);
-                new MainResetPassFrame().setVisible(true);
-                dispose();
+                Reset();
             }
         };
-        loginAndRegister = new PanelLoginAndRegister(eventRegister, eventLogin, eventReset);
+        loginAndRegister = new PanelLoginAndResetPass(eventLogin, eventReset);
         TimingTarget target = new TimingTargetAdapter() {
             @Override
             public void timingEvent(float fraction) {
@@ -110,8 +113,6 @@ public class MainLoginFrame extends javax.swing.JFrame {
         animator.setDeceleration(0.5f);
         animator.setResolution(0);  //  for smooth animation
         bg.setLayout(layout);
-        bg.setLayer(loading, JLayeredPane.POPUP_LAYER);
-        bg.add(loading, "pos 0 0 100% 100%");
         bg.add(cover, "width " + coverSize + "%, pos 0al 0 n 100%");
         bg.add(loginAndRegister, "width " + loginSize + "%, pos 1al 0 n 100%"); //  1al as 100%
         cover.addEvent(new ActionListener() {
@@ -122,34 +123,6 @@ public class MainLoginFrame extends javax.swing.JFrame {
                 }
             }
         });
-    }
-
-    private void register() {
-        NguoiDung nd2 = loginAndRegister.getRegister();
-        String username = nd2.getMa(); //txt
-        String email = nd2.getEmail(); //txt
-        String password = nd2.getMatKhau(); //txt
-        ChucVu cb = nd2.getChucVu();
-        NguoiDung getND = new NguoiDung();
-        getND.setMa(username);
-        getND.setEmail(email);
-        getND.setMatKhau(password);
-        getND.setChucVu(cb);
-        if (username.isEmpty()) {
-            showMessage(Message.MessageType.ERROR, "Tên người dùng không được để trống!");
-        } else if (email.isEmpty()) {
-            showMessage(Message.MessageType.ERROR, "Email không được để trống!");
-        } else if (password.isEmpty()) {
-            showMessage(Message.MessageType.ERROR, "Mật khẩu không được để trống!");
-        } else if (password.length() < 8) {
-            showMessage(Message.MessageType.ERROR, "Mật khẩu tối thiểu 8 kí tự!");
-        } else if (iNguoiDungService.getObj(username) != null) {
-            showMessage(Message.MessageType.ERROR, "Tên đăng nhập đã tồn tại!");
-        } else {
-            iNguoiDungService.save(getND);
-            showMessage(Message.MessageType.SUCCESS, "Đăng ký thành công !");
-        }
-
     }
 
     private void login() {
@@ -174,9 +147,10 @@ public class MainLoginFrame extends javax.swing.JFrame {
                         @Override
                         public void run() {
                             try {
-                                loading.setVisible(true);
+                                bg.setLayer(loading1, JLayeredPane.POPUP_LAYER);
+                                bg.add(loading1, "pos 0 0 100% 100%");
+                                loading1.setVisible(true);
                                 Thread.sleep(2350);
-//                                new FrmHome(nd).setVisible(true);
                                 new MainHome(nd).setVisible(true);
                                 dispose();
                             } catch (InterruptedException e) {
@@ -184,10 +158,55 @@ public class MainLoginFrame extends javax.swing.JFrame {
                             }
                         }
                     }).start();
-
                 }
             }
         }
+    }
+
+    private void Reset() {
+        NguoiDung ndreset = loginAndRegister.getReset();
+        String username = ndreset.getMa(); //txt
+        String email = ndreset.getEmail(); //txt
+        String lbl_reset_capcha = ndreset.getSdt();
+        String txt_reset_capcha = ndreset.getDiaChi();
+        String newPassword = UUID.randomUUID().toString().substring(0, 8);
+        NguoiDung getND = new NguoiDung();
+        getND.setMa(username);
+        getND.setEmail(email);
+        NguoiDung nd = iNguoiDungService.getObj(username);
+        if (nd == null) {
+            showMessage(Message.MessageType.ERROR, "Tên đăng nhập không tồn tại!");
+        } else {
+            if (nd.getEmail().equals(email)) {
+                if (!txt_reset_capcha.equals(lbl_reset_capcha)) {
+                    showMessage(Message.MessageType.ERROR, "Mã capcha không chính xác!");
+                } else {
+                    if (helper.confirm(this, "Mật khẩu mới sẽ được gửi đến " + email + ". Chọn YES để xác nhận!")) {
+                        sendMain(nd, newPassword);
+                        nd.setMatKhau(newPassword);
+                        iNguoiDungService.save(nd);
+                    }
+                }
+            } else {
+                showMessage(Message.MessageType.ERROR, "Email không chính xác!");
+            }
+        }
+
+    }
+
+    private void sendMain(NguoiDung user, String newPassword) {
+        String email = user.getEmail();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                bg.setLayer(loading2, JLayeredPane.POPUP_LAYER);
+                bg.add(loading2, "pos 0 0 100% 100%");
+                loading2.setVisible(true);
+                showMessage(Message.MessageType.SUCCESS, mailUltil.sendEmail(email, "[MWC_STORE] Mật khẩu đã được đặt lại!", "Xin chào, mật khẩu mới của bạn là: " + newPassword));
+                loading2.setVisible(false);
+                loginAndRegister.showRegister(isLogin);
+            }
+        }).start();
     }
 
     private void showMessage(Message.MessageType messageType, String message) {

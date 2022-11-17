@@ -1,4 +1,4 @@
-package swing;
+package UI;
 
 import swing.ButtonOutLine;
 import java.awt.Color;
@@ -13,6 +13,7 @@ import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 import javax.swing.JLabel;
 import net.miginfocom.swing.MigLayout;
+import swing.ButtonOutLine;
 
 public class PanelCover extends javax.swing.JPanel {
 
@@ -48,7 +49,7 @@ public class PanelCover extends javax.swing.JPanel {
         button = new ButtonOutLine();
         button.setBackground(new Color(255, 255, 255));
         button.setForeground(new Color(255, 255, 255));
-        button.setText("SIGN IN");
+        button.setText("Quên mật khẩu");
         button.setFocusPainted(false);
         button.addActionListener(new ActionListener() {
             @Override
@@ -78,7 +79,7 @@ public class PanelCover extends javax.swing.JPanel {
     @Override
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;
-        GradientPaint gra = new GradientPaint(0, 0, new Color(255,192,203), 0, getHeight(), new Color(176,196,222));
+        GradientPaint gra = new GradientPaint(0, 0, new Color(85, 184, 236), 0, getHeight(), new Color(190, 89, 255));
         g2.setPaint(gra);
         g2.fillRect(0, 0, getWidth(), getHeight());
         super.paintComponent(grphcs);
@@ -126,12 +127,12 @@ public class PanelCover extends javax.swing.JPanel {
                 title.setText("MWC STORE");
                 description.setText("Man Women And Choices");
                 description1.setText("\"Sự lựa chọn hoàn hảo\"");
-                button.setText("Đăng ký");
+                button.setText("Đăng nhập");
             } else {
                 title.setText("Welcome Back!");
                 description.setText("To keep connected with us please");
                 description1.setText("login with your personal info");
-                button.setText("Đăng nhập");
+                button.setText("Quên mật khẩu");
             }
             this.isLogin = login;
         }

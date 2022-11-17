@@ -1,5 +1,6 @@
 package swing;
 
+import UI.GraphicsUtilities;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 

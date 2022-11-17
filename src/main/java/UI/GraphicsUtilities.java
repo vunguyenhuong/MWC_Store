@@ -1,4 +1,4 @@
-package swing;
+package UI;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
