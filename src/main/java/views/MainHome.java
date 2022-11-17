@@ -17,6 +17,7 @@ import com.google.zxing.NotFoundException;
 import com.google.zxing.Result;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
+import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -28,8 +29,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import javax.swing.JPanel;
-import java.awt.event.MouseEvent;
-import javax.swing.event.AncestorListener;
 import models.NguoiDung;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
@@ -58,6 +57,7 @@ public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFact
     private MainForm main;
     private Animator animator;
     NguoiDung nguoiDung = new NguoiDung();
+    private CardLayout cardLayout;
 
     public MainHome(NguoiDung nd) {
         initComponents();
@@ -72,6 +72,9 @@ public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFact
         setExtendedState(MAXIMIZED_BOTH);
         header = new Header();
         init();
+        cardLayout = (CardLayout) pn_main.getLayout();
+        cardLayout.show(pn_main, "general");
+        initWebcam(pn_webcam);
     }
 
     private void init() {
@@ -124,6 +127,7 @@ public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFact
                     }
                 }
                 if (menuIndex == 4) {
+                    cardLayout.show(pn_main, "banhang");
                     if (subMenuIndex == 0) {
 
                     } else if (subMenuIndex == 1) {
@@ -211,10 +215,16 @@ public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFact
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pn_main = new javax.swing.JPanel();
         bg = new javax.swing.JLayeredPane();
+        jPanel2 = new javax.swing.JPanel();
+        pn_webcam = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+
+        pn_main.setLayout(new java.awt.CardLayout());
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
         bg.setOpaque(true);
@@ -223,27 +233,65 @@ public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFact
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1366, Short.MAX_VALUE)
+            .addGap(0, 2035, Short.MAX_VALUE)
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 783, Short.MAX_VALUE)
+            .addGap(0, 1163, Short.MAX_VALUE)
         );
+
+        pn_main.add(bg, "general");
+
+        pn_webcam.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton1.setText("Return");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pn_webcam, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addContainerGap(1697, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pn_webcam, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addContainerGap(919, Short.MAX_VALUE))
+        );
+
+        pn_main.add(jPanel2, "banhang");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg)
+            .addComponent(pn_main, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg)
+            .addComponent(pn_main, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        cardLayout.show(pn_main, "general");
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -281,6 +329,10 @@ public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFact
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane bg;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel pn_main;
+    private javax.swing.JPanel pn_webcam;
     // End of variables declaration//GEN-END:variables
 
     public void initWebcam(JPanel panelShow) {
