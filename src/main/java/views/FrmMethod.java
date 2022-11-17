@@ -26,7 +26,7 @@ import utilities.SendMailUltil;
  *
  * @author KenTizz
  */
-public class MainLoginFrame extends javax.swing.JFrame {
+public class FrmMethod extends javax.swing.JFrame {
 
     private final DecimalFormat df = new DecimalFormat("##0.###", DecimalFormatSymbols.getInstance(Locale.US));
     INguoiDungService iNguoiDungService = new NguoiDungService();
@@ -44,7 +44,7 @@ public class MainLoginFrame extends javax.swing.JFrame {
     private final double coverSize = 40;
     private final double loginSize = 60;
 
-    public MainLoginFrame() {
+    public FrmMethod() {
         initComponents();
         init();
     }
@@ -151,7 +151,7 @@ public class MainLoginFrame extends javax.swing.JFrame {
                                 bg.add(loading1, "pos 0 0 100% 100%");
                                 loading1.setVisible(true);
                                 Thread.sleep(2350);
-                                new MainHome(nd).setVisible(true);
+                                new FrmMainHome(nd).setVisible(true);
                                 dispose();
                             } catch (InterruptedException e) {
                                 System.err.println(e);
@@ -305,7 +305,7 @@ public class MainLoginFrame extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainLoginFrame().setVisible(true);
+                new FrmMethod().setVisible(true);
             }
         });
     }

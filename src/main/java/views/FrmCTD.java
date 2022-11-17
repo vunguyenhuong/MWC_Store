@@ -1,5 +1,6 @@
 package views;
 
+import java.awt.Color;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,6 +19,7 @@ import models.NhaSX;
 import models.Size;
 import services.IChiTietDepService;
 import services.impl.ChiTietDepService;
+import swing.Table;
 import utilities.ExportSP;
 import utilities.Helper;
 import utilities.ImageUltil;
@@ -49,6 +51,8 @@ public class FrmCTD extends javax.swing.JPanel {
         initComponents();
         iChiTietDepService = new ChiTietDepService();
         loadData(iChiTietDepService.getAll());
+        setBackground(Color.WHITE);
+        Table.apply(jScrollPane1, Table.TableType.MULTI_LINE);
     }
     
     private void loadData(List<ChiTietDep> list) {
@@ -67,8 +71,6 @@ public class FrmCTD extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tb_table = new javax.swing.JTable();
         lbl_image = new javax.swing.JLabel();
         rd_ct_ngungkd = new swing.RadioButtonCustom();
         cb_loaidep = new swing.Combobox();
@@ -90,23 +92,11 @@ public class FrmCTD extends javax.swing.JPanel {
         cb_dep = new swing.Combobox();
         txt_mota = new swing.TextField();
         btn_exportExcel = new swing.Button();
+        tableScrollButton1 = new swing.TableScrollButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tb_table = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
-
-        tb_table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "STT", "Tên", "Loại", "Màu sắc", "Chất liệu", "NSX", "Size", "Mô tả", "Số lượng", "Giá nhập", "Giá bán", "Trạng thái"
-            }
-        ));
-        tb_table.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tb_tableMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tb_table);
 
         lbl_image.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_image.setText(" ");
@@ -223,6 +213,27 @@ public class FrmCTD extends javax.swing.JPanel {
             }
         });
 
+        tb_table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "STT", "Tên", "Loại", "Màu sắc", "Chất liệu", "NSX", "Size", "Mô tả", "Số lượng", "Giá nhập", "Giá bán", "Trạng thái"
+            }
+        ));
+        tb_table.setSelectionBackground(new java.awt.Color(153, 153, 255));
+        tb_table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_tableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tb_table);
+        if (tb_table.getColumnModel().getColumnCount() > 0) {
+            tb_table.getColumnModel().getColumn(10).setResizable(false);
+        }
+
+        tableScrollButton1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -230,7 +241,6 @@ public class FrmCTD extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -276,7 +286,8 @@ public class FrmCTD extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btn_exportExcel1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_exportExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_exportExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -322,7 +333,7 @@ public class FrmCTD extends javax.swing.JPanel {
                     .addComponent(btn_exportExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_exportExcel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -507,6 +518,7 @@ public class FrmCTD extends javax.swing.JPanel {
     private swing.RadioButtonCustom rd_ct_dangkd;
     private swing.RadioButtonCustom rd_ct_ngungkd;
     private swing.Spinner sp_soluong;
+    private swing.TableScrollButton tableScrollButton1;
     private javax.swing.JTable tb_table;
     private swing.TextField txt_giaban;
     private swing.TextField txt_gianhap;

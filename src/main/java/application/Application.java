@@ -1,6 +1,6 @@
 package application;
 
-import views.MainLoginFrame;
+import views.FrmMethod;
 
 /**
  *
@@ -20,6 +20,6 @@ public class Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        new MainLoginFrame().setVisible(true);
+        new FrmMethod().setVisible(true);
     }
 }

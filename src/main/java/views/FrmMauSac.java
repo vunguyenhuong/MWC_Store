@@ -13,14 +13,14 @@ import utilities.Helper;
  *
  * @author VU NGUYEN HUONG
  */
-public class FrmMS extends javax.swing.JPanel {
+public class FrmMauSac extends javax.swing.JPanel {
 
     private IMauSacService iMauSacService;
     private DefaultTableModel dtm;
     private Helper helper;
     private SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
     
-    public FrmMS() {
+    public FrmMauSac() {
         initComponents();
         iMauSacService = new MauSacService();
         helper = new Helper();

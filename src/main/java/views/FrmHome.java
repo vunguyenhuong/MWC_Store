@@ -724,7 +724,6 @@ public class FrmHome extends javax.swing.JFrame implements Runnable,ThreadFactor
         effectNav(home, nv, sp, hd, bh, thongke);
         cardLayout.show(main, "general");
         deskpane.removeAll();
-        deskpane.add(new FrmWelcome()).setVisible(true);
     }//GEN-LAST:event_homeMouseClicked
 
     private void nvMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nvMouseClicked
@@ -733,7 +732,6 @@ public class FrmHome extends javax.swing.JFrame implements Runnable,ThreadFactor
         } else {
             effectNav(nv, home, sp, hd, bh, thongke);
             cardLayout.show(main, "general");
-            deskpane.add(new FrmQLNhanVien()).setVisible(true);
         }
     }//GEN-LAST:event_nvMouseClicked
 

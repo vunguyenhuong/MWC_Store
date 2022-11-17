@@ -44,7 +44,7 @@ import utilities.Helper;
  *
  * @author KenTizz
  */
-public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFactory {
+public class FrmMainHome extends javax.swing.JFrame implements Runnable, ThreadFactory {
 
     private static final long serialVersionUID = 6441489157408381878L;
     private Executor executor = Executors.newSingleThreadExecutor(this);
@@ -59,7 +59,7 @@ public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFact
     NguoiDung nguoiDung = new NguoiDung();
     private CardLayout cardLayout;
 
-    public MainHome(NguoiDung nd) {
+    public FrmMainHome(NguoiDung nd) {
         initComponents();
         this.nguoiDung = nd;
         setExtendedState(MAXIMIZED_BOTH);
@@ -70,7 +70,7 @@ public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFact
         initWebcam(pn_webcam);
     }
 
-    public MainHome() {
+    public FrmMainHome() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
         header = new Header();
@@ -88,7 +88,7 @@ public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFact
             @Override
             public void mousePressed(MouseEvent e) {
                 System.out.println("mousePressed");
-                main.showForm(new HomeFrame());
+                main.showForm(new FrmTrangChu());
             }
         };
         menu = new Menu(even);
@@ -98,7 +98,7 @@ public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFact
                 System.out.println("Menu Index : " + menuIndex + " SubMenu Index " + subMenuIndex);
                 if (menuIndex == 0) {
                     if (subMenuIndex == 0) {
-                        main.showForm(new Form1(nguoiDung));
+                        main.showForm(new FrmProfile(nguoiDung));
                     } else if (subMenuIndex == 1) {
 // Đổi MK
                     }
@@ -124,7 +124,7 @@ public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFact
 // Chất liệu
                     } else if (subMenuIndex == 5) {
 // Màu sắc
-                        main.showForm(new FrmMS());
+                        main.showForm(new FrmMauSac());
                     } else if (subMenuIndex == 6) {
 // NSX
                     }
@@ -155,7 +155,8 @@ public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFact
                     if (subMenuIndex == 0) {
                         if (helper.confirm(rootPane, "Bạn có chắc muốn đăng xuất ?")) {
                             dispose();
-                            new MainLoginFrame().setVisible(true);
+                            webcam.close();
+                            new FrmMethod().setVisible(true);
                         }
                     } else if (subMenuIndex == 1) {
                         if (helper.confirm(rootPane, "Bạn có chắc muốn thoát không ?")) {
@@ -169,9 +170,9 @@ public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFact
             @Override
             public void showPopup(Component com) {
                 MenuItem item = (MenuItem) com;
-                PopupMenu popup = new PopupMenu(MainHome.this, item.getIndex(), item.getEventSelected(), item.getMenu().getSubMenu());
-                int x = MainHome.this.getX() + 52;
-                int y = MainHome.this.getY() + com.getY() + 86;
+                PopupMenu popup = new PopupMenu(FrmMainHome.this, item.getIndex(), item.getEventSelected(), item.getMenu().getSubMenu());
+                int x = FrmMainHome.this.getX() + 52;
+                int y = FrmMainHome.this.getY() + com.getY() + 86;
                 popup.setLocation(x, y);
                 popup.setVisible(true);
             }
@@ -218,7 +219,7 @@ public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFact
         });
         //  Init google icon font
         //  Start with this form
-        main.showForm(new HomeFrame());
+        main.showForm(new FrmTrangChu());
     }
 
     @SuppressWarnings("unchecked")
@@ -229,6 +230,7 @@ public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFact
         bg = new javax.swing.JLayeredPane();
         jPanel2 = new javax.swing.JPanel();
         pn_webcam = new javax.swing.JPanel();
+        button1 = new swing.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -255,21 +257,34 @@ public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFact
 
         pn_webcam.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        button1.setBackground(new java.awt.Color(102, 102, 102));
+        button1.setForeground(new java.awt.Color(255, 255, 255));
+        button1.setText("Trở về màn hình chính");
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(285, 285, 285)
-                .addComponent(pn_webcam, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1424, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(1779, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pn_webcam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addComponent(pn_webcam, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(895, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(pn_webcam, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(953, Short.MAX_VALUE))
         );
 
         pn_main.add(jPanel2, "banhang");
@@ -289,6 +304,10 @@ public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFact
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        cardLayout.show(pn_main, "general");
+    }//GEN-LAST:event_button1ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -303,14 +322,16 @@ public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFact
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmMainHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmMainHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmMainHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmMainHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
@@ -318,13 +339,14 @@ public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFact
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new MainHome().setVisible(true);
+                new FrmMainHome().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane bg;
+    private swing.Button button1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel pn_main;
     private javax.swing.JPanel pn_webcam;
