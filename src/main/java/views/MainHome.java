@@ -22,17 +22,14 @@ import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-<<<<<<< HEAD
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import javax.swing.JPanel;
-=======
 import java.awt.event.MouseEvent;
 import javax.swing.event.AncestorListener;
->>>>>>> ed2f2a86eeb17ad6a8fc4a7af36d8155d5e503ce
 import models.NguoiDung;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
