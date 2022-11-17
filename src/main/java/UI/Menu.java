@@ -6,7 +6,10 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
 import javax.swing.event.AncestorListener;
 import net.miginfocom.swing.MigLayout;
@@ -22,6 +25,10 @@ public class Menu extends javax.swing.JPanel {
     }
 
     public void addEvent(EventMenuSelected event) {
+        this.event = event;
+    }
+
+    public void addMenuEvent(EventMenuSelected event) {
         this.event = event;
     }
 
@@ -50,6 +57,7 @@ public class Menu extends javax.swing.JPanel {
         sp.setVerticalScrollBar(new ScrollBarCustom());
         layout = new MigLayout("wrap, fillx, insets 0", "[fill]", "[]0[]");
         panel.setLayout(layout);
+
     }
 
     public void initMenuItem() {
@@ -96,10 +104,7 @@ public class Menu extends javax.swing.JPanel {
             }
         }
     }
-        public void addMenuEvent(ActionListener event) {
-        AncestorListener listener = null;
-        profile1.addAncestorListener(listener);
-    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
