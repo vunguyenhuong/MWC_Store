@@ -20,7 +20,6 @@ public class Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //</editor-fold>
         new MainLoginFrame().setVisible(true);
     }
 }

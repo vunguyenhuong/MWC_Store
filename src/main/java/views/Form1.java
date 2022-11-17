@@ -93,18 +93,22 @@ public class Form1 extends javax.swing.JPanel {
             }
         });
 
+        txt_sdt.setEditable(false);
         txt_sdt.setLabelText("Số điện thoại");
         txt_sdt.setLineColor(new java.awt.Color(153, 153, 255));
         txt_sdt.setSelectionColor(new java.awt.Color(153, 153, 255));
 
+        txt_diachi.setEditable(false);
         txt_diachi.setLabelText("Địa chỉ");
         txt_diachi.setLineColor(new java.awt.Color(153, 153, 255));
         txt_diachi.setSelectionColor(new java.awt.Color(153, 153, 255));
 
+        txt_email.setEditable(false);
         txt_email.setLabelText("Email");
         txt_email.setLineColor(new java.awt.Color(153, 153, 255));
         txt_email.setSelectionColor(new java.awt.Color(153, 153, 255));
 
+        txt_ten.setEditable(false);
         txt_ten.setLabelText("Tên");
         txt_ten.setLineColor(new java.awt.Color(153, 153, 255));
         txt_ten.setSelectionColor(new java.awt.Color(153, 153, 255));

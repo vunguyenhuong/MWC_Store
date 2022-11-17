@@ -65,6 +65,9 @@ public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFact
         setExtendedState(MAXIMIZED_BOTH);
         header = new Header(nguoiDung);
         init();
+        cardLayout = (CardLayout) pn_main.getLayout();
+        cardLayout.show(pn_main, "general");
+        initWebcam(pn_webcam);
     }
 
     public MainHome() {
@@ -219,7 +222,6 @@ public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFact
         bg = new javax.swing.JLayeredPane();
         jPanel2 = new javax.swing.JPanel();
         pn_webcam = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -242,34 +244,25 @@ public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFact
 
         pn_main.add(bg, "general");
 
-        pn_webcam.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton1.setText("Return");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        pn_webcam.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pn_webcam, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addContainerGap(1697, Short.MAX_VALUE))
+                .addGap(285, 285, 285)
+                .addComponent(pn_webcam, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1424, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(75, 75, 75)
                 .addComponent(pn_webcam, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addContainerGap(919, Short.MAX_VALUE))
+                .addContainerGap(895, Short.MAX_VALUE))
         );
 
         pn_main.add(jPanel2, "banhang");
@@ -288,10 +281,6 @@ public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFact
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        cardLayout.show(pn_main, "general");
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -329,7 +318,6 @@ public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFact
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane bg;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel pn_main;
     private javax.swing.JPanel pn_webcam;

@@ -741,7 +741,6 @@ public class FrmHome extends javax.swing.JFrame implements Runnable,ThreadFactor
         effectNav(sp, home, nv, hd, bh, thongke);
         cardLayout.show(main, "general");
         deskpane.removeAll();
-        deskpane.add(new FrmChiTietDep()).setVisible(true);
     }//GEN-LAST:event_spMouseClicked
 
     private void hdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hdMouseClicked

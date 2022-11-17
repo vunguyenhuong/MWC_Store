@@ -24,7 +24,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel8" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="404" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -42,7 +42,7 @@
                           <Component id="jLabel7" alignment="0" pref="196" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -98,8 +98,8 @@
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jLabel8" pref="79" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane1" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -252,14 +252,28 @@
         <Property name="text" type="java.lang.String" value="Cao V&#x103;n Doanh"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel8">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="18" style="1"/>
-        </Property>
-        <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="CH&#x1af;A BI&#x1ebe;T VI&#x1ebe;T G&#xcc;"/>
-      </Properties>
-    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="jTextArea1">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="lineWrap" type="boolean" value="true"/>
+            <Property name="rows" type="int" value="5"/>
+            <Property name="text" type="java.lang.String" value="H&#x1ec7; th&#x1ed1;ng gi&#xe0;y MWC chuy&#xea;n thi&#x1ebf;t k&#x1ebf; v&#xe0; kinh doanh c&#xe1;c m&#x1eb7;t h&#xe0;ng d&#xe9;p cho gi&#x1edb;i tr&#x1ebb;, l&#xe0; c&#x1ea5;u n&#x1ed1;i cho b&#x1ea1;n tr&#x1ebb; c&#x1ea3; n&#x1b0;&#x1edb;c ti&#x1ebf;p c&#x1ead;n v&#x1edb;i xu h&#x1b0;&#x1edb;ng th&#x1edd;i trang tr&#xea;n th&#x1ebf; gi&#x1edb;i. &quot;Ch&#xfa;ng t&#xf4;i mang &#x111;&#x1ebf;n s&#x1ef1; kh&#xe1;c bi&#x1ec7;t!&quot; - C&#xf9;ng v&#x1edb;i xu h&#x1b0;&#x1edb;ng th&#x1edd;i trang c&#x1ee7;a th&#x1ebf; gi&#x1edb;i H&#x1ec7; th&#x1ed1;ng MWC &#x111;&#xe3; v&#xe0; &#x111;ang kh&#xf4;ng ng&#x1eeb;ng &#x111;&#x1ed5;i m&#x1edb;i &#x111;&#x1ec3; mang &#x111;&#x1ebf;n cho c&#xe1;c b&#x1ea1;n tr&#x1ebb; c&#xe1;c m&#x1eab;u d&#xe9;p th&#x1edd;i trang &#x111;&#x1ed9;c &#x111;&#xe1;o, m&#x1edb;i l&#x1ea1;, &#x111;&#x1ec3; ti&#xea;n phong cho m&#x1ed9;t phong c&#xe1;ch th&#x1edd;i trang m&#x1edb;i, m&#x1ed9;t phong c&#xe1;ch bi&#x1ec3;u t&#x1b0;&#x1ee3;ng cho gi&#x1edb;i tr&#x1ebb; tr&#xea;n c&#x1ea3; n&#x1b0;&#x1edb;c."/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="wrapStyleWord" type="boolean" value="true"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="null"/>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>
