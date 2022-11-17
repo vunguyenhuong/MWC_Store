@@ -23,6 +23,9 @@ import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.concurrent.Executor;
@@ -44,12 +47,9 @@ import utilities.Helper;
 public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFactory {
 
     private static final long serialVersionUID = 6441489157408381878L;
-
     private Executor executor = Executors.newSingleThreadExecutor(this);
-
     private Webcam webcam = null;
     private WebcamPanel panel = null;
-
     private Helper helper = new Helper();
     private MigLayout layout;
     private Menu menu;
@@ -81,7 +81,14 @@ public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFact
         layout = new MigLayout("fill", "0[]0[100%, fill]0", "0[fill, top]0");
         bg.setLayout(layout);
         main = new MainForm();
-        menu = new Menu();
+        MouseListener even = new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                System.out.println("mousePressed");
+                main.showForm(new HomeFrame());
+            }
+        };
+        menu = new Menu(even);
         menu.addEvent(new EventMenuSelected() {
             @Override
             public void menuSelected(int menuIndex, int subMenuIndex) {

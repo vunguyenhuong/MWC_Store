@@ -1,10 +1,8 @@
 package UI;
 
-import UI.EventMenu;
-import UI.EventMenuSelected;
-import UI.ModelMenu;
 import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -80,6 +78,7 @@ public class MenuItem extends javax.swing.JPanel {
             });
             add(item);
         }
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 
     @SuppressWarnings("unchecked")

@@ -2,10 +2,12 @@ package UI;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
 import net.miginfocom.swing.MigLayout;
 
@@ -44,19 +46,20 @@ public class Menu extends javax.swing.JPanel {
     private EventShowPopupMenu eventShowPopup;
     private boolean enableMenu = true;
     private boolean showMenu = true;
-    private MainForm main;
-
-    public Menu() {
+    
+    public Menu(MouseListener even) {
         initComponents();
         setOpaque(false);
         sp.getViewport().setOpaque(false);
         sp.setVerticalScrollBar(new ScrollBarCustom());
         layout = new MigLayout("wrap, fillx, insets 0", "[fill]", "[]0[]");
         panel.setLayout(layout);
+        profile1.addMouseListener(even);
+        profile1.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 
     public void initMenuItem() {
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/1.png")), "Thông tin cá nhân", "Chỉnh sửa thông tin cá nhân", "Đổi mật khẩu"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/1.png")), "Thông tin cá nhân", "Hồ sơ cá nhân", "Đổi mật khẩu"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/2.png")), "Quản lý nhân viên"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/3.png")), "Quản lý sản phẩm", "Chi tiết sản phẩm", "Dép", "Loại dép", "Size", "Chất liệu", "Màu sắc", "Nhà sản xuất"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icons/4.png")), "Quản lý hóa đơn"));
