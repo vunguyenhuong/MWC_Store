@@ -103,7 +103,7 @@ public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFact
                 if (menuIndex == 2) {
                     if (subMenuIndex == 0) {
 // CTSPFrmCTD
-//                        main.showForm(new FrmCTD());
+                        main.showForm(new FrmCTD());
                     } else if (subMenuIndex == 1) {
 // Dép
                     } else if (subMenuIndex == 2) {
@@ -114,7 +114,7 @@ public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFact
 // Chất liệu
                     } else if (subMenuIndex == 5) {
 // Màu sắc
-//                        main.showForm(new FrmMS());
+                        main.showForm(new FrmMS());
                     } else if (subMenuIndex == 6) {
 // NSX
                     }
@@ -343,6 +343,7 @@ public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFact
         panel = new WebcamPanel(webcam);
         panel.setPreferredSize(size);
         panel.setFPSDisplayed(true);
+        panel.setMirrored(true);
 
         panelShow.add(panel, new AbsoluteConstraints(0, 0, panelShow.getWidth(), panelShow.getHeight()));
 
