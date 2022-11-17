@@ -212,7 +212,7 @@ public class FrmSize extends javax.swing.JFrame {
             return;
         }
         String result;
-        for (int i = 35; i < sizeService.getListSize().size() + 1; i++) {
+        for (int i = 36; i < sizeService.getListSize().size() + 1; i++) {
             result = "S" + i;
             if (sizeService.getObj(result) == null) {
                 size.setMa(result);

@@ -6,13 +6,12 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
-import javax.swing.event.AncestorListener;
+import javax.swing.JOptionPane;
 import net.miginfocom.swing.MigLayout;
+import views.HomeFrame;
 
 /**
  *
@@ -49,6 +48,7 @@ public class Menu extends javax.swing.JPanel {
     private EventShowPopupMenu eventShowPopup;
     private boolean enableMenu = true;
     private boolean showMenu = true;
+    private MainForm main;
 
     public Menu() {
         initComponents();
@@ -57,6 +57,13 @@ public class Menu extends javax.swing.JPanel {
         sp.setVerticalScrollBar(new ScrollBarCustom());
         layout = new MigLayout("wrap, fillx, insets 0", "[fill]", "[]0[]");
         panel.setLayout(layout);
+        profile1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent me) {
+//                main.showForm(new HomeFrame());
+            }
+
+        });
 
     }
 
