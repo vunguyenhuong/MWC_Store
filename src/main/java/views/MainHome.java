@@ -111,10 +111,7 @@ public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFact
 // Chất liệu
                     } else if (subMenuIndex == 5) {
 // Màu sắc
-<<<<<<< HEAD
 //                        main.showForm(new FrmMS());
-=======
->>>>>>> 81b67523565ce142da279ad719fb9234fc7e2055
                     } else if (subMenuIndex == 6) {
 // NSX
                     }
