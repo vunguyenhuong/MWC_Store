@@ -126,12 +126,18 @@
     </Container>
     <Component class="swing.RadioButtonCustom" name="rd_nu">
       <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="N&#x1eef;"/>
         <Property name="focusPainted" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="swing.RadioButtonCustom" name="rd_nam">
       <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Nam"/>
         <Property name="focusPainted" type="boolean" value="false"/>
       </Properties>

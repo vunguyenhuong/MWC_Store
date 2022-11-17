@@ -113,7 +113,7 @@ public class FrmMainHome extends javax.swing.JFrame implements Runnable, ThreadF
                 if (menuIndex == 2) {
                     if (subMenuIndex == 0) {
 // CTSPFrmCTD
-                        main.showForm(new FrmCTD());
+                        main.showForm(new FrmChiTietDep());
                     } else if (subMenuIndex == 1) {
 // Dép
                     } else if (subMenuIndex == 2) {

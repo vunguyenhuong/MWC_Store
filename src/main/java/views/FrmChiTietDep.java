@@ -29,7 +29,7 @@ import utilities.ImportSP;
  *
  * @author VU NGUYEN HUONG
  */
-public class FrmCTD extends javax.swing.JPanel {
+public class FrmChiTietDep extends javax.swing.JPanel {
 
     private Helper helper = new Helper();
     private ImageUltil imageUltil = new ImageUltil();
@@ -47,7 +47,7 @@ public class FrmCTD extends javax.swing.JPanel {
 
     private int checkSearchCT = 0;
 
-    public FrmCTD() {
+    public FrmChiTietDep() {
         initComponents();
         iChiTietDepService = new ChiTietDepService();
         loadData(iChiTietDepService.getAll());
@@ -71,6 +71,7 @@ public class FrmCTD extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         lbl_image = new javax.swing.JLabel();
         rd_ct_ngungkd = new swing.RadioButtonCustom();
         cb_loaidep = new swing.Combobox();
@@ -101,6 +102,7 @@ public class FrmCTD extends javax.swing.JPanel {
         lbl_image.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_image.setText(" ");
 
+        buttonGroup1.add(rd_ct_ngungkd);
         rd_ct_ngungkd.setText("Ngừng kinh doanh");
         rd_ct_ngungkd.setFocusPainted(false);
 
@@ -109,6 +111,7 @@ public class FrmCTD extends javax.swing.JPanel {
         cb_loaidep.setLineColor(new java.awt.Color(102, 102, 102));
         cb_loaidep.setRequestFocusEnabled(false);
 
+        buttonGroup1.add(rd_ct_dangkd);
         rd_ct_dangkd.setText("Đang kinh doanh");
         rd_ct_dangkd.setFocusPainted(false);
 
@@ -116,8 +119,9 @@ public class FrmCTD extends javax.swing.JPanel {
         lbl_total.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_total.setText("Total: 0");
 
-        btn_exportExcel1.setBackground(new java.awt.Color(0, 126, 0));
+        btn_exportExcel1.setBackground(new java.awt.Color(0, 102, 0));
         btn_exportExcel1.setForeground(new java.awt.Color(255, 255, 255));
+        btn_exportExcel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/excel.png"))); // NOI18N
         btn_exportExcel1.setText("Import Excel");
         btn_exportExcel1.setFocusPainted(false);
         btn_exportExcel1.addActionListener(new java.awt.event.ActionListener() {
@@ -203,8 +207,9 @@ public class FrmCTD extends javax.swing.JPanel {
         txt_mota.setLabelText("Mô tả");
         txt_mota.setLineColor(new java.awt.Color(102, 102, 102));
 
-        btn_exportExcel.setBackground(new java.awt.Color(0, 126, 0));
+        btn_exportExcel.setBackground(new java.awt.Color(0, 102, 0));
         btn_exportExcel.setForeground(new java.awt.Color(255, 255, 255));
+        btn_exportExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/excel.png"))); // NOI18N
         btn_exportExcel.setText("Export Excel");
         btn_exportExcel.setFocusPainted(false);
         btn_exportExcel.addActionListener(new java.awt.event.ActionListener() {
@@ -283,13 +288,16 @@ public class FrmCTD extends javax.swing.JPanel {
                                 .addComponent(btn_ctd_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lbl_total)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_exportExcel1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 328, Short.MAX_VALUE)
+                        .addComponent(btn_exportExcel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_exportExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btn_exportExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btn_exportExcel, btn_exportExcel1});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -333,7 +341,7 @@ public class FrmCTD extends javax.swing.JPanel {
                     .addComponent(btn_exportExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_exportExcel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -505,6 +513,7 @@ public class FrmCTD extends javax.swing.JPanel {
     private swing.Button btn_ctd_xoa;
     private swing.Button btn_exportExcel;
     private swing.Button btn_exportExcel1;
+    private javax.swing.ButtonGroup buttonGroup1;
     private swing.Combobox cb_chatlieu;
     private swing.Combobox cb_dep;
     private swing.Combobox cb_loaidep;

@@ -77,9 +77,11 @@ public class FrmProfile extends javax.swing.JPanel {
             }
         });
 
+        buttonGroup1.add(rd_nu);
         rd_nu.setText("Nữ");
         rd_nu.setFocusPainted(false);
 
+        buttonGroup1.add(rd_nam);
         rd_nam.setText("Nam");
         rd_nam.setFocusPainted(false);
 

@@ -55,12 +55,15 @@ public class FrmTrangChu extends javax.swing.JPanel {
         imageAvatar2.setGradientColor2(new java.awt.Color(153, 153, 255));
         imageAvatar2.setImage(new javax.swing.ImageIcon(getClass().getResource("/icons/ntl.jpg"))); // NOI18N
 
+        jLabel1.setForeground(java.awt.Color.gray);
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Vũ Nguyên Hướng - PH27229");
 
+        jLabel2.setForeground(java.awt.Color.gray);
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Lại Thị Kim Chi - PH26384");
 
+        jLabel3.setForeground(java.awt.Color.gray);
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Dương Văn Cảnh - PH23043");
 
@@ -76,23 +79,29 @@ public class FrmTrangChu extends javax.swing.JPanel {
         imageAvatar6.setGradientColor2(new java.awt.Color(153, 153, 255));
         imageAvatar6.setImage(new javax.swing.ImageIcon(getClass().getResource("/icons/ltkh1.jpg"))); // NOI18N
 
+        jLabel5.setForeground(java.awt.Color.gray);
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Hoàng Vĩnh Giang");
+        jLabel5.setText("Hoàng Vĩnh Giang - PH23041");
 
+        jLabel6.setForeground(java.awt.Color.gray);
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Đặng Thanh Phương");
+        jLabel6.setText("Đặng Thanh Phương - PH23038");
 
+        jLabel7.setForeground(java.awt.Color.gray);
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Cao Văn Doanh");
+        jLabel7.setText("Cao Văn Doanh - PH22977");
 
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
         jTextArea1.setText("Hệ thống giày MWC chuyên thiết kế và kinh doanh các mặt hàng dép cho giới trẻ, là cấu nối cho bạn trẻ cả nước tiếp cận với xu hướng thời trang trên thế giới. \"Chúng tôi mang đến sự khác biệt!\" - Cùng với xu hướng thời trang của thế giới Hệ thống MWC đã và đang không ngừng đổi mới để mang đến cho các bạn trẻ các mẫu dép thời trang độc đáo, mới lạ, để tiên phong cho một phong cách thời trang mới, một phong cách biểu tượng cho giới trẻ trên cả nước.");
         jTextArea1.setToolTipText("");
         jTextArea1.setWrapStyleWord(true);
-        jTextArea1.setBorder(null);
+        jTextArea1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        jTextArea1.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jTextArea1.setFocusable(false);
         jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -160,7 +169,7 @@ public class FrmTrangChu extends javax.swing.JPanel {
                     .addComponent(jLabel6)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
