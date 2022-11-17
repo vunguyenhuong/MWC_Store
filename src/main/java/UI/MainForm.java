@@ -8,8 +8,7 @@ import javax.swing.border.EmptyBorder;
  *
  * @author KenTizz
  */
-public class MainForm extends javax.swing.JPanel {
-
+public class MainForm extends javax.swing.JPanel{
     public MainForm() {
         initComponents();
         setOpaque(false);
@@ -23,7 +22,7 @@ public class MainForm extends javax.swing.JPanel {
         repaint();
         revalidate();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -34,7 +33,7 @@ public class MainForm extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 660, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

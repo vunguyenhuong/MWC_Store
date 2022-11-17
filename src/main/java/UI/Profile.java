@@ -23,7 +23,7 @@ public class Profile extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         imageAvatar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logo1.png"))); // NOI18N
-        add(imageAvatar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 80, 80));
+        add(imageAvatar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 80));
 
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logo2.png"))); // NOI18N
         add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 170, 80));
