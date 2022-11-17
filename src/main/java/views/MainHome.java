@@ -80,8 +80,8 @@ public class MainHome extends javax.swing.JFrame implements Runnable, ThreadFact
     private void init() {
         layout = new MigLayout("fill", "0[]0[100%, fill]0", "0[fill, top]0");
         bg.setLayout(layout);
-        menu = new Menu();
         main = new MainForm();
+        menu = new Menu();
         menu.addEvent(new EventMenuSelected() {
             @Override
             public void menuSelected(int menuIndex, int subMenuIndex) {

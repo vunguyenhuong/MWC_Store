@@ -1,18 +1,16 @@
 package UI;
 
-
-
 /**
  *
  * @author KenTizz
  */
 public class Profile extends javax.swing.JPanel {
-    
+
     public Profile() {
         initComponents();
         setOpaque(false);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
