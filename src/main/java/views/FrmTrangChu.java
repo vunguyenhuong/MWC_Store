@@ -45,15 +45,15 @@ public class FrmTrangChu extends javax.swing.JPanel {
 
         imageAvatar1.setGradientColor1(new java.awt.Color(255, 153, 153));
         imageAvatar1.setGradientColor2(new java.awt.Color(153, 153, 255));
-        imageAvatar1.setImage(new javax.swing.ImageIcon(getClass().getResource("/icons/tohru.jpg"))); // NOI18N
+        imageAvatar1.setImage(new javax.swing.ImageIcon(getClass().getResource("/icons/vnh.jpg"))); // NOI18N
 
         imageAvatar3.setGradientColor1(new java.awt.Color(255, 153, 153));
         imageAvatar3.setGradientColor2(new java.awt.Color(153, 153, 255));
-        imageAvatar3.setImage(new javax.swing.ImageIcon(getClass().getResource("/icons/ayna.jpg"))); // NOI18N
+        imageAvatar3.setImage(new javax.swing.ImageIcon(getClass().getResource("/icons/kimchi.jpg"))); // NOI18N
 
         imageAvatar2.setGradientColor1(new java.awt.Color(255, 153, 153));
         imageAvatar2.setGradientColor2(new java.awt.Color(153, 153, 255));
-        imageAvatar2.setImage(new javax.swing.ImageIcon(getClass().getResource("/icons/ntl.jpg"))); // NOI18N
+        imageAvatar2.setImage(new javax.swing.ImageIcon(getClass().getResource("/icons/canh.jpg"))); // NOI18N
 
         jLabel1.setForeground(java.awt.Color.gray);
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -69,15 +69,15 @@ public class FrmTrangChu extends javax.swing.JPanel {
 
         imageAvatar5.setGradientColor1(new java.awt.Color(255, 153, 153));
         imageAvatar5.setGradientColor2(new java.awt.Color(153, 153, 255));
-        imageAvatar5.setImage(new javax.swing.ImageIcon(getClass().getResource("/icons/ayna1.jpg"))); // NOI18N
+        imageAvatar5.setImage(new javax.swing.ImageIcon(getClass().getResource("/icons/giang.jpg"))); // NOI18N
 
         imageAvatar4.setGradientColor1(new java.awt.Color(255, 153, 153));
         imageAvatar4.setGradientColor2(new java.awt.Color(153, 153, 255));
-        imageAvatar4.setImage(new javax.swing.ImageIcon(getClass().getResource("/icons/avt.jpg"))); // NOI18N
+        imageAvatar4.setImage(new javax.swing.ImageIcon(getClass().getResource("/icons/ntl.jpg"))); // NOI18N
 
         imageAvatar6.setGradientColor1(new java.awt.Color(255, 153, 153));
         imageAvatar6.setGradientColor2(new java.awt.Color(153, 153, 255));
-        imageAvatar6.setImage(new javax.swing.ImageIcon(getClass().getResource("/icons/ltkh1.jpg"))); // NOI18N
+        imageAvatar6.setImage(new javax.swing.ImageIcon(getClass().getResource("/icons/doanh.jpg"))); // NOI18N
 
         jLabel5.setForeground(java.awt.Color.gray);
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

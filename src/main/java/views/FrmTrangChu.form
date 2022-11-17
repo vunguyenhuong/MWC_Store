@@ -123,7 +123,7 @@
           <Color blue="ff" green="99" red="99" type="rgb"/>
         </Property>
         <Property name="image" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/icons/tohru.jpg"/>
+          <Image iconType="3" name="/icons/vnh.jpg"/>
         </Property>
       </Properties>
 
@@ -140,7 +140,7 @@
           <Color blue="ff" green="99" red="99" type="rgb"/>
         </Property>
         <Property name="image" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/icons/ayna.jpg"/>
+          <Image iconType="3" name="/icons/kimchi.jpg"/>
         </Property>
       </Properties>
 
@@ -157,7 +157,7 @@
           <Color blue="ff" green="99" red="99" type="rgb"/>
         </Property>
         <Property name="image" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/icons/ntl.jpg"/>
+          <Image iconType="3" name="/icons/canh.jpg"/>
         </Property>
       </Properties>
 
@@ -201,7 +201,7 @@
           <Color blue="ff" green="99" red="99" type="rgb"/>
         </Property>
         <Property name="image" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/icons/ayna1.jpg"/>
+          <Image iconType="3" name="/icons/giang.jpg"/>
         </Property>
       </Properties>
 
@@ -218,7 +218,7 @@
           <Color blue="ff" green="99" red="99" type="rgb"/>
         </Property>
         <Property name="image" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/icons/avt.jpg"/>
+          <Image iconType="3" name="/icons/ntl.jpg"/>
         </Property>
       </Properties>
 
@@ -235,7 +235,7 @@
           <Color blue="ff" green="99" red="99" type="rgb"/>
         </Property>
         <Property name="image" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/icons/ltkh1.jpg"/>
+          <Image iconType="3" name="/icons/doanh.jpg"/>
         </Property>
       </Properties>
 
