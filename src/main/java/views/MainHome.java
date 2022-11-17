@@ -28,8 +28,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import javax.swing.JPanel;
-import java.awt.event.MouseEvent;
-import javax.swing.event.AncestorListener;
 import models.NguoiDung;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
