@@ -130,8 +130,10 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                         main.showForm(new FrmChiTietDep());
                     } else if (subMenuIndex == 1) {
 // Dép
+                        main.showForm(new FrmDepOK());
                     } else if (subMenuIndex == 2) {
 // Loại dép
+                        main.showForm(new FrmLoaiDepOK());
                     } else if (subMenuIndex == 3) {
 // Size
                         main.showForm(new FrmSizeOK());
