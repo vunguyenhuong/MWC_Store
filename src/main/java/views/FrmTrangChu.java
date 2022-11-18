@@ -73,7 +73,7 @@ public class FrmTrangChu extends javax.swing.JPanel {
 
         imageAvatar4.setGradientColor1(new java.awt.Color(255, 153, 153));
         imageAvatar4.setGradientColor2(new java.awt.Color(153, 153, 255));
-        imageAvatar4.setImage(new javax.swing.ImageIcon(getClass().getResource("/icons/ntl.jpg"))); // NOI18N
+        imageAvatar4.setImage(new javax.swing.ImageIcon(getClass().getResource("/icons/phuongdeptrai.jpg"))); // NOI18N
 
         imageAvatar6.setGradientColor1(new java.awt.Color(255, 153, 153));
         imageAvatar6.setGradientColor2(new java.awt.Color(153, 153, 255));
