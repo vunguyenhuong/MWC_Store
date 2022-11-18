@@ -93,7 +93,6 @@ public class FrmTrangChu extends javax.swing.JPanel {
 
         jScrollPane1.setBorder(null);
 
-        jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jTextArea1.setLineWrap(true);
@@ -101,7 +100,7 @@ public class FrmTrangChu extends javax.swing.JPanel {
         jTextArea1.setText("Hệ thống giày MWC chuyên thiết kế và kinh doanh các mặt hàng dép cho giới trẻ, là cấu nối cho bạn trẻ cả nước tiếp cận với xu hướng thời trang trên thế giới. \"Chúng tôi mang đến sự khác biệt!\" - Cùng với xu hướng thời trang của thế giới Hệ thống MWC đã và đang không ngừng đổi mới để mang đến cho các bạn trẻ các mẫu dép thời trang độc đáo, mới lạ, để tiên phong cho một phong cách thời trang mới, một phong cách biểu tượng cho giới trẻ trên cả nước.");
         jTextArea1.setToolTipText("");
         jTextArea1.setWrapStyleWord(true);
-        jTextArea1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        jTextArea1.setBorder(null);
         jTextArea1.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jTextArea1.setFocusable(false);
         jScrollPane1.setViewportView(jTextArea1);
