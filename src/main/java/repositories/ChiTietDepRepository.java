@@ -61,6 +61,13 @@ public class ChiTietDepRepository {
         return list;
     }
 
+    public List<ChiTietDep> findByTT(int trangThai) {
+        Query query = session.createQuery("SELECT c FROM ChiTietDep c WHERE c.trangThai = :trangThai");
+        query.setParameter("trangThai", trangThai);
+        List<ChiTietDep> list = query.getResultList();
+        return list;
+    }
+
     public ChiTietDep getObjById(int id) {
         ChiTietDep ctd = null;
         try {

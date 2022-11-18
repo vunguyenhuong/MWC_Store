@@ -73,4 +73,9 @@ public class ChiTietDepService implements IChiTietDepService {
     public List<NhaSX> getAllNSX() {
         return nsxRepo.getAll();
     }
+
+    @Override
+    public List<ChiTietDep> findByTT(int trangThai) {
+        return repo.findByTT(trangThai);
+    }
 }
