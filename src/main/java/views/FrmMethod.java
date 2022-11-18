@@ -151,7 +151,7 @@ public class FrmMethod extends javax.swing.JFrame {
                                 bg.add(loading1, "pos 0 0 100% 100%");
                                 loading1.setVisible(true);
                                 Thread.sleep(2350);
-                                new FrmMainHome(nd).setVisible(true);
+                                new FrmHome(nd).setVisible(true);
                                 dispose();
                             } catch (InterruptedException e) {
                                 System.err.println(e);

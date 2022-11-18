@@ -52,6 +52,12 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         iChiTietDepService = new ChiTietDepService();
         loadData(iChiTietDepService.getAll());
         Table.apply(jScrollPane1, Table.TableType.MULTI_LINE);
+        addCbChatLieu();
+        addCbDep();
+        addCbLoaiDep();
+        addCbMauSac();
+        addCbNhaSX();
+        addCbSize();
     }
 
     private void loadData(List<ChiTietDep> list) {
