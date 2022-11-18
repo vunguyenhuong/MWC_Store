@@ -5,39 +5,37 @@
 package repositories;
 
 import java.util.List;
-import models.KhuyenMai;
+import models.KhachHang;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import javax.persistence.Query;
-
+import org.hibernate.query.Query;
 import utilities.HibernateUtil;
 
 /**
  *
- * @author KimChi
+ * @author homna
  */
-public class KhuyenMaiRepository {
-
+public class KhachHangRepository {
     private Session session = HibernateUtil.getSessionFactory().openSession();
     private Transaction transaction = session.getTransaction();
 
-    public List<KhuyenMai> getAll() {
-        Query query = session.createQuery("SELECT k FROM KhuyenMai k");
-        List<KhuyenMai> list = query.getResultList();
+    public List<KhachHang> getAll() {
+        Query query = session.createQuery("SELECT kh FROM KhachHang kh");
+        List<KhachHang> list = query.getResultList();
         return list;
     }
-
-    public List<KhuyenMai> findByName(String ten) {
-        Query query = session.createQuery("SELECT k FROM KhuyenMai k WHERE k.ten like :ten");
+    
+    public List<KhachHang> findByName(String ten) {
+        Query query = session.createQuery("SELECT kh FROM KhachHang kh WHERE kh.ten like :ten");
         query.setParameter("ten", "%" + ten + "%");
-        List<KhuyenMai> list = query.getResultList();
+        List<KhachHang> list = query.getResultList();
         return list;
     }
 
-    public boolean save(KhuyenMai km) {
+    public boolean save(KhachHang kh) {
         try {
             transaction.begin();
-            session.saveOrUpdate(km);
+            session.saveOrUpdate(kh);
             transaction.commit();
             return true;
         } catch (Exception e) {
@@ -46,10 +44,10 @@ public class KhuyenMaiRepository {
             return false;
         }
     }
-    public boolean delete(KhuyenMai km) {
+    public boolean delete(KhachHang kh) {
         try {
             transaction.begin();
-            session.delete(km);
+            session.delete(kh);
             transaction.commit();
             return true;
         } catch (Exception e) {
@@ -59,33 +57,32 @@ public class KhuyenMaiRepository {
         }
     }
 
-    public KhuyenMai getObj(String ma) {
-        KhuyenMai km = null;
+    public KhachHang getObj(String ma) {
+        KhachHang kh = null;
         try {
-            Query query = session.createQuery("SELECT k FROM KhuyenMai k WHERE n.ma = :ma");
+            Query query = session.createQuery("SELECT kh FROM KhachHang kh WHERE kh.ma = :ma");
             query.setParameter("ma", ma);
-            km = (KhuyenMai) query.getSingleResult();
+            kh = (KhachHang) query.getSingleResult();
         } catch (Exception e) {
         }
-        return km;
+        return kh;
     }
 
-    public KhuyenMai getObjectById(int id) {
-        KhuyenMai km = null;
+    public KhachHang getObjectById(int id) {
+        KhachHang kh = null;
         try {
-            Query query = session.createQuery("SELECT k FROM KhuyenMai k WHERE n.id = :id");
+            Query query = session.createQuery("SELECT kh FROM KhuyenMai kh WHERE kh.id = :id");
             query.setParameter("id", id);
-            km = (KhuyenMai) query.getSingleResult();
+            kh = (KhachHang) query.getSingleResult();
         } catch (Exception e) {
         }
-        return km;
+        return kh;
     }
-
+    
     public static void main(String[] args) {
-        KhuyenMaiRepository kmr = new KhuyenMaiRepository();
-        for (KhuyenMai khuyenMai : kmr.getAll()) {
-            System.out.println(khuyenMai);
+        KhachHangRepository khr = new KhachHangRepository();
+        for (KhachHang x : khr.getAll()) {
+            System.out.println(x);
         }
     }
-
 }
