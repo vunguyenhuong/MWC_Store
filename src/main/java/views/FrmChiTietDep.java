@@ -51,7 +51,6 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         initComponents();
         iChiTietDepService = new ChiTietDepService();
         loadData(iChiTietDepService.getAll());
-        setBackground(Color.WHITE);
         Table.apply(jScrollPane1, Table.TableType.MULTI_LINE);
     }
     
