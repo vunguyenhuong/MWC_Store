@@ -28,16 +28,21 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.net.URL;
+import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import models.ChiTietDep;
 import models.NguoiDung;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
+import services.IChiTietDepService;
+import services.impl.ChiTietDepService;
 import swing.Table;
 import utilities.Helper;
 
@@ -51,6 +56,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
     private Executor executor = Executors.newSingleThreadExecutor(this);
     private Webcam webcam = null;
     private WebcamPanel panel = null;
+    
     private Helper helper = new Helper();
     private MigLayout layout;
     private Menu menu;
@@ -58,6 +64,9 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
     private MainForm main;
     private Animator animator;
     NguoiDung nguoiDung = new NguoiDung();
+    
+    private DefaultTableModel defaultTableModel;
+    private IChiTietDepService iChiTietDepService = new ChiTietDepService();
     private CardLayout cardLayout;
 
     public FrmHome(NguoiDung nd) {
@@ -227,6 +236,13 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         //  Start with this form
         main.showForm(new FrmTrangChu());
     }
+    
+    private void loadSP(List<ChiTietDep> list){
+        defaultTableModel = (DefaultTableModel) tb_sanpham.getModel();
+        for (ChiTietDep chiTietDep : iChiTietDepService.getAll()) {
+            
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -236,26 +252,28 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         bg = new javax.swing.JLayeredPane();
         jPanel2 = new javax.swing.JPanel();
         pn_webcam = new javax.swing.JPanel();
-        button1 = new swing.Button();
+        btn_return = new swing.Button();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        textField2 = new swing.TextField();
+        textField3 = new swing.TextField();
         jPanel4 = new javax.swing.JPanel();
         tableScrollButton2 = new swing.TableScrollButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        button2 = new swing.Button();
-        button3 = new swing.Button();
+        tb_giohang = new javax.swing.JTable();
+        btn_gh_xoa = new swing.Button();
+        bnt_gh_xoatatca = new swing.Button();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         tableScrollButton3 = new swing.TableScrollButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tb_sanpham = new javax.swing.JTable();
         textField1 = new swing.TextField();
         jLabel2 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         tableScrollButton1 = new swing.TableScrollButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tb_hoadon = new javax.swing.JTable();
         combobox1 = new swing.Combobox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -283,12 +301,12 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
 
         pn_webcam.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        button1.setBackground(new java.awt.Color(102, 102, 102));
-        button1.setForeground(new java.awt.Color(255, 255, 255));
-        button1.setText("Trở về màn hình chính");
-        button1.addActionListener(new java.awt.event.ActionListener() {
+        btn_return.setBackground(new java.awt.Color(102, 102, 102));
+        btn_return.setForeground(new java.awt.Color(255, 255, 255));
+        btn_return.setText("Trở về màn hình chính");
+        btn_return.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button1ActionPerformed(evt);
+                btn_returnActionPerformed(evt);
             }
         });
 
@@ -297,26 +315,42 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
 
         jLabel3.setText("Thông tin");
 
+        textField2.setLabelText("Mã khách hàng");
+        textField2.setLineColor(new java.awt.Color(102, 102, 102));
+
+        textField3.setLabelText("Tên khách hàng");
+        textField3.setLineColor(new java.awt.Color(102, 102, 102));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textField3, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tb_giohang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -324,17 +358,17 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 "STT", "Mã SP", "Tên SP", "Số lượng", "Đơn giá", "Thành tiền"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tb_giohang);
 
         tableScrollButton2.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
-        button2.setBackground(new java.awt.Color(102, 102, 102));
-        button2.setForeground(new java.awt.Color(255, 255, 255));
-        button2.setText("Xóa");
+        btn_gh_xoa.setBackground(new java.awt.Color(102, 102, 102));
+        btn_gh_xoa.setForeground(new java.awt.Color(255, 255, 255));
+        btn_gh_xoa.setText("Xóa");
 
-        button3.setBackground(new java.awt.Color(102, 102, 102));
-        button3.setForeground(new java.awt.Color(255, 255, 255));
-        button3.setText("Xóa tất cả");
+        bnt_gh_xoatatca.setBackground(new java.awt.Color(102, 102, 102));
+        bnt_gh_xoatatca.setForeground(new java.awt.Color(255, 255, 255));
+        bnt_gh_xoatatca.setText("Xóa tất cả");
 
         jLabel1.setText("Giỏ hàng");
 
@@ -351,8 +385,8 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(button2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(button3, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE))
+                    .addComponent(btn_gh_xoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bnt_gh_xoatatca, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -362,9 +396,9 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_gh_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bnt_gh_xoatatca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 91, Short.MAX_VALUE))
                     .addComponent(tableScrollButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
         );
@@ -372,7 +406,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tb_sanpham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -380,7 +414,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 "STT", "Mã", "Tên", "Loại", "Size", "NSX", "Số lượng tồn", "Đơn giá"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(tb_sanpham);
 
         tableScrollButton3.add(jScrollPane3, java.awt.BorderLayout.CENTER);
 
@@ -418,7 +452,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tb_hoadon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -426,7 +460,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 "Mã", "Nhân viên", "Khách hàng", "Ngày tạo", "Trạng thái"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tb_hoadon);
 
         tableScrollButton1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -473,7 +507,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 .addGap(7, 7, 7)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(button1, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE))
+                    .addComponent(btn_return, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -493,7 +527,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                         .addGap(13, 13, 13)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_return, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -514,10 +548,10 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+    private void btn_returnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_returnActionPerformed
         cardLayout.show(pn_main, "general");
         webcam.close();
-    }//GEN-LAST:event_button1ActionPerformed
+    }//GEN-LAST:event_btn_returnActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -561,9 +595,9 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane bg;
-    private swing.Button button1;
-    private swing.Button button2;
-    private swing.Button button3;
+    private swing.Button bnt_gh_xoatatca;
+    private swing.Button btn_gh_xoa;
+    private swing.Button btn_return;
     private swing.Combobox combobox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -576,15 +610,17 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private javax.swing.JPanel pn_main;
     private javax.swing.JPanel pn_webcam;
     private swing.TableScrollButton tableScrollButton1;
     private swing.TableScrollButton tableScrollButton2;
     private swing.TableScrollButton tableScrollButton3;
+    private javax.swing.JTable tb_giohang;
+    private javax.swing.JTable tb_hoadon;
+    private javax.swing.JTable tb_sanpham;
     private swing.TextField textField1;
+    private swing.TextField textField2;
+    private swing.TextField textField3;
     // End of variables declaration//GEN-END:variables
 
     public void initWebcam(JPanel panelShow) {
