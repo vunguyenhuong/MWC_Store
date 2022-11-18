@@ -61,9 +61,10 @@ public class ChiTietDepRepository {
         return list;
     }
 
-    public List<ChiTietDep> findByTT(int trangThai) {
-        Query query = session.createQuery("SELECT c FROM ChiTietDep c WHERE c.trangThai = :trangThai");
+    public List<ChiTietDep> findByTT(int trangThai, String ten) {
+        Query query = session.createQuery("SELECT c FROM ChiTietDep c WHERE c.trangThai = :trangThai AND c.dep.ten LIKE :ten");
         query.setParameter("trangThai", trangThai);
+        query.setParameter("ten", "%" + ten + "%");
         List<ChiTietDep> list = query.getResultList();
         return list;
     }
