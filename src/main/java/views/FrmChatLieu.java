@@ -33,11 +33,10 @@ public class FrmChatLieu extends javax.swing.JFrame {
         lbl_date.setText(getDateNow());
         loadTable(chatLieuService.getListSize());
         System.out.println(getDateNow());
-        
+
     }
-    
-    
-    public void trangThai(){
+
+    public void trangThai() {
         ButtonGroup bg = new ButtonGroup();
         bg.add(rdo_dangKinhDoanh);
         bg.add(rdo_ngungKinhDong);
@@ -62,20 +61,20 @@ public class FrmChatLieu extends javax.swing.JFrame {
                 chatLieu.getTen(),
                 chatLieu.getNgayThem(),
                 chatLieu.getNgaySuaCuoi(),
-                chatLieu.getTrangThai() == 0 ? "Đang kinh doanh":"Ngừng kinh doanh"
+                chatLieu.getTrangThai() == 0 ? "Đang kinh doanh" : "Ngừng kinh doanh"
             });
         }
     }
-    
-    public int getTrangThaiInt(){
+
+    public int getTrangThaiInt() {
         if (rdo_dangKinhDoanh.isSelected()) {
             return 0;
-        }else{
+        } else {
             return 1;
         }
     }
-   
-    public ChatLieu getdata(){
+
+    public ChatLieu getdata() {
         ChatLieu chatLieu = new ChatLieu();
         chatLieu.setTen(txt_ten.getText().trim());
         chatLieu.setTrangThai(getTrangThaiInt());
@@ -286,10 +285,10 @@ public class FrmChatLieu extends javax.swing.JFrame {
         txt_ten.setText(tbo_table.getValueAt(row, 2).toString());
         if (tbo_table.getValueAt(row, 5).toString().equals("Đang kinh doanh")) {
             rdo_dangKinhDoanh.setSelected(true);
-        }else{
+        } else {
             rdo_ngungKinhDong.setSelected(true);
         }
-        
+
     }//GEN-LAST:event_tbo_tableMouseClicked
 
     /**

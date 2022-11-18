@@ -54,7 +54,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         setBackground(Color.WHITE);
         Table.apply(jScrollPane1, Table.TableType.MULTI_LINE);
     }
-    
+
     private void loadData(List<ChiTietDep> list) {
         int stt = 1;
         defaultTableModel = (DefaultTableModel) tb_table.getModel();
