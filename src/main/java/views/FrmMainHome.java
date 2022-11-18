@@ -120,6 +120,7 @@ public class FrmMainHome extends javax.swing.JFrame implements Runnable, ThreadF
 // Loại dép
                     } else if (subMenuIndex == 3) {
 // Size
+                        main.showForm(new FrmSizeOK());
                     } else if (subMenuIndex == 4) {
 // Chất liệu
                         main.showForm(new FrmChatLieuOK());
