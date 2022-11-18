@@ -45,7 +45,7 @@ import utilities.Helper;
  * @author KenTizz
  */
 public class FrmMainHome extends javax.swing.JFrame implements Runnable, ThreadFactory {
-
+    
     private static final long serialVersionUID = 6441489157408381878L;
     private Executor executor = Executors.newSingleThreadExecutor(this);
     private Webcam webcam = null;
@@ -58,7 +58,7 @@ public class FrmMainHome extends javax.swing.JFrame implements Runnable, ThreadF
     private Animator animator;
     NguoiDung nguoiDung = new NguoiDung();
     private CardLayout cardLayout;
-
+    
     public FrmMainHome(NguoiDung nd) {
         initComponents();
         this.nguoiDung = nd;
@@ -69,7 +69,7 @@ public class FrmMainHome extends javax.swing.JFrame implements Runnable, ThreadF
         cardLayout.show(pn_main, "general");
         initWebcam(pn_webcam);
     }
-
+    
     public FrmMainHome() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
@@ -79,7 +79,7 @@ public class FrmMainHome extends javax.swing.JFrame implements Runnable, ThreadF
         cardLayout.show(pn_main, "general");
         initWebcam(pn_webcam);
     }
-
+    
     private void init() {
         layout = new MigLayout("fill", "0[]0[100%, fill]0", "0[fill, top]0");
         bg.setLayout(layout);
@@ -127,28 +127,29 @@ public class FrmMainHome extends javax.swing.JFrame implements Runnable, ThreadF
                         main.showForm(new FrmMauSac());
                     } else if (subMenuIndex == 6) {
 // NSX
+                        main.showForm(new FrmNhaSanXuat());
                     }
                 }
                 if (menuIndex == 3) {
                     if (subMenuIndex == 0) {
-
+                        
                     } else if (subMenuIndex == 1) {
-
+                        
                     }
                 }
                 if (menuIndex == 4) {
                     cardLayout.show(pn_main, "banhang");
                     if (subMenuIndex == 0) {
-
+                        
                     } else if (subMenuIndex == 1) {
-
+                        
                     }
                 }
                 if (menuIndex == 5) {
                     if (subMenuIndex == 0) {
-
+                        
                     } else if (subMenuIndex == 1) {
-
+                        
                     }
                 }
                 if (menuIndex == 6) {
@@ -193,13 +194,13 @@ public class FrmMainHome extends javax.swing.JFrame implements Runnable, ThreadF
                 layout.setComponentConstraints(menu, "w " + width + "!, spany2");
                 menu.revalidate();
             }
-
+            
             @Override
             public void end() {
                 menu.setShowMenu(!menu.isShowMenu());
                 menu.setEnableMenu(true);
             }
-
+            
         };
         animator = new Animator(500, target);
         animator.setResolution(0);
@@ -221,7 +222,7 @@ public class FrmMainHome extends javax.swing.JFrame implements Runnable, ThreadF
         //  Start with this form
         main.showForm(new FrmTrangChu());
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -307,7 +308,7 @@ public class FrmMainHome extends javax.swing.JFrame implements Runnable, ThreadF
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
         cardLayout.show(pn_main, "general");
     }//GEN-LAST:event_button1ActionPerformed
-
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -356,17 +357,17 @@ public class FrmMainHome extends javax.swing.JFrame implements Runnable, ThreadF
         Dimension size = WebcamResolution.QVGA.getSize();
         webcam = Webcam.getWebcams().get(0); //0 is default webcam
         webcam.setViewSize(size);
-
+        
         panel = new WebcamPanel(webcam);
         panel.setPreferredSize(size);
         panel.setFPSDisplayed(true);
         panel.setMirrored(true);
-
+        
         panelShow.add(panel, new AbsoluteConstraints(0, 0, panelShow.getWidth(), panelShow.getHeight()));
-
+        
         executor.execute(this);
     }
-
+    
     @Override
     public void run() {
         while (true) {
@@ -375,26 +376,26 @@ public class FrmMainHome extends javax.swing.JFrame implements Runnable, ThreadF
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
+            
             Result result = null;
             BufferedImage image = null;
-
+            
             if (webcam.isOpen()) {
-
+                
                 if ((image = webcam.getImage()) == null) {
                     continue;
                 }
-
+                
                 LuminanceSource source = new BufferedImageLuminanceSource(image);
                 BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-
+                
                 try {
                     result = new MultiFormatReader().decode(bitmap);
                 } catch (NotFoundException e) {
                     // fall thru, it means there is no QR code in image
                 }
             }
-
+            
             if (result != null) {
                 try {
                     Desktop.getDesktop().browse(new URL(result.getText()).toURI());
@@ -405,7 +406,7 @@ public class FrmMainHome extends javax.swing.JFrame implements Runnable, ThreadF
             }
         }
     }
-
+    
     @Override
     public Thread newThread(Runnable r) {
         Thread t = new Thread(r, "example-runner");
