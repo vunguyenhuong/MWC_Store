@@ -49,7 +49,7 @@ public class KhuyenMai implements Serializable {
     private Date ngaySuaCuoi;
 
     @OneToMany(mappedBy = "KhuyenMai", fetch = FetchType.LAZY)
-    List<HoaDon> listCTDep;
+    List<HoaDon> listHoaDon;
 
     @Override
     public String toString() {
