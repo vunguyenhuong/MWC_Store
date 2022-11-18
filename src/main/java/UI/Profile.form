@@ -21,12 +21,12 @@
     <Container class="UI.ImageAvatar" name="imageAvatar1">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/icons/logo1.png"/>
+          <Image iconType="3" name="/icons/logorobot.png"/>
         </Property>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="0" y="0" width="70" height="80"/>
+          <AbsoluteConstraints x="-10" y="0" width="75" height="80"/>
         </Constraint>
       </Constraints>
 

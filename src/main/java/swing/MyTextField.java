@@ -46,9 +46,9 @@ public class MyTextField extends JTextField {
     public MyTextField() {
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setBackground(new Color(0, 0, 0, 0));
-        setForeground(Color.decode("#7A8C8D"));
+        setForeground(Color.decode("#666666"));
         setFont(new java.awt.Font("sansserif", 0, 13));
-        setSelectionColor(new Color(176, 196, 222));
+        setSelectionColor(new Color(167, 191, 250 ));
     }
 
     @Override
@@ -69,7 +69,7 @@ public class MyTextField extends JTextField {
             ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
             Insets ins = getInsets();
             FontMetrics fm = g.getFontMetrics();
-            g.setColor(new Color(200, 200, 200));
+            g.setColor(new Color(153,153,153));
             g.drawString(hint, ins.left, h / 2 + fm.getAscent() / 2 - 2);
         }
     }
