@@ -92,6 +92,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         Table.apply(jScrollPane1, Table.TableType.MULTI_LINE);
         Table.apply(jScrollPane2, Table.TableType.MULTI_LINE);
         Table.apply(jScrollPane3, Table.TableType.MULTI_LINE);
+        loadSP(iChiTietDepService.findByTT(0,""));
     }
     
     private void init() {
@@ -240,9 +241,10 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
     private void loadSP(List<ChiTietDep> list) {
         int stt=1;
         defaultTableModel = (DefaultTableModel) tb_sanpham.getModel();
-        for (ChiTietDep x : iChiTietDepService.findByTT(0)) {
+        defaultTableModel.setRowCount(0);
+        for (ChiTietDep x : list) {
             defaultTableModel.addRow(new Object[]{
-                stt++,x.getDep().getMa(),x.getDep().getTen()
+                stt++,x.getDep().getMa(),x.getDep().getTen(),x.getLoaiDep().getTen(),x.getSize().getKichCo(),x.getNhaSX().getTen(),x.getSoLuong(),x.getGiaBan().doubleValue()
             });
         }
     }
@@ -271,7 +273,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         tableScrollButton3 = new swing.TableScrollButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tb_sanpham = new javax.swing.JTable();
-        textField1 = new swing.TextField();
+        txt_timkiem = new swing.TextField();
         jLabel2 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         tableScrollButton1 = new swing.TableScrollButton();
@@ -421,8 +423,13 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
 
         tableScrollButton3.add(jScrollPane3, java.awt.BorderLayout.CENTER);
 
-        textField1.setLabelText("Tìm kiếm sản phẩm");
-        textField1.setLineColor(new java.awt.Color(102, 102, 102));
+        txt_timkiem.setLabelText("Tìm kiếm sản phẩm");
+        txt_timkiem.setLineColor(new java.awt.Color(102, 102, 102));
+        txt_timkiem.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txt_timkiemCaretUpdate(evt);
+            }
+        });
 
         jLabel2.setText("Sản phẩm");
 
@@ -437,7 +444,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -446,7 +453,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tableScrollButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
                 .addContainerGap())
@@ -555,6 +562,10 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         cardLayout.show(pn_main, "general");
         webcam.close();
     }//GEN-LAST:event_btn_returnActionPerformed
+
+    private void txt_timkiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_timkiemCaretUpdate
+        loadSP(iChiTietDepService.findByTT(0, txt_timkiem.getText()));
+    }//GEN-LAST:event_txt_timkiemCaretUpdate
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -621,9 +632,9 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
     private javax.swing.JTable tb_giohang;
     private javax.swing.JTable tb_hoadon;
     private javax.swing.JTable tb_sanpham;
-    private swing.TextField textField1;
     private swing.TextField textField2;
     private swing.TextField textField3;
+    private swing.TextField txt_timkiem;
     // End of variables declaration//GEN-END:variables
 
     public void initWebcam(JPanel panelShow) {
