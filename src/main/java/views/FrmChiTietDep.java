@@ -67,6 +67,54 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         lbl_total.setText("Total: " + list.size());
     }
 
+    private void addCbDep() {
+        cb_dep.setModel((DefaultComboBoxModel) comboDep);
+        cb_dep.removeAllItems();
+        for (Dep x : iChiTietDepService.getAllDep()) {
+            comboDep.addElement(x);
+        }
+    }
+
+    private void addCbLoaiDep() {
+        cb_loaidep.setModel((DefaultComboBoxModel) comboLoaiDep);
+        cb_loaidep.removeAllItems();
+        for (LoaiDep x : iChiTietDepService.getAllLoaiDep()) {
+            comboLoaiDep.addElement(x);
+        }
+    }
+
+    private void addCbChatLieu() {
+        cb_chatlieu.setModel((DefaultComboBoxModel) comboChatLieu);
+        cb_chatlieu.removeAllItems();
+        for (ChatLieu x : iChiTietDepService.getAllChatLieu()) {
+            comboChatLieu.addElement(x);
+        }
+    }
+
+    private void addCbMauSac() {
+        cb_mausac.setModel((DefaultComboBoxModel) comboMauSac);
+        cb_mausac.removeAllItems();
+        for (MauSac x : iChiTietDepService.getAllMauSac()) {
+            comboMauSac.addElement(x);
+        }
+    }
+
+    private void addCbSize() {
+        cb_size.setModel((DefaultComboBoxModel) comboSize);
+        cb_size.removeAllItems();
+        for (Size x : iChiTietDepService.getAllSize()) {
+            comboSize.addElement(x);
+        }
+    }
+
+    private void addCbNhaSX() {
+        cb_nsx.setModel((DefaultComboBoxModel) comboNSX);
+        cb_nsx.removeAllItems();
+        for (NhaSX x : iChiTietDepService.getAllNSX()) {
+            comboNSX.addElement(x);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
