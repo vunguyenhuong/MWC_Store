@@ -134,13 +134,16 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
 // Loại dép
                     } else if (subMenuIndex == 3) {
 // Size
+                        main.showForm(new FrmSizeOK());
                     } else if (subMenuIndex == 4) {
 // Chất liệu
+                        main.showForm(new FrmChatLieuOK());
                     } else if (subMenuIndex == 5) {
 // Màu sắc
                         main.showForm(new FrmMauSac());
                     } else if (subMenuIndex == 6) {
 // NSX
+                        main.showForm(new FrmNhaSanXuat());
                     }
                 }
                 if (menuIndex == 3) {
@@ -238,11 +241,11 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
     }
     
     private void loadSP(List<ChiTietDep> list) {
-        int stt=1;
+        int stt = 1;
         defaultTableModel = (DefaultTableModel) tb_sanpham.getModel();
         for (ChiTietDep x : iChiTietDepService.findByTT(0)) {
             defaultTableModel.addRow(new Object[]{
-                stt++,x.getDep().getMa(),x.getDep().getTen()
+                stt++, x.getDep().getMa(), x.getDep().getTen()
             });
         }
     }
