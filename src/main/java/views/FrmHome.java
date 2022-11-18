@@ -81,6 +81,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         Table.apply(jScrollPane1, Table.TableType.MULTI_LINE);
         Table.apply(jScrollPane2, Table.TableType.MULTI_LINE);
         Table.apply(jScrollPane3, Table.TableType.MULTI_LINE);
+        loadSP(iChiTietDepService.findByTT(0, ""));
     }
     
     public FrmHome() {
