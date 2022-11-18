@@ -1,29 +1,9 @@
 package swing;
 
-import java.awt.AWTEvent;
-import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.RenderingHints;
-import java.awt.Shape;
-import java.awt.event.MouseEvent;
-import java.awt.geom.Ellipse2D;
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-import javax.swing.JLayer;
 import javax.swing.JLayeredPane;
-import javax.swing.JScrollPane;
-import javax.swing.SwingUtilities;
-import javax.swing.plaf.LayerUI;
 import org.jdesktop.animation.timing.Animator;
-import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
-import org.jdesktop.animation.timing.interpolation.PropertySetter;
 
 public class TableScrollButton extends JLayeredPane {
 
@@ -31,7 +11,6 @@ public class TableScrollButton extends JLayeredPane {
     private boolean show = false;
     private Animator animator;
     private Animator animatorScroll;
-    private TimingTarget target;
 
     public TableScrollButton() {
         init();
@@ -70,6 +49,7 @@ public class TableScrollButton extends JLayeredPane {
         this.show = show;
         animator.start();
     }
+<<<<<<< HEAD
 
     @Override
     public void add(Component comp, Object constraints) {
@@ -172,4 +152,6 @@ public class TableScrollButton extends JLayeredPane {
         animatorScroll.addTarget(target);
         animatorScroll.start();
     }
+=======
+>>>>>>> 57603bbab99fa05e7d4bb5a4343ff5c5816fb451
 }
