@@ -80,7 +80,7 @@ public class KhuyenMaiRepository {
         }
         return km;
     }
-    
+
     public static void main(String[] args) {
         KhuyenMaiRepository kmr = new KhuyenMaiRepository();
         for (KhuyenMai khuyenMai : kmr.getAll()) {
