@@ -148,7 +148,6 @@ public class TableScrollButton extends JLayeredPane {
                         scrollBackToTop(l.getView());
                     }
                     mousePressed = false;
-
                 }
             }
             l.repaint();
