@@ -46,6 +46,18 @@ public class KhuyenMaiRepository {
             return false;
         }
     }
+    public boolean delete(KhuyenMai km) {
+        try {
+            transaction.begin();
+            session.delete(km);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            transaction.rollback();
+            System.out.println(e);
+            return false;
+        }
+    }
 
     public KhuyenMai getObj(String ma) {
         KhuyenMai km = null;
