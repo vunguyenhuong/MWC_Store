@@ -28,32 +28,40 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="txt_Ma1" min="-2" pref="189" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="rd_Dangnhap" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="txt_Timkiem" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txt_Ten" alignment="0" pref="186" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="rd_Ngungnhap" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl_Total" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="txt_Ma1" min="-2" pref="189" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="rd_Dangnhap" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="txt_Timkiem" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txt_Ten" alignment="0" pref="186" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="rd_Ngungnhap" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_Total" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="btn_Them" min="-2" pref="80" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                              <Component id="btn_Capnhat" min="-2" pref="80" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="btn_Xoa" min="-2" pref="80" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="tableScrollButton1" pref="364" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="btn_Them" min="-2" pref="80" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                      <Component id="btn_Capnhat" min="-2" pref="80" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btn_Xoa" min="-2" pref="80" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="tableScrollButton1" pref="364" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -62,6 +70,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" pref="25" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                   <Component id="tableScrollButton1" alignment="0" pref="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
@@ -87,7 +97,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="99" max="32767" attributes="0"/>
+              <EmptySpace pref="56" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -225,5 +235,13 @@
         </Container>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="18" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="NH&#xc0; S&#x1ea2;N XU&#x1ea4;T"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>
