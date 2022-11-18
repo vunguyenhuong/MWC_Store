@@ -48,8 +48,8 @@ public class KhuyenMai implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date ngaySuaCuoi;
 
-    @OneToMany(mappedBy = "KhuyenMai", fetch = FetchType.LAZY)
-    List<HoaDon> listCTDep;
+    @OneToMany(mappedBy = "khuyenMai", fetch = FetchType.LAZY)
+    List<HoaDon> listHoaDon;
 
     @Override
     public String toString() {
