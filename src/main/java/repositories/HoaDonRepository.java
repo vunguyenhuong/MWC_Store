@@ -12,7 +12,7 @@ import utilities.HibernateUtil;
  * @author VU NGUYEN HUONG
  */
 public class HoaDonRepository {
-    private Session session = HibernateUtil.getSessionFactory().openSession();
+    private static final Session session = HibernateUtil.getSessionFactory().openSession();
     private Transaction transaction = session.getTransaction();
 
     public List<HoaDon> getAll() {
@@ -28,7 +28,7 @@ public class HoaDonRepository {
             return true;
         } catch (Exception e) {
             transaction.rollback();
-            System.out.println(e);
+            e.printStackTrace();
             return false;
         }
     }

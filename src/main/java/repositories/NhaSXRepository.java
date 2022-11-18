@@ -10,7 +10,7 @@ import utilities.HibernateUtil;
 
 public class NhaSXRepository {
 
-    private Session se = HibernateUtil.getSessionFactory().openSession();
+    private static final Session se = HibernateUtil.getSessionFactory().openSession();
     private Transaction tra = se.getTransaction();
 
     public List<NhaSX> getAll() {
@@ -62,7 +62,8 @@ public class NhaSXRepository {
         }
         return nx;
     }
-    public NhaSX getObjById(int id){
+
+    public NhaSX getObjById(int id) {
         NhaSX nsx = null;
         try {
             Query query = se.createQuery(" SELECT s FROM NhaSX s WHERE s.id = :id ");

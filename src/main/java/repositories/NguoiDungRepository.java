@@ -13,7 +13,7 @@ import utilities.HibernateUtil;
  */
 public class NguoiDungRepository {
 
-    private Session session = HibernateUtil.getSessionFactory().openSession();
+    private static final Session session = HibernateUtil.getSessionFactory().openSession();
     private Transaction transaction = session.getTransaction();
 
     public List<NguoiDung> getAll() {
@@ -57,5 +57,12 @@ public class NguoiDungRepository {
         } catch (Exception e) {
         }
         return nd;
+    }
+    
+    public static void main(String[] args) {
+        NguoiDungRepository ndr = new NguoiDungRepository();
+        for (NguoiDung x : ndr.getAll()) {
+            System.out.println(x);
+        }
     }
 }

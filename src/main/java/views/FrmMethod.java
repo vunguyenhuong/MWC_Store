@@ -29,7 +29,7 @@ import utilities.SendMailUltil;
 public class FrmMethod extends javax.swing.JFrame {
 
     private final DecimalFormat df = new DecimalFormat("##0.###", DecimalFormatSymbols.getInstance(Locale.US));
-    INguoiDungService iNguoiDungService = new NguoiDungService();
+    public INguoiDungService iNguoiDungService = new NguoiDungService();
     private MigLayout layout;
     private PanelCover cover;
     String icon1 = "images/suportUI/loading1.gif";

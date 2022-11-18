@@ -61,14 +61,14 @@ public class HoaDon implements Serializable {
     private Date ngayNhanHang;
     
     @ManyToOne
-    @JoinColumn(name = "IdND",nullable = false)
+    @JoinColumn(name = "IdND")
     private NguoiDung nguoiDung;
     
     @ManyToOne
-    @JoinColumn(name = "IdKH",nullable = false)
+    @JoinColumn(name = "IdKH")
     private KhachHang khachHang;
     
     @ManyToOne
-    @JoinColumn(name = "IdKM",nullable = false)
+    @JoinColumn(name = "IdKM")
     private KhuyenMai khuyenMai;
 }

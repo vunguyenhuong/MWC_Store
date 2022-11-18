@@ -5,15 +5,10 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.UUID;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
-import models.ChucVu;
 import models.NguoiDung;
 import net.miginfocom.swing.MigLayout;
-import services.IChucVuService;
-import services.impl.ChucVuService;
 import swing.ButtonLG;
 import swing.MyPasswordField;
 import swing.MyTextField;
@@ -33,11 +28,8 @@ public class PanelLoginAndResetPass extends javax.swing.JLayeredPane {
     }
     private NguoiDung dataLogin;
     private NguoiDung dataReset;
-    private JButton cmdForget;
     MyTextField txtcapcha = new MyTextField();
     JLabel lblcapCha = new JLabel();
-    private DefaultComboBoxModel<ChucVu> defaultComboBoxModel = new DefaultComboBoxModel<>();
-    IChucVuService iChucVuService = new ChucVuService();
 
     public PanelLoginAndResetPass(ActionListener eventLogin, ActionListener eventReset) {
         initComponents();

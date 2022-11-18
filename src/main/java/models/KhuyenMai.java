@@ -40,6 +40,12 @@ public class KhuyenMai implements Serializable {
     @Column(name = "PhanTramGiam")
     private Float phantramgiam;
 
+    @Column(name = "SoLuong")
+    private int soLuong;
+
+    @Column(name = "HinhAnh")
+    private String hinhAnh;
+
     @Column(name = "NgayBatDau")
     @Temporal(TemporalType.DATE)
     private Date ngayThem;

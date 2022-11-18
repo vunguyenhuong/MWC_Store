@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package repositories;
 
 import java.util.List;
@@ -16,7 +12,8 @@ import utilities.HibernateUtil;
  * @author homna
  */
 public class KhachHangRepository {
-    private Session session = HibernateUtil.getSessionFactory().openSession();
+
+    private static final Session session = HibernateUtil.getSessionFactory().openSession();
     private Transaction transaction = session.getTransaction();
 
     public List<KhachHang> getAll() {
@@ -24,7 +21,7 @@ public class KhachHangRepository {
         List<KhachHang> list = query.getResultList();
         return list;
     }
-    
+
     public List<KhachHang> findByName(String ten) {
         Query query = session.createQuery("SELECT kh FROM KhachHang kh WHERE kh.ten like :ten");
         query.setParameter("ten", "%" + ten + "%");
@@ -44,6 +41,7 @@ public class KhachHangRepository {
             return false;
         }
     }
+
     public boolean delete(KhachHang kh) {
         try {
             transaction.begin();
@@ -78,7 +76,7 @@ public class KhachHangRepository {
         }
         return kh;
     }
-    
+
     public static void main(String[] args) {
         KhachHangRepository khr = new KhachHangRepository();
         for (KhachHang x : khr.getAll()) {

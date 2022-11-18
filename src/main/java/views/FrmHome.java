@@ -35,6 +35,7 @@ import java.util.concurrent.ThreadFactory;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import models.ChiTietDep;
+import models.KhachHang;
 import models.NguoiDung;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
@@ -51,12 +52,12 @@ import utilities.Helper;
  * @author KenTizz
  */
 public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFactory {
-
+    
     private static final long serialVersionUID = 6441489157408381878L;
     private Executor executor = Executors.newSingleThreadExecutor(this);
     private Webcam webcam = null;
     private WebcamPanel panel = null;
-
+    
     private Helper helper = new Helper();
     private MigLayout layout;
     private Menu menu;
@@ -64,11 +65,11 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
     private MainForm main;
     private Animator animator;
     NguoiDung nguoiDung = new NguoiDung();
-
+    
     private DefaultTableModel defaultTableModel;
     private IChiTietDepService iChiTietDepService = new ChiTietDepService();
     private CardLayout cardLayout;
-
+    
     public FrmHome(NguoiDung nd) {
         initComponents();
         this.nguoiDung = nd;
@@ -81,7 +82,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         Table.apply(jScrollPane2, Table.TableType.MULTI_LINE);
         Table.apply(jScrollPane3, Table.TableType.MULTI_LINE);
     }
-
+    
     public FrmHome() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
@@ -94,7 +95,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         Table.apply(jScrollPane3, Table.TableType.MULTI_LINE);
         loadSP(iChiTietDepService.findByTT(0, ""));
     }
-
+    
     private void init() {
         layout = new MigLayout("fill", "0[]0[100%, fill]0", "0[fill, top]0");
         bg.setLayout(layout);
@@ -151,25 +152,25 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 }
                 if (menuIndex == 3) {
                     if (subMenuIndex == 0) {
-
+                        
                     } else if (subMenuIndex == 1) {
-
+                        
                     }
                 }
                 if (menuIndex == 4) {
                     cardLayout.show(pn_main, "banhang");
                     initWebcam(pn_webcam);
                     if (subMenuIndex == 0) {
-
+                        
                     } else if (subMenuIndex == 1) {
-
+                        
                     }
                 }
                 if (menuIndex == 5) {
                     if (subMenuIndex == 0) {
-
+                        
                     } else if (subMenuIndex == 1) {
-
+                        
                     }
                 }
                 if (menuIndex == 6) {
@@ -217,13 +218,13 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 layout.setComponentConstraints(menu, "w " + width + "!, spany2");
                 menu.revalidate();
             }
-
+            
             @Override
             public void end() {
                 menu.setShowMenu(!menu.isShowMenu());
                 menu.setEnableMenu(true);
             }
-
+            
         };
         animator = new Animator(500, target);
         animator.setResolution(0);
@@ -245,7 +246,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         //  Start with this form
         main.showForm(new FrmTrangChu());
     }
-
+    
     private void loadSP(List<ChiTietDep> list) {
         int stt = 1;
         defaultTableModel = (DefaultTableModel) tb_sanpham.getModel();
@@ -256,7 +257,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             });
         }
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -268,9 +269,9 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         btn_return = new swing.Button();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        textField2 = new swing.TextField();
-        textField3 = new swing.TextField();
-        button1 = new swing.Button();
+        txt_makh = new swing.TextField();
+        txt_tenkh = new swing.TextField();
+        btn_themKH = new swing.Button();
         button2 = new swing.Button();
         jSeparator1 = new javax.swing.JSeparator();
         textField4 = new swing.TextField();
@@ -279,7 +280,13 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         button3 = new swing.Button();
         textField7 = new swing.TextField();
         jCheckBoxCustom1 = new swing.JCheckBoxCustom();
-        jLabel4 = new javax.swing.JLabel();
+        lbl_diemtichluy = new javax.swing.JLabel();
+        textField8 = new swing.TextField();
+        textField9 = new swing.TextField();
+        button1 = new swing.Button();
+        textField10 = new swing.TextField();
+        textField11 = new swing.TextField();
+        buttonLG1 = new swing.ButtonLG();
         jPanel4 = new javax.swing.JPanel();
         tableScrollButton2 = new swing.TableScrollButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -311,7 +318,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1316, Short.MAX_VALUE)
+            .addGap(0, 1317, Short.MAX_VALUE)
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -338,31 +345,38 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
 
         jLabel3.setText("Thông tin");
 
-        textField2.setLabelText("Mã khách hàng");
-        textField2.setLineColor(new java.awt.Color(102, 102, 102));
+        txt_makh.setEditable(false);
+        txt_makh.setText("null");
+        txt_makh.setLabelText("Mã khách hàng");
+        txt_makh.setLineColor(new java.awt.Color(102, 102, 102));
 
-        textField3.setLabelText("Tên khách hàng");
-        textField3.setLineColor(new java.awt.Color(102, 102, 102));
+        txt_tenkh.setEditable(false);
+        txt_tenkh.setText("Khách hàng lẻ");
+        txt_tenkh.setLabelText("Tên khách hàng");
+        txt_tenkh.setLineColor(new java.awt.Color(102, 102, 102));
 
-        button1.setBackground(new java.awt.Color(102, 102, 102));
-        button1.setForeground(new java.awt.Color(255, 255, 255));
-        button1.setText("Thêm khách hàng");
-        button1.addActionListener(new java.awt.event.ActionListener() {
+        btn_themKH.setBackground(new java.awt.Color(102, 102, 102));
+        btn_themKH.setForeground(new java.awt.Color(255, 255, 255));
+        btn_themKH.setText("Thêm/Cập nhật KH");
+        btn_themKH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button1ActionPerformed(evt);
+                btn_themKHActionPerformed(evt);
             }
         });
 
         button2.setBackground(new java.awt.Color(102, 102, 102));
         button2.setForeground(new java.awt.Color(255, 255, 255));
-        button2.setText("button2");
+        button2.setText("Khách hàng lẻ");
 
+        textField4.setEditable(false);
         textField4.setLabelText("Mã hóa đơn");
         textField4.setLineColor(new java.awt.Color(102, 102, 102));
 
+        textField5.setEditable(false);
         textField5.setLabelText("Tổng tiền");
         textField5.setLineColor(new java.awt.Color(102, 102, 102));
 
+        textField6.setEditable(false);
         textField6.setLabelText("Giảm giá");
         textField6.setLineColor(new java.awt.Color(102, 102, 102));
 
@@ -370,14 +384,37 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         button3.setForeground(new java.awt.Color(255, 255, 255));
         button3.setText("Tạo hóa đơn");
 
-        textField7.setLabelText("Cái giá phải trả");
+        textField7.setEditable(false);
+        textField7.setLabelText("Phải trả");
         textField7.setLineColor(new java.awt.Color(102, 102, 102));
 
-        jCheckBoxCustom1.setText("Sử dụng điểm tích lũy");
+        jCheckBoxCustom1.setText("Sử dụng ?");
 
-        jLabel4.setForeground(java.awt.Color.blue);
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("Bạn đang có 0 điểm tích lũy");
+        lbl_diemtichluy.setForeground(java.awt.Color.blue);
+        lbl_diemtichluy.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl_diemtichluy.setText("Bạn đang có 10 điểm tích lũy");
+
+        textField8.setLabelText("Tiền khách đưa");
+        textField8.setLineColor(new java.awt.Color(102, 102, 102));
+
+        textField9.setEditable(false);
+        textField9.setLabelText("Tiền thừa");
+        textField9.setLineColor(new java.awt.Color(102, 102, 102));
+
+        button1.setBackground(new java.awt.Color(102, 102, 102));
+        button1.setForeground(new java.awt.Color(255, 255, 255));
+        button1.setText("Thêm khuyến mãi");
+
+        textField10.setEditable(false);
+        textField10.setLabelText("Mã khuyến mãi");
+        textField10.setLineColor(new java.awt.Color(102, 102, 102));
+
+        textField11.setEditable(false);
+        textField11.setLabelText("Tên khuyến mãi");
+        textField11.setLineColor(new java.awt.Color(102, 102, 102));
+
+        buttonLG1.setForeground(new java.awt.Color(255, 255, 255));
+        buttonLG1.setText("Thanh toán");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -386,62 +423,87 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+                    .addComponent(buttonLG1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textField3, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_makh, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_tenkh, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(button2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(button1, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)))
+                            .addComponent(btn_themKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jSeparator1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(textField4, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                            .addComponent(jSeparator1))
+                        .addComponent(textField4, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(textField6, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(textField5, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(button3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textField7, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textField5, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(textField7, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textField6, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jCheckBoxCustom1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lbl_diemtichluy, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+                            .addComponent(jCheckBoxCustom1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textField10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(textField9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(textField8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(button1, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+                            .addComponent(textField11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {textField4, textField5, textField6, textField7, textField8});
+
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_makh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_themKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_tenkh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lbl_diemtichluy)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBoxCustom1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(textField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(textField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(textField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBoxCustom1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(textField9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(button1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonLG1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -497,7 +559,9 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bnt_gh_xoatatca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 91, Short.MAX_VALUE))
-                    .addComponent(tableScrollButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(tableScrollButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -609,7 +673,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 .addGap(7, 7, 7)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_return, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE))
+                    .addComponent(btn_return, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -662,10 +726,19 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         loadSP(iChiTietDepService.findByTT(0, txt_timkiem.getText()));
     }//GEN-LAST:event_txt_timkiemCaretUpdate
 
-    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-        new FrmKhachHang(this, true).setVisible(true);
-    }//GEN-LAST:event_button1ActionPerformed
-
+    private void btn_themKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themKHActionPerformed
+        FrmKhachHang fkh = new FrmKhachHang(this, true);
+        fkh.setVisible(true);
+        KhachHang kh = fkh.getKH();
+        if (kh == null) {
+            helper.error(this, "Bạn chưa chọn khách hàng!"); 
+        } else {
+            txt_makh.setText(kh.getMa());
+            txt_tenkh.setText(kh.getTen());
+            lbl_diemtichluy.setText("Bạn đang có " + kh.getDiemTichLuy() + " điểm tích lũy");
+        }
+    }//GEN-LAST:event_btn_themKHActionPerformed
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -711,15 +784,16 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
     private swing.Button bnt_gh_xoatatca;
     private swing.Button btn_gh_xoa;
     private swing.Button btn_return;
+    private swing.Button btn_themKH;
     private swing.Button button1;
     private swing.Button button2;
     private swing.Button button3;
+    private swing.ButtonLG buttonLG1;
     private swing.Combobox combobox1;
     private swing.JCheckBoxCustom jCheckBoxCustom1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -729,6 +803,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lbl_diemtichluy;
     private javax.swing.JPanel pn_main;
     private javax.swing.JPanel pn_webcam;
     private swing.TableScrollButton tableScrollButton1;
@@ -737,12 +812,16 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
     private javax.swing.JTable tb_giohang;
     private javax.swing.JTable tb_hoadon;
     private javax.swing.JTable tb_sanpham;
-    private swing.TextField textField2;
-    private swing.TextField textField3;
+    private swing.TextField textField10;
+    private swing.TextField textField11;
     private swing.TextField textField4;
     private swing.TextField textField5;
     private swing.TextField textField6;
     private swing.TextField textField7;
+    private swing.TextField textField8;
+    private swing.TextField textField9;
+    private swing.TextField txt_makh;
+    private swing.TextField txt_tenkh;
     private swing.TextField txt_timkiem;
     // End of variables declaration//GEN-END:variables
 
@@ -750,17 +829,17 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         Dimension size = WebcamResolution.QVGA.getSize();
         webcam = Webcam.getWebcams().get(0); //0 is default webcam
         webcam.setViewSize(size);
-
+        
         panel = new WebcamPanel(webcam);
         panel.setPreferredSize(size);
         panel.setFPSDisplayed(true);
         panel.setMirrored(true);
-
+        
         panelShow.add(panel, new AbsoluteConstraints(0, 0, panelShow.getWidth(), panelShow.getHeight()));
-
+        
         executor.execute(this);
     }
-
+    
     @Override
     public void run() {
         while (true) {
@@ -769,26 +848,26 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
+            
             Result result = null;
             BufferedImage image = null;
-
+            
             if (webcam.isOpen()) {
-
+                
                 if ((image = webcam.getImage()) == null) {
                     continue;
                 }
-
+                
                 LuminanceSource source = new BufferedImageLuminanceSource(image);
                 BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-
+                
                 try {
                     result = new MultiFormatReader().decode(bitmap);
                 } catch (NotFoundException e) {
                     // fall thru, it means there is no QR code in image
                 }
             }
-
+            
             if (result != null) {
                 try {
                     Desktop.getDesktop().browse(new URL(result.getText()).toURI());
@@ -799,7 +878,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             }
         }
     }
-
+    
     @Override
     public Thread newThread(Runnable r) {
         Thread t = new Thread(r, "example-runner");

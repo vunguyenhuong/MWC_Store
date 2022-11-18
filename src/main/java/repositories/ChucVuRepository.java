@@ -13,7 +13,7 @@ import utilities.HibernateUtil;
  */
 public class ChucVuRepository {
 
-    private Session session = HibernateUtil.getSessionFactory().openSession();
+    private static final Session session = HibernateUtil.getSessionFactory().openSession();
     private Transaction transaction = session.getTransaction();
 
     public List<ChucVu> getAll() {

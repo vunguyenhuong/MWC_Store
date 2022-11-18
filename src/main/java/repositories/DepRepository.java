@@ -12,7 +12,7 @@ import org.hibernate.query.Query;
  */
 public class DepRepository {
 
-    private Session session = utilities.HibernateUtil.getSessionFactory().openSession();
+    private static final Session session = utilities.HibernateUtil.getSessionFactory().openSession();
     private Transaction transaction = session.getTransaction();
 
     public List<Dep> getAll() {

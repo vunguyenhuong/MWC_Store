@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
 import models.Size;
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import utilities.HibernateUtil;
@@ -15,7 +14,7 @@ import utilities.HibernateUtil;
  */
 public class SizeRepository {
 
-    private Session session = HibernateUtil.getSessionFactory().openSession();
+    private static final Session session = HibernateUtil.getSessionFactory().openSession();
     private Transaction transaction = session.getTransaction();
 
     public List<Size> getAll() {

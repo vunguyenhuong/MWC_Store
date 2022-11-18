@@ -14,7 +14,7 @@ import utilities.HibernateUtil;
  */
 public class HoaDonCTRepository {
 
-    private Session session = HibernateUtil.getSessionFactory().openSession();
+    private static final Session session = HibernateUtil.getSessionFactory().openSession();
     private Transaction transaction = session.getTransaction();
 
     public List<HoaDonChiTiet> getAll() {
