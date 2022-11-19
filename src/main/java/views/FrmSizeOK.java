@@ -244,8 +244,8 @@ public class FrmSizeOK extends javax.swing.JPanel {
             return;
         }
         String result;
-        for (int i = 36; i < sizeService.getListSize().size() + 1; i++) {
-            result = "S" + i;
+        for (int i = 0; i < sizeService.getListSize().size() + 1; i++) {
+            result = "SZ" + i;
             if (sizeService.getObj(result) == null) {
                 size.setMa(result);
                 break;

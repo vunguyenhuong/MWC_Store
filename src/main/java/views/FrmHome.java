@@ -166,7 +166,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                         main.showForm(new FrmMauSac1());
                     } else if (subMenuIndex == 6) {
 // NSX
-                        main.showForm(new FrmNhaSanXuat());
+                        main.showForm(new FrmNhaSanXuat1());
                     }
                 }
                 if (menuIndex == 3) {
