@@ -29,7 +29,7 @@ import utilities.SendMailUltil;
 public class FrmMethod extends javax.swing.JFrame {
 
     private final DecimalFormat df = new DecimalFormat("##0.###", DecimalFormatSymbols.getInstance(Locale.US));
-    public INguoiDungService iNguoiDungService = new NguoiDungService();
+    private INguoiDungService iNguoiDungService = new NguoiDungService();
     private MigLayout layout;
     private PanelCover cover;
     String icon1 = "images/suportUI/loading1.gif";
@@ -38,7 +38,7 @@ public class FrmMethod extends javax.swing.JFrame {
     private final PanelLoading loading2 = new PanelLoading(new ImageIcon(icon2));
     private PanelLoginAndResetPass loginAndRegister;
     private final Helper helper = new Helper();
-    SendMailUltil mailUltil = new SendMailUltil();
+    private SendMailUltil mailUltil = new SendMailUltil();
     private boolean isLogin;
     private final double addSize = 30;
     private final double coverSize = 40;
@@ -182,7 +182,7 @@ public class FrmMethod extends javax.swing.JFrame {
                     showMessage(Message.MessageType.ERROR, "Mã capcha không chính xác!");
                 } else {
                     if (helper.confirm(this, "Mật khẩu mới sẽ được gửi đến " + email + ". Chọn YES để xác nhận!")) {
-                        sendMain(nd, newPassword);
+                        sendMail(nd, newPassword);
                         nd.setMatKhau(newPassword);
                         iNguoiDungService.save(nd);
                     }
@@ -194,7 +194,7 @@ public class FrmMethod extends javax.swing.JFrame {
 
     }
 
-    private void sendMain(NguoiDung user, String newPassword) {
+    private void sendMail(NguoiDung user, String newPassword) {
         String email = user.getEmail();
         new Thread(new Runnable() {
             @Override
