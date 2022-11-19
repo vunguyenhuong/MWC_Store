@@ -399,8 +399,11 @@ public class FrmKhuyenMai extends java.awt.Dialog {
     private void btn_ChonKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ChonKhuyenMaiActionPerformed
         // TODO add your handling code here:
         int row = tb_danhSach.getSelectedRow();
+        int soLuong = Integer.parseInt(tb_danhSach.getValueAt(row, 3).toString());
         if (row == -1) {
             helper.error(this, "Vui lòng chọn khuyến mại!");
+        } else if (soLuong == 0) {
+            helper.error(this, "Đã hết mã khuyến mại!");
         } else {
             KhuyenMai km = iKhuyenMaiService.getObj((String) tb_danhSach.getValueAt(row, 0));
             helper.alert(this, "Thêm thành công!");
