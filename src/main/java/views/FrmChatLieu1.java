@@ -151,7 +151,7 @@ public class FrmChatLieu1 extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Mã", "Kích cỡ", "Ngày thêm", "Ngày sửa cuối", "Trạng thái"
+                "Mã", "Tên", "Ngày thêm", "Ngày sửa cuối", "Trạng thái"
             }
         ));
         tbl_Table.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -228,28 +228,6 @@ public class FrmChatLieu1 extends javax.swing.JPanel {
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
         // TODO add your handling code here:
-        ChatLieu cl = getdata();
-        String result;
-        for (int i = 1; i < chatLieuService.getListSize().size() + 1; i++) {
-            result = "CL" + i;
-            if (chatLieuService.getObject(result) == null) {
-                cl.setMa(result);
-                break;
-            } else {
-                continue;
-            }
-        }
-        if (cl.getTen().length() == 0) {
-            JOptionPane.showMessageDialog(this, "Chưa Nhập Tên !");
-            return;
-        }
-        chatLieuService.save(cl);
-        JOptionPane.showMessageDialog(this, "Thêm thành công");
-        loadTable(chatLieuService.getListSize());
-    }//GEN-LAST:event_btn_updateActionPerformed
-
-    private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
-        // TODO add your handling code here:
         int row = tbl_Table.getSelectedRow();
         if (row == -1) {
             JOptionPane.showMessageDialog(this, "Chọn 1 dòng rồi sửa !");
@@ -267,6 +245,30 @@ public class FrmChatLieu1 extends javax.swing.JPanel {
         cl.setNgaySuaCuoi(chatLieu.getNgaySuaCuoi());
         chatLieuService.save(cl);
         JOptionPane.showMessageDialog(this, "Cập Nhật Thành Công !");
+        loadTable(chatLieuService.getListSize());
+    }//GEN-LAST:event_btn_updateActionPerformed
+
+    private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
+        // TODO add your handling code here:
+        
+        
+        ChatLieu cl = getdata();
+        String result;
+        for (int i = 1; i < chatLieuService.getListSize().size() + 1; i++) {
+            result = "CL" + i;
+            if (chatLieuService.getObject(result) == null) {
+                cl.setMa(result);
+                break;
+            } else {
+                continue;
+            }
+        }
+        if (cl.getTen().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Chưa Nhập Tên !");
+            return;
+        }
+        chatLieuService.save(cl);
+        JOptionPane.showMessageDialog(this, "Thêm thành công");
         loadTable(chatLieuService.getListSize());
     }//GEN-LAST:event_btn_addActionPerformed
 
