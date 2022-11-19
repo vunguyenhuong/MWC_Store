@@ -1005,6 +1005,10 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 helper.error(this, "Hóa đơn đã được thanh toán!");
                 return;
             }
+            if(tb_giohang.getRowCount()==0){
+                helper.error(this, "Giỏ hàng trống!");
+                return;
+            }
             Double tienKhachDua = null;
             Double phaiTra = null;
             try {
