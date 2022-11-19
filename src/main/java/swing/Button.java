@@ -1,6 +1,7 @@
 package swing;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
@@ -53,6 +54,7 @@ public class Button extends JButton {
         setBackground(new Color(255, 255, 255));
         setForeground(new Color(80, 80, 80));
         rippleEffect.setRippleColor(new Color(220, 220, 220));
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 
     @Override
