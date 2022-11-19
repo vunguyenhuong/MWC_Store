@@ -3,6 +3,7 @@ package repositories;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
+import models.ChiTietDep;
 import models.HoaDonChiTiet;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -65,5 +66,17 @@ public class HoaDonCTRepository {
         query.setParameter("ma", ma);
         List<HoaDonChiTiet> list = query.getResultList();
         return list;
+    }
+    
+    public HoaDonChiTiet getObj(int idSP, int idHD){
+        HoaDonChiTiet hdct = null;
+        try {
+            Query query = session.createQuery("SELECT c FROM HoaDonChiTiet c WHERE c.ctdep.id = :idSP AND c.hoaDon.id = :idHD");
+            query.setParameter("idSP", idSP);
+            query.setParameter("idHD", idHD);
+            hdct = (HoaDonChiTiet) query.getSingleResult();
+        } catch (Exception e) {
+        }
+        return hdct;
     }
 }

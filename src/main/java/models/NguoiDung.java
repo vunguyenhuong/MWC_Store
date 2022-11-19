@@ -68,4 +68,7 @@ public class NguoiDung implements Serializable {
 
     @OneToMany(mappedBy = "nguoiDung",fetch = FetchType.LAZY)
     List<HoaDon> listHoaDon;
+    
+     @OneToMany(mappedBy = "nguoiDungTT",fetch = FetchType.LAZY)
+    List<HoaDon> listHoaDon1;
 }

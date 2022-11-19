@@ -200,11 +200,11 @@
                                   </Group>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="txt_txt_tienthua" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txt_tienkhachdua" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="txt_tienkhachdua" linkSize="1" max="32767" attributes="0"/>
+                                      <Component id="txt_txt_tienthua" alignment="0" min="-2" pref="207" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="btn_themkm" pref="207" max="32767" attributes="0"/>
                                       <Component id="txt_tenkm" max="32767" attributes="0"/>
@@ -254,17 +254,17 @@
                                   </Group>
                               </Group>
                           </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="txt_tenkm" min="-2" max="-2" attributes="0"/>
+                              <Component id="txt_tienkhachdua" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txt_tienkhachdua" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txt_tenkm" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btn_themkm" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
+                              <Component id="txt_txt_tienthua" alignment="3" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txt_txt_tienthua" max="32767" attributes="0"/>
-                              <Component id="btn_themkm" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace pref="42" max="32767" attributes="0"/>
+                          <EmptySpace pref="28" max="32767" attributes="0"/>
                           <Component id="btn_thanhtoan" min="-2" pref="35" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -348,6 +348,7 @@
                 <Component class="swing.TextField" name="txt_giamgia">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
                     <Property name="labelText" type="java.lang.String" value="Gi&#x1ea3;m gi&#xe1;"/>
                     <Property name="lineColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="66" green="66" red="66" type="rgb"/>
@@ -381,6 +382,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="S&#x1eed; d&#x1ee5;ng ?"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chk_tichluyActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lbl_diemtichluy">
                   <Properties>
@@ -388,7 +392,7 @@
                       <Color blue="ff" green="0" id="blue" palette="1" red="0" type="palette"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="4"/>
-                    <Property name="text" type="java.lang.String" value="B&#x1ea1;n &#x111;ang c&#xf3; 0 &#x111;i&#x1ec3;m t&#xed;ch l&#x169;y"/>
+                    <Property name="text" type="java.lang.String" value="Kh&#xe1;ch h&#xe0;ng l&#x1ebb; &#x111;ang c&#xf3; 0 &#x111;i&#x1ec3;m t&#xed;ch l&#x169;y"/>
                   </Properties>
                 </Component>
                 <Component class="swing.TextField" name="txt_tienkhachdua">
@@ -444,6 +448,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Thanh to&#xe1;n"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_thanhtoanActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -585,6 +592,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_gh_xoaActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="swing.Button" name="bnt_gh_xoatatca">
                   <Properties>
@@ -729,6 +739,9 @@
                               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tb_sanphamMouseClicked"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -818,16 +831,22 @@
                         <Component class="javax.swing.JTable" name="tb_hoadon">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="5" rowCount="0">
+                              <Table columnCount="6" rowCount="0">
                                 <Column editable="true" title="M&#xe3;" type="java.lang.Object"/>
                                 <Column editable="true" title="Nh&#xe2;n vi&#xea;n" type="java.lang.Object"/>
                                 <Column editable="true" title="Kh&#xe1;ch h&#xe0;ng" type="java.lang.Object"/>
                                 <Column editable="true" title="Ng&#xe0;y t&#x1ea1;o" type="java.lang.Object"/>
                                 <Column editable="true" title="Tr&#x1ea1;ng th&#xe1;i" type="java.lang.Object"/>
+                                <Column editable="true" title="NV thanh to&#xe1;n" type="java.lang.Object"/>
                               </Table>
                             </Property>
                             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                               <TableColumnModel selectionModel="0">
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
                                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                                   <Title/>
                                   <Editor/>
@@ -870,12 +889,13 @@
                 <Component class="swing.Combobox" name="cb_trangthai">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="5">
+                      <StringArray count="6">
                         <StringItem index="0" value="T&#x1ea5;t c&#x1ea3;"/>
                         <StringItem index="1" value="Ch&#x1b0;a thanh to&#xe1;n"/>
-                        <StringItem index="2" value="&#x110;ang giao"/>
-                        <StringItem index="3" value="&#x110;&#xe3; giao"/>
-                        <StringItem index="4" value="&#x110;&#xe3; h&#x1ee7;y"/>
+                        <StringItem index="2" value="&#x110;&#xe3; thanh to&#xe1;n"/>
+                        <StringItem index="3" value="&#x110;ang giao"/>
+                        <StringItem index="4" value="&#x110;&#xe3; giao"/>
+                        <StringItem index="5" value="&#x110;&#xe3; h&#x1ee7;y"/>
                       </StringArray>
                     </Property>
                     <Property name="labeText" type="java.lang.String" value="Tr&#x1ea1;ng th&#xe1;i"/>

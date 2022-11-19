@@ -55,4 +55,9 @@ public class HoaDonCTService implements IHoaDonCTService {
         return repo.findByMa(ma);
     }
 
+    @Override
+    public HoaDonChiTiet getobj(int idSP, int idHD) {
+        return repo.getObj(idSP, idHD);
+    }
+
 }

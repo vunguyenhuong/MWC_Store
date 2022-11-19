@@ -22,6 +22,8 @@ public interface IHoaDonCTService {
     boolean delete(HoaDonChiTiet hdct);
 
     HoaDonChiTiet getobjbyId(int id);
+    
+    HoaDonChiTiet getobj(int idSP, int idHD);
 
     List<HoaDonChiTiet> findByMa(String ma);
 }

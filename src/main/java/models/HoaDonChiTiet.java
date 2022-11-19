@@ -32,15 +32,18 @@ public class HoaDonChiTiet implements Serializable {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "idCTDep", nullable = false)
+    @JoinColumn(name = "idCTD", nullable = false)
     private ChiTietDep ctdep;
 
     @ManyToOne
-    @JoinColumn(name = "idHoaDon", nullable = false)
+    @JoinColumn(name = "idHD", nullable = false)
     private HoaDon hoaDon;
 
     @Column
     private BigDecimal donGia;
+    
+    @Column
+    private BigDecimal giamGia;
 
     @Column
     private int soLuong;
