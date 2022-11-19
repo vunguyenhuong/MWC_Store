@@ -38,12 +38,11 @@ public class FrmLoaiDep1 extends javax.swing.JPanel {
     }
     
     public void LoadTabale(List<LoaiDep> list) {
-        int stt = 1;
         defaultTableModel = (DefaultTableModel) tb_Table.getModel();
         defaultTableModel.setRowCount(0);
         for (LoaiDep x : list) {
             Object[] row = {
-                stt++, x.getMa(), x.getTen(), formatD.format(x.getNgayThem()), formatD.format(x.getNgaySuaCuoi()),
+                x.getMa(), x.getTen(), formatD.format(x.getNgayThem()), formatD.format(x.getNgaySuaCuoi()),
                 x.getTrangThai() == 0 ? "Đang Kinh Doanh" : "Ngừng Kinh Doanh"
             };
             defaultTableModel.addRow(row);
@@ -158,7 +157,7 @@ public class FrmLoaiDep1 extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Mã", "Kích cỡ", "Ngày thêm", "Ngày sửa cuối", "Trạng thái"
+                "Mã", "Tên", "Ngày thêm", "Ngày sửa cuối", "Trạng thái"
             }
         ));
         tb_Table.addMouseListener(new java.awt.event.MouseAdapter() {

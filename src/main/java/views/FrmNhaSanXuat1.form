@@ -30,14 +30,14 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="txt_search" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txt_Timkiem" alignment="0" max="32767" attributes="0"/>
                           <Component id="txt_Ten" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txt_Ma" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
+                          <Component id="txt_Ma1" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="rd_NgungKinhDoanh" min="-2" max="-2" attributes="0"/>
-                          <Component id="rd_DangKinhDoanh" min="-2" pref="121" max="-2" attributes="0"/>
+                          <Component id="rd_Ngungnhap" min="-2" max="-2" attributes="0"/>
+                          <Component id="rd_Dangnhap" min="-2" pref="121" max="-2" attributes="0"/>
                           <Component id="lbl_Total" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -69,17 +69,17 @@
                   <Component id="tableScrollButton1" alignment="0" min="-2" pref="215" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txt_Ma" max="32767" attributes="0"/>
-                          <Component id="rd_DangKinhDoanh" min="-2" pref="46" max="-2" attributes="0"/>
+                          <Component id="txt_Ma1" max="32767" attributes="0"/>
+                          <Component id="rd_Dangnhap" min="-2" pref="46" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="txt_Ten" max="32767" attributes="0"/>
-                          <Component id="rd_NgungKinhDoanh" min="-2" pref="46" max="-2" attributes="0"/>
+                          <Component id="rd_Ngungnhap" min="-2" pref="46" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txt_search" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_Timkiem" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lbl_Total" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -95,14 +95,14 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="swing.TextField" name="txt_Ma">
+    <Component class="swing.TextField" name="txt_Ma1">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
         <Property name="labelText" type="java.lang.String" value="M&#xe3; :"/>
       </Properties>
     </Component>
-    <Component class="swing.RadioButtonCustom" name="rd_DangKinhDoanh">
+    <Component class="swing.RadioButtonCustom" name="rd_Dangnhap">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup1"/>
@@ -111,7 +111,7 @@
         <Property name="text" type="java.lang.String" value="&#x110;ang kinh doanh"/>
       </Properties>
     </Component>
-    <Component class="swing.RadioButtonCustom" name="rd_NgungKinhDoanh">
+    <Component class="swing.RadioButtonCustom" name="rd_Ngungnhap">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup1"/>
@@ -135,18 +135,18 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_addActionPerformed"/>
       </Events>
     </Component>
-    <Component class="swing.TextField" name="txt_search">
+    <Component class="swing.TextField" name="txt_Timkiem">
       <Properties>
         <Property name="labelText" type="java.lang.String" value="Search"/>
       </Properties>
       <Events>
-        <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="txt_searchCaretUpdate"/>
+        <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="txt_TimkiemCaretUpdate"/>
       </Events>
     </Component>
     <Component class="swing.TextField" name="txt_Ten">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value=""/>
-        <Property name="labelText" type="java.lang.String" value="T&#xea;n : "/>
+        <Property name="labelText" type="java.lang.String" value="T&#xea;n:"/>
       </Properties>
     </Component>
     <Container class="swing.TableScrollButton" name="tableScrollButton1">
@@ -165,7 +165,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="tb_Table">
+            <Component class="javax.swing.JTable" name="tblBang">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="5" rowCount="4">
@@ -210,7 +210,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tb_TableMouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblBangMouseClicked"/>
               </Events>
             </Component>
           </SubComponents>
@@ -230,7 +230,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="LO&#x1ea0;I D&#xc9;P"/>
+        <Property name="text" type="java.lang.String" value="NH&#xc0; S&#x1ea2;N XU&#x1ea4;T"/>
       </Properties>
     </Component>
   </SubComponents>
