@@ -152,6 +152,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                         main.showForm(new FrmDepOK());
                     } else if (subMenuIndex == 2) {
 // Loại dép
+
                         main.showForm(new FrmLoaiDep1());
 
                     } else if (subMenuIndex == 3) {
@@ -162,7 +163,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                         main.showForm(new FrmChatLieu1());
                     } else if (subMenuIndex == 5) {
 // Màu sắc
-                        main.showForm(new FrmMauSac());
+                        main.showForm(new FrmMauSac1());
                     } else if (subMenuIndex == 6) {
 // NSX
                         main.showForm(new FrmNhaSanXuat1());

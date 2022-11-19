@@ -231,7 +231,7 @@ public class FrmMauSac1 extends javax.swing.JPanel {
         }
         String result;
         for (int i = 1; i < iMauSacService.getAll().size() + 1; i++) {
-            result = "MS0" + i;
+            result = "MS" + i;
             if (iMauSacService.getObj(result) == null) {
                 m.setMa(result);
                 break;
@@ -239,8 +239,7 @@ public class FrmMauSac1 extends javax.swing.JPanel {
                 continue;
             }
         }
-        if (iMauSacService.getObj(txt_Ma.getText()) == null) {
-            m.setMa(txt_Ma.getText());
+      
             m.setTen(txt_Ten.getText());
             m.setNgayThem(new Date());
             m.setNgaySuaCuoi(new Date());
@@ -253,7 +252,7 @@ public class FrmMauSac1 extends javax.swing.JPanel {
             loadToTable(iMauSacService.getAll());
             helper.alert(this, "Thêm thành công!");
 
-        }
+        
     }//GEN-LAST:event_btn_addActionPerformed
 
     private void txt_searchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_searchCaretUpdate
