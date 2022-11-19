@@ -326,7 +326,7 @@ public class FrmKhuyenMai extends java.awt.Dialog {
         km.setNgayKetThuc(date_NgayKetThuc.getDate());
         km.setHinhAnh(txt_Ma.getText() + ".png");
         try {
-            String filePath = "images/voucher/" + txt_Ma.getText() + ".png";
+            String filePath = "images/voucher/" + txt_Ma.getText().toUpperCase() + ".png";
             String charset = "UTF-8";
             Map<EncodeHintType, ErrorCorrectionLevel> hintMap = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
             hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
