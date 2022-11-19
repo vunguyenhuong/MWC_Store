@@ -316,7 +316,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
 
             txt_tongtien.setText(String.valueOf(tongTien));
             txt_phaitra.setText(String.valueOf(giamGia));
-        }else{
+        } else {
             txt_tongtien.setText("0");
             txt_phaitra.setText("0");
         }
@@ -994,6 +994,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         } else {
             helper.error(this, "Bạn vừa hủy");
         }
+        tongTien();
     }//GEN-LAST:event_chk_tichluyActionPerformed
 
     private void btn_thanhtoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_thanhtoanActionPerformed
@@ -1002,11 +1003,11 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             helper.error(this, "Vui lòng chọn hóa đơn cần thanh toán!");
         } else {
             HoaDon hd = iHoaDonService.getObj(txt_mahd.getText());
-            if(hd.getTrangThai()==1){
+            if (hd.getTrangThai() == 1) {
                 helper.error(this, "Hóa đơn đã được thanh toán!");
                 return;
             }
-            if(tb_giohang.getRowCount()==0){
+            if (tb_giohang.getRowCount() == 0) {
                 helper.error(this, "Giỏ hàng trống!");
                 return;
             }
@@ -1029,13 +1030,15 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             }
 
             if (tienKhachDua >= phaiTra) {
-                hd.setNguoiDungTT(nguoiDung);
-                hd.setTrangThai(1);
-                hd.setNgayThanhToan(new Date());
                 if (helper.confirm(this, "Trả lại khách " + (tienKhachDua - phaiTra) + ". Xác nhận thanh toán " + txt_phaitra.getText() + "?")) {
+                    hd.setNguoiDungTT(nguoiDung);
+                    hd.setTrangThai(1);
+                    hd.setNgayThanhToan(new Date());
                     iHoaDonService.save(hd);
                     loadHD(iHoaDonService.getAll());
                     helper.alert(this, "Thanh toán thành công!");
+                    txt_tienkhachdua.setText("");
+                    txt_tienthua.setText("");
                 }
             } else {
                 helper.error(this, "Khách chưa đưa đủ tiền!");
@@ -1044,13 +1047,15 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
     }//GEN-LAST:event_btn_thanhtoanActionPerformed
 
     private void txt_tienkhachduaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_tienkhachduaCaretUpdate
+        Double tongTien = null;
+        Double tienKhachDua = null;
         try {
-            Double tongTien = Double.parseDouble(txt_phaitra.getText());
-            Double tienKhachDua = Double.parseDouble(txt_tienkhachdua.getText());
+            tongTien = Double.parseDouble(txt_phaitra.getText());
+            tienKhachDua = Double.parseDouble(txt_tienkhachdua.getText());
             Double tienThua = tienKhachDua - tongTien;
             txt_tienthua.setText(tienThua.toString());
         } catch (Exception e) {
-            txt_tienthua.setText("0");
+            txt_tienthua.setText("-" + tongTien);
         }
     }//GEN-LAST:event_txt_tienkhachduaCaretUpdate
 
@@ -1058,8 +1063,8 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         Integer soLuong;
         int rowGH = tb_giohang.getSelectedRow();
         int rowHD = tb_hoadon.getSelectedRow();
-        Integer soLuongNhap = 0;
         HoaDon hd = iHoaDonService.getObj((String) tb_hoadon.getValueAt(rowHD, 0));
+        System.out.println(hd.getTrangThai());
         if (hd.getTrangThai() == 1) {
             tb_giohang.clearSelection();
             helper.error(this, "Hóa đơn đã được thanh toán");
@@ -1070,11 +1075,11 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             try {
                 soLuong = Integer.parseInt(inputSL);
                 if (ctd.getSoLuong() == 0) {
-                    if (soLuongNhap > hdct.getSoLuong()) {
+                    if (soLuong > hdct.getSoLuong()) {
                         helper.error(this, "Quá số lượng cho phép!");
                         return;
                     }
-                } else if (soLuongNhap > ctd.getSoLuong()) {
+                } else if (soLuong > ctd.getSoLuong()) {
                     helper.error(this, "Quá số lượng cho phép!");
                     return;
                 }
@@ -1083,25 +1088,27 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 return;
             }
 
-            if (soLuongNhap == 0) {
+            if (soLuong == 0) {
                 if (helper.confirm(this, "Xác nhận xóa " + hdct.getCtdep().getDep().getTen() + " khỏi giỏ hàng ?")) {
                     ctd.setSoLuong(ctd.getSoLuong() + hdct.getSoLuong());
                     iHoaDonCTService.delete(hdct);
                     iChiTietDepService.save(ctd);
                     loadGioHang(txt_mahd.getText());
                     loadSP(iChiTietDepService.getAll());
+                    tongTien();
                     helper.alert(this, "Xóa thành công!");
                 }
-            } else if (soLuongNhap < 0) {
+            } else if (soLuong < 0) {
                 helper.error(this, "Vui lòng nhập lại!");
             } else {
-                ctd.setSoLuong(ctd.getSoLuong() + hdct.getSoLuong() - soLuongNhap);
+                ctd.setSoLuong(ctd.getSoLuong() + hdct.getSoLuong() - soLuong);
                 iChiTietDepService.save(ctd);
-                hdct.setSoLuong(soLuongNhap);
+                hdct.setSoLuong(soLuong);
                 iHoaDonCTService.save(hdct);
                 loadGioHang(hd.getMa());
                 loadSP(iChiTietDepService.getAll());
                 checkSearchSP = 0;
+                tongTien();
                 helper.alert(this, "Cập nhật thành công!");
             }
         }
