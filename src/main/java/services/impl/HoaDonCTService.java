@@ -51,8 +51,8 @@ public class HoaDonCTService implements IHoaDonCTService {
     }
 
     @Override
-    public List<HoaDonChiTiet> findByName(String ten) {
-        return repo.findByName(ten);
+    public List<HoaDonChiTiet> findByMa(String ma) {
+        return repo.findByMa(ma);
     }
 
 }

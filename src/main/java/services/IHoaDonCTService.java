@@ -23,5 +23,5 @@ public interface IHoaDonCTService {
 
     HoaDonChiTiet getobjbyId(int id);
 
-    List<HoaDonChiTiet> findByName(String ten);
+    List<HoaDonChiTiet> findByMa(String ma);
 }

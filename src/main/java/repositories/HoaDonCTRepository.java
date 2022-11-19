@@ -49,13 +49,6 @@ public class HoaDonCTRepository {
         }
     }
 
-    public List<HoaDonChiTiet> findByName(String ten) {
-        Query query = session.createQuery("SELECT c FROM HoaDonChiTiet c WHERE c.hoaDon LIKE :ten");
-        query.setParameter("ten", "%" + ten + "%");
-        List<HoaDonChiTiet> list = query.getResultList();
-        return list;
-    }
-
     public HoaDonChiTiet getObjById(int id) {
         HoaDonChiTiet hdct = null;
         try {
@@ -65,5 +58,12 @@ public class HoaDonCTRepository {
         } catch (Exception e) {
         }
         return hdct;
+    }
+
+    public List<HoaDonChiTiet> findByMa(String ma) {
+        Query query = session.createQuery("SELECT c FROM HoaDonChiTiet c WHERE c.hoaDon.ma = :ma");
+        query.setParameter("ma", ma);
+        List<HoaDonChiTiet> list = query.getResultList();
+        return list;
     }
 }
