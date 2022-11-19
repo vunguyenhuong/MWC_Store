@@ -128,7 +128,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                     if (subMenuIndex == 0) {
                         main.showForm(new FrmProfile(nguoiDung));
                     } else if (subMenuIndex == 1) {
-// Đổi MK
+// Đổi MK               
                     }
                 }
                 if (menuIndex == 1) {
