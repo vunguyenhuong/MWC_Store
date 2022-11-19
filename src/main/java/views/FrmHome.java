@@ -427,7 +427,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
 
         lbl_diemtichluy.setForeground(java.awt.Color.blue);
         lbl_diemtichluy.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lbl_diemtichluy.setText("Bạn đang có 10 điểm tích lũy");
+        lbl_diemtichluy.setText("Bạn đang có 0 điểm tích lũy");
 
         txt_tienkhachdua.setLabelText("Tiền khách đưa");
         txt_tienkhachdua.setLineColor(new java.awt.Color(102, 102, 102));

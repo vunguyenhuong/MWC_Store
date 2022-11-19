@@ -388,7 +388,7 @@
                       <Color blue="ff" green="0" id="blue" palette="1" red="0" type="palette"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="4"/>
-                    <Property name="text" type="java.lang.String" value="B&#x1ea1;n &#x111;ang c&#xf3; 10 &#x111;i&#x1ec3;m t&#xed;ch l&#x169;y"/>
+                    <Property name="text" type="java.lang.String" value="B&#x1ea1;n &#x111;ang c&#xf3; 0 &#x111;i&#x1ec3;m t&#xed;ch l&#x169;y"/>
                   </Properties>
                 </Component>
                 <Component class="swing.TextField" name="txt_tienkhachdua">
