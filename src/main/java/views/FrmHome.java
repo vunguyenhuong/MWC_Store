@@ -315,6 +315,9 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
 
             txt_tongtien.setText(String.valueOf(tongTien));
             txt_phaitra.setText(String.valueOf(giamGia));
+        }else{
+            txt_tongtien.setText("0");
+            txt_phaitra.setText("0");
         }
 //        if()
 //            for (int i = 0; i < tb_giohang.getRowCount(); i++) {
@@ -998,6 +1001,10 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             helper.error(this, "Vui lòng chọn hóa đơn cần thanh toán!");
         } else {
             HoaDon hd = iHoaDonService.getObj(txt_mahd.getText());
+            if(hd.getTrangThai()==1){
+                helper.error(this, "Hóa đơn đã được thanh toán!");
+                return;
+            }
             Double tienKhachDua = null;
             Double phaiTra = null;
             try {
