@@ -92,6 +92,7 @@ public class FrmTrangChu extends javax.swing.JPanel {
         jLabel7.setText("Cao Văn Doanh - PH22977");
 
         jScrollPane1.setBorder(null);
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
