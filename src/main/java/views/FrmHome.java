@@ -1291,12 +1291,17 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                     for (int i = 0; i < listKM.size(); i++) {
                         if (listKM.get(i).getMa().equals(maKhuyenMai)) {
                             khuyenMai = iKhuyenMaiService.getObj(maKhuyenMai);
-                            txt_makm.setText(khuyenMai.getMa());
-                            txt_tenkm.setText(khuyenMai.getTen());
-                            Double giamGia = Double.parseDouble(txt_tongtien.getText()) / 100 * khuyenMai.getPhantramgiam();
-                            Double phaiTra = Double.parseDouble(txt_tongtien.getText()) - giamGia;
-                            txt_giamgia.setText(giamGia.toString());
-                            txt_phaitra.setText(phaiTra.toString());
+                            if (khuyenMai.getSoLuong() == 0) {
+                                helper.error(this, "Đã hết mã khuyến mại");
+                                break;
+                            } else {
+                                txt_makm.setText(khuyenMai.getMa());
+                                txt_tenkm.setText(khuyenMai.getTen());
+                                Double giamGia = Double.parseDouble(txt_tongtien.getText()) / 100 * khuyenMai.getPhantramgiam();
+                                Double phaiTra = Double.parseDouble(txt_tongtien.getText()) - giamGia;
+                                txt_giamgia.setText(giamGia.toString());
+                                txt_phaitra.setText(phaiTra.toString());
+                            }
                         }
                     }
                     System.out.println(maKhuyenMai);
