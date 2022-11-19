@@ -31,7 +31,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Component id="txt_search" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txt_KichCo" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txt_Ten" alignment="0" max="32767" attributes="0"/>
                           <Component id="txt_Ma" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -74,7 +74,7 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txt_KichCo" max="32767" attributes="0"/>
+                          <Component id="txt_Ten" max="32767" attributes="0"/>
                           <Component id="rd_NgungKinhDoanh" min="-2" pref="46" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -143,10 +143,11 @@
         <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="txt_searchCaretUpdate"/>
       </Events>
     </Component>
-    <Component class="swing.TextField" name="txt_KichCo">
+    <Component class="swing.TextField" name="txt_Ten">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value=""/>
-        <Property name="labelText" type="java.lang.String" value="K&#xed;ch c&#x1ee1; :"/>
+        <Property name="labelText" type="java.lang.String" value="T&#xea;n :"/>
+        <Property name="name" type="java.lang.String" value="" noResource="true"/>
       </Properties>
     </Component>
     <Container class="swing.TableScrollButton" name="tableScrollButton1">
@@ -165,12 +166,12 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="tb_DanhSach">
+            <Component class="javax.swing.JTable" name="tblBang">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="5" rowCount="4">
                     <Column editable="true" title="M&#xe3;" type="java.lang.Object"/>
-                    <Column editable="true" title="K&#xed;ch c&#x1ee1;" type="java.lang.Object"/>
+                    <Column editable="true" title="T&#xea;n" type="java.lang.Object"/>
                     <Column editable="true" title="Ng&#xe0;y th&#xea;m" type="java.lang.Object"/>
                     <Column editable="true" title="Ng&#xe0;y s&#x1eed;a cu&#x1ed1;i" type="java.lang.Object"/>
                     <Column editable="true" title="Tr&#x1ea1;ng th&#xe1;i" type="java.lang.Object"/>
@@ -181,7 +182,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tb_DanhSachMouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblBangMouseClicked"/>
               </Events>
             </Component>
           </SubComponents>
