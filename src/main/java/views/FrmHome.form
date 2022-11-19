@@ -425,6 +425,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Th&#xea;m khuy&#x1ebf;n m&#xe3;i"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_themkmActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="swing.TextField" name="txt_makm">
                   <Properties>
@@ -746,7 +749,7 @@
                             </Property>
                           </Properties>
                           <Events>
-                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tb_sanphamMouseClicked"/>
+                            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tb_sanphamMousePressed"/>
                           </Events>
                         </Component>
                       </SubComponents>

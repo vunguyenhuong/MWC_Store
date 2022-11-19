@@ -34,6 +34,7 @@ public class FrmKhuyenMai extends java.awt.Dialog {
     private DefaultTableModel defaultTableModel = new DefaultTableModel();
     private IKhuyenMaiService iKhuyenMaiService = new KhuyenMaiService();
     private Helper helper = new Helper();
+    public KhuyenMai khuyenMai;
 
     public FrmKhuyenMai(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -278,16 +279,16 @@ public class FrmKhuyenMai extends java.awt.Dialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(tableScrollButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(11, 11, 11)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btn_Them, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_CapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_Xoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_ChonKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btn_Them, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btn_CapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btn_Xoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_ChonKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(imageAvatar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -315,23 +316,23 @@ public class FrmKhuyenMai extends java.awt.Dialog {
         dispose();
     }//GEN-LAST:event_closeDialog
     private KhuyenMai getForm() {
-        String result = txt_Ma.getText().toUpperCase();
+        String result = "MWCSTORES" + txt_Ma.getText().toUpperCase();
         KhuyenMai km = new KhuyenMai();
-        km.setMa(result);
+        km.setMa(txt_Ma.getText());
         km.setTen(txt_TenKM.getText());
         km.setSoLuong((int) sp_SoLuong.getValue());
         km.setPhantramgiam(Float.parseFloat(txt_PhanTramGiam.getText()));
         km.setNgayBatDau(date_NgayBatDau.getDate());
         km.setNgayKetThuc(date_NgayKetThuc.getDate());
-        km.setHinhAnh(result + ".png");
+        km.setHinhAnh(txt_Ma.getText() + ".png");
         try {
-            String filePath = "images/voucher/" + result + ".png";
+            String filePath = "images/voucher/" + txt_Ma.getText() + ".png";
             String charset = "UTF-8";
             Map<EncodeHintType, ErrorCorrectionLevel> hintMap = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
             hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
             BitMatrix matrix = new MultiFormatWriter().encode(
                     new String(result.getBytes(charset), charset),
-                    BarcodeFormat.QR_CODE, 200, 200, hintMap);
+                    BarcodeFormat.QR_CODE, 500, 500, hintMap);
 
             MatrixToImageWriter.writeToFile(matrix, filePath.substring(filePath.lastIndexOf('.') + 1), new File(filePath));
             System.out.println("Qr code has been generated at the location " + filePath);
@@ -413,18 +414,14 @@ public class FrmKhuyenMai extends java.awt.Dialog {
         if (row == -1) {
             helper.error(this, "Vui lòng chọn dòng cần xóa!");
         } else {
-            String result = txt_Ma.getText().trim();
+            String result = txt_Ma.getText().replace("MWCSTORES", "").trim();
             String fileName = "images/voucher/" + result + ".png";
-            try {
-                boolean file = Files.deleteIfExists(Paths.get(fileName));
-                if (file) {
-                    System.out.println("Tệp bị xóa!");
-                } else {
-                    System.out.println("Xin lỗi, không thể xóa tập tin.");
-                    return;
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+            File file = new File(fileName);
+            if (file.delete()) {
+                System.out.println("Tệp bị xóa!");
+            } else {
+                System.out.println("Xin lỗi, không thể xóa tập tin.");
+                return;
             }
             KhuyenMai km = iKhuyenMaiService.getObj(tb_danhSach.getValueAt(row, 0).toString());
             iKhuyenMaiService.delete(km);
@@ -443,6 +440,7 @@ public class FrmKhuyenMai extends java.awt.Dialog {
         // TODO add your handling code here:
         int row = tb_danhSach.getSelectedRow();
         KhuyenMai km = iKhuyenMaiService.getObj(tb_danhSach.getValueAt(row, 0).toString());
+        khuyenMai = km;
         txt_Ma.setText(km.getMa());
         txt_TenKM.setText(km.getTen());
         txt_PhanTramGiam.setText(String.valueOf(km.getPhantramgiam()));
