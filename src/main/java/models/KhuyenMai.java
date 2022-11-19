@@ -48,11 +48,11 @@ public class KhuyenMai implements Serializable {
 
     @Column(name = "NgayBatDau")
     @Temporal(TemporalType.DATE)
-    private Date ngayThem;
+    private Date ngayBatDau;
 
     @Column(name = "NgayKetThuc")
     @Temporal(TemporalType.DATE)
-    private Date ngaySuaCuoi;
+    private Date ngayKetThuc;
 
     @OneToMany(mappedBy = "khuyenMai", fetch = FetchType.LAZY)
     List<HoaDon> listHoaDon;

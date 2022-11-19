@@ -59,7 +59,7 @@ public class KhuyenMaiRepository {
     public KhuyenMai getObj(String ma) {
         KhuyenMai km = null;
         try {
-            Query query = session.createQuery("SELECT k FROM KhuyenMai k WHERE n.ma = :ma");
+            Query query = session.createQuery("SELECT k FROM KhuyenMai k WHERE k.ma = :ma");
             query.setParameter("ma", ma);
             km = (KhuyenMai) query.getSingleResult();
         } catch (Exception e) {

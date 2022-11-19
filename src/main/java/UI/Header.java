@@ -15,7 +15,6 @@ public class Header extends javax.swing.JPanel {
 
     public Header(NguoiDung nd) {
         initComponents();
-//        cmdMenu.setIcon(new ImageIcon(getClass().getResource("/icons/menu.png")));
         this.nguoidung = nd;
         lbl_tenUser.setText(nd.getTen());
         lbl_role.setText(nd.getChucVu().getTen());
@@ -24,7 +23,6 @@ public class Header extends javax.swing.JPanel {
 
     public Header() {
         initComponents();
-//        cmdMenu.setIcon(new ImageIcon(getClass().getResource("/icons/menu.png")));
     }
 
     public void addMenuEvent(ActionListener event) {
