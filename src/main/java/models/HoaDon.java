@@ -60,6 +60,9 @@ public class HoaDon implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date ngayNhanHang;
     
+    @Column(name = "trangThai")
+    private int trangThai;
+    
     @ManyToOne
     @JoinColumn(name = "IdND")
     private NguoiDung nguoiDung;

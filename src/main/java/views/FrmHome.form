@@ -167,7 +167,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="buttonLG1" max="32767" attributes="0"/>
+                              <Component id="btn_thanhtoan" max="32767" attributes="0"/>
                               <Component id="jLabel3" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -176,38 +176,38 @@
                                   </Group>
                                   <EmptySpace min="100" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="button2" max="32767" attributes="0"/>
+                                      <Component id="btn_khLe" max="32767" attributes="0"/>
                                       <Component id="btn_themKH" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <Component id="jSeparator1" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="textField4" linkSize="1" min="-2" pref="207" max="-2" attributes="0"/>
+                                  <Component id="txt_mahd" linkSize="1" min="-2" pref="207" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="textField5" linkSize="1" min="-2" pref="206" max="-2" attributes="0"/>
+                                  <Component id="txt_tongtien" linkSize="1" min="-2" pref="206" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="button3" alignment="1" max="32767" attributes="0"/>
+                              <Component id="btn_taohd" alignment="1" max="32767" attributes="0"/>
                               <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="textField7" linkSize="1" min="-2" pref="206" max="-2" attributes="0"/>
-                                      <Component id="textField6" linkSize="1" alignment="0" min="-2" pref="201" max="-2" attributes="0"/>
+                                      <Component id="txt_phaitra" linkSize="1" min="-2" pref="206" max="-2" attributes="0"/>
+                                      <Component id="txt_giamgia" linkSize="1" alignment="0" min="-2" pref="201" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="lbl_diemtichluy" alignment="0" pref="207" max="32767" attributes="0"/>
-                                      <Component id="jCheckBoxCustom1" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="textField10" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="chk_tichluy" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txt_makm" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="textField9" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="textField8" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txt_txt_tienthua" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txt_tienkhachdua" linkSize="1" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="button1" pref="207" max="32767" attributes="0"/>
-                                      <Component id="textField11" max="32767" attributes="0"/>
+                                      <Component id="btn_themkm" pref="207" max="32767" attributes="0"/>
+                                      <Component id="txt_tenkm" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -227,45 +227,45 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="txt_tenkh" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="button2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btn_khLe" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="button3" min="-2" pref="41" max="-2" attributes="0"/>
+                          <Component id="btn_taohd" min="-2" pref="52" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="textField4" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="textField5" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txt_mahd" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txt_tongtien" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <Component id="lbl_diemtichluy" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jCheckBoxCustom1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="chk_tichluy" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
-                                  <Component id="textField6" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_giamgia" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="textField7" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="textField10" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txt_phaitra" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txt_makm" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="textField8" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="textField11" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txt_tienkhachdua" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txt_tenkm" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="textField9" max="32767" attributes="0"/>
-                              <Component id="button1" max="32767" attributes="0"/>
+                              <Component id="txt_txt_tienthua" max="32767" attributes="0"/>
+                              <Component id="btn_themkm" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="buttonLG1" min="-2" pref="35" max="-2" attributes="0"/>
+                          <EmptySpace pref="42" max="32767" attributes="0"/>
+                          <Component id="btn_thanhtoan" min="-2" pref="35" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -311,7 +311,7 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_themKHActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="swing.Button" name="button2">
+                <Component class="swing.Button" name="btn_khLe">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="66" green="66" red="66" type="rgb"/>
@@ -321,10 +321,13 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Kh&#xe1;ch h&#xe0;ng l&#x1ebb;"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_khLeActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JSeparator" name="jSeparator1">
                 </Component>
-                <Component class="swing.TextField" name="textField4">
+                <Component class="swing.TextField" name="txt_mahd">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="labelText" type="java.lang.String" value="M&#xe3; h&#xf3;a &#x111;&#x1a1;n"/>
@@ -333,7 +336,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="swing.TextField" name="textField5">
+                <Component class="swing.TextField" name="txt_tongtien">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="labelText" type="java.lang.String" value="T&#x1ed5;ng ti&#x1ec1;n"/>
@@ -342,7 +345,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="swing.TextField" name="textField6">
+                <Component class="swing.TextField" name="txt_giamgia">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="labelText" type="java.lang.String" value="Gi&#x1ea3;m gi&#xe1;"/>
@@ -351,7 +354,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="swing.Button" name="button3">
+                <Component class="swing.Button" name="btn_taohd">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="66" green="66" red="66" type="rgb"/>
@@ -361,8 +364,11 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="T&#x1ea1;o h&#xf3;a &#x111;&#x1a1;n"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_taohdActionPerformed"/>
+                  </Events>
                 </Component>
-                <Component class="swing.TextField" name="textField7">
+                <Component class="swing.TextField" name="txt_phaitra">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="labelText" type="java.lang.String" value="Ph&#x1ea3;i tr&#x1ea3;"/>
@@ -371,7 +377,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="swing.JCheckBoxCustom" name="jCheckBoxCustom1">
+                <Component class="swing.JCheckBoxCustom" name="chk_tichluy">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="S&#x1eed; d&#x1ee5;ng ?"/>
                   </Properties>
@@ -385,7 +391,7 @@
                     <Property name="text" type="java.lang.String" value="B&#x1ea1;n &#x111;ang c&#xf3; 10 &#x111;i&#x1ec3;m t&#xed;ch l&#x169;y"/>
                   </Properties>
                 </Component>
-                <Component class="swing.TextField" name="textField8">
+                <Component class="swing.TextField" name="txt_tienkhachdua">
                   <Properties>
                     <Property name="labelText" type="java.lang.String" value="Ti&#x1ec1;n kh&#xe1;ch &#x111;&#x1b0;a"/>
                     <Property name="lineColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -393,7 +399,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="swing.TextField" name="textField9">
+                <Component class="swing.TextField" name="txt_txt_tienthua">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="labelText" type="java.lang.String" value="Ti&#x1ec1;n th&#x1eeb;a"/>
@@ -402,7 +408,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="swing.Button" name="button1">
+                <Component class="swing.Button" name="btn_themkm">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="66" green="66" red="66" type="rgb"/>
@@ -413,7 +419,7 @@
                     <Property name="text" type="java.lang.String" value="Th&#xea;m khuy&#x1ebf;n m&#xe3;i"/>
                   </Properties>
                 </Component>
-                <Component class="swing.TextField" name="textField10">
+                <Component class="swing.TextField" name="txt_makm">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="labelText" type="java.lang.String" value="M&#xe3; khuy&#x1ebf;n m&#xe3;i"/>
@@ -422,7 +428,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="swing.TextField" name="textField11">
+                <Component class="swing.TextField" name="txt_tenkm">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="labelText" type="java.lang.String" value="T&#xea;n khuy&#x1ebf;n m&#xe3;i"/>
@@ -431,7 +437,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="swing.ButtonLG" name="buttonLG1">
+                <Component class="swing.ButtonLG" name="btn_thanhtoan">
                   <Properties>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -622,7 +628,7 @@
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel2" min="-2" pref="153" max="-2" attributes="0"/>
-                                      <Component id="txt_timkiem" alignment="0" min="-2" pref="238" max="-2" attributes="0"/>
+                                      <Component id="txt_sp_timkiem" alignment="0" min="-2" pref="238" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
@@ -636,7 +642,7 @@
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txt_timkiem" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_sp_timkiem" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="tableScrollButton3" pref="89" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -728,7 +734,7 @@
                     </Container>
                   </SubComponents>
                 </Container>
-                <Component class="swing.TextField" name="txt_timkiem">
+                <Component class="swing.TextField" name="txt_sp_timkiem">
                   <Properties>
                     <Property name="labelText" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m s&#x1ea3;n ph&#x1ea9;m"/>
                     <Property name="lineColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -736,7 +742,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="txt_timkiemCaretUpdate"/>
+                    <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="txt_sp_timkiemCaretUpdate"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel2">
@@ -768,9 +774,9 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="tableScrollButton1" pref="523" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
-                                  <Component id="textField1" min="-2" pref="341" max="-2" attributes="0"/>
+                                  <Component id="txt_hd_timkiem" min="-2" pref="341" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="combobox1" max="32767" attributes="0"/>
+                                  <Component id="cb_trangthai" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -784,8 +790,8 @@
                           <Component id="tableScrollButton1" pref="139" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="combobox1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="textField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cb_trangthai" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txt_hd_timkiem" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                       </Group>
@@ -853,12 +859,15 @@
                               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tb_hoadonMouseClicked"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
                   </SubComponents>
                 </Container>
-                <Component class="swing.Combobox" name="combobox1">
+                <Component class="swing.Combobox" name="cb_trangthai">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="5">
@@ -875,7 +884,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="swing.TextField" name="textField1">
+                <Component class="swing.TextField" name="txt_hd_timkiem">
                   <Properties>
                     <Property name="labelText" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m h&#xf3;a &#x111;&#x1a1;n"/>
                   </Properties>

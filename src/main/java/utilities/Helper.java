@@ -44,7 +44,7 @@ public class Helper {
     }
     
     public String formatDate(Date date){
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         String result = format.format(date);
         return result;
     }
