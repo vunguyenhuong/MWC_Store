@@ -232,7 +232,7 @@ public class FrmNhaSanXuat1 extends javax.swing.JPanel {
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
         // TODO add your handling code here:
-         NhaSX n = new NhaSX();
+        NhaSX n = new NhaSX();
         if (checkNull()) {
             return;
         }
@@ -246,8 +246,6 @@ public class FrmNhaSanXuat1 extends javax.swing.JPanel {
                 continue;
             }
         }
-
-            
             n.setTen(txt_Ten.getText());
             n.setNgayThem(new Date());
             n.setNgaySuaCuoi(new Date());
@@ -259,9 +257,7 @@ public class FrmNhaSanXuat1 extends javax.swing.JPanel {
             iNhaSXService.save(n);
             loadToTable(iNhaSXService.getAll());
             helper.alert(this, "Thêm thành công!");
-            clear();
-        
-        
+   
     }//GEN-LAST:event_btn_addActionPerformed
 
     private void txt_TimkiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_TimkiemCaretUpdate
