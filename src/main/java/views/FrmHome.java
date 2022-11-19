@@ -129,7 +129,6 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                         main.showForm(new FrmProfile(nguoiDung));
                     } else if (subMenuIndex == 1) {
 // Đổi MK               
-                        main.showForm(new FrmDoiMatKhau(nguoiDung));
                     }
                 }
                 if (menuIndex == 1) {
@@ -154,7 +153,6 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                     } else if (subMenuIndex == 2) {
 // Loại dép
                         main.showForm(new FrmLoaiDep1());
-
                     } else if (subMenuIndex == 3) {
 // Size
                         main.showForm(new FrmSizeOK());
@@ -995,20 +993,41 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
     }//GEN-LAST:event_chk_tichluyActionPerformed
 
     private void btn_thanhtoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_thanhtoanActionPerformed
-        HoaDon hd = iHoaDonService.getObj(txt_mahd.getText());
-        Double tienKhachDua = Double.parseDouble(txt_tienkhachdua.getText());
-        Double phaiTra = Double.parseDouble(txt_phaitra.getText());
-        if (tienKhachDua >= phaiTra) {
-            hd.setNguoiDungTT(nguoiDung);
-            hd.setTrangThai(1);
-            hd.setNgayThanhToan(new Date());
-            if (helper.confirm(this, "Trả lại khách " + (tienKhachDua - phaiTra) + ". Xác nhận thanh toán " + txt_phaitra.getText() + "?")) {
-                iHoaDonService.save(hd);
-                loadHD(iHoaDonService.getAll());
-                helper.alert(this, "Thanh toán thành công!");
-            }
+        int row = tb_hoadon.getSelectedRow();
+        if (row == -1) {
+            helper.error(this, "Vui lòng chọn hóa đơn cần thanh toán!");
         } else {
-            helper.error(this, "Khách chưa đưa đủ tiền!");
+            HoaDon hd = iHoaDonService.getObj(txt_mahd.getText());
+            Double tienKhachDua = null;
+            Double phaiTra = null;
+            try {
+                if (txt_tienkhachdua.getText().isEmpty()) {
+                    helper.error(this, "Bạn chưa nhập tiền khách đưa!");
+                    return;
+                } else {
+                    tienKhachDua = Double.parseDouble(txt_tienkhachdua.getText());
+                }
+                if (txt_phaitra.getText().isEmpty()) {
+                    helper.error(this, "Vui lòng chọn sản phẩm rồi thanh toán!");
+                    return;
+                } else {
+                    phaiTra = Double.parseDouble(txt_phaitra.getText());
+                }
+            } catch (Exception e) {
+            }
+
+            if (tienKhachDua >= phaiTra) {
+                hd.setNguoiDungTT(nguoiDung);
+                hd.setTrangThai(1);
+                hd.setNgayThanhToan(new Date());
+                if (helper.confirm(this, "Trả lại khách " + (tienKhachDua - phaiTra) + ". Xác nhận thanh toán " + txt_phaitra.getText() + "?")) {
+                    iHoaDonService.save(hd);
+                    loadHD(iHoaDonService.getAll());
+                    helper.alert(this, "Thanh toán thành công!");
+                }
+            } else {
+                helper.error(this, "Khách chưa đưa đủ tiền!");
+            }
         }
     }//GEN-LAST:event_btn_thanhtoanActionPerformed
 
