@@ -283,12 +283,7 @@ public class FrmNhaSanXuat extends javax.swing.JPanel {
                 continue;
             }
         }
-        if (iNhaSXService.getObj(txt_Ma1.getText()) == null) {
-            if (iNhaSXService.getObj(txt_Ma1.getText()) != null) {
-                JOptionPane.showMessageDialog(this, "Da ton tai !");
-                return;
-            }
-            n.setMa(txt_Ma1.getText());
+        
             n.setTen(txt_Ten.getText());
             n.setNgayThem(new Date());
             n.setNgaySuaCuoi(new Date());
@@ -301,7 +296,7 @@ public class FrmNhaSanXuat extends javax.swing.JPanel {
             loadToTable(iNhaSXService.getAll());
             helper.alert(this, "Thêm thành công!");
 
-        }
+         
     }//GEN-LAST:event_btn_ThemActionPerformed
 
     private void txt_TimkiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_TimkiemCaretUpdate

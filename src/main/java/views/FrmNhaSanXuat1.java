@@ -3,12 +3,12 @@ package views;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
-import models.Size;
-import services.ISizeService;
-import services.impl.SizeService;
+import models.NhaSX;
+import services.INhaSXService;
+import services.impl.NhaSXService;
 import swing.Table;
 import utilities.Helper;
 
@@ -16,62 +16,55 @@ import utilities.Helper;
  *
  * @author dell
  */
-public class FrmSizeOK extends javax.swing.JPanel {
+public class FrmNhaSanXuat1 extends javax.swing.JPanel {
     
+    private DefaultTableModel dtm;
+    private INhaSXService iNhaSXService;
     private Helper helper;
-    private ISizeService sizeService = new SizeService();
-    private DefaultTableModel tableModel = new DefaultTableModel();
-    private ButtonGroup group = new ButtonGroup();
     private SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 
     /**
      * Creates new form FrmSizeOK
      */
-    public FrmSizeOK() {
+    public FrmNhaSanXuat1() {
         initComponents();
-        initComponents();
-        tb_DanhSach.getTableHeader().setReorderingAllowed(false);
-        group.add(rd_DangKinhDoanh);
-        group.add(rd_NgungKinhDoanh);
-        loadData(sizeService.getListSize());
+        iNhaSXService = new NhaSXService();
+        loadToTable(iNhaSXService.getAll());
         helper = new Helper();
         Table.apply(jScrollPane1, Table.TableType.MULTI_LINE);
     }
     
-    public void loadData(List<Size> list) {
-        tableModel = (DefaultTableModel) tb_DanhSach.getModel();
-        tableModel.setRowCount(0);
-        for (Size s : list) {
-            tableModel.addRow(new Object[]{
-                s.getMa(),
-                s.getKichCo(),
-                format.format(s.getNgayThem()),
-                format.format(s.getNgaySuaCuoi()),
-                s.getTrangThai() == 0 ? "Đang kinh doanh" : "Ngừng kinh doanh"
+   private void loadToTable(List<NhaSX> list) {
+        dtm = (DefaultTableModel) tblBang.getModel();
+        dtm.setRowCount(0);
+        for (NhaSX x : list) {
+            dtm.addRow(new Object[]{
+                x.getMa(),
+                x.getTen(),
+                format.format(x.getNgayThem()),
+                format.format(x.getNgaySuaCuoi()),
+                x.getTrangThai() == 0 ? "Đang nhập hàng" : "Ngừng nhập hàng"
             });
         }
         lbl_Total.setText("Total: " + list.size());
     }
-
-    public boolean check() {
-
-        if (helper.checkNull(txt_KichCo, "Kích cỡ")) {
+    
+    private boolean checkNull() {
+        if (helper.checkNull(txt_Ten, "Tên")
+                || helper.checkRegex(txt_Ten, "(\\S+ )*\\S+", "Tên không hợp lệ!")) {
             return true;
-        } else {
-            try {
-                float f = Float.parseFloat(txt_KichCo.getText().trim());
-            } catch (NumberFormatException e) {
-                helper.error(this, "Kích cỡ không chứa chữ !");
-                return true;
-            }
-            return false;
+        } else if (!rd_Ngungnhap.isSelected() && !rd_Dangnhap.isSelected()) {
+            helper.error(this, "chưa chọn trạng thái");
+            return true;
         }
+        return false;
+
     }
 
     public void clear() {
-        txt_Ma.setText("");
-        txt_KichCo.setText("");
-        rd_DangKinhDoanh.setSelected(true);
+        txt_Ma1.setText("");
+        txt_Ten.setText("");
+        rd_Dangnhap.setSelected(true);
     }
 
     /**
@@ -84,31 +77,31 @@ public class FrmSizeOK extends javax.swing.JPanel {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        txt_Ma = new swing.TextField();
-        rd_DangKinhDoanh = new swing.RadioButtonCustom();
-        rd_NgungKinhDoanh = new swing.RadioButtonCustom();
+        txt_Ma1 = new swing.TextField();
+        rd_Dangnhap = new swing.RadioButtonCustom();
+        rd_Ngungnhap = new swing.RadioButtonCustom();
         btn_update = new swing.Button();
         btn_add = new swing.Button();
-        txt_search = new swing.TextField();
-        txt_KichCo = new swing.TextField();
+        txt_Timkiem = new swing.TextField();
+        txt_Ten = new swing.TextField();
         tableScrollButton1 = new swing.TableScrollButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tb_DanhSach = new javax.swing.JTable();
+        tblBang = new javax.swing.JTable();
         lbl_Total = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        txt_Ma.setEditable(false);
-        txt_Ma.setToolTipText("");
-        txt_Ma.setLabelText("Mã :");
+        txt_Ma1.setEditable(false);
+        txt_Ma1.setToolTipText("");
+        txt_Ma1.setLabelText("Mã :");
 
-        buttonGroup1.add(rd_DangKinhDoanh);
-        rd_DangKinhDoanh.setSelected(true);
-        rd_DangKinhDoanh.setText("Đang kinh doanh");
+        buttonGroup1.add(rd_Dangnhap);
+        rd_Dangnhap.setSelected(true);
+        rd_Dangnhap.setText("Đang kinh doanh");
 
-        buttonGroup1.add(rd_NgungKinhDoanh);
-        rd_NgungKinhDoanh.setText("Ngừng kinh doanh");
+        buttonGroup1.add(rd_Ngungnhap);
+        rd_Ngungnhap.setText("Ngừng kinh doanh");
 
         btn_update.setText("Update");
         btn_update.addActionListener(new java.awt.event.ActionListener() {
@@ -124,17 +117,17 @@ public class FrmSizeOK extends javax.swing.JPanel {
             }
         });
 
-        txt_search.setLabelText("Search");
-        txt_search.addCaretListener(new javax.swing.event.CaretListener() {
+        txt_Timkiem.setLabelText("Search");
+        txt_Timkiem.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                txt_searchCaretUpdate(evt);
+                txt_TimkiemCaretUpdate(evt);
             }
         });
 
-        txt_KichCo.setToolTipText("");
-        txt_KichCo.setLabelText("Kích cỡ :");
+        txt_Ten.setToolTipText("");
+        txt_Ten.setLabelText("Tên:");
 
-        tb_DanhSach.setModel(new javax.swing.table.DefaultTableModel(
+        tblBang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -142,15 +135,15 @@ public class FrmSizeOK extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Mã", "Kích cỡ", "Ngày thêm", "Ngày sửa cuối", "Trạng thái"
+                "Mã", "Tên", "Ngày thêm", "Ngày sửa cuối", "Trạng thái"
             }
         ));
-        tb_DanhSach.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblBang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tb_DanhSachMouseClicked(evt);
+                tblBangMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tb_DanhSach);
+        jScrollPane1.setViewportView(tblBang);
 
         tableScrollButton1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -158,7 +151,7 @@ public class FrmSizeOK extends javax.swing.JPanel {
         lbl_Total.setText("Total: 0");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("SIZE");
+        jLabel1.setText("NHÀ SẢN XUẤT");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -169,13 +162,13 @@ public class FrmSizeOK extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txt_search, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_KichCo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_Ma, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_Timkiem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_Ten, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_Ma1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rd_NgungKinhDoanh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rd_DangKinhDoanh, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rd_Ngungnhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rd_Dangnhap, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbl_Total))
                         .addGap(18, 18, 18)
                         .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE))
@@ -199,15 +192,15 @@ public class FrmSizeOK extends javax.swing.JPanel {
                     .addComponent(tableScrollButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_Ma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(rd_DangKinhDoanh, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_Ma1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(rd_Dangnhap, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_KichCo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(rd_NgungKinhDoanh, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_Ten, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(rd_Ngungnhap, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_Timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbl_Total))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -219,71 +212,69 @@ public class FrmSizeOK extends javax.swing.JPanel {
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
         // TODO add your handling code here:
-        int row = tb_DanhSach.getSelectedRow();
-        Size size = sizeService.getObj(tb_DanhSach.getValueAt(row, 0).toString());
-        if (check()) {
+         int row = tblBang.getSelectedRow();
+        NhaSX n = iNhaSXService.getObj(tblBang.getValueAt(row, 0).toString());
+        if (checkNull()) {
             return;
         }
-        size.setKichCo(Float.valueOf(txt_KichCo.getText()));
-        size.setNgaySuaCuoi(new Date());
-        if (rd_DangKinhDoanh.isSelected()) {
-            size.setTrangThai(0);
+        n.setTen(txt_Ten.getText());
+        n.setNgaySuaCuoi(new Date());
+        if (rd_Dangnhap.isSelected()) {
+            n.setTrangThai(0);
         } else {
-            size.setTrangThai(1);
+            n.setTrangThai(1);
         }
-        sizeService.save(size);
-        loadData(sizeService.getListSize());
-        helper.alert(this, "Sửa thành công");
+        iNhaSXService.save(n);
+        loadToTable(iNhaSXService.getAll());
+        helper.alert(this, "Sửa thành công!");
         clear();
     }//GEN-LAST:event_btn_updateActionPerformed
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
         // TODO add your handling code here:
-        Size size = new Size();
-        if (check()) {
+        NhaSX n = new NhaSX();
+        if (checkNull()) {
             return;
         }
         String result;
-        for (int i = 0; i < sizeService.getListSize().size() + 1; i++) {
-            result = "SZ" + i;
-            if (sizeService.getObj(result) == null) {
-                size.setMa(result);
+        for (int i = 0; i < iNhaSXService.getAll().size() + 1; i++) {
+            result = "NX" + i;
+            if (iNhaSXService.getObj(result) == null) {
+                n.setMa(result);
                 break;
             } else {
                 continue;
             }
         }
-        size.setKichCo(Float.parseFloat(txt_KichCo.getText()));
-        size.setNgayThem(new Date());
-        size.setNgaySuaCuoi(new Date());
-        if (rd_DangKinhDoanh.isSelected()) {
-            size.setTrangThai(0);
-        } else {
-            size.setTrangThai(1);
-        }
-        sizeService.save(size);
-        loadData(sizeService.getListSize());
-        helper.alert(this, "Thêm thành công");
-        clear();
+            n.setTen(txt_Ten.getText());
+            n.setNgayThem(new Date());
+            n.setNgaySuaCuoi(new Date());
+            if (rd_Dangnhap.isSelected()) {
+                n.setTrangThai(0);
+            } else {
+                n.setTrangThai(1);
+            }
+            iNhaSXService.save(n);
+            loadToTable(iNhaSXService.getAll());
+            helper.alert(this, "Thêm thành công!");
+   
     }//GEN-LAST:event_btn_addActionPerformed
 
-    private void txt_searchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_searchCaretUpdate
+    private void txt_TimkiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_TimkiemCaretUpdate
         // TODO add your handling code here:
         clear();
-        loadData(sizeService.findByName(txt_search.getText()));
-    }//GEN-LAST:event_txt_searchCaretUpdate
+        loadToTable(iNhaSXService.findByName(txt_Timkiem.getText()));
+    }//GEN-LAST:event_txt_TimkiemCaretUpdate
 
-    private void tb_DanhSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_DanhSachMouseClicked
+    private void tblBangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBangMouseClicked
         // TODO add your handling code here:
-        int row = tb_DanhSach.getSelectedRow();
-        txt_Ma.setText(tb_DanhSach.getValueAt(row, 0).toString());
-        txt_KichCo.setText(tb_DanhSach.getValueAt(row, 1).toString());
-        if (tb_DanhSach.getValueAt(row, 4).equals("Đang kinh doanh")) {
-            rd_DangKinhDoanh.setSelected(true);
-        } else {
-            rd_NgungKinhDoanh.setSelected(true);
-        }
-    }//GEN-LAST:event_tb_DanhSachMouseClicked
+        int row = tblBang.getSelectedRow();
+        NhaSX n = iNhaSXService.getObj((String) tblBang.getValueAt(row, 0));
+        txt_Ma1.setText(n.getMa());
+        txt_Ten.setText(n.getTen());
+        rd_Dangnhap.setSelected(n.getTrangThai() == 0);
+        rd_Ngungnhap.setSelected(n.getTrangThai() == 1);
+    }//GEN-LAST:event_tblBangMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -293,12 +284,12 @@ public class FrmSizeOK extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_Total;
-    private swing.RadioButtonCustom rd_DangKinhDoanh;
-    private swing.RadioButtonCustom rd_NgungKinhDoanh;
+    private swing.RadioButtonCustom rd_Dangnhap;
+    private swing.RadioButtonCustom rd_Ngungnhap;
     private swing.TableScrollButton tableScrollButton1;
-    private javax.swing.JTable tb_DanhSach;
-    private swing.TextField txt_KichCo;
-    private swing.TextField txt_Ma;
-    private swing.TextField txt_search;
+    private javax.swing.JTable tblBang;
+    private swing.TextField txt_Ma1;
+    private swing.TextField txt_Ten;
+    private swing.TextField txt_Timkiem;
     // End of variables declaration//GEN-END:variables
 }

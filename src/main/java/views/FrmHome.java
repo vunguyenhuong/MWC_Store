@@ -128,13 +128,13 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                     if (subMenuIndex == 0) {
                         main.showForm(new FrmProfile(nguoiDung));
                     } else if (subMenuIndex == 1) {
-// Đổi MK
+// Đổi MK               
                     }
                 }
                 if (menuIndex == 1) {
-                    if(nguoiDung.getChucVu().getTen().equals("Nhân viên")){
+                    if (nguoiDung.getChucVu().getTen().equals("Nhân viên")) {
                         helper.error(null, "Bạn không có quyền sử dụng chức năng này!");
-                    }else{
+                    } else {
                         main.showForm(new FrmNhanVien());
                     }
                     if (subMenuIndex == 0) {
@@ -152,19 +152,21 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                         main.showForm(new FrmDepOK());
                     } else if (subMenuIndex == 2) {
 // Loại dép
-                        main.showForm(new FrmLoaiDepOK());
+
+                        main.showForm(new FrmLoaiDep1());
+
                     } else if (subMenuIndex == 3) {
 // Size
                         main.showForm(new FrmSizeOK());
                     } else if (subMenuIndex == 4) {
 // Chất liệu
-                        main.showForm(new FrmChatLieuOK());
+                        main.showForm(new FrmChatLieu1());
                     } else if (subMenuIndex == 5) {
 // Màu sắc
-                        main.showForm(new FrmMauSac());
+                        main.showForm(new FrmMauSac1());
                     } else if (subMenuIndex == 6) {
 // NSX
-                        main.showForm(new FrmNhaSanXuat());
+                        main.showForm(new FrmNhaSanXuat1());
                     }
                 }
                 if (menuIndex == 3) {
@@ -301,17 +303,33 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
     }
 
     private void tongTien() {
-        try {
-            Double tongTien = 0.0;
-            Double giamGia = 0.0;
+        int row = tb_giohang.getRowCount();
+        if (row > 0) {
+            double tongTien = 0;
+            double giamGia;
             for (int i = 0; i < tb_giohang.getRowCount(); i++) {
                 tongTien = tongTien + Double.parseDouble(tb_giohang.getValueAt(i, 5).toString());
             }
+            if (txt_giamgia.getText().isEmpty()) {
+                txt_giamgia.setText("0");
+            }
             giamGia = tongTien - Double.parseDouble(txt_giamgia.getText());
-            txt_tongtien.setText(tongTien.toString());
-            txt_phaitra.setText(giamGia.toString());
-        } catch (Exception e) {
+
+            txt_tongtien.setText(String.valueOf(tongTien));
+            txt_phaitra.setText(String.valueOf(giamGia));
+        } else {
+            txt_tongtien.setText("0");
+            txt_phaitra.setText("0");
         }
+//        if()
+//            for (int i = 0; i < tb_giohang.getRowCount(); i++) {
+//                tongTien = tongTien + Double.parseDouble(tb_giohang.getValueAt(i, 5).toString());
+//            }
+//            giamGia = tongTien - Double.parseDouble(txt_giamgia.getText());
+//            txt_tongtien.setText(String.valueOf(tongTien));
+//            txt_phaitra.setText(String.valueOf(giamGia));
+//        } catch (Exception e) {
+//        }
     }
 
     @SuppressWarnings("unchecked")
@@ -338,7 +356,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         chk_tichluy = new swing.JCheckBoxCustom();
         lbl_diemtichluy = new javax.swing.JLabel();
         txt_tienkhachdua = new swing.TextField();
-        txt_txt_tienthua = new swing.TextField();
+        txt_tienthua = new swing.TextField();
         btn_themkm = new swing.Button();
         txt_makm = new swing.TextField();
         txt_tenkm = new swing.TextField();
@@ -379,7 +397,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 639, Short.MAX_VALUE)
+            .addGap(0, 799, Short.MAX_VALUE)
         );
 
         pn_main.add(bg, "general");
@@ -469,10 +487,15 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
 
         txt_tienkhachdua.setLabelText("Tiền khách đưa");
         txt_tienkhachdua.setLineColor(new java.awt.Color(102, 102, 102));
+        txt_tienkhachdua.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txt_tienkhachduaCaretUpdate(evt);
+            }
+        });
 
-        txt_txt_tienthua.setEditable(false);
-        txt_txt_tienthua.setLabelText("Tiền thừa");
-        txt_txt_tienthua.setLineColor(new java.awt.Color(102, 102, 102));
+        txt_tienthua.setEditable(false);
+        txt_tienthua.setLabelText("Tiền thừa");
+        txt_tienthua.setLineColor(new java.awt.Color(102, 102, 102));
 
         btn_themkm.setBackground(new java.awt.Color(102, 102, 102));
         btn_themkm.setForeground(new java.awt.Color(255, 255, 255));
@@ -529,7 +552,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txt_tienkhachdua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_txt_tienthua, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_tienthua, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btn_themkm, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
@@ -578,8 +601,8 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_themkm, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_txt_tienthua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                    .addComponent(txt_tienthua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
                 .addComponent(btn_thanhtoan, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -595,6 +618,11 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 "STT", "Mã SP", "Tên SP", "Số lượng", "Đơn giá", "Thành tiền"
             }
         ));
+        tb_giohang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_giohangMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tb_giohang);
 
         tableScrollButton2.add(jScrollPane2, java.awt.BorderLayout.CENTER);
@@ -699,7 +727,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_sp_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tableScrollButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                .addComponent(tableScrollButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -805,7 +833,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pn_main, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pn_main, javax.swing.GroupLayout.DEFAULT_SIZE, 799, Short.MAX_VALUE)
         );
 
         pack();
@@ -902,7 +930,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             } else {
                 ctd = iChiTietDepService.findByTT(0, txt_sp_timkiem.getText()).get(row);
             }
-            if (hd.getTrangThai() == 1 || cb_trangthai.getSelectedItem().equals("Đã thanh toán")) {
+            if (hd.getTrangThai() == 1) {
                 helper.error(this, "Hóa đơn đã được thanh toán!");
                 return;
             }
@@ -963,20 +991,129 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
 
     private void chk_tichluyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chk_tichluyActionPerformed
         if (chk_tichluy.isSelected()) {
-            helper.alert(this, "Bạn vừa chọn tích luy");
+            helper.alert(this, "Bạn vừa chọn tích lũy");
         } else {
             helper.error(this, "Bạn vừa hủy");
         }
+        tongTien();
     }//GEN-LAST:event_chk_tichluyActionPerformed
 
     private void btn_thanhtoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_thanhtoanActionPerformed
-        HoaDon hd = iHoaDonService.getObj(txt_mahd.getText());
-        hd.setNguoiDungTT(nguoiDung);
-        hd.setTrangThai(1);
-        hd.setNgayThanhToan(new Date());
-        iHoaDonService.save(hd);
-        loadHD(iHoaDonService.getAll());
+        int row = tb_hoadon.getSelectedRow();
+        if (row == -1) {
+            helper.error(this, "Vui lòng chọn hóa đơn cần thanh toán!");
+        } else {
+            HoaDon hd = iHoaDonService.getObj(txt_mahd.getText());
+            if (hd.getTrangThai() == 1) {
+                helper.error(this, "Hóa đơn đã được thanh toán!");
+                return;
+            }
+            if (tb_giohang.getRowCount() == 0) {
+                helper.error(this, "Giỏ hàng trống!");
+                return;
+            }
+            Double tienKhachDua = null;
+            Double phaiTra = null;
+            try {
+                if (txt_tienkhachdua.getText().isEmpty()) {
+                    helper.error(this, "Bạn chưa nhập tiền khách đưa!");
+                    return;
+                } else {
+                    tienKhachDua = Double.parseDouble(txt_tienkhachdua.getText());
+                }
+                if (txt_phaitra.getText().isEmpty()) {
+                    helper.error(this, "Vui lòng chọn sản phẩm rồi thanh toán!");
+                    return;
+                } else {
+                    phaiTra = Double.parseDouble(txt_phaitra.getText());
+                }
+            } catch (Exception e) {
+            }
+
+            if (tienKhachDua >= phaiTra) {
+                if (helper.confirm(this, "Trả lại khách " + (tienKhachDua - phaiTra) + ". Xác nhận thanh toán " + txt_phaitra.getText() + "?")) {
+                    hd.setNguoiDungTT(nguoiDung);
+                    hd.setTrangThai(1);
+                    hd.setNgayThanhToan(new Date());
+                    iHoaDonService.save(hd);
+                    loadHD(iHoaDonService.getAll());
+                    helper.alert(this, "Thanh toán thành công!");
+                    txt_tienkhachdua.setText("");
+                    txt_tienthua.setText("");
+                }
+            } else {
+                helper.error(this, "Khách chưa đưa đủ tiền!");
+            }
+        }
     }//GEN-LAST:event_btn_thanhtoanActionPerformed
+
+    private void txt_tienkhachduaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_tienkhachduaCaretUpdate
+        Double tongTien = null;
+        Double tienKhachDua = null;
+        try {
+            tongTien = Double.parseDouble(txt_phaitra.getText());
+            tienKhachDua = Double.parseDouble(txt_tienkhachdua.getText());
+            Double tienThua = tienKhachDua - tongTien;
+            txt_tienthua.setText(tienThua.toString());
+        } catch (Exception e) {
+            txt_tienthua.setText("-" + tongTien);
+        }
+    }//GEN-LAST:event_txt_tienkhachduaCaretUpdate
+
+    private void tb_giohangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_giohangMouseClicked
+        Integer soLuong;
+        int rowGH = tb_giohang.getSelectedRow();
+        int rowHD = tb_hoadon.getSelectedRow();
+        HoaDon hd = iHoaDonService.getObj((String) tb_hoadon.getValueAt(rowHD, 0));
+        System.out.println(hd.getTrangThai());
+        if (hd.getTrangThai() == 1) {
+            tb_giohang.clearSelection();
+            helper.error(this, "Hóa đơn đã được thanh toán");
+        } else {
+            HoaDonChiTiet hdct = iHoaDonCTService.findByMa(txt_mahd.getText()).get(rowGH);
+            ChiTietDep ctd = iChiTietDepService.getObj(hdct.getCtdep().getId());
+            String inputSL = helper.input(this, "Cập nhật lại số lượng", "Nhập số lượng");
+            try {
+                soLuong = Integer.parseInt(inputSL);
+                if (ctd.getSoLuong() == 0) {
+                    if (soLuong > hdct.getSoLuong()) {
+                        helper.error(this, "Quá số lượng cho phép!");
+                        return;
+                    }
+                } else if (soLuong > ctd.getSoLuong()) {
+                    helper.error(this, "Quá số lượng cho phép!");
+                    return;
+                }
+            } catch (Exception e) {
+                helper.error(this, "Vui lòng nhập lại!");
+                return;
+            }
+
+            if (soLuong == 0) {
+                if (helper.confirm(this, "Xác nhận xóa " + hdct.getCtdep().getDep().getTen() + " khỏi giỏ hàng ?")) {
+                    ctd.setSoLuong(ctd.getSoLuong() + hdct.getSoLuong());
+                    iHoaDonCTService.delete(hdct);
+                    iChiTietDepService.save(ctd);
+                    loadGioHang(txt_mahd.getText());
+                    loadSP(iChiTietDepService.getAll());
+                    tongTien();
+                    helper.alert(this, "Xóa thành công!");
+                }
+            } else if (soLuong < 0) {
+                helper.error(this, "Vui lòng nhập lại!");
+            } else {
+                ctd.setSoLuong(ctd.getSoLuong() + hdct.getSoLuong() - soLuong);
+                iChiTietDepService.save(ctd);
+                hdct.setSoLuong(soLuong);
+                iHoaDonCTService.save(hdct);
+                loadGioHang(hd.getMa());
+                loadSP(iChiTietDepService.getAll());
+                checkSearchSP = 0;
+                tongTien();
+                helper.alert(this, "Cập nhật thành công!");
+            }
+        }
+    }//GEN-LAST:event_tb_giohangMouseClicked
 
     public static void main(String args[]) {
         try {
@@ -1041,8 +1178,8 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
     private swing.TextField txt_tenkh;
     private swing.TextField txt_tenkm;
     private swing.TextField txt_tienkhachdua;
+    private swing.TextField txt_tienthua;
     private swing.TextField txt_tongtien;
-    private swing.TextField txt_txt_tienthua;
     // End of variables declaration//GEN-END:variables
 
     public void initWebcam(JPanel panelShow) {

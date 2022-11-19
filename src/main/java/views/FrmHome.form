@@ -59,7 +59,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="639" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="799" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -202,7 +202,7 @@
                               <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="txt_tienkhachdua" linkSize="1" max="32767" attributes="0"/>
-                                      <Component id="txt_txt_tienthua" alignment="0" min="-2" pref="207" max="-2" attributes="0"/>
+                                      <Component id="txt_tienthua" alignment="0" min="-2" pref="207" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -262,9 +262,9 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btn_themkm" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
-                              <Component id="txt_txt_tienthua" alignment="3" max="32767" attributes="0"/>
+                              <Component id="txt_tienthua" alignment="3" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="28" max="32767" attributes="0"/>
+                          <EmptySpace pref="188" max="32767" attributes="0"/>
                           <Component id="btn_thanhtoan" min="-2" pref="35" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -402,8 +402,11 @@
                       <Color blue="66" green="66" red="66" type="rgb"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="txt_tienkhachduaCaretUpdate"/>
+                  </Events>
                 </Component>
-                <Component class="swing.TextField" name="txt_txt_tienthua">
+                <Component class="swing.TextField" name="txt_tienthua">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="labelText" type="java.lang.String" value="Ti&#x1ec1;n th&#x1eeb;a"/>
@@ -577,6 +580,9 @@
                               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tb_giohangMouseClicked"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -654,7 +660,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="txt_sp_timkiem" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="tableScrollButton3" pref="89" max="32767" attributes="0"/>
+                          <Component id="tableScrollButton3" pref="249" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
