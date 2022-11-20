@@ -318,13 +318,13 @@ public class FrmKhuyenMai extends java.awt.Dialog {
     private KhuyenMai getForm() {
         String result = "MWCSTORES" + txt_Ma.getText().toUpperCase();
         KhuyenMai km = new KhuyenMai();
-        km.setMa(txt_Ma.getText());
+        km.setMa(txt_Ma.getText().toUpperCase());
         km.setTen(txt_TenKM.getText());
         km.setSoLuong((int) sp_SoLuong.getValue());
         km.setPhantramgiam(Float.parseFloat(txt_PhanTramGiam.getText()));
         km.setNgayBatDau(date_NgayBatDau.getDate());
         km.setNgayKetThuc(date_NgayKetThuc.getDate());
-        km.setHinhAnh(txt_Ma.getText() + ".png");
+        km.setHinhAnh(txt_Ma.getText().toUpperCase() + ".png");
         try {
             String filePath = "images/voucher/" + txt_Ma.getText().toUpperCase() + ".png";
             String charset = "UTF-8";
