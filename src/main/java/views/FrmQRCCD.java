@@ -28,6 +28,7 @@ import services.IChucVuService;
 import services.INguoiDungService;
 import services.impl.ChucVuService;
 import services.impl.NguoiDungService;
+import ui.NotificationMess;
 import utilities.Helper;
 
 /**
@@ -35,28 +36,28 @@ import utilities.Helper;
  * @author VU NGUYEN HUONG
  */
 public class FrmQRCCD extends javax.swing.JFrame implements Runnable, ThreadFactory {
-    
+
     private static final long serialVersionUID = 6441489157408381878L;
     private Executor executor = Executors.newSingleThreadExecutor(this);
     private Webcam webcam = null;
     private WebcamPanel panel = null;
-    
+
     private INguoiDungService iNguoiDungService = new NguoiDungService();
     private IChucVuService iChucVuService = new ChucVuService();
     private Helper helper = new Helper();
     private NguoiDung nguoiDung = new NguoiDung();
-    
+
     public FrmQRCCD() {
         initComponents();
         initWebcam(pn_webcam);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
-    
+
     public NguoiDung getNguoiDung() {
         return nguoiDung;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -150,17 +151,17 @@ public class FrmQRCCD extends javax.swing.JFrame implements Runnable, ThreadFact
         Dimension size = WebcamResolution.QVGA.getSize();
         webcam = Webcam.getWebcams().get(0); //0 is default webcam
         webcam.setViewSize(size);
-        
+
         panel = new WebcamPanel(webcam);
         panel.setPreferredSize(size);
         panel.setFPSDisplayed(true);
         panel.setMirrored(true);
-        
+
         panelShow.add(panel, new AbsoluteConstraints(0, 0, panelShow.getWidth(), panelShow.getHeight()));
-        
+
         executor.execute(this);
     }
-    
+
     @Override
     public void run() {
         while (true) {
@@ -169,26 +170,26 @@ public class FrmQRCCD extends javax.swing.JFrame implements Runnable, ThreadFact
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            
+
             Result result = null;
             BufferedImage image = null;
-            
+
             if (webcam.isOpen()) {
-                
+
                 if ((image = webcam.getImage()) == null) {
                     continue;
                 }
-                
+
                 LuminanceSource source = new BufferedImageLuminanceSource(image);
                 BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-                
+
                 try {
                     result = new MultiFormatReader().decode(bitmap);
                 } catch (NotFoundException e) {
                     // fall thru, it means there is no QR code in image
                 }
             }
-            
+
             if (result != null) {
                 try {
                     System.out.println(result.getText());
@@ -196,7 +197,8 @@ public class FrmQRCCD extends javax.swing.JFrame implements Runnable, ThreadFact
                     String withoutTen = input.substring(14, input.length());
                     String[] splits = withoutTen.split("[|]");
                     if (iNguoiDungService.getObj(input.substring(0, 12)) != null) {
-                        helper.error(this, "Đã tồn tại trong danh sách!");
+                        NotificationMess panel = new NotificationMess(new FrmQRCCD(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Đã tồn tại trong danh sách!");
+                        panel.showNotification();
                     } else {
                         nguoiDung.setMa(input.substring(0, 12));
                         nguoiDung.setTen(splits[0]);
@@ -213,19 +215,20 @@ public class FrmQRCCD extends javax.swing.JFrame implements Runnable, ThreadFact
                                 nguoiDung.setHinhAnh("defaultavt.jpg");
                                 nguoiDung.setMatKhau(UUID.randomUUID().toString().substring(0, 8));
                                 iNguoiDungService.save(nguoiDung);
-                                helper.alert(this, "Thêm thành công!");
+                                NotificationMess panel = new NotificationMess(new FrmQRCCD(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Thêm thành công!");
+                        panel.showNotification();
                                 webcam.close();
                                 this.dispose();
                             }
                         }
                     }
                 } catch (Exception e) {
-                    
+
                 }
             }
         }
     }
-    
+
     @Override
     public Thread newThread(Runnable r) {
         Thread t = new Thread(r, "example-runner");

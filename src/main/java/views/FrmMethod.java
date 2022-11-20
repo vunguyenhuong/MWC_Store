@@ -34,7 +34,7 @@ public class FrmMethod extends javax.swing.JFrame {
     private INguoiDungService iNguoiDungService = new NguoiDungService();
     private MigLayout layout;
     private PanelCover cover;
-    String icon1 = "images/suportUI/loading1.gif";
+    String icon1 = "images/suportUI/loading3.gif";
     String icon2 = "images/suportUI/loading.gif";
     private final PanelLoading loading1 = new PanelLoading(new ImageIcon(icon1));
     private final PanelLoading loading2 = new PanelLoading(new ImageIcon(icon2));
@@ -154,7 +154,7 @@ public class FrmMethod extends javax.swing.JFrame {
                                 bg.setLayer(loading1, JLayeredPane.POPUP_LAYER);
                                 bg.add(loading1, "pos 0 0 100% 100%");
                                 loading1.setVisible(true);
-                                Thread.sleep(2350);
+                                Thread.sleep(3100);
                                 new FrmHome(nd).setVisible(true);
                                 dispose();
                             } catch (InterruptedException e) {
