@@ -1,6 +1,6 @@
 package swing;
 
-import UI.ModernScrollBarUILogin;
+import ui.ModernScrollBarUILogin;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JScrollBar;

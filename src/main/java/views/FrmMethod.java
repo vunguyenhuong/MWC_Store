@@ -1,9 +1,9 @@
 package views;
 
-import UI.Message;
-import UI.PanelCover;
-import UI.PanelLoading;
-import UI.PanelLoginAndResetPass;
+import ui.Message;
+import ui.PanelCover;
+import ui.PanelLoading;
+import ui.PanelLoginAndResetPass;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;

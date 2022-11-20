@@ -1,13 +1,13 @@
 package views;
 
-import UI.EventMenuSelected;
-import UI.EventShowPopupMenu;
-import UI.Header;
-import UI.MainForm;
-import UI.Menu;
-import UI.MenuItem;
-import UI.NotificationMess;
-import UI.PopupMenu;
+import ui.EventMenuSelected;
+import ui.EventShowPopupMenu;
+import ui.Header;
+import ui.MainForm;
+import ui.Menu;
+import ui.MenuItem;
+import ui.NotificationMess;
+import ui.PopupMenu;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
 import com.github.sarxos.webcam.WebcamResolution;
