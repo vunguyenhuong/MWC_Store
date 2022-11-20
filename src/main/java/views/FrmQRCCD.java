@@ -50,10 +50,7 @@ public class FrmQRCCD extends javax.swing.JFrame implements Runnable, ThreadFact
         initComponents();
         initWebcam(pn_webcam);
         setLocationRelativeTo(null);
-<<<<<<< HEAD:src/main/java/views/FrmQRCCD.java
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-=======
->>>>>>> d67b381d456af11a7e61fdd7eedeb64f3ce72317:src/main/java/views/AAA.java
     }
     
     public NguoiDung getNguoiDung() {
