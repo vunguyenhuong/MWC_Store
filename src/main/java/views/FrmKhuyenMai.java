@@ -9,9 +9,6 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -34,7 +31,7 @@ public class FrmKhuyenMai extends java.awt.Dialog {
     private DefaultTableModel defaultTableModel = new DefaultTableModel();
     private IKhuyenMaiService iKhuyenMaiService = new KhuyenMaiService();
     private Helper helper = new Helper();
-    public KhuyenMai khuyenMai;
+    private KhuyenMai khuyenMai;
 
     public FrmKhuyenMai(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -494,4 +491,13 @@ public class FrmKhuyenMai extends java.awt.Dialog {
     private swing.TextField txt_Search;
     private swing.TextField txt_TenKM;
     // End of variables declaration//GEN-END:variables
+    public KhuyenMai getKM() {
+        if (khuyenMai == null) {
+            return null;
+        } else if (khuyenMai.getSoLuong() > 0) {
+            return khuyenMai;
+        } else {
+            return null;
+        }
+    }
 }
