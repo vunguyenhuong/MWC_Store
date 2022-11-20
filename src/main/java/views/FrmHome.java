@@ -6,6 +6,7 @@ import UI.Header;
 import UI.MainForm;
 import UI.Menu;
 import UI.MenuItem;
+import UI.NotificationMess;
 import UI.PopupMenu;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
@@ -77,7 +78,6 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
     private NguoiDung nguoiDung = new NguoiDung();
     private KhachHang khachHang = null;
     private KhuyenMai khuyenMai = null;
-
     private DefaultTableModel defaultTableModel;
     private IChiTietDepService iChiTietDepService = new ChiTietDepService();
     private IHoaDonService iHoaDonService = new HoaDonService();
@@ -139,7 +139,8 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 }
                 if (menuIndex == 1) {
                     if (nguoiDung.getChucVu().getTen().equals("Nhân viên")) {
-                        helper.error(null, "Bạn không có quyền sử dụng chức năng này!");
+                        NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.CENTER, "Bạn không có quyền sử dụng chức năng này! ");
+                        panel.showNotification();
                     } else {
                         main.showForm(new FrmNhanVien());
                     }
@@ -344,7 +345,8 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         String inPutSL = null;
         Integer soLuongNhap;
         if (rowHD == -1) {
-            helper.error(this, "Vui lòng chọn hóa đơn cần thêm!");
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Vui lòng chọn hóa đơn cần thêm ! ");
+            panel.showNotification();
         } else {
             HoaDon hd = iHoaDonService.getObj((String) tb_hoadon.getValueAt(rowHD, 0));
             ChiTietDep ctd;
@@ -354,21 +356,25 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 ctd = iChiTietDepService.findByTT(0, txt_sp_timkiem.getText()).get(row);
             }
             if (hd.getTrangThai() == 1) {
-                helper.error(this, "Hóa đơn đã được thanh toán!");
+                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Hóa đơn đã được thanh toán ! ");
+                panel.showNotification();
                 return;
             }
             inPutSL = helper.input(this, "Vui lòng nhập số lượng: ", "Số lượng");
             try {
                 soLuongNhap = Integer.parseInt(inPutSL);
                 if (soLuongNhap <= 0) {
-                    helper.error(this, "Vui lòng nhập lại!");
+                    NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Vui lòng nhập lại ! ");
+                    panel.showNotification();
                     return;
                 } else if (soLuongNhap > ctd.getSoLuong()) {
-                    helper.error(this, "Quá số lượng cho phép!");
+                    NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Quá số lượng cho phép !");
+                    panel.showNotification();
                     return;
                 }
             } catch (Exception e) {
-                helper.error(this, "Vui lòng nhập lại!");
+                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Vui lòng nhập lại !");
+                panel.showNotification();
                 return;
             }
             if (iHoaDonCTService.getobj(ctd.getId(), hd.getId()) == null) {
@@ -727,6 +733,11 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         bnt_gh_xoatatca.setBackground(new java.awt.Color(102, 102, 102));
         bnt_gh_xoatatca.setForeground(new java.awt.Color(255, 255, 255));
         bnt_gh_xoatatca.setText("Xóa tất cả");
+        bnt_gh_xoatatca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnt_gh_xoatatcaActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Giỏ hàng");
 
@@ -951,7 +962,8 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         fkh.setVisible(true);
         khachHang = fkh.getKH();
         if (khachHang == null) {
-            helper.error(this, "Bạn chưa chọn khách hàng!");
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Bạn chưa chọn khách hàng !");
+            panel.showNotification();
         } else {
             txt_makh.setText(khachHang.getMa());
             txt_tenkh.setText(khachHang.getTen());
@@ -984,7 +996,8 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             hd.setKhachHang(khachHang);
             iHoaDonService.save(hd);
             loadHD(iHoaDonService.getAll());
-            helper.alert(this, "Tạo hóa đơn thành công!");
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Tạo hóa đơn thành công !");
+            panel.showNotification();
         }
     }//GEN-LAST:event_btn_taohdActionPerformed
 
@@ -1009,7 +1022,8 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
     private void btn_gh_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_gh_xoaActionPerformed
         int row = tb_giohang.getSelectedRow();
         if (row == -1) {
-            helper.error(this, "Vui lòng chọn sản phẩm cần xóa khỏi giỏ hàng ?");
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Vui lòng chọn sản phẩm cần xóa khỏi giỏ hàng ?");
+            panel.showNotification();
         } else {
             HoaDonChiTiet hdct = iHoaDonCTService.findByMa(txt_mahd.getText()).get(row);
             ChiTietDep ctd = iChiTietDepService.getObj(hdct.getCtdep().getId());
@@ -1019,16 +1033,19 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 iChiTietDepService.save(ctd);
                 loadGioHang(txt_mahd.getText());
                 loadSP(iChiTietDepService.getAll());
-                helper.alert(this, "Xóa thành công!");
+                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Xóa thành công !");
+                panel.showNotification();
             }
         }
     }//GEN-LAST:event_btn_gh_xoaActionPerformed
 
     private void chk_tichluyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chk_tichluyActionPerformed
         if (chk_tichluy.isSelected()) {
-            helper.alert(this, "Bạn vừa chọn tích lũy");
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Bạn vừa chọn tích lũy ! ");
+            panel.showNotification();
         } else {
-            helper.error(this, "Bạn vừa hủy");
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Bạn vừa hủy !");
+            panel.showNotification();
         }
         tongTien();
     }//GEN-LAST:event_chk_tichluyActionPerformed
@@ -1036,28 +1053,33 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
     private void btn_thanhtoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_thanhtoanActionPerformed
         int row = tb_hoadon.getSelectedRow();
         if (row == -1) {
-            helper.error(this, "Vui lòng chọn hóa đơn cần thanh toán!");
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Vui lòng chọn hóa đơn cần thanh toán !");
+            panel.showNotification();
         } else {
             HoaDon hd = iHoaDonService.getObj(txt_mahd.getText());
             if (hd.getTrangThai() == 1) {
-                helper.error(this, "Hóa đơn đã được thanh toán!");
+                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Hóa đơn đã được thanh toán !");
+                panel.showNotification();
                 return;
             }
             if (tb_giohang.getRowCount() == 0) {
-                helper.error(this, "Giỏ hàng trống!");
+                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Giỏ hàng trống ! ");
+                panel.showNotification();
                 return;
             }
             Double tienKhachDua = null;
             Double phaiTra = null;
             try {
                 if (txt_tienkhachdua.getText().isEmpty()) {
-                    helper.error(this, "Bạn chưa nhập tiền khách đưa!");
+                    NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, " Bạn chưa nhập tiền khách đưa!");
+                    panel.showNotification();
                     return;
                 } else {
                     tienKhachDua = Double.parseDouble(txt_tienkhachdua.getText());
                 }
                 if (txt_phaitra.getText().isEmpty()) {
-                    helper.error(this, "Vui lòng chọn sản phẩm rồi thanh toán!");
+                    NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Vui lòng chọn sản phẩm rồi thanh toán ! ");
+                    panel.showNotification();
                     return;
                 } else {
                     phaiTra = Double.parseDouble(txt_phaitra.getText());
@@ -1080,11 +1102,13 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                     loadHD(iHoaDonService.getAll());
                     iKhachHangService.save(khachHang);
                     iKhuyenMaiService.save(khuyenMai);
-                    helper.alert(this, "Thanh toán thành công!");
+                    NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Thanh toán thành công ! ");
+                    panel.showNotification();
                     clearForm();
                 }
             } else {
-                helper.error(this, "Khách chưa đưa đủ tiền!");
+                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Khách chưa đưa đủ tiền! ");
+                panel.showNotification();
             }
         }
     }//GEN-LAST:event_btn_thanhtoanActionPerformed
@@ -1110,7 +1134,8 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         System.out.println(hd.getTrangThai());
         if (hd.getTrangThai() == 1) {
             tb_giohang.clearSelection();
-            helper.error(this, "Hóa đơn đã được thanh toán");
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Hóa đơn đã được thanh toán ");
+            panel.showNotification();
         } else {
             HoaDonChiTiet hdct = iHoaDonCTService.findByMa(txt_mahd.getText()).get(rowGH);
             ChiTietDep ctd = iChiTietDepService.getObj(hdct.getCtdep().getId());
@@ -1119,15 +1144,18 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 soLuong = Integer.parseInt(inputSL);
                 if (ctd.getSoLuong() == 0) {
                     if (soLuong > hdct.getSoLuong()) {
-                        helper.error(this, "Quá số lượng cho phép!");
+                        NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Quá số lượng cho phép! ");
+                        panel.showNotification();
                         return;
                     }
                 } else if (soLuong > ctd.getSoLuong()) {
-                    helper.error(this, "Quá số lượng cho phép!");
+                    NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Quá số lượng cho phép ! ");
+                    panel.showNotification();
                     return;
                 }
             } catch (Exception e) {
-                helper.error(this, "Vui lòng nhập lại!");
+                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Vui lòng nhập lại! ");
+                panel.showNotification();
                 return;
             }
 
@@ -1140,10 +1168,12 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                     loadSP(iChiTietDepService.getAll());
                     tongTien();
                     txt_tienkhachdua.setText("");
-                    helper.alert(this, "Xóa thành công!");
+                    NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Xóa thành công ! ");
+                    panel.showNotification();
                 }
             } else if (soLuong < 0) {
-                helper.error(this, "Vui lòng nhập lại!");
+                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Vui lòng nhập lại !");
+                panel.showNotification();
             } else {
                 ctd.setSoLuong(ctd.getSoLuong() + hdct.getSoLuong() - soLuong);
                 iChiTietDepService.save(ctd);
@@ -1154,7 +1184,8 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 checkSearchSP = 0;
                 tongTien();
                 txt_tienkhachdua.setText("");
-                helper.alert(this, "Cập nhật thành công!");
+                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công! ");
+                panel.showNotification();
             }
         }
     }//GEN-LAST:event_tb_giohangMouseClicked
@@ -1164,7 +1195,8 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         fkm.setVisible(true);
         khuyenMai = fkm.khuyenMai;
         if (khuyenMai == null) {
-            helper.error(this, "Bạn không chọn khuyến mãi!");
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Bạn không chọn khuyến mãi !");
+            panel.showNotification();
         } else {
             txt_makm.setText(khuyenMai.getMa());
             txt_tenkm.setText(khuyenMai.getTen());
@@ -1178,6 +1210,10 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
     private void tb_sanphamMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_sanphamMousePressed
         addSpToGH();
     }//GEN-LAST:event_tb_sanphamMousePressed
+
+    private void bnt_gh_xoatatcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnt_gh_xoatatcaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bnt_gh_xoatatcaActionPerformed
 
     public static void main(String args[]) {
         try {
@@ -1295,7 +1331,8 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                     for (int i = 0; i < tb_sanpham.getRowCount(); i++) {
                         if (tb_sanpham.getValueAt(i, 1).equals(maSP)) {
                             tb_sanpham.setRowSelectionInterval(i, i);
-                            helper.alert(this, "Đã tìm thấy " + maSP);
+                            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.INFO, NotificationMess.Location.TOP_CENTER, "Đã tìm thấy" + maSP);
+                            panel.showNotification();
                             addSpToGH();
                         }
                     }
@@ -1310,13 +1347,16 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                         if (listKM.get(i).getMa().equals(maKhuyenMai)) {
                             khuyenMai = iKhuyenMaiService.getObj(maKhuyenMai);
                             if (khuyenMai.getSoLuong() == 0) {
-                                helper.error(this, "Đã hết mã khuyến mại");
+                                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Đã hết mã khuyến mại !");
+                                panel.showNotification();
                                 break;
                             } else {
                                 if (txt_makh.getText().isEmpty()) {
-                                    helper.error(this, "Bạn chưa tạo/chọn hóa đơn!");
+                                    NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Bạn chưa tạo/chọn hóa đơn ! ");
+                                    panel.showNotification();
                                 } else if (tb_giohang.getRowCount() == 0) {
-                                    helper.error(this, "Không thể lấy khuyến mãi khi giỏ hàng trống!");
+                                    NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Không thể lấy khuyến mãi khi giỏ hàng trống! ");
+                                    panel.showNotification();
                                 } else {
                                     if (helper.confirm(this, "Đã tìm thấy " + khuyenMai.getMa() + " giảm " + khuyenMai.getPhantramgiam() + "%. Xác nhận sử dụng ?")) {
                                         txt_makm.setText(khuyenMai.getMa());

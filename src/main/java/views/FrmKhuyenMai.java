@@ -318,13 +318,13 @@ public class FrmKhuyenMai extends java.awt.Dialog {
     private KhuyenMai getForm() {
         String result = "MWCSTORES" + txt_Ma.getText().toUpperCase();
         KhuyenMai km = new KhuyenMai();
-        km.setMa(txt_Ma.getText());
+        km.setMa(txt_Ma.getText().toUpperCase());
         km.setTen(txt_TenKM.getText());
         km.setSoLuong((int) sp_SoLuong.getValue());
         km.setPhantramgiam(Float.parseFloat(txt_PhanTramGiam.getText()));
         km.setNgayBatDau(date_NgayBatDau.getDate());
         km.setNgayKetThuc(date_NgayKetThuc.getDate());
-        km.setHinhAnh(txt_Ma.getText() + ".png");
+        km.setHinhAnh(txt_Ma.getText().toUpperCase() + ".png");
         try {
             String filePath = "images/voucher/" + txt_Ma.getText().toUpperCase() + ".png";
             String charset = "UTF-8";
@@ -404,6 +404,7 @@ public class FrmKhuyenMai extends java.awt.Dialog {
             helper.error(this, "Vui lòng chọn khuyến mại!");
         } else if (soLuong == 0) {
             helper.error(this, "Đã hết mã khuyến mại!");
+            return;
         } else {
             KhuyenMai km = iKhuyenMaiService.getObj((String) tb_danhSach.getValueAt(row, 0));
             helper.alert(this, "Thêm thành công!");
