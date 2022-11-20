@@ -29,7 +29,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -167,7 +166,6 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
 // Loại dép
 
                         main.showForm(new FrmLoaiDep1());
-
                     } else if (subMenuIndex == 3) {
 // Size
                         main.showForm(new FrmSizeOK());
