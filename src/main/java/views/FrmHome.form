@@ -270,9 +270,9 @@
                                   <EmptySpace min="-2" pref="133" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="btn_themkm" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="lbl_removekm" alignment="1" min="-2" pref="46" max="-2" attributes="0"/>
+                                      <Component id="btn_themkm" min="-2" pref="46" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
@@ -568,7 +568,7 @@
                                 <Column editable="false" title="T&#xea;n SP" type="java.lang.Object"/>
                                 <Column editable="false" title="S&#x1ed1; l&#x1b0;&#x1ee3;ng" type="java.lang.Object"/>
                                 <Column editable="false" title="&#x110;&#x1a1;n gi&#xe1;" type="java.lang.Object"/>
-                                <Column editable="true" title="Th&#xe0;nh ti&#x1ec1;n" type="java.lang.Object"/>
+                                <Column editable="false" title="Th&#xe0;nh ti&#x1ec1;n" type="java.lang.Object"/>
                               </Table>
                             </Property>
                             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -724,7 +724,7 @@
                                 <Column editable="false" title="T&#xea;n" type="java.lang.Object"/>
                                 <Column editable="false" title="Lo&#x1ea1;i" type="java.lang.Object"/>
                                 <Column editable="false" title="Size" type="java.lang.Object"/>
-                                <Column editable="true" title="NSX" type="java.lang.Object"/>
+                                <Column editable="false" title="NSX" type="java.lang.Object"/>
                                 <Column editable="false" title="S&#x1ed1; l&#x1b0;&#x1ee3;ng t&#x1ed3;n" type="java.lang.Object"/>
                                 <Column editable="false" title="&#x110;&#x1a1;n gi&#xe1;" type="java.lang.Object"/>
                               </Table>
