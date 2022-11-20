@@ -40,7 +40,6 @@ public class AAA extends javax.swing.JFrame implements Runnable, ThreadFactory {
         initComponents();
         initWebcam(pn_webcam);
         setLocationRelativeTo(null);
-//        /
     }
 
     /**

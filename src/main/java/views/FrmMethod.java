@@ -1,5 +1,7 @@
 package views;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import ui.Message;
 import ui.PanelCover;
 import ui.PanelLoading;
@@ -46,6 +48,8 @@ public class FrmMethod extends javax.swing.JFrame {
 
     public FrmMethod() {
         initComponents();
+        Image icon = Toolkit.getDefaultToolkit().getImage("images/suportUI/logo.png");
+        this.setIconImage(icon);
         init();
     }
 
