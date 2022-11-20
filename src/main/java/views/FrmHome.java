@@ -476,6 +476,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         txt_hd_timkiem = new swing.TextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("MWC_Store");
         setUndecorated(true);
 
         pn_main.setLayout(new java.awt.CardLayout());

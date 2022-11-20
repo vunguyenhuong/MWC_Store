@@ -275,6 +275,7 @@ public class FrmMethod extends javax.swing.JFrame {
         bg = new javax.swing.JLayeredPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("MWC_Store");
         setUndecorated(true);
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
