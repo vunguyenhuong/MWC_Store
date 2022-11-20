@@ -394,7 +394,6 @@ public class FrmKhuyenMai extends java.awt.Dialog {
     }//GEN-LAST:event_btn_CapNhatActionPerformed
 
     private void btn_ChonKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ChonKhuyenMaiActionPerformed
-        // TODO add your handling code here:
         int row = tb_danhSach.getSelectedRow();
         int soLuong = Integer.parseInt(tb_danhSach.getValueAt(row, 3).toString());
         if (row == -1) {
@@ -403,7 +402,8 @@ public class FrmKhuyenMai extends java.awt.Dialog {
             helper.error(this, "Đã hết mã khuyến mại!");
             return;
         } else {
-            KhuyenMai km = iKhuyenMaiService.getObj((String) tb_danhSach.getValueAt(row, 0));
+            KhuyenMai km = iKhuyenMaiService.getObj(tb_danhSach.getValueAt(row, 0).toString());
+            khuyenMai = km;
             helper.alert(this, "Thêm thành công!");
             this.dispose();
         }
@@ -441,7 +441,6 @@ public class FrmKhuyenMai extends java.awt.Dialog {
         // TODO add your handling code here:
         int row = tb_danhSach.getSelectedRow();
         KhuyenMai km = iKhuyenMaiService.getObj(tb_danhSach.getValueAt(row, 0).toString());
-        khuyenMai = km;
         txt_Ma.setText(km.getMa());
         txt_TenKM.setText(km.getTen());
         txt_PhanTramGiam.setText(String.valueOf(km.getPhantramgiam()));

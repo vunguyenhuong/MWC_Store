@@ -41,9 +41,6 @@ public class HoaDonChiTiet implements Serializable {
 
     @Column
     private BigDecimal donGia;
-    
-    @Column
-    private BigDecimal giamGia;
 
     @Column
     private int soLuong;

@@ -63,6 +63,9 @@ public class HoaDon implements Serializable {
     @Column(name = "trangThai")
     private int trangThai;
     
+    @Column(name = "diemTichLuy")
+    private int diemTichLuy;
+    
     @ManyToOne
     @JoinColumn(name = "IdND")
     private NguoiDung nguoiDung;
