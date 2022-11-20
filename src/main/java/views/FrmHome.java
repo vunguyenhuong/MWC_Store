@@ -19,7 +19,6 @@ import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
 import java.awt.CardLayout;
 import java.awt.Component;
-import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,7 +26,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
-import java.net.URL;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -394,6 +392,27 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             loadGioHang(hd.getMa());
         }
         tongTien();
+    }
+
+    private void clearForm() {
+        tb_giohang.clearSelection();
+        tb_hoadon.clearSelection();
+        tb_sanpham.clearSelection();
+        cb_trangthai.setSelectedIndex(0);
+        khachHang = null;
+        khuyenMai = null;
+        txt_makh.setText("");
+        txt_tenkh.setText("");
+        txt_mahd.setText("");
+        txt_tongtien.setText("");
+        txt_giamgia.setText("");
+        lbl_diemtichluy.setText("Khách hàng lẻ đang có 0 điểm tích lũy");
+        chk_tichluy.setSelected(false);
+        txt_phaitra.setText("");
+        txt_makm.setText("");
+        txt_tenkm.setText("");
+        txt_tienkhachdua.setText("");
+        txt_tienthua.setText("");
     }
 
     @SuppressWarnings("unchecked")
@@ -1062,8 +1081,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                     iKhachHangService.save(khachHang);
                     iKhuyenMaiService.save(khuyenMai);
                     helper.alert(this, "Thanh toán thành công!");
-                    txt_tienkhachdua.setText("");
-                    txt_tienthua.setText("");
+                    clearForm();
                 }
             } else {
                 helper.error(this, "Khách chưa đưa đủ tiền!");
@@ -1295,17 +1313,26 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                                 helper.error(this, "Đã hết mã khuyến mại");
                                 break;
                             } else {
-                                txt_makm.setText(khuyenMai.getMa());
-                                txt_tenkm.setText(khuyenMai.getTen());
-                                Double giamGia = Double.parseDouble(txt_tongtien.getText()) / 100 * khuyenMai.getPhantramgiam();
-                                Double phaiTra = Double.parseDouble(txt_tongtien.getText()) - giamGia;
-                                txt_giamgia.setText(giamGia.toString());
-                                txt_phaitra.setText(phaiTra.toString());
+                                if (txt_makh.getText().isEmpty()) {
+                                    helper.error(this, "Bạn chưa tạo/chọn hóa đơn!");
+                                } else if (tb_giohang.getRowCount() == 0) {
+                                    helper.error(this, "Không thể lấy khuyến mãi khi giỏ hàng trống!");
+                                } else {
+                                    if (helper.confirm(this, "Đã tìm thấy " + khuyenMai.getMa() + " giảm " + khuyenMai.getPhantramgiam() + "%. Xác nhận sử dụng ?")) {
+                                        txt_makm.setText(khuyenMai.getMa());
+                                        txt_tenkm.setText(khuyenMai.getTen());
+                                        Double giamGia = Double.parseDouble(txt_tongtien.getText()) / 100 * khuyenMai.getPhantramgiam();
+                                        Double phaiTra = Double.parseDouble(txt_tongtien.getText()) - giamGia;
+                                        txt_giamgia.setText(giamGia.toString());
+                                        txt_phaitra.setText(phaiTra.toString());
+                                    }
+                                }
                             }
                         }
                     }
                     System.out.println(maKhuyenMai);
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         }
