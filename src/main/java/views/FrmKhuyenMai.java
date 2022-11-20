@@ -404,6 +404,7 @@ public class FrmKhuyenMai extends java.awt.Dialog {
             helper.error(this, "Vui lòng chọn khuyến mại!");
         } else if (soLuong == 0) {
             helper.error(this, "Đã hết mã khuyến mại!");
+            return;
         } else {
             KhuyenMai km = iKhuyenMaiService.getObj((String) tb_danhSach.getValueAt(row, 0));
             helper.alert(this, "Thêm thành công!");
