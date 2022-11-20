@@ -48,6 +48,9 @@ public class NotificationMess extends javax.swing.JComponent {
         } else if (type == Type.INFO) {
             lbIcon.setIcon(new ImageIcon(getClass().getResource("/icons/info.png")));
             lbMessage.setText("Info");
+        } else if (type == Type.ERROR) {
+            lbIcon.setIcon(new ImageIcon(getClass().getResource("/icons/errors.png")));
+            lbMessage.setText("Error");
         } else {
             lbIcon.setIcon(new ImageIcon(getClass().getResource("/icons/warning.png")));
             lbMessage.setText("Warning");
@@ -188,6 +191,8 @@ public class NotificationMess extends javax.swing.JComponent {
             g2.setColor(new Color(18, 163, 24));
         } else if (type == Type.INFO) {
             g2.setColor(new Color(28, 139, 206));
+        } else if (type == Type.ERROR) {
+            g2.setColor(new Color(255, 0, 0));
         } else {
             g2.setColor(new Color(241, 196, 15));
         }
@@ -232,11 +237,12 @@ public class NotificationMess extends javax.swing.JComponent {
 
         panel.setOpaque(false);
 
-        lbMessage.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        lbMessage.setFont(new java.awt.Font("sansserif", 1, 15)); // NOI18N
         lbMessage.setForeground(new java.awt.Color(38, 38, 38));
         lbMessage.setText("Message");
 
-        lbMessageText.setForeground(new java.awt.Color(127, 127, 127));
+        lbMessageText.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbMessageText.setForeground(new java.awt.Color(102, 102, 102));
         lbMessageText.setText("Message Text");
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
@@ -248,14 +254,14 @@ public class NotificationMess extends javax.swing.JComponent {
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbMessage)
                     .addComponent(lbMessageText))
-                .addContainerGap(204, Short.MAX_VALUE))
+                .addContainerGap(199, Short.MAX_VALUE))
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lbMessage)
-                .addGap(3, 3, 3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbMessageText)
                 .addContainerGap())
         );
@@ -301,7 +307,7 @@ public class NotificationMess extends javax.swing.JComponent {
     }//GEN-LAST:event_cmdCloseActionPerformed
 
     public static enum Type {
-        SUCCESS, INFO, WARNING
+        SUCCESS, INFO, WARNING, ERROR
     }
 
     public static enum Location {
