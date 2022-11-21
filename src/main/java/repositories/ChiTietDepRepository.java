@@ -89,5 +89,6 @@ public class ChiTietDepRepository {
         List<ChiTietDep> list = query.getResultList();
         return list;
     }
+    
 
 }

@@ -510,6 +510,7 @@
     <Component class="swing.Button" name="btn_frist">
       <Properties>
         <Property name="text" type="java.lang.String" value="Frist"/>
+        <Property name="actionCommand" type="java.lang.String" value="First"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_fristActionPerformed"/>
