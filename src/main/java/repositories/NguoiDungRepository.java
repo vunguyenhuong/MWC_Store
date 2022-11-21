@@ -3,6 +3,7 @@ package repositories;
 import java.util.List;
 import javax.persistence.Query;
 import models.NguoiDung;
+import org.bridj.cpp.std.list;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import utilities.HibernateUtil;
@@ -15,6 +16,14 @@ public class NguoiDungRepository {
 
     private static final Session session = HibernateUtil.getSessionFactory().openSession();
     private Transaction transaction = session.getTransaction();
+     
+public List<NguoiDung> getListNhanVien(String ma) {
+        Query query = session.createQuery(" SELECT n FROM NguoiDung n WHERE n.chucVu.ma = :ma ");
+        query.setParameter("ma", ma);
+        List<NguoiDung> list = query.getResultList();
+        return list;
+    }
+
 
     public List<NguoiDung> getAll() {
         Query query = session.createQuery("SELECT n FROM NguoiDung n");
@@ -58,10 +67,17 @@ public class NguoiDungRepository {
         }
         return nd;
     }
+    public List<NguoiDung> findByName(String ma,String ten) {
+        Query query = session.createQuery(" SELECT n FROM NguoiDung n WHERE n.chucVu.ma = :ma AND n.ten LIKE :ten ");
+        query.setParameter("ma", ma);
+        query.setParameter("ten", "%" + ten + "%");
+        List<NguoiDung> list = query.getResultList();
+        return list;
+    }
     
     public static void main(String[] args) {
         NguoiDungRepository ndr = new NguoiDungRepository();
-        for (NguoiDung x : ndr.getAll()) {
+        for (NguoiDung x : ndr.getListNhanVien("CV1")) {
             System.out.println(x);
         }
     }
