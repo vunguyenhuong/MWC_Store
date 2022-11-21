@@ -77,9 +77,9 @@ public class FrmDepOK extends javax.swing.JPanel {
         int trangthai;
 
         String result;
-        for (int i = 1; i < iDepService.getList().size() + 1; i++) {
+        for (int i = 0; i < iDepService.getList().size() + 1; i++) {
 
-            result = "SP0" + i;
+            result = "SP" + i;
             if (iDepService.getObj(result) == null) {
                 dep.setMa(result);
                 break;

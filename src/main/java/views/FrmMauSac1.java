@@ -230,7 +230,7 @@ public class FrmMauSac1 extends javax.swing.JPanel {
             return;
         }
         String result;
-        for (int i = 1; i < iMauSacService.getAll().size() + 1; i++) {
+        for (int i = 0; i < iMauSacService.getAll().size() + 1; i++) {
             result = "MS" + i;
             if (iMauSacService.getObj(result) == null) {
                 m.setMa(result);

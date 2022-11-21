@@ -16,6 +16,7 @@ public class FrmNhanVien extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         btn_scanqr = new swing.Button();
         txt_ma = new swing.TextField();
@@ -43,8 +44,10 @@ public class FrmNhanVien extends javax.swing.JPanel {
 
         txt_diachi.setLabelText("Địa chỉ");
 
+        buttonGroup1.add(rd_nam);
         rd_nam.setText("Nam");
 
+        buttonGroup1.add(rd_nu);
         rd_nu.setText("Nữ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -118,6 +121,7 @@ public class FrmNhanVien extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private swing.Button btn_scanqr;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private swing.RadioButtonCustom rd_nam;
     private swing.RadioButtonCustom rd_nu;
