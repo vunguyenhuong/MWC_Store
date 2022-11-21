@@ -146,15 +146,20 @@ public class FrmMethod extends javax.swing.JFrame {
                     showMessage(Message.MessageType.ERROR, "Mật khẩu không chính xác!");
                     return;
                 }
+                if (nd.getTrangThai() == 1) {
+                    showMessage(Message.MessageType.ERROR, "Bạn đã nghỉ làm không thể đăng nhập vào hệ thống !");
+                    return;
+                }
                 if (nd.getMa().equals(username) && nd.getMatKhau().equals(password)) {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
                             try {
+                                showMessage(Message.MessageType.SUCCESS, "Đăng nhập thành công vào hệ thống");
                                 bg.setLayer(loading1, JLayeredPane.POPUP_LAYER);
                                 bg.add(loading1, "pos 0 0 100% 100%");
                                 loading1.setVisible(true);
-                                Thread.sleep(3100);
+                                Thread.sleep(3000);
                                 new FrmHome(nd).setVisible(true);
                                 dispose();
                             } catch (InterruptedException e) {
@@ -186,6 +191,7 @@ public class FrmMethod extends javax.swing.JFrame {
                     showMessage(Message.MessageType.ERROR, "Mã capcha không chính xác!");
                 } else {
                     if (helper.confirm(this, "Mật khẩu mới sẽ được gửi đến " + email + ". Chọn YES để xác nhận!")) {
+                        showMessage(Message.MessageType.SUCCESS, "Đang gửi mật khẩu mới đến Mail của bạn...");
                         sendMail(nd, newPassword);
                         nd.setMatKhau(newPassword);
                         iNguoiDungService.save(nd);
