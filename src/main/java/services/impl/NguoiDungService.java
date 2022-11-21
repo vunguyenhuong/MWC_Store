@@ -33,4 +33,16 @@ public class NguoiDungService implements INguoiDungService {
         return repo.getObj(ma);
     }
 
+    @Override
+    public List<NguoiDung> getListNhanVien(String ma) {
+        return repo.getListNhanVien(ma);
+    }
+
+    @Override
+    public List<NguoiDung> findByName(String ma, String ten) {
+        return repo.findByName(ma, ten);
+    }
+
+   
+
 }
