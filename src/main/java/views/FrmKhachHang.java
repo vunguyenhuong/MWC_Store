@@ -1,5 +1,6 @@
 package views;
 
+import java.awt.Frame;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -7,6 +8,7 @@ import models.KhachHang;
 import services.IKhachHangService;
 import services.impl.KhachHangService;
 import swing.Table;
+import ui.NotificationMess;
 import utilities.Helper;
 
 /**
@@ -291,7 +293,7 @@ public class FrmKhachHang extends java.awt.Dialog {
         // TODO add your handling code here:
         int row = tbl_KhachHang.getSelectedRow();
         if (row == -1) {
-            helper.error(this, "Chọn 1 khách hàng");
+            helper.error(this, "Chọn 1 dòng khách hàng");
             return;
         }
         KhachHang kh = this.getDataFromInput();
@@ -340,7 +342,8 @@ public class FrmKhachHang extends java.awt.Dialog {
             helper.error(this, "Vui lòng chọn khách hàng!");
         } else {
             khachHang = iKhachHangService.getObj((String) tbl_KhachHang.getValueAt(row, 1));
-            helper.alert(this, "Thêm thành công!");
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Chọn thành công khách hàng " + khachHang.getTen());
+            panel.showNotification();
             this.dispose();
         }
     }//GEN-LAST:event_btn_ChonActionPerformed

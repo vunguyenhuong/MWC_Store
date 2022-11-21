@@ -1,61 +1,87 @@
 package views;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import models.MauSac;
-import models.Size;
-import services.IMauSacService;
-import services.ISizeService;
-import services.impl.MauSacService;
-import services.impl.SizeService;
+import models.LoaiDep;
+import services.ILoaiDepService;
+import services.impl.LoaiDepService;
 import swing.Table;
+import ui.NotificationMess;
 import utilities.Helper;
 
 /**
  *
  * @author dell
  */
-public class FrmMauSac1 extends javax.swing.JPanel {
+public class FrmLoaiDep extends javax.swing.JPanel {
 
-    private IMauSacService iMauSacService;
-    private DefaultTableModel dtm;
+    private ILoaiDepService loaidepSV;
+    private DefaultTableModel defaultTableModel;
     private Helper helper;
-    private SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+    private SimpleDateFormat formatD = new SimpleDateFormat("dd-MM-yyyy");
 
     /**
      * Creates new form FrmSizeOK
      */
-    public FrmMauSac1() {
+    public FrmLoaiDep() {
         initComponents();
-        iMauSacService = new MauSacService();
+        loaidepSV = new LoaiDepService();
         helper = new Helper();
-        loadToTable(iMauSacService.getAll());
+        LoadTabale(loaidepSV.getAll());
         Table.apply(jScrollPane1, Table.TableType.MULTI_LINE);
     }
 
-    public boolean check() {
-
-        if (helper.checkNull(txt_Ten, "Kích cỡ")) {
-            return true;
-        } else {
-            try {
-                float f = Float.parseFloat(txt_Ten.getText().trim());
-            } catch (NumberFormatException e) {
-                helper.error(this, "Kích cỡ không chứa chữ !");
-                return true;
-            }
-            return false;
+    public void LoadTabale(List<LoaiDep> list) {
+        defaultTableModel = (DefaultTableModel) tb_Table.getModel();
+        defaultTableModel.setRowCount(0);
+        for (LoaiDep x : list) {
+            Object[] row = {
+                x.getMa(), x.getTen(), formatD.format(x.getNgayThem()), formatD.format(x.getNgaySuaCuoi()),
+                x.getTrangThai() == 0 ? "Đang Kinh Doanh" : "Ngừng Kinh Doanh"
+            };
+            defaultTableModel.addRow(row);
         }
+        lbl_Total.setText("Total:" + list.size());
     }
 
-    public void clear() {
-        txt_Ma.setText("");
-        txt_Ten.setText("");
-        rd_DangKinhDoanh.setSelected(true);
+    private boolean checkNull() {
+        if (helper.checkNull(txt_Ten, "Tên")
+                || helper.checkRegex(txt_Ten, "(\\S+ )*\\S+", "Tên không hợp lệ!")) {
+            return true;
+        }
+        return false;
+
+    }
+
+    private LoaiDep getForm() {
+        LoaiDep loaiDep = new LoaiDep();
+        String result;
+        for (int i = 0; i < loaidepSV.getAll().size() + 1; i++) {
+            result = "LD" + i;
+            if (loaidepSV.getObj(result) == null) {
+                loaiDep.setMa(result);
+                break;
+            } else {
+                continue;
+            }
+        }
+        String ten = txt_Ten.getText();
+        int trangthai;
+        if (rd_DangKinhDoanh.isSelected()) {
+            trangthai = 0;
+        } else {
+            trangthai = 1;
+        }
+        loaiDep.setTen(ten);
+        loaiDep.setNgayThem(new Date());
+        loaiDep.setNgaySuaCuoi(new Date());
+        loaiDep.setTrangThai(trangthai);
+        return loaiDep;
+
     }
 
     /**
@@ -77,7 +103,7 @@ public class FrmMauSac1 extends javax.swing.JPanel {
         txt_Ten = new swing.TextField();
         tableScrollButton1 = new swing.TableScrollButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblBang = new javax.swing.JTable();
+        tb_Table = new javax.swing.JTable();
         lbl_Total = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -94,14 +120,14 @@ public class FrmMauSac1 extends javax.swing.JPanel {
         buttonGroup1.add(rd_NgungKinhDoanh);
         rd_NgungKinhDoanh.setText("Ngừng kinh doanh");
 
-        btn_update.setText("Update");
+        btn_update.setText("Cập nhật");
         btn_update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_updateActionPerformed(evt);
             }
         });
 
-        btn_add.setText("Add");
+        btn_add.setText("Thêm");
         btn_add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_addActionPerformed(evt);
@@ -116,10 +142,9 @@ public class FrmMauSac1 extends javax.swing.JPanel {
         });
 
         txt_Ten.setToolTipText("");
-        txt_Ten.setLabelText("Tên :");
-        txt_Ten.setName(""); // NOI18N
+        txt_Ten.setLabelText("Tên : ");
 
-        tblBang.setModel(new javax.swing.table.DefaultTableModel(
+        tb_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -130,12 +155,12 @@ public class FrmMauSac1 extends javax.swing.JPanel {
                 "Mã", "Tên", "Ngày thêm", "Ngày sửa cuối", "Trạng thái"
             }
         ));
-        tblBang.addMouseListener(new java.awt.event.MouseAdapter() {
+        tb_Table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblBangMouseClicked(evt);
+                tb_TableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tblBang);
+        jScrollPane1.setViewportView(tb_Table);
 
         tableScrollButton1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -143,7 +168,7 @@ public class FrmMauSac1 extends javax.swing.JPanel {
         lbl_Total.setText("Total: 0");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("MÀU SẮC");
+        jLabel1.setText("LOẠI DÉP");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -189,7 +214,7 @@ public class FrmMauSac1 extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txt_Ten, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(rd_NgungKinhDoanh, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(rd_NgungKinhDoanh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -204,72 +229,51 @@ public class FrmMauSac1 extends javax.swing.JPanel {
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
         // TODO add your handling code here:
-         int row = tblBang.getSelectedRow();
-        MauSac m = iMauSacService.getObj(tblBang.getValueAt(row, 0).toString());
-        if (checkNull()) {
+        int row = tb_Table.getSelectedRow();
+        if (row == -1) {
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Chọn 1 dòng loại dép để cập nhật");
+            panel.showNotification();
             return;
         }
-
-        
-        m.setNgaySuaCuoi(new Date());
-        if (rd_DangKinhDoanh.isSelected()) {
-            m.setTrangThai(0);
-        } else {
-            m.setTrangThai(1);
-        }
-        iMauSacService.save(m);
-        loadToTable(iMauSacService.getAll());
-        helper.alert(this, "Sửa thành công!");;
-        clear();
+        LoaiDep loaidep = getForm();
+        LoaiDep loai = loaidepSV.getObj(txt_Ma.getText().trim());
+        loai.setTen(loaidep.getTen());
+        loai.setNgaySuaCuoi(loaidep.getNgaySuaCuoi());
+        loai.setTrangThai(loaidep.getTrangThai());
+        this.loaidepSV.save(loai);
+        LoadTabale(loaidepSV.getAll());
+        NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công");
+        panel.showNotification();
     }//GEN-LAST:event_btn_updateActionPerformed
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
         // TODO add your handling code here:
-         MauSac m = new MauSac();
         if (checkNull()) {
             return;
         }
-        String result;
-        for (int i = 0; i < iMauSacService.getAll().size() + 1; i++) {
-            result = "MS" + i;
-            if (iMauSacService.getObj(result) == null) {
-                m.setMa(result);
-                break;
-            } else {
-                continue;
-            }
-        }
-      
-            m.setTen(txt_Ten.getText());
-            m.setNgayThem(new Date());
-            m.setNgaySuaCuoi(new Date());
-            if (rd_DangKinhDoanh.isSelected()) {
-                m.setTrangThai(0);
-            } else {
-                m.setTrangThai(1);
-            }
-            iMauSacService.save(m);
-            loadToTable(iMauSacService.getAll());
-            helper.alert(this, "Thêm thành công!");
-
-        
+        LoaiDep loaidep = getForm();
+        this.loaidepSV.save(loaidep);
+        LoadTabale(loaidepSV.getAll());
+        NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Thêm thành công");
+        panel.showNotification();
     }//GEN-LAST:event_btn_addActionPerformed
 
     private void txt_searchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_searchCaretUpdate
         // TODO add your handling code here:
-        clear();
-         loadToTable(iMauSacService.findByName(txt_search.getText()));
+        LoadTabale(loaidepSV.findByName(txt_search.getText()));
     }//GEN-LAST:event_txt_searchCaretUpdate
 
-    private void tblBangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBangMouseClicked
+    private void tb_TableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_TableMouseClicked
         // TODO add your handling code here:
-        int row = tblBang.getSelectedRow();
-        MauSac m = iMauSacService.getObj((String) tblBang.getValueAt(row, 0));
-        txt_Ma.setText(m.getMa());
-        txt_Ten.setText(m.getTen());
-        rd_DangKinhDoanh.setSelected(m.getTrangThai() == 0);
-        rd_NgungKinhDoanh.setSelected(m.getTrangThai() == 1);
-    }//GEN-LAST:event_tblBangMouseClicked
+        int row = tb_Table.getSelectedRow();
+        txt_Ma.setText(tb_Table.getValueAt(row, 0).toString());
+        txt_Ten.setText(tb_Table.getValueAt(row, 1).toString());
+        if (tb_Table.getValueAt(row, 4).equals("Đang kinh doanh")) {
+            rd_DangKinhDoanh.setSelected(true);
+        } else {
+            rd_NgungKinhDoanh.setSelected(true);
+        }
+    }//GEN-LAST:event_tb_TableMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -282,35 +286,9 @@ public class FrmMauSac1 extends javax.swing.JPanel {
     private swing.RadioButtonCustom rd_DangKinhDoanh;
     private swing.RadioButtonCustom rd_NgungKinhDoanh;
     private swing.TableScrollButton tableScrollButton1;
-    private javax.swing.JTable tblBang;
+    private javax.swing.JTable tb_Table;
     private swing.TextField txt_Ma;
     private swing.TextField txt_Ten;
     private swing.TextField txt_search;
     // End of variables declaration//GEN-END:variables
-    private void loadToTable(List<MauSac> list) {
-        dtm = (DefaultTableModel) tblBang.getModel();
-        dtm.setRowCount(0);
-        for (MauSac x : list) {
-            dtm.addRow(new Object[]{
-                x.getMa(),
-                x.getTen(),
-                format.format(x.getNgayThem()),
-                format.format(x.getNgaySuaCuoi()),
-                x.getTrangThai() == 0 ? "Đang kinh doanh" : "Ngừng kinh doanh"
-            });
-        }
-        lbl_Total.setText("Total: " + list.size());
-    }
-
-    private boolean checkNull() {
-        if (helper.checkNull(txt_Ten, "Tên")
-                || helper.checkRegex(txt_Ten, "(\\S+ )*\\S+", "Tên không hợp lệ!")) {
-            return true;
-        } else if (!rd_NgungKinhDoanh.isSelected() && !rd_DangKinhDoanh.isSelected()) {
-            helper.error(this, "chưa chọn trạng thái");
-            return true;
-        }
-        return false;
-
-    }
 }

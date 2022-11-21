@@ -1,92 +1,78 @@
 package views;
 
-import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.swing.ButtonGroup;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import models.LoaiDep;
-import services.ILoaiDepService;
-import services.impl.LoaiDepService;
+import models.Size;
+import services.ISizeService;
+import services.impl.SizeService;
 import swing.Table;
+import ui.NotificationMess;
 import utilities.Helper;
 
 /**
  *
  * @author dell
  */
-public class FrmLoaiDep1 extends javax.swing.JPanel {
-    
-    private ILoaiDepService loaidepSV;
-    private DefaultTableModel defaultTableModel;
+public class FrmSize extends javax.swing.JPanel {
+
     private Helper helper;
-    private SimpleDateFormat formatD = new SimpleDateFormat("dd-MM-yyyy");
-    private ButtonGroup btn = new ButtonGroup();
+    private ISizeService sizeService = new SizeService();
+    private DefaultTableModel tableModel = new DefaultTableModel();
+    private ButtonGroup group = new ButtonGroup();
+    private SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 
     /**
      * Creates new form FrmSizeOK
      */
-    public FrmLoaiDep1() {
+    public FrmSize() {
         initComponents();
-        loaidepSV = new LoaiDepService();
+        initComponents();
+        tb_DanhSach.getTableHeader().setReorderingAllowed(false);
+        group.add(rd_DangKinhDoanh);
+        group.add(rd_NgungKinhDoanh);
+        loadData(sizeService.getListSize());
         helper = new Helper();
-        btn.add(rd_DangKinhDoanh);
-        btn.add(rd_NgungKinhDoanh);
-        LoadTabale(loaidepSV.getAll());
         Table.apply(jScrollPane1, Table.TableType.MULTI_LINE);
     }
-    
-    public void LoadTabale(List<LoaiDep> list) {
-        defaultTableModel = (DefaultTableModel) tb_Table.getModel();
-        defaultTableModel.setRowCount(0);
-        for (LoaiDep x : list) {
-            Object[] row = {
-                x.getMa(), x.getTen(), formatD.format(x.getNgayThem()), formatD.format(x.getNgaySuaCuoi()),
-                x.getTrangThai() == 0 ? "Đang Kinh Doanh" : "Ngừng Kinh Doanh"
-            };
-            defaultTableModel.addRow(row);
+
+    public void loadData(List<Size> list) {
+        tableModel = (DefaultTableModel) tb_DanhSach.getModel();
+        tableModel.setRowCount(0);
+        for (Size s : list) {
+            tableModel.addRow(new Object[]{
+                s.getMa(),
+                s.getKichCo(),
+                format.format(s.getNgayThem()),
+                format.format(s.getNgaySuaCuoi()),
+                s.getTrangThai() == 0 ? "Đang kinh doanh" : "Ngừng kinh doanh"
+            });
         }
-        lbl_Total.setText("Total:" + list.size());
+        lbl_Total.setText("Total: " + list.size());
     }
 
-    private boolean checkNull() {
-        if (helper.checkNull(txt_Ten, "Tên")
-                || helper.checkRegex(txt_Ten, "(\\S+ )*\\S+", "Tên không hợp lệ!")) {
-            return true;
-        } else if (!rd_DangKinhDoanh.isSelected() && !rd_NgungKinhDoanh.isSelected()) {
-            helper.error(this, "chưa chọn trạng thái");
-            return true;
-        }
-        return false;
+    public boolean check() {
 
-    }
-
-    private LoaiDep getForm() {
-        LoaiDep loaiDep = new LoaiDep();
-        String result;
-        for (int i = 0; i < loaidepSV.getAll().size() + 1; i++) {
-            result = "LD" + i;
-            if (loaidepSV.getObj(result) == null) {
-                loaiDep.setMa(result);
-                break;
-            } else {
-                continue;
-            }
-        }
-        String ten = txt_Ten.getText();
-        int trangthai;
-        if (rd_DangKinhDoanh.isSelected()) {
-            trangthai = 0;
+        if (helper.checkNull(txt_KichCo, "Kích cỡ")) {
+            return true;
         } else {
-            trangthai = 1;
+            try {
+                float f = Float.parseFloat(txt_KichCo.getText().trim());
+            } catch (NumberFormatException e) {
+                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Kích cỡ không chứa chữ !");
+                panel.showNotification();
+                return true;
+            }
+            return false;
         }
-        loaiDep.setTen(ten);
-        loaiDep.setNgayThem(new Date());
-        loaiDep.setNgaySuaCuoi(new Date());
-        loaiDep.setTrangThai(trangthai);
-        return loaiDep;
+    }
 
+    public void clear() {
+        txt_Ma.setText("");
+        txt_KichCo.setText("");
+        rd_DangKinhDoanh.setSelected(true);
     }
 
     /**
@@ -105,10 +91,10 @@ public class FrmLoaiDep1 extends javax.swing.JPanel {
         btn_update = new swing.Button();
         btn_add = new swing.Button();
         txt_search = new swing.TextField();
-        txt_Ten = new swing.TextField();
+        txt_KichCo = new swing.TextField();
         tableScrollButton1 = new swing.TableScrollButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tb_Table = new javax.swing.JTable();
+        tb_DanhSach = new javax.swing.JTable();
         lbl_Total = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -125,14 +111,14 @@ public class FrmLoaiDep1 extends javax.swing.JPanel {
         buttonGroup1.add(rd_NgungKinhDoanh);
         rd_NgungKinhDoanh.setText("Ngừng kinh doanh");
 
-        btn_update.setText("Update");
+        btn_update.setText("Cập nhật");
         btn_update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_updateActionPerformed(evt);
             }
         });
 
-        btn_add.setText("Add");
+        btn_add.setText("Thêm");
         btn_add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_addActionPerformed(evt);
@@ -146,10 +132,10 @@ public class FrmLoaiDep1 extends javax.swing.JPanel {
             }
         });
 
-        txt_Ten.setToolTipText("");
-        txt_Ten.setLabelText("Tên : ");
+        txt_KichCo.setToolTipText("");
+        txt_KichCo.setLabelText("Kích cỡ :");
 
-        tb_Table.setModel(new javax.swing.table.DefaultTableModel(
+        tb_DanhSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -157,15 +143,15 @@ public class FrmLoaiDep1 extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Mã", "Tên", "Ngày thêm", "Ngày sửa cuối", "Trạng thái"
+                "Mã", "Kích cỡ", "Ngày thêm", "Ngày sửa cuối", "Trạng thái"
             }
         ));
-        tb_Table.addMouseListener(new java.awt.event.MouseAdapter() {
+        tb_DanhSach.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tb_TableMouseClicked(evt);
+                tb_DanhSachMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tb_Table);
+        jScrollPane1.setViewportView(tb_DanhSach);
 
         tableScrollButton1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -173,7 +159,7 @@ public class FrmLoaiDep1 extends javax.swing.JPanel {
         lbl_Total.setText("Total: 0");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("LOẠI DÉP");
+        jLabel1.setText("SIZE");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -185,7 +171,7 @@ public class FrmLoaiDep1 extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txt_search, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_Ten, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_KichCo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txt_Ma, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,7 +204,7 @@ public class FrmLoaiDep1 extends javax.swing.JPanel {
                             .addComponent(rd_DangKinhDoanh, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_Ten, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_KichCo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(rd_NgungKinhDoanh, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -234,48 +220,78 @@ public class FrmLoaiDep1 extends javax.swing.JPanel {
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
         // TODO add your handling code here:
-        int row = tb_Table.getSelectedRow();
+        int row = tb_DanhSach.getSelectedRow();
         if (row == -1) {
-            JOptionPane.showMessageDialog(this, "Chọn 1 dòng sản phẩm");
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Chọn 1 dòng Size để cập nhật");
+            panel.showNotification();
             return;
         }
-        LoaiDep loaidep = getForm();
-        LoaiDep loai = loaidepSV.getObj(txt_Ma.getText().trim());
-        loai.setTen(loaidep.getTen());
-        loai.setNgaySuaCuoi(loaidep.getNgaySuaCuoi());
-        loai.setTrangThai(loaidep.getTrangThai());
-        this.loaidepSV.save(loai);
-        LoadTabale(loaidepSV.getAll());
-        JOptionPane.showMessageDialog(this, "Sửa thành công");
+        Size size = sizeService.getObj(tb_DanhSach.getValueAt(row, 0).toString());
+        if (check()) {
+            return;
+        }
+        size.setKichCo(Float.valueOf(txt_KichCo.getText()));
+        size.setNgaySuaCuoi(new Date());
+        if (rd_DangKinhDoanh.isSelected()) {
+            size.setTrangThai(0);
+        } else {
+            size.setTrangThai(1);
+        }
+        sizeService.save(size);
+        loadData(sizeService.getListSize());
+        NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công");
+        panel.showNotification();
+        clear();
     }//GEN-LAST:event_btn_updateActionPerformed
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
         // TODO add your handling code here:
-        if (checkNull()) {
+        Size size = new Size();
+        if (check()) {
             return;
         }
-        LoaiDep loaidep = getForm();
-        this.loaidepSV.save(loaidep);
-        LoadTabale(loaidepSV.getAll());
-        helper.alert(this, "Thêm thành công");
+        String result;
+        for (int i = 0; i < sizeService.getListSize().size() + 1; i++) {
+            result = "SZ" + i;
+            if (sizeService.getObj(result) == null) {
+                size.setMa(result);
+                break;
+            } else {
+                continue;
+            }
+        }
+        size.setKichCo(Float.parseFloat(txt_KichCo.getText()));
+        size.setNgayThem(new Date());
+        size.setNgaySuaCuoi(new Date());
+        if (rd_DangKinhDoanh.isSelected()) {
+            size.setTrangThai(0);
+        } else {
+            size.setTrangThai(1);
+        }
+        sizeService.save(size);
+        loadData(sizeService.getListSize());
+        NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Thêm thành công");
+        panel.showNotification();
+        clear();
     }//GEN-LAST:event_btn_addActionPerformed
 
     private void txt_searchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_searchCaretUpdate
         // TODO add your handling code here:
-        LoadTabale(loaidepSV.findByName(txt_search.getText()));
+        clear();
+        loadData(sizeService.findByName(txt_search.getText()));
     }//GEN-LAST:event_txt_searchCaretUpdate
 
-    private void tb_TableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_TableMouseClicked
+    private void tb_DanhSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_DanhSachMouseClicked
         // TODO add your handling code here:
-        int row = tb_Table.getSelectedRow();
-        txt_Ma.setText(tb_Table.getValueAt(row, 0).toString());
-        txt_Ten.setText(tb_Table.getValueAt(row, 1).toString());
-        if (tb_Table.getValueAt(row, 4).equals("Đang kinh doanh")) {
+        int row = tb_DanhSach.getSelectedRow();
+        txt_Ma.setText(tb_DanhSach.getValueAt(row, 0).toString());
+        txt_KichCo.setText(tb_DanhSach.getValueAt(row, 1).toString());
+        if (tb_DanhSach.getValueAt(row, 4).equals("Đang kinh doanh")) {
             rd_DangKinhDoanh.setSelected(true);
         } else {
             rd_NgungKinhDoanh.setSelected(true);
         }
-    }//GEN-LAST:event_tb_TableMouseClicked
+    }//GEN-LAST:event_tb_DanhSachMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -288,9 +304,9 @@ public class FrmLoaiDep1 extends javax.swing.JPanel {
     private swing.RadioButtonCustom rd_DangKinhDoanh;
     private swing.RadioButtonCustom rd_NgungKinhDoanh;
     private swing.TableScrollButton tableScrollButton1;
-    private javax.swing.JTable tb_Table;
+    private javax.swing.JTable tb_DanhSach;
+    private swing.TextField txt_KichCo;
     private swing.TextField txt_Ma;
-    private swing.TextField txt_Ten;
     private swing.TextField txt_search;
     // End of variables declaration//GEN-END:variables
 }

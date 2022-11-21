@@ -1,77 +1,67 @@
 package views;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import javax.swing.ButtonGroup;
-import javax.swing.JOptionPane;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
-import models.Size;
-import services.ISizeService;
-import services.impl.SizeService;
+import models.ChatLieu;
+import services.IChatLieuService;
+import services.impl.ChatLieuService;
 import swing.Table;
-import utilities.Helper;
+import ui.NotificationMess;
 
 /**
  *
  * @author dell
  */
-public class FrmSizeOK extends javax.swing.JPanel {
-    
-    private Helper helper;
-    private ISizeService sizeService = new SizeService();
-    private DefaultTableModel tableModel = new DefaultTableModel();
-    private ButtonGroup group = new ButtonGroup();
+public class FrmChatLieu extends javax.swing.JPanel {
+
+    private DefaultTableModel defaultTableModel;
+    private IChatLieuService chatLieuService;
     private SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 
     /**
      * Creates new form FrmSizeOK
      */
-    public FrmSizeOK() {
+    public FrmChatLieu() {
         initComponents();
+        chatLieuService = new ChatLieuService();
         initComponents();
-        tb_DanhSach.getTableHeader().setReorderingAllowed(false);
-        group.add(rd_DangKinhDoanh);
-        group.add(rd_NgungKinhDoanh);
-        loadData(sizeService.getListSize());
-        helper = new Helper();
+        loadTable(chatLieuService.getListSize());
         Table.apply(jScrollPane1, Table.TableType.MULTI_LINE);
     }
-    
-    public void loadData(List<Size> list) {
-        tableModel = (DefaultTableModel) tb_DanhSach.getModel();
-        tableModel.setRowCount(0);
-        for (Size s : list) {
-            tableModel.addRow(new Object[]{
-                s.getMa(),
-                s.getKichCo(),
-                format.format(s.getNgayThem()),
-                format.format(s.getNgaySuaCuoi()),
-                s.getTrangThai() == 0 ? "Đang kinh doanh" : "Ngừng kinh doanh"
+
+    public void loadTable(List<ChatLieu> list) {
+
+        defaultTableModel = (DefaultTableModel) tbl_Table.getModel();
+        defaultTableModel.setRowCount(0);
+        for (ChatLieu chatLieu : list) {
+            defaultTableModel.addRow(new Object[]{
+                chatLieu.getMa(),
+                chatLieu.getTen(),
+                format.format(chatLieu.getNgayThem()),
+                format.format(chatLieu.getNgaySuaCuoi()),
+                chatLieu.getTrangThai() == 0 ? "Đang kinh doanh" : "Ngừng kinh doanh"
             });
         }
         lbl_Total.setText("Total: " + list.size());
     }
 
-    public boolean check() {
-
-        if (helper.checkNull(txt_KichCo, "Kích cỡ")) {
-            return true;
+    public int getTrangThaiInt() {
+        if (rd_DangKinhDoanh.isSelected()) {
+            return 0;
         } else {
-            try {
-                float f = Float.parseFloat(txt_KichCo.getText().trim());
-            } catch (NumberFormatException e) {
-                helper.error(this, "Kích cỡ không chứa chữ !");
-                return true;
-            }
-            return false;
+            return 1;
         }
     }
 
-    public void clear() {
-        txt_Ma.setText("");
-        txt_KichCo.setText("");
-        rd_DangKinhDoanh.setSelected(true);
+    public ChatLieu getdata() {
+        ChatLieu chatLieu = new ChatLieu();
+        chatLieu.setTen(txt_Ten.getText().trim());
+        chatLieu.setTrangThai(getTrangThaiInt());
+        chatLieu.setNgayThem(new Date());
+        chatLieu.setNgaySuaCuoi(new Date());
+        return chatLieu;
     }
 
     /**
@@ -90,10 +80,10 @@ public class FrmSizeOK extends javax.swing.JPanel {
         btn_update = new swing.Button();
         btn_add = new swing.Button();
         txt_search = new swing.TextField();
-        txt_KichCo = new swing.TextField();
+        txt_Ten = new swing.TextField();
         tableScrollButton1 = new swing.TableScrollButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tb_DanhSach = new javax.swing.JTable();
+        tbl_Table = new javax.swing.JTable();
         lbl_Total = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -110,14 +100,14 @@ public class FrmSizeOK extends javax.swing.JPanel {
         buttonGroup1.add(rd_NgungKinhDoanh);
         rd_NgungKinhDoanh.setText("Ngừng kinh doanh");
 
-        btn_update.setText("Update");
+        btn_update.setText("Cập nhật");
         btn_update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_updateActionPerformed(evt);
             }
         });
 
-        btn_add.setText("Add");
+        btn_add.setText("Thêm");
         btn_add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_addActionPerformed(evt);
@@ -131,10 +121,10 @@ public class FrmSizeOK extends javax.swing.JPanel {
             }
         });
 
-        txt_KichCo.setToolTipText("");
-        txt_KichCo.setLabelText("Kích cỡ :");
+        txt_Ten.setToolTipText("");
+        txt_Ten.setLabelText("Tên : ");
 
-        tb_DanhSach.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -142,15 +132,15 @@ public class FrmSizeOK extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Mã", "Kích cỡ", "Ngày thêm", "Ngày sửa cuối", "Trạng thái"
+                "Mã", "Tên", "Ngày thêm", "Ngày sửa cuối", "Trạng thái"
             }
         ));
-        tb_DanhSach.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbl_Table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tb_DanhSachMouseClicked(evt);
+                tbl_TableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tb_DanhSach);
+        jScrollPane1.setViewportView(tbl_Table);
 
         tableScrollButton1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -158,7 +148,7 @@ public class FrmSizeOK extends javax.swing.JPanel {
         lbl_Total.setText("Total: 0");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("SIZE");
+        jLabel1.setText("CHẤT LIỆU");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -170,7 +160,7 @@ public class FrmSizeOK extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txt_search, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_KichCo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_Ten, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txt_Ma, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,7 +193,7 @@ public class FrmSizeOK extends javax.swing.JPanel {
                             .addComponent(rd_DangKinhDoanh, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_KichCo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_Ten, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(rd_NgungKinhDoanh, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -219,71 +209,70 @@ public class FrmSizeOK extends javax.swing.JPanel {
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
         // TODO add your handling code here:
-        int row = tb_DanhSach.getSelectedRow();
-        Size size = sizeService.getObj(tb_DanhSach.getValueAt(row, 0).toString());
-        if (check()) {
+        int row = tbl_Table.getSelectedRow();
+        if (row == -1) {
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Chọn 1 dòng chất liệu để cập nhật");
+            panel.showNotification();
             return;
         }
-        size.setKichCo(Float.valueOf(txt_KichCo.getText()));
-        size.setNgaySuaCuoi(new Date());
-        if (rd_DangKinhDoanh.isSelected()) {
-            size.setTrangThai(0);
-        } else {
-            size.setTrangThai(1);
+        ChatLieu chatLieu = getdata();
+        String ma = tbl_Table.getValueAt(row, 1).toString();
+        if (txt_Ten.getText().trim().length() == 0) {
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Không được sửa rỗng !");
+            panel.showNotification();
+            return;
         }
-        sizeService.save(size);
-        loadData(sizeService.getListSize());
-        helper.alert(this, "Sửa thành công");
-        clear();
+        ChatLieu cl = chatLieuService.getObject(ma);
+        cl.setTen(chatLieu.getTen());
+        cl.setTrangThai(chatLieu.getTrangThai());
+        cl.setNgaySuaCuoi(chatLieu.getNgaySuaCuoi());
+        chatLieuService.save(cl);
+        NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập Nhật Thành Công !");
+        panel.showNotification();
+        loadTable(chatLieuService.getListSize());
     }//GEN-LAST:event_btn_updateActionPerformed
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
         // TODO add your handling code here:
-        Size size = new Size();
-        if (check()) {
-            return;
-        }
+
+        ChatLieu cl = getdata();
         String result;
-        for (int i = 0; i < sizeService.getListSize().size() + 1; i++) {
-            result = "SZ" + i;
-            if (sizeService.getObj(result) == null) {
-                size.setMa(result);
+        for (int i = 0; i < chatLieuService.getListSize().size() + 1; i++) {
+            result = "CL" + i;
+            if (chatLieuService.getObject(result) == null) {
+                cl.setMa(result);
                 break;
             } else {
                 continue;
             }
         }
-        size.setKichCo(Float.parseFloat(txt_KichCo.getText()));
-        size.setNgayThem(new Date());
-        size.setNgaySuaCuoi(new Date());
-        if (rd_DangKinhDoanh.isSelected()) {
-            size.setTrangThai(0);
-        } else {
-            size.setTrangThai(1);
+        if (cl.getTen().length() == 0) {
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Chưa Nhập Tên !");
+            panel.showNotification();
+            return;
         }
-        sizeService.save(size);
-        loadData(sizeService.getListSize());
-        helper.alert(this, "Thêm thành công");
-        clear();
+        chatLieuService.save(cl);
+        NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Thêm thành công");
+        panel.showNotification();
+        loadTable(chatLieuService.getListSize());
     }//GEN-LAST:event_btn_addActionPerformed
 
     private void txt_searchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_searchCaretUpdate
         // TODO add your handling code here:
-        clear();
-        loadData(sizeService.findByName(txt_search.getText()));
+        loadTable(chatLieuService.getSearch(txt_search.getText().trim()));
     }//GEN-LAST:event_txt_searchCaretUpdate
 
-    private void tb_DanhSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_DanhSachMouseClicked
+    private void tbl_TableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_TableMouseClicked
         // TODO add your handling code here:
-        int row = tb_DanhSach.getSelectedRow();
-        txt_Ma.setText(tb_DanhSach.getValueAt(row, 0).toString());
-        txt_KichCo.setText(tb_DanhSach.getValueAt(row, 1).toString());
-        if (tb_DanhSach.getValueAt(row, 4).equals("Đang kinh doanh")) {
+        int row = tbl_Table.getSelectedRow();
+        txt_Ma.setText(tbl_Table.getValueAt(row, 1).toString());
+        txt_Ten.setText(tbl_Table.getValueAt(row, 2).toString());
+        if (tbl_Table.getValueAt(row, 5).toString().equals("Đang kinh doanh")) {
             rd_DangKinhDoanh.setSelected(true);
         } else {
             rd_NgungKinhDoanh.setSelected(true);
         }
-    }//GEN-LAST:event_tb_DanhSachMouseClicked
+    }//GEN-LAST:event_tbl_TableMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -296,9 +285,9 @@ public class FrmSizeOK extends javax.swing.JPanel {
     private swing.RadioButtonCustom rd_DangKinhDoanh;
     private swing.RadioButtonCustom rd_NgungKinhDoanh;
     private swing.TableScrollButton tableScrollButton1;
-    private javax.swing.JTable tb_DanhSach;
-    private swing.TextField txt_KichCo;
+    private javax.swing.JTable tbl_Table;
     private swing.TextField txt_Ma;
+    private swing.TextField txt_Ten;
     private swing.TextField txt_search;
     // End of variables declaration//GEN-END:variables
 }
