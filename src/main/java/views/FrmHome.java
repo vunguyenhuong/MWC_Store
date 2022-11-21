@@ -1047,6 +1047,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             hd.setKhachHang(khachHang);
             iHoaDonService.save(hd);
             loadHD(iHoaDonService.getAll());
+            txt_giamgia.setText("0");
             NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Tạo hóa đơn thành công !");
             panel.showNotification();
         }
