@@ -613,7 +613,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                 ctd.setTrangThai(1);
             }
             iChiTietDepService.save(ctd);
-            loadData(iChiTietDepService.pagination(page, rowCountPerPage));
+            loadData(iChiTietDepService.getAll());
             checkSearchCT = 0;
             helper.alert(this, "Sửa thành công!");
         }
@@ -626,34 +626,59 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         } else {
             checkSearchCT = 1;
         }
+
     }//GEN-LAST:event_txt_timkiemCaretUpdate
 
     private void btn_ctd_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ctd_themActionPerformed
 
-                ChiTietDep ctd = new ChiTietDep();
-                ctd.setDep((Dep) comboDep.getSelectedItem());
-                ctd.setLoaiDep((LoaiDep) comboLoaiDep.getSelectedItem());
-                ctd.setMauSac((MauSac) comboMauSac.getSelectedItem());
-                ctd.setChatLieu((ChatLieu) comboChatLieu.getSelectedItem());
-                ctd.setNhaSX((NhaSX) comboNSX.getSelectedItem());
-                ctd.setSize((Size) comboSize.getSelectedItem());
-                ctd.setMoTa(txt_mota.getText());
-                ctd.setSoLuong((int) sp_soluong.getValue());
-                ctd.setGiaNhap(helper.convertToDecimal(txt_gianhap, "Error!"));
-                ctd.setGiaBan(helper.convertToDecimal(txt_giaban, "Error!"));
-                ctd.setNgayThem(new Date());
-                ctd.setNgaySuaCuoi(new Date());
-                if (rd_ct_dangkd.isSelected()) {
-                    ctd.setTrangThai(0);
-                } else {
-                    ctd.setTrangThai(1);
-                }
-                iChiTietDepService.save(ctd);
-                loadData(iChiTietDepService.getAll());
-                helper.alert(this, "Thêm thành công!");
-                return;
-            
-        
+        Dep dep = (Dep) comboDep.getSelectedItem();
+        ChatLieu chatLieu = (ChatLieu) comboChatLieu.getSelectedItem();
+        MauSac mauSac = (MauSac) comboMauSac.getSelectedItem();
+        Size size = (Size) comboSize.getSelectedItem();
+        LoaiDep loaiDep = (LoaiDep) comboLoaiDep.getSelectedItem();
+        NhaSX nhaSX = (NhaSX) comboNSX.getSelectedItem();
+
+        if (iChiTietDepService.getObjByProperties(dep.getId(), loaiDep.getId(), mauSac.getId(), chatLieu.getId(), nhaSX.getId(), size.getId()) == null) {
+            ChiTietDep ctd = new ChiTietDep();
+            ctd.setDep((Dep) comboDep.getSelectedItem());
+            ctd.setLoaiDep((LoaiDep) comboLoaiDep.getSelectedItem());
+            ctd.setMauSac((MauSac) comboMauSac.getSelectedItem());
+            ctd.setChatLieu((ChatLieu) comboChatLieu.getSelectedItem());
+            ctd.setNhaSX((NhaSX) comboNSX.getSelectedItem());
+            ctd.setSize((Size) comboSize.getSelectedItem());
+            ctd.setMoTa(txt_mota.getText());
+            ctd.setSoLuong((int) sp_soluong.getValue());
+            ctd.setGiaNhap(helper.convertToDecimal(txt_gianhap, "Error!"));
+            ctd.setGiaBan(helper.convertToDecimal(txt_giaban, "Error!"));
+            ctd.setNgayThem(new Date());
+            ctd.setNgaySuaCuoi(new Date());
+            if (rd_ct_dangkd.isSelected()) {
+                ctd.setTrangThai(0);
+            } else {
+                ctd.setTrangThai(1);
+            }
+            iChiTietDepService.save(ctd);
+            loadData(iChiTietDepService.getAll());
+            helper.alert(this, "Thêm thành công!");
+        } else {
+            ChiTietDep ctd = iChiTietDepService.getObjByProperties(dep.getId(), loaiDep.getId(), mauSac.getId(), chatLieu.getId(), nhaSX.getId(), size.getId());
+            int soLuong = (int) sp_soluong.getValue();
+            ctd.setSoLuong(ctd.getSoLuong() + soLuong);
+            ctd.setMoTa(txt_mota.getText());
+            ctd.setGiaNhap(helper.convertToDecimal(txt_gianhap, "Error!"));
+            ctd.setGiaBan(helper.convertToDecimal(txt_giaban, "Error!"));
+            ctd.setNgayThem(new Date());
+            ctd.setNgaySuaCuoi(new Date());
+            if (rd_ct_dangkd.isSelected()) {
+                ctd.setTrangThai(0);
+            } else {
+                ctd.setTrangThai(1);
+            }
+            iChiTietDepService.save(ctd);
+            loadData(iChiTietDepService.getAll());
+            helper.alert(this, "Sp đã tồn tại, cập nhật sl!");
+        }
+
 
     }//GEN-LAST:event_btn_ctd_themActionPerformed
 

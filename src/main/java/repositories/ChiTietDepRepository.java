@@ -90,5 +90,21 @@ public class ChiTietDepRepository {
         return list;
     }
     
+    public ChiTietDep checkDuplicate(int idDep, int idLoaiDep, int idMauSac, int idChatLieu, int idNSX, int idSize) {
+        ChiTietDep ctd = null;
+        try {
+            Query query = session.createQuery("SELECT c FROM ChiTietDep c WHERE c.dep.id = :idDep AND c.loaiDep.id = :idLoaiDep AND c.mauSac.Id = :idMauSac AND c.chatLieu.id = :idChatLieu AND c.nhaSX.id = :idNSX AND c.size.id = :idSize");
+            query.setParameter("idDep", idDep);
+            query.setParameter("idLoaiDep", idLoaiDep);
+            query.setParameter("idMauSac", idMauSac);
+            query.setParameter("idChatLieu", idChatLieu);
+            query.setParameter("idNSX", idNSX);
+            query.setParameter("idSize", idSize);
+            ctd = (ChiTietDep) query.getSingleResult();
+        } catch (Exception e) {
+//            e.printStackTrace();
+        }
+        return ctd;
+    }
 
 }
