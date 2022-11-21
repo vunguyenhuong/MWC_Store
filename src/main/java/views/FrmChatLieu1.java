@@ -254,7 +254,7 @@ public class FrmChatLieu1 extends javax.swing.JPanel {
         
         ChatLieu cl = getdata();
         String result;
-        for (int i = 1; i < chatLieuService.getListSize().size() + 1; i++) {
+        for (int i = 0; i < chatLieuService.getListSize().size() + 1; i++) {
             result = "CL" + i;
             if (chatLieuService.getObject(result) == null) {
                 cl.setMa(result);
