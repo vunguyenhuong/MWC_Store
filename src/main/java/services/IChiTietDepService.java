@@ -41,4 +41,6 @@ public interface IChiTietDepService {
     
     List<ChiTietDep> pagination(int pageNumber, int pageSize);
     
+    ChiTietDep checkDuplicate(int idDep, int idLoaiDep, int idMauSac, int idChatLieu, int idNSX, int idSize);
+    
 }

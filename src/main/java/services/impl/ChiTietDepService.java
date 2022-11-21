@@ -83,6 +83,10 @@ public class ChiTietDepService implements IChiTietDepService {
     public List<ChiTietDep> pagination(int pageNumber, int pageSize) {
         return repo.pagination(pageNumber, pageSize);
     }
-    
-    
+
+    @Override
+    public ChiTietDep checkDuplicate(int idDep, int idLoaiDep, int idMauSac, int idChatLieu, int idNSX, int idSize) {
+        return repo.checkDuplicate(idDep, idLoaiDep, idMauSac, idChatLieu, idNSX, idSize);
+    }
+
 }

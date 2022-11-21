@@ -629,32 +629,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_timkiemCaretUpdate
 
     private void btn_ctd_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ctd_themActionPerformed
-
-                ChiTietDep ctd = new ChiTietDep();
-                ctd.setDep((Dep) comboDep.getSelectedItem());
-                ctd.setLoaiDep((LoaiDep) comboLoaiDep.getSelectedItem());
-                ctd.setMauSac((MauSac) comboMauSac.getSelectedItem());
-                ctd.setChatLieu((ChatLieu) comboChatLieu.getSelectedItem());
-                ctd.setNhaSX((NhaSX) comboNSX.getSelectedItem());
-                ctd.setSize((Size) comboSize.getSelectedItem());
-                ctd.setMoTa(txt_mota.getText());
-                ctd.setSoLuong((int) sp_soluong.getValue());
-                ctd.setGiaNhap(helper.convertToDecimal(txt_gianhap, "Error!"));
-                ctd.setGiaBan(helper.convertToDecimal(txt_giaban, "Error!"));
-                ctd.setNgayThem(new Date());
-                ctd.setNgaySuaCuoi(new Date());
-                if (rd_ct_dangkd.isSelected()) {
-                    ctd.setTrangThai(0);
-                } else {
-                    ctd.setTrangThai(1);
-                }
-                iChiTietDepService.save(ctd);
-                loadData(iChiTietDepService.getAll());
-                helper.alert(this, "Thêm thành công!");
-                return;
-            
         
-
     }//GEN-LAST:event_btn_ctd_themActionPerformed
 
     private void btn_ctd_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ctd_xoaActionPerformed
