@@ -94,7 +94,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lbl_page" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                      <Component id="btn_exportExcel1" linkSize="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_importExcel" linkSize="3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btn_exportExcel" linkSize="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -154,7 +154,7 @@
                   <Component id="txt_timkiem" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lbl_total" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btn_exportExcel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btn_exportExcel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_importExcel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btn_frist" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btn_next" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btn_previous" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -212,7 +212,7 @@
         <Property name="text" type="java.lang.String" value="Total: 0"/>
       </Properties>
     </Component>
-    <Component class="swing.Button" name="btn_exportExcel1">
+    <Component class="swing.Button" name="btn_importExcel">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="66" red="0" type="rgb"/>
@@ -227,7 +227,7 @@
         <Property name="focusPainted" type="boolean" value="false"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_exportExcel1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_importExcelActionPerformed"/>
       </Events>
     </Component>
     <Component class="swing.Spinner" name="sp_soluong">

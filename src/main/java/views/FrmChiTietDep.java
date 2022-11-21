@@ -168,7 +168,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         cb_loaidep = new swing.Combobox();
         rd_ct_dangkd = new swing.RadioButtonCustom();
         lbl_total = new javax.swing.JLabel();
-        btn_exportExcel1 = new swing.Button();
+        btn_importExcel = new swing.Button();
         sp_soluong = new swing.Spinner();
         jLabel2 = new javax.swing.JLabel();
         btn_ctd_capnhat = new swing.Button();
@@ -215,14 +215,14 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         lbl_total.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_total.setText("Total: 0");
 
-        btn_exportExcel1.setBackground(new java.awt.Color(0, 102, 0));
-        btn_exportExcel1.setForeground(new java.awt.Color(255, 255, 255));
-        btn_exportExcel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/excel.png"))); // NOI18N
-        btn_exportExcel1.setText("Import Excel");
-        btn_exportExcel1.setFocusPainted(false);
-        btn_exportExcel1.addActionListener(new java.awt.event.ActionListener() {
+        btn_importExcel.setBackground(new java.awt.Color(0, 102, 0));
+        btn_importExcel.setForeground(new java.awt.Color(255, 255, 255));
+        btn_importExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/excel.png"))); // NOI18N
+        btn_importExcel.setText("Import Excel");
+        btn_importExcel.setFocusPainted(false);
+        btn_importExcel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_exportExcel1ActionPerformed(evt);
+                btn_importExcelActionPerformed(evt);
             }
         });
 
@@ -427,14 +427,14 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbl_page)
                         .addGap(44, 44, 44)
-                        .addComponent(btn_exportExcel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_importExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_exportExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btn_exportExcel, btn_exportExcel1});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btn_exportExcel, btn_importExcel});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -477,7 +477,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                     .addComponent(txt_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_total)
                     .addComponent(btn_exportExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_exportExcel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_importExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_frist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_next, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_previous, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -516,7 +516,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         System.out.println(ctd.getDep().getHinhAnh());
     }//GEN-LAST:event_tb_tableMouseClicked
 
-    private void btn_exportExcel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_exportExcel1ActionPerformed
+    private void btn_importExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_importExcelActionPerformed
         JFileChooser fileChooser = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter(".xlsx", "xlsx");
         fileChooser.setFileFilter(filter);
@@ -539,7 +539,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             }
             System.out.println("Save as file: " + fileOpen.getAbsolutePath());
         }
-    }//GEN-LAST:event_btn_exportExcel1ActionPerformed
+    }//GEN-LAST:event_btn_importExcelActionPerformed
 
     private void btn_ctd_capnhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ctd_capnhatActionPerformed
         int row = tb_table.getSelectedRow();
@@ -621,7 +621,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             }
             if (helper.confirm(this, "Xác nhận xóa")) {
                 iChiTietDepService.delete(ctd);
-                loadData(iChiTietDepService.getAll());
+                loadData(iChiTietDepService.pagination(page, rowCountPerPage));
                 checkSearchCT = 0;
                 helper.alert(this, "Xóa thành công!");
             }
@@ -679,8 +679,8 @@ public class FrmChiTietDep extends javax.swing.JPanel {
     private swing.Button btn_ctd_them;
     private swing.Button btn_ctd_xoa;
     private swing.Button btn_exportExcel;
-    private swing.Button btn_exportExcel1;
     private swing.Button btn_frist;
+    private swing.Button btn_importExcel;
     private swing.Button btn_last;
     private swing.Button btn_next;
     private swing.Button btn_previous;

@@ -79,22 +79,15 @@ public class ChiTietDepRepository {
         }
         return ctd;
     }
-    
+
     public List<ChiTietDep> pagination(int pageNumber, int pageSize) {
-        try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Query query = session.createQuery("From ChiTietDep");
-            
-            int pageIndex = pageNumber - 1 < 0 ? 0 : pageNumber - 1;
-            int fromRecordIndex = pageIndex * pageSize;
-            
-            query.setFirstResult(fromRecordIndex);
-            query.setMaxResults(pageSize);
-            List<ChiTietDep> employeeList = query.getResultList();
-            return employeeList;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+        Query query = session.createQuery("SELECT c FROM ChiTietDep c");
+        int pageIndex = pageNumber - 1 < 0 ? 0 : pageNumber - 1;
+        int fromRecordIndex = pageIndex * pageSize;
+        query.setFirstResult(fromRecordIndex);
+        query.setMaxResults(pageSize);
+        List<ChiTietDep> list = query.getResultList();
+        return list;
     }
-    
+
 }
