@@ -17,6 +17,7 @@ import models.KhuyenMai;
 import services.IKhuyenMaiService;
 import services.impl.KhuyenMaiService;
 import swing.Table;
+import ui.NotificationMess;
 import utilities.Helper;
 
 /**
@@ -40,6 +41,7 @@ public class FrmKhuyenMai extends java.awt.Dialog {
         Table.apply(jScrollPane1, Table.TableType.DEFAULT);
         date_NgayBatDau.setDate(new Date());
         date_NgayKetThuc.setDate(new Date());
+        setTitle("Danh sách khuyến mãi");
     }
 
     private void loadData(List<KhuyenMai> list) {
@@ -120,7 +122,7 @@ public class FrmKhuyenMai extends java.awt.Dialog {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Mã", "Tên", "Phần trăm giảm", "Số lượng", "Ngày bắt đầu", "Ngày kết thúc"
+                "Mã", "Tên", "% Giảm", "Số lượng", "Ngày bắt đầu", "Ngày kết thúc"
             }
         ));
         tb_danhSach.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -129,6 +131,12 @@ public class FrmKhuyenMai extends java.awt.Dialog {
             }
         });
         jScrollPane1.setViewportView(tb_danhSach);
+        if (tb_danhSach.getColumnModel().getColumnCount() > 0) {
+            tb_danhSach.getColumnModel().getColumn(2).setMinWidth(65);
+            tb_danhSach.getColumnModel().getColumn(2).setMaxWidth(65);
+            tb_danhSach.getColumnModel().getColumn(3).setMinWidth(70);
+            tb_danhSach.getColumnModel().getColumn(3).setMaxWidth(70);
+        }
 
         tableScrollButton1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -158,7 +166,8 @@ public class FrmKhuyenMai extends java.awt.Dialog {
 
         btn_CapNhat.setBackground(new java.awt.Color(102, 102, 102));
         btn_CapNhat.setForeground(new java.awt.Color(255, 255, 255));
-        btn_CapNhat.setText("Cập Nhật");
+        btn_CapNhat.setText("Cập nhật");
+        btn_CapNhat.setToolTipText("");
         btn_CapNhat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_CapNhatActionPerformed(evt);
@@ -167,7 +176,8 @@ public class FrmKhuyenMai extends java.awt.Dialog {
 
         btn_ChonKhuyenMai.setBackground(new java.awt.Color(0, 137, 187));
         btn_ChonKhuyenMai.setForeground(new java.awt.Color(255, 255, 255));
-        btn_ChonKhuyenMai.setText("Chọn khuyến mại");
+        btn_ChonKhuyenMai.setActionCommand("Chọn khuyến mãi");
+        btn_ChonKhuyenMai.setLabel("Chọn khuyến mãi");
         btn_ChonKhuyenMai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ChonKhuyenMaiActionPerformed(evt);
@@ -377,7 +387,7 @@ public class FrmKhuyenMai extends java.awt.Dialog {
         // TODO add your handling code here:
         int row = tb_danhSach.getSelectedRow();
         if (row == -1) {
-            helper.error(this, "Vui lòng chọn dòng cần sửa!");
+            helper.error(this, "Vui lòng chọn dòng cần cập nhật!");
         } else {
             KhuyenMai km = iKhuyenMaiService.getObj(tb_danhSach.getValueAt(row, 0).toString());
             km.setMa(txt_Ma.getText().toUpperCase());
@@ -389,22 +399,25 @@ public class FrmKhuyenMai extends java.awt.Dialog {
             iKhuyenMaiService.save(km);
             loadData(iKhuyenMaiService.getAll());
             clearForm();
-            helper.alert(this, "Sửa thành công");
+            helper.alert(this, "Cập nhật thành công");
         }
     }//GEN-LAST:event_btn_CapNhatActionPerformed
 
     private void btn_ChonKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ChonKhuyenMaiActionPerformed
         int row = tb_danhSach.getSelectedRow();
-        int soLuong = Integer.parseInt(tb_danhSach.getValueAt(row, 3).toString());
         if (row == -1) {
-            helper.error(this, "Vui lòng chọn khuyến mại!");
-        } else if (soLuong == 0) {
-            helper.error(this, "Đã hết mã khuyến mại!");
+            helper.error(this, "Vui lòng chọn khuyến !");
             return;
+        }
+        int soLuong = Integer.parseInt(tb_danhSach.getValueAt(row, 3).toString());
+        if (soLuong == 0) {
+            helper.error(this, "Đã hết mã khuyến mãi!");
         } else {
+            String tenKM = (String) tb_danhSach.getValueAt(row, 1);
             KhuyenMai km = iKhuyenMaiService.getObj(tb_danhSach.getValueAt(row, 0).toString());
             khuyenMai = km;
-            helper.alert(this, "Thêm thành công!");
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Thêm thành công khuyến mãi " + tenKM);
+            panel.showNotification();
             this.dispose();
         }
     }//GEN-LAST:event_btn_ChonKhuyenMaiActionPerformed
@@ -419,10 +432,9 @@ public class FrmKhuyenMai extends java.awt.Dialog {
             String fileName = "images/voucher/" + result + ".png";
             File file = new File(fileName);
             if (file.delete()) {
-                System.out.println("Tệp bị xóa!");
+                System.out.println("File anh QR da xoa");
             } else {
-                System.out.println("Xin lỗi, không thể xóa tập tin.");
-                return;
+                System.out.println("Xin loi, khong co File anh QR de xoa.");
             }
             KhuyenMai km = iKhuyenMaiService.getObj(tb_danhSach.getValueAt(row, 0).toString());
             iKhuyenMaiService.delete(km);

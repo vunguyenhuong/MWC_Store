@@ -41,11 +41,11 @@ public class ChatLieu implements Serializable {
     @Column(name = "Ten")
     private String ten;
 
-    @Column
+    @Column (name = "NgayThem")
     @Temporal(TemporalType.DATE)
     private Date ngayThem;
 
-    @Column
+    @Column (name = "NgaySuaCuoi")
     @Temporal(TemporalType.DATE)
     private Date ngaySuaCuoi;
 
