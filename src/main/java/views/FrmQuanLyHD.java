@@ -562,11 +562,8 @@ public class FrmQuanLyHD extends javax.swing.JFrame {
         defaultTableModel.setRowCount(0);
         for (HoaDon x : list) {
             defaultTableModel.addRow(new Object[]{
-                x.getMa(), x.getNguoiDung().getTen(),
-                x.getKhachHang() == null ? "Khách hàng lẻ" : x.getKhachHang().getTen(),
-                helper.formatDate(x.getNgayTao()),
-                x.getTrangThai() == 0 ? "Chưa thanh toán" : "Đã thanh toán",
-                x.getNguoiDungTT() == null ? "" : x.getNguoiDungTT().getTen()
+                x.getMa(), 
+              
             });
         }
     }
