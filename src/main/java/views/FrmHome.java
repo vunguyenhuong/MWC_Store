@@ -199,7 +199,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 }
                 if (menuIndex == 5) {
                     if (subMenuIndex == 0) {
-                        
+                        main.showForm(new FrmThongKe());
                     } else if (subMenuIndex == 1) {
                         
                     }
