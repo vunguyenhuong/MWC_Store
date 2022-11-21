@@ -17,8 +17,20 @@ import models.LoaiDep;
 import models.MauSac;
 import models.NhaSX;
 import models.Size;
+import services.IChatLieuService;
 import services.IChiTietDepService;
+import services.IDepService;
+import services.ILoaiDepService;
+import services.IMauSacService;
+import services.INhaSXService;
+import services.ISizeService;
+import services.impl.ChatLieuService;
 import services.impl.ChiTietDepService;
+import services.impl.DepService;
+import services.impl.LoaiDepService;
+import services.impl.MauSacService;
+import services.impl.NhaSXService;
+import services.impl.SizeService;
 import swing.Table;
 import utilities.ExportSP;
 import utilities.Helper;
@@ -44,6 +56,13 @@ public class FrmChiTietDep extends javax.swing.JPanel {
     private DefaultComboBoxModel<MauSac> comboMauSac = new DefaultComboBoxModel<>();
     private DefaultComboBoxModel<Size> comboSize = new DefaultComboBoxModel<>();
     private DefaultComboBoxModel<NhaSX> comboNSX = new DefaultComboBoxModel<>();
+
+    private IDepService iDepService = new DepService();
+    private ILoaiDepService iLoaiDepService = new LoaiDepService();
+    private IMauSacService iMauSacService = new MauSacService();
+    private IChatLieuService iChatLieuService = new ChatLieuService();
+    private INhaSXService iNhaSXService = new NhaSXService();
+    private ISizeService iSizeService = new SizeService();
 
     private int checkSearchCT = 0;
 
@@ -104,7 +123,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         defaultTableModel.setRowCount(0);
         for (ChiTietDep x : list) {
             defaultTableModel.addRow(new Object[]{
-                stt++, x.getDep().getTen(), x.getLoaiDep().getTen(), x.getMauSac().getTen(), x.getChatLieu().getTen(), x.getNhaSX().getTen(), x.getSize().getKichCo(), x.getMoTa(), x.getSoLuong(), x.getGiaNhap(), x.getGiaBan(), x.getTrangThai()
+                stt++, x.getDep().getTen(), x.getLoaiDep().getTen(), x.getMauSac().getTen(), x.getChatLieu().getTen(), x.getNhaSX().getTen(), x.getSize().getKichCo(), x.getMoTa(), x.getSoLuong(), x.getGiaNhap(), x.getGiaBan(), x.getTrangThai() == 0 ? "Đang kinh doanh" : "Ngừng kinh doanh"
             });
         }
         lbl_total.setText("Total: " + list.size());
@@ -114,7 +133,11 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         cb_dep.setModel((DefaultComboBoxModel) comboDep);
         cb_dep.removeAllItems();
         for (Dep x : iChiTietDepService.getAllDep()) {
-            comboDep.addElement(x);
+            if (x.getTrangThai() == 1) {
+                comboDep.removeElement(x);
+            } else {
+                comboDep.addElement(x);
+            }
         }
     }
 
@@ -122,7 +145,11 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         cb_loaidep.setModel((DefaultComboBoxModel) comboLoaiDep);
         cb_loaidep.removeAllItems();
         for (LoaiDep x : iChiTietDepService.getAllLoaiDep()) {
-            comboLoaiDep.addElement(x);
+            if (x.getTrangThai() == 1) {
+                comboLoaiDep.removeElement(x);
+            } else {
+                comboLoaiDep.addElement(x);
+            }
         }
     }
 
@@ -130,7 +157,11 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         cb_chatlieu.setModel((DefaultComboBoxModel) comboChatLieu);
         cb_chatlieu.removeAllItems();
         for (ChatLieu x : iChiTietDepService.getAllChatLieu()) {
-            comboChatLieu.addElement(x);
+            if (x.getTrangThai() == 1) {
+                comboChatLieu.removeElement(x);
+            } else {
+                comboChatLieu.addElement(x);
+            }
         }
     }
 
@@ -138,7 +169,11 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         cb_mausac.setModel((DefaultComboBoxModel) comboMauSac);
         cb_mausac.removeAllItems();
         for (MauSac x : iChiTietDepService.getAllMauSac()) {
-            comboMauSac.addElement(x);
+            if (x.getTrangThai() == 1) {
+                comboMauSac.removeElement(x);
+            } else {
+                comboMauSac.addElement(x);
+            }
         }
     }
 
@@ -146,7 +181,11 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         cb_size.setModel((DefaultComboBoxModel) comboSize);
         cb_size.removeAllItems();
         for (Size x : iChiTietDepService.getAllSize()) {
-            comboSize.addElement(x);
+            if (x.getTrangThai() == 1) {
+                comboSize.removeElement(x);
+            } else {
+                comboSize.addElement(x);
+            }
         }
     }
 
@@ -154,7 +193,11 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         cb_nsx.setModel((DefaultComboBoxModel) comboNSX);
         cb_nsx.removeAllItems();
         for (NhaSX x : iChiTietDepService.getAllNSX()) {
-            comboNSX.addElement(x);
+            if (x.getTrangThai() == 1) {
+                comboNSX.removeElement(x);
+            } else {
+                comboNSX.addElement(x);
+            }
         }
     }
 
@@ -336,6 +379,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         tableScrollButton1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         btn_frist.setText("Frist");
+        btn_frist.setActionCommand("First");
         btn_frist.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_fristActionPerformed(evt);
@@ -569,7 +613,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                 ctd.setTrangThai(1);
             }
             iChiTietDepService.save(ctd);
-            loadData(iChiTietDepService.getAll());
+            loadData(iChiTietDepService.pagination(page, rowCountPerPage));
             checkSearchCT = 0;
             helper.alert(this, "Sửa thành công!");
         }
@@ -585,27 +629,32 @@ public class FrmChiTietDep extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_timkiemCaretUpdate
 
     private void btn_ctd_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ctd_themActionPerformed
-        ChiTietDep ctd = new ChiTietDep();
-        ctd.setDep((Dep) comboDep.getSelectedItem());
-        ctd.setLoaiDep((LoaiDep) comboLoaiDep.getSelectedItem());
-        ctd.setMauSac((MauSac) comboMauSac.getSelectedItem());
-        ctd.setChatLieu((ChatLieu) comboChatLieu.getSelectedItem());
-        ctd.setNhaSX((NhaSX) comboNSX.getSelectedItem());
-        ctd.setSize((Size) comboSize.getSelectedItem());
-        ctd.setMoTa(txt_mota.getText());
-        ctd.setSoLuong((int) sp_soluong.getValue());
-        ctd.setGiaNhap(helper.convertToDecimal(txt_gianhap, "Error!"));
-        ctd.setGiaBan(helper.convertToDecimal(txt_giaban, "Error!"));
-        ctd.setNgayThem(new Date());
-        ctd.setNgaySuaCuoi(new Date());
-        if (rd_ct_dangkd.isSelected()) {
-            ctd.setTrangThai(0);
-        } else {
-            ctd.setTrangThai(1);
-        }
-        iChiTietDepService.save(ctd);
-        loadData(iChiTietDepService.getAll());
-        helper.alert(this, "Thêm thành công!");
+
+                ChiTietDep ctd = new ChiTietDep();
+                ctd.setDep((Dep) comboDep.getSelectedItem());
+                ctd.setLoaiDep((LoaiDep) comboLoaiDep.getSelectedItem());
+                ctd.setMauSac((MauSac) comboMauSac.getSelectedItem());
+                ctd.setChatLieu((ChatLieu) comboChatLieu.getSelectedItem());
+                ctd.setNhaSX((NhaSX) comboNSX.getSelectedItem());
+                ctd.setSize((Size) comboSize.getSelectedItem());
+                ctd.setMoTa(txt_mota.getText());
+                ctd.setSoLuong((int) sp_soluong.getValue());
+                ctd.setGiaNhap(helper.convertToDecimal(txt_gianhap, "Error!"));
+                ctd.setGiaBan(helper.convertToDecimal(txt_giaban, "Error!"));
+                ctd.setNgayThem(new Date());
+                ctd.setNgaySuaCuoi(new Date());
+                if (rd_ct_dangkd.isSelected()) {
+                    ctd.setTrangThai(0);
+                } else {
+                    ctd.setTrangThai(1);
+                }
+                iChiTietDepService.save(ctd);
+                loadData(iChiTietDepService.getAll());
+                helper.alert(this, "Thêm thành công!");
+                return;
+            
+        
+
     }//GEN-LAST:event_btn_ctd_themActionPerformed
 
     private void btn_ctd_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ctd_xoaActionPerformed
