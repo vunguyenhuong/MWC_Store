@@ -62,7 +62,6 @@ public class FrmNhanVien extends javax.swing.JPanel {
     }
     public NguoiDung getForm(){
         NguoiDung nguoidung = new NguoiDung();
-        int index = tb_nhanvien.getSelectedRow();
         String ma = txt_ma1.getText();
         nguoidung.setMa(ma);
         String ten = txt_ten.getText();
@@ -91,17 +90,15 @@ public class FrmNhanVien extends javax.swing.JPanel {
             trangthai = 1;
         }
         nguoidung.setTrangThai(trangthai);
-        if (filename == null) {
-            filename = tb_nhanvien.getValueAt(index, 2).toString();
-        } else {
-            filename = filename;
+        if(filename==null){
+            JOptionPane.showMessageDialog(this, "Chon anh.");
+            return null;
         }
-
         if (lblHinhAnh.getIcon() == null) {
             JOptionPane.showMessageDialog(this, "Vui lòng đính kèm ảnh !", "Warning", JOptionPane.WARNING_MESSAGE);
             return null;
         }
-
+        
    
         nguoidung.setHinhAnh(filename);
         return nguoidung;
@@ -366,9 +363,11 @@ public class FrmNhanVien extends javax.swing.JPanel {
             return;
         }
         NguoiDung nguoidung = getForm();
+        if(nguoidung!=null){
         this.nguoidungSV.save(nguoidung);
         LoadData(nguoidungSV.getListNhanVien("CV2"));
         JOptionPane.showMessageDialog(this, "Them thanh cong");
+        }
     }//GEN-LAST:event_btn_themActionPerformed
 
     private void tb_nhanvienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_nhanvienMouseClicked
@@ -385,6 +384,7 @@ public class FrmNhanVien extends javax.swing.JPanel {
         rd_nu.setSelected(nuoidung.getGioiTinh()==1);
         ImageIcon i = utilities.ImageUltil.resizeIcon(new ImageIcon("images/users/" + nuoidung.getHinhAnh()), lblHinhAnh.getWidth(), lblHinhAnh.getHeight());
         lblHinhAnh.setIcon(i);
+        filename=nuoidung.getHinhAnh();
         
     }//GEN-LAST:event_tb_nhanvienMouseClicked
 
@@ -395,7 +395,8 @@ public class FrmNhanVien extends javax.swing.JPanel {
             return;
         }
         NguoiDung nguoidung = getForm();
-        NguoiDung nguoi = nguoidungSV.getObj(txt_ma1.getText().trim());
+        if(nguoidung!=null){
+            NguoiDung nguoi = nguoidungSV.getObj(txt_ma1.getText().trim());
      
         nguoi.setTen(nguoidung.getTen());
         nguoi.setDiaChi(nguoidung.getDiaChi());
@@ -408,6 +409,8 @@ public class FrmNhanVien extends javax.swing.JPanel {
         this.nguoidungSV.save(nguoi);
         LoadData(nguoidungSV.getListNhanVien("CV2"));
         JOptionPane.showMessageDialog(this, "Sủa Thành Công");
+        filename=null;
+        }
     }//GEN-LAST:event_btn_suaActionPerformed
 
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
