@@ -47,10 +47,16 @@ public class FrmChiTietDep extends javax.swing.JPanel {
 
     private int checkSearchCT = 0;
 
+    Integer page = 1;
+    Integer rowCountPerPage = 5;
+    Integer totalPage = 1;
+    Integer totalData = 0;
+
     public FrmChiTietDep() {
         initComponents();
         iChiTietDepService = new ChiTietDepService();
-        loadData(iChiTietDepService.getAll());
+//        loadData(iChiTietDepService.getAll());
+        initPagination();
         Table.apply(jScrollPane1, Table.TableType.MULTI_LINE);
         addCbChatLieu();
         addCbDep();
@@ -58,6 +64,38 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         addCbMauSac();
         addCbNhaSX();
         addCbSize();
+    }
+
+    public void initPagination() {
+        totalData = iChiTietDepService.getAll().size();
+        rowCountPerPage = 5;
+        Double totalPageD = Math.ceil(totalData.doubleValue() / rowCountPerPage.doubleValue());
+        totalPage = totalPageD.intValue();
+
+        if (page.equals(1)) {
+            btn_frist.setEnabled(false);
+            btn_previous.setEnabled(false);
+        } else {
+            btn_frist.setEnabled(true);
+            btn_previous.setEnabled(true);
+        }
+
+        if (page.equals(totalPage)) {
+            btn_last.setEnabled(false);
+            btn_next.setEnabled(false);
+        } else {
+            btn_last.setEnabled(true);
+            btn_next.setEnabled(true);
+        }
+
+        if (page > totalPage) {
+            page = 1;
+        }
+
+        List<ChiTietDep> listCTDep = iChiTietDepService.pagination(page, rowCountPerPage);
+        lbl_page.setText("Page: " + page);
+
+        loadData(listCTDep);
     }
 
     private void loadData(List<ChiTietDep> list) {
@@ -149,6 +187,11 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         tableScrollButton1 = new swing.TableScrollButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_table = new javax.swing.JTable();
+        btn_frist = new swing.Button();
+        btn_next = new swing.Button();
+        btn_previous = new swing.Button();
+        btn_last = new swing.Button();
+        lbl_page = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -292,6 +335,38 @@ public class FrmChiTietDep extends javax.swing.JPanel {
 
         tableScrollButton1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
+        btn_frist.setText("Frist");
+        btn_frist.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_fristActionPerformed(evt);
+            }
+        });
+
+        btn_next.setText("Next");
+        btn_next.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_nextActionPerformed(evt);
+            }
+        });
+
+        btn_previous.setText("Previous");
+        btn_previous.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_previousActionPerformed(evt);
+            }
+        });
+
+        btn_last.setText("Last");
+        btn_last.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_lastActionPerformed(evt);
+            }
+        });
+
+        lbl_page.setForeground(java.awt.Color.red);
+        lbl_page.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl_page.setText("Page: 0");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -328,7 +403,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cb_mausac, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cb_size, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lbl_image, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -341,7 +416,17 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                                 .addComponent(btn_ctd_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lbl_total)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 328, Short.MAX_VALUE)
+                        .addGap(43, 43, 43)
+                        .addComponent(btn_frist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_next, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_previous, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_last, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_page)
+                        .addGap(44, 44, 44)
                         .addComponent(btn_exportExcel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_exportExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -392,9 +477,14 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                     .addComponent(txt_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_total)
                     .addComponent(btn_exportExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_exportExcel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                    .addComponent(btn_exportExcel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_frist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_next, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_previous, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_last, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_page))
+                .addGap(18, 18, 18)
+                .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -406,7 +496,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
 
     private void tb_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_tableMouseClicked
         int row = tb_table.getSelectedRow();
-        ChiTietDep ctd = iChiTietDepService.getAll().get(row);
+        ChiTietDep ctd = iChiTietDepService.pagination(page, rowCountPerPage).get(row);
         comboDep.setSelectedItem(ctd.getDep());
         comboLoaiDep.setSelectedItem(ctd.getLoaiDep());
         comboChatLieu.setSelectedItem(ctd.getChatLieu());
@@ -559,6 +649,30 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btn_exportExcelActionPerformed
 
+    private void btn_fristActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_fristActionPerformed
+        page = 1;
+        initPagination();
+    }//GEN-LAST:event_btn_fristActionPerformed
+
+    private void btn_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nextActionPerformed
+        if (page < totalPage) {
+            page++;
+            initPagination();
+        }
+    }//GEN-LAST:event_btn_nextActionPerformed
+
+    private void btn_previousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_previousActionPerformed
+        if (page > 1) {
+            page--;
+            initPagination();
+        }
+    }//GEN-LAST:event_btn_previousActionPerformed
+
+    private void btn_lastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lastActionPerformed
+        page = totalPage;
+        initPagination();
+    }//GEN-LAST:event_btn_lastActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private swing.Button btn_ctd_capnhat;
@@ -566,6 +680,10 @@ public class FrmChiTietDep extends javax.swing.JPanel {
     private swing.Button btn_ctd_xoa;
     private swing.Button btn_exportExcel;
     private swing.Button btn_exportExcel1;
+    private swing.Button btn_frist;
+    private swing.Button btn_last;
+    private swing.Button btn_next;
+    private swing.Button btn_previous;
     private javax.swing.ButtonGroup buttonGroup1;
     private swing.Combobox cb_chatlieu;
     private swing.Combobox cb_dep;
@@ -576,6 +694,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_image;
+    private javax.swing.JLabel lbl_page;
     private javax.swing.JLabel lbl_total;
     private swing.RadioButtonCustom rd_ct_dangkd;
     private swing.RadioButtonCustom rd_ct_ngungkd;

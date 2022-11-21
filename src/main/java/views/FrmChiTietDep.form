@@ -67,7 +67,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="188" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="lbl_image" min="-2" pref="173" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -83,7 +83,17 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="lbl_total" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="328" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                      <Component id="btn_frist" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btn_next" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btn_previous" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btn_last" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lbl_page" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                       <Component id="btn_exportExcel1" linkSize="3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btn_exportExcel" linkSize="3" min="-2" max="-2" attributes="0"/>
@@ -145,9 +155,14 @@
                   <Component id="lbl_total" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btn_exportExcel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btn_exportExcel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_frist" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_next" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_previous" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_last" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_page" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="tableScrollButton1" pref="175" max="32767" attributes="0"/>
+              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+              <Component id="tableScrollButton1" pref="91" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -492,5 +507,46 @@
         </Container>
       </SubComponents>
     </Container>
+    <Component class="swing.Button" name="btn_frist">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Frist"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_fristActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="swing.Button" name="btn_next">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Next"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_nextActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="swing.Button" name="btn_previous">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Previous"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_previousActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="swing.Button" name="btn_last">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Last"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_lastActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_page">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" id="red" palette="1" red="ff" type="palette"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="Page: 0"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>

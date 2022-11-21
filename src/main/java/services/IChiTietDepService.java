@@ -38,4 +38,6 @@ public interface IChiTietDepService {
     List<ChiTietDep> findByName(String ten);
 
     List<ChiTietDep> findByTT(int trangThai, String ten);
+    
+    List<ChiTietDep> pagination(int pageNumber, int pageSize);
 }
