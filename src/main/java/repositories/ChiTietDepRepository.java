@@ -84,7 +84,6 @@ public class ChiTietDepRepository {
         List<ChiTietDep> list = query.getResultList();
         return list;
     }
-
     public ChiTietDep checkDuplicate(int idDep, int idLoaiDep, int idMauSac, int idChatLieu, int idNSX, int idSize) {
         ChiTietDep ctd = null;
         try {
