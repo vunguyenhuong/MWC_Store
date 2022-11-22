@@ -88,8 +88,4 @@ public class ChiTietDepService implements IChiTietDepService {
     public ChiTietDep getObjByProperties(int idDep, int idLoaiDep, int idMauSac, int idChatLieu, int idNSX, int idSize) {
         return repo.checkDuplicate(idDep, idLoaiDep, idMauSac, idChatLieu, idNSX, idSize);
     }
-    
-    
-    
-    
 }

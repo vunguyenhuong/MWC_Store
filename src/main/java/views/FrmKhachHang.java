@@ -206,6 +206,11 @@ public class FrmKhachHang extends java.awt.Dialog {
                 txt_SearchCaretUpdate(evt);
             }
         });
+        txt_Search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_SearchActionPerformed(evt);
+            }
+        });
 
         txt_Diemtichluy.setEditable(false);
         txt_Diemtichluy.setLabelText("Điểm tích lũy : ");
@@ -347,6 +352,10 @@ public class FrmKhachHang extends java.awt.Dialog {
             this.dispose();
         }
     }//GEN-LAST:event_btn_ChonActionPerformed
+
+    private void txt_SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_SearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_SearchActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {

@@ -572,11 +572,26 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                 List<ChiTietDep> list = ImportSP.readExcel(fileOpen.getAbsolutePath());
                 if (helper.confirm(this, "Xác nhận thêm " + list.size() + " sản phẩm ?")) {
                     for (ChiTietDep x : list) {
-                        iChiTietDepService.save(x);
+                        ChiTietDep ctd = iChiTietDepService.getObjByProperties(x.getDep().getId(), x.getLoaiDep().getId(), x.getMauSac().getId(), x.getChatLieu().getId(), x.getNhaSX().getId(), x.getSize().getId());
+                        if (ctd != null) {
+                            ctd.setSoLuong(ctd.getSoLuong() + x.getSoLuong());
+                            iChiTietDepService.save(ctd);
+                            continue;
+                        } else {
+                            iChiTietDepService.save(x);
+                        }
+
                     }
                     loadData(iChiTietDepService.getAll());
                     helper.alert(this, "Thêm thành công!");
                 }
+//                if (helper.confirm(this, "Xác nhận thêm " + list.size() + " sản phẩm ?")) {
+//                    for (ChiTietDep x : list) {
+//                        iChiTietDepService.save(x);
+//                    }
+//                    loadData(iChiTietDepService.getAll());
+//                    helper.alert(this, "Thêm thành công!");
+//                }
             } catch (Exception e) {
                 e.printStackTrace();
                 helper.alert(this, "Add File thất bại!");
@@ -678,8 +693,6 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             loadData(iChiTietDepService.getAll());
             helper.alert(this, "Sp đã tồn tại, cập nhật sl!");
         }
-
-
     }//GEN-LAST:event_btn_ctd_themActionPerformed
 
     private void btn_ctd_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ctd_xoaActionPerformed

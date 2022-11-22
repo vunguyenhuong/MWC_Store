@@ -48,4 +48,6 @@ public class HoaDonChiTiet implements Serializable {
     @Column
     private int trangThai;
 
+    
+
 }

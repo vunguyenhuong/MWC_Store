@@ -23,11 +23,6 @@ public class ChiTietDepRepository {
 //return session.createCriteria(ChiTietDep.class).list();
     }
 
-    public static void main(String[] args) {
-        ChiTietDepRepository ctdr = new ChiTietDepRepository();
-        System.out.println(ctdr.getAll());
-    }
-
     public boolean save(ChiTietDep ctd) {
         try {
             transaction.begin();
@@ -89,7 +84,6 @@ public class ChiTietDepRepository {
         List<ChiTietDep> list = query.getResultList();
         return list;
     }
-    
     public ChiTietDep checkDuplicate(int idDep, int idLoaiDep, int idMauSac, int idChatLieu, int idNSX, int idSize) {
         ChiTietDep ctd = null;
         try {
@@ -107,4 +101,8 @@ public class ChiTietDepRepository {
         return ctd;
     }
 
+    public static void main(String[] args) {
+        ChiTietDepRepository ctdr = new ChiTietDepRepository();
+        System.out.println(ctdr.checkDuplicate(1, 2, 3, 2, 1, 2));
+    }
 }
