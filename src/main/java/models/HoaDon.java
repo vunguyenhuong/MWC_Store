@@ -81,5 +81,16 @@ public class HoaDon implements Serializable {
     @ManyToOne
     @JoinColumn(name = "IdKM")
     private KhuyenMai khuyenMai;
+
+    @Override
+    public String toString() {
+        
+        if (trangThai == 1) {
+            return "Đã thanh toán";
+        } else {
+            return "Chưa thanh toán";
+        }
+    }
+    
     
 }
