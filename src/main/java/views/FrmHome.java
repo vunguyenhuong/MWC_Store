@@ -1372,11 +1372,14 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             txt_tenkh.setText(khachHang.getTen());
         }
         if (hd.getTrangThai() == 1) {
-            Double tongTien = Double.parseDouble(txt_tongtien.getText());
-            Double giamGia = tongTien / 100 * hd.getKhuyenMai().getPhantramgiam();
-            System.out.println(hd.getKhuyenMai().getPhantramgiam());
-            txt_giamgia.setText(String.valueOf(giamGia + hd.getDiemTichLuy() * 1000));
-            txt_phaitra.setText(String.valueOf(tongTien - giamGia));
+            try {
+                Double tongTien = Double.parseDouble(txt_tongtien.getText());
+                Double giamGia = tongTien / 100 * hd.getKhuyenMai().getPhantramgiam();
+                System.out.println(hd.getKhuyenMai().getPhantramgiam());
+                txt_giamgia.setText(String.valueOf(giamGia + hd.getDiemTichLuy() * 1000));
+                txt_phaitra.setText(String.valueOf(tongTien - giamGia));
+            } catch (Exception e) {
+            }
         }
         loadGioHang(hd.getMa());
         tongTien();
