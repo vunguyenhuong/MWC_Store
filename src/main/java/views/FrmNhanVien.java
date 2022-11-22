@@ -336,8 +336,8 @@ public class FrmNhanVien extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_scanqrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_scanqrActionPerformed
-        FrmQRCCD qRCCD = new FrmQRCCD();
-        qRCCD.setVisible(true);
+        FrmQRCCCD fqrcccd = new FrmQRCCCD(null, true);
+        fqrcccd.setVisible(true);
 //        NguoiDung nd = qRCCD.getNguoiDung();
 //        txt_ma.setText(nd.getMa());
 //        txt_ten.setText("");
