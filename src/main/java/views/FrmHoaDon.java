@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import models.HoaDon;
+import models.HoaDonChiTiet;
 import services.IHoaDonCTService;
 import services.IHoaDonService;
 import services.impl.HoaDonService;
@@ -491,8 +492,20 @@ public class FrmHoaDon extends javax.swing.JPanel {
         for (HoaDon x : list) {
             defaultTableModel.addRow(new Object[]{
                 x.getMa(), 
-                x.
               
+                helper.formatDate(x.getNgayTao()),
+                helper.formatDate(x.getNgayThanhToan()),
+              
+            });
+        }
+    }
+      private void loadHDChiTiet(String maHD) {
+        
+        defaultTableModel = (DefaultTableModel) tbl_HoadonCT.getModel();
+        defaultTableModel.setRowCount(0);
+        for (HoaDonChiTiet x : iHoaDonCTService.findByMa(maHD)) {
+            defaultTableModel.addRow(new Object[]{
+                x.getCtdep().getDep().getMa(), x.getCtdep().getDep().getTen(), x.getSoLuong()
             });
         }
     }
