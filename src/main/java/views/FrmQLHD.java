@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import models.HoaDon;
+import models.HoaDonChiTiet;
 import services.IHoaDonCTService;
 import services.IHoaDonService;
 import services.impl.HoaDonCTService;
@@ -55,7 +56,7 @@ public class FrmQLHD extends javax.swing.JPanel {
     }
 
     public void loadDataToHD(List<HoaDon> list) {
-        dtm = (DefaultTableModel) tbl_HoaDon.getModel();
+        dtm = (DefaultTableModel) tb_hoadon.getModel();
 
         int i = 1;
 
@@ -88,7 +89,7 @@ public class FrmQLHD extends javax.swing.JPanel {
 //    }
     public void locTrangThai() {
         int index = cbo_Trangthai.getSelectedIndex();
-        
+
         if (index == 0) {
             loadDataToHD(iHoaDonService.getAll());
             buttonGroup1.clearSelection();
@@ -102,9 +103,9 @@ public class FrmQLHD extends javax.swing.JPanel {
             } catch (ParseException ex) {
                 Logger.getLogger(FrmQLHD.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         } else {
-            
+
             loadDataToHD(iHoaDonService.getHDByTT(0, typeKH, jdc_From.getDate(), jdc_To.getDate()));
         }
     }
@@ -124,7 +125,7 @@ public class FrmQLHD extends javax.swing.JPanel {
         cbo_Trangthai = new swing.Combobox();
         tableScrollButton1 = new swing.TableScrollButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_HoaDon = new javax.swing.JTable();
+        tb_hoadon = new javax.swing.JTable();
         rdo_Khachhangthanhvien = new swing.RadioButtonCustom();
         rdo_Khachhangle = new swing.RadioButtonCustom();
         jdc_From = new com.toedter.calendar.JDateChooser();
@@ -132,8 +133,10 @@ public class FrmQLHD extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         tableScrollButton2 = new swing.TableScrollButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbl_HDCT = new javax.swing.JTable();
+        tb_HDCT = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        lbl_tongtien = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -159,8 +162,7 @@ public class FrmQLHD extends javax.swing.JPanel {
             }
         });
 
-        tbl_HoaDon.setBackground(new java.awt.Color(255, 255, 255));
-        tbl_HoaDon.setModel(new javax.swing.table.DefaultTableModel(
+        tb_hoadon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
@@ -171,12 +173,12 @@ public class FrmQLHD extends javax.swing.JPanel {
                 "STT", "Mã HD", "Khách hàng", "Người tạo", "Người thanh toán", "Khuyến mãi", "Ngày tạo", "Ngày thanh toán", "Trạng thái"
             }
         ));
-        tbl_HoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbl_HoaDonMouseClicked(evt);
+        tb_hoadon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tb_hoadonMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(tbl_HoaDon);
+        jScrollPane1.setViewportView(tb_hoadon);
 
         tableScrollButton1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -236,15 +238,14 @@ public class FrmQLHD extends javax.swing.JPanel {
                     .addComponent(jdc_From, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jdc_To, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
+                .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Hóa đơn chi tiết"));
 
-        tbl_HDCT.setBackground(new java.awt.Color(255, 255, 255));
-        tbl_HDCT.setModel(new javax.swing.table.DefaultTableModel(
+        tb_HDCT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -252,10 +253,10 @@ public class FrmQLHD extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã HD", "Tên sản phẩm", "Đơn giá", "Số lượng", "Thành tiền"
+                "STT", "Mã HD", "Tên sản phẩm", "Số lượng", "Đơn giá", "Thành tiền"
             }
         ));
-        jScrollPane2.setViewportView(tbl_HDCT);
+        jScrollPane2.setViewportView(tb_HDCT);
 
         tableScrollButton2.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
@@ -276,6 +277,13 @@ public class FrmQLHD extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("QUẢN LÝ HÓA ĐƠN");
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel2.setText("Tổng tiền SP :");
+
+        lbl_tongtien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbl_tongtien.setText("0");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -289,15 +297,25 @@ public class FrmQLHD extends javax.swing.JPanel {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_tongtien)
+                .addGap(81, 81, 81))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lbl_tongtien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -310,45 +328,67 @@ public class FrmQLHD extends javax.swing.JPanel {
         loadDataToHD(this.iHoaDonService.findByMaAndTen(maAndTen));
     }//GEN-LAST:event_txt_TimkiemCaretUpdate
 
-    private void tbl_HoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_HoaDonMouseClicked
-        int index = tbl_HoaDon.getSelectedRow();
-
-
-    }//GEN-LAST:event_tbl_HoaDonMouseClicked
-
     private void rdo_KhachhangleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo_KhachhangleActionPerformed
         loadDataToHD(iHoaDonService.getKHByTen());
-        
+
         typeKH = "=null";
     }//GEN-LAST:event_rdo_KhachhangleActionPerformed
 
     private void rdo_KhachhangthanhvienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo_KhachhangthanhvienActionPerformed
         loadDataToHD(iHoaDonService.getKHByTen1());
-        
+
         typeKH = "!= null";
     }//GEN-LAST:event_rdo_KhachhangthanhvienActionPerformed
 
     private void cbo_TrangthaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbo_TrangthaiActionPerformed
         locTrangThai();
     }//GEN-LAST:event_cbo_TrangthaiActionPerformed
+    public void tongTien() {
+        int row = tb_HDCT.getRowCount();
+        double tongTien = 0;
+        double giamGia;
+        for (int i = 0; i < tb_HDCT.getRowCount(); i++) {
+            tongTien = tongTien + Double.parseDouble(tb_HDCT.getValueAt(i, 5).toString());
+        }
+        lbl_tongtien.setText(String.valueOf(tongTien));
+    }
+    private void tb_hoadonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_hoadonMousePressed
+        // TODO add your handling code here:
+        int row = tb_hoadon.getSelectedRow();
+        HoaDon hd = iHoaDonService.getObj((String) tb_hoadon.getValueAt(row, 1));
+        loadHoaDonCT(hd.getMa());
+        tongTien();
 
+    }//GEN-LAST:event_tb_hoadonMousePressed
+    private void loadHoaDonCT(String maHD) {
+        int stt = 1;
+        dtm = (DefaultTableModel) tb_HDCT.getModel();
+        dtm.setRowCount(0);
+        for (HoaDonChiTiet x : iHoaDonCTService.findByMa(maHD)) {
+            dtm.addRow(new Object[]{
+                stt++, x.getCtdep().getDep().getMa(), x.getCtdep().getDep().getTen(), x.getSoLuong(), x.getDonGia(), x.getSoLuong() * x.getDonGia().doubleValue()
+            });
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private swing.Combobox cbo_Trangthai;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private com.toedter.calendar.JDateChooser jdc_From;
     private com.toedter.calendar.JDateChooser jdc_To;
+    private javax.swing.JLabel lbl_tongtien;
     private swing.RadioButtonCustom rdo_Khachhangle;
     private swing.RadioButtonCustom rdo_Khachhangthanhvien;
     private swing.TableScrollButton tableScrollButton1;
     private swing.TableScrollButton tableScrollButton2;
-    private javax.swing.JTable tbl_HDCT;
-    private javax.swing.JTable tbl_HoaDon;
+    private javax.swing.JTable tb_HDCT;
+    private javax.swing.JTable tb_hoadon;
     private swing.TextField txt_Timkiem;
     // End of variables declaration//GEN-END:variables
 }

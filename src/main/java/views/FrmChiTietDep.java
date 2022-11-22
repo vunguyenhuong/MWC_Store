@@ -124,7 +124,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         defaultTableModel.setRowCount(0);
         for (ChiTietDep x : list) {
             defaultTableModel.addRow(new Object[]{
-                stt++, x.getDep().getTen(), x.getLoaiDep().getTen(), x.getMauSac().getTen(), x.getChatLieu().getTen(), x.getNhaSX().getTen(), x.getSize().getKichCo(), x.getMoTa(), x.getSoLuong(), x.getGiaNhap(), x.getGiaBan(), x.getTrangThai() == 0 ? "Đang kinh doanh" : "Ngừng kinh doanh"
+                stt++, x.getDep().getTen(), x.getLoaiDep().getTen(), x.getMauSac().getTen(), x.getChatLieu().getTen(), x.getNhaSX().getTen(), x.getSize().getKichCo(), x.getMoTa(), x.getSoLuong(), x.getGiaNhap(), x.getGiaBan(), helper.formatDate(x.getNgayThem()), helper.formatDate(x.getNgaySuaCuoi()), x.getTrangThai() == 0 ? "Đang kinh doanh" : "Ngừng kinh doanh"
             });
         }
         lbl_total.setText("Total: " + list.size());
@@ -253,6 +253,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         cb_loaidep.setRequestFocusEnabled(false);
 
         buttonGroup1.add(rd_ct_dangkd);
+        rd_ct_dangkd.setSelected(true);
         rd_ct_dangkd.setText("Đang kinh doanh");
         rd_ct_dangkd.setFocusPainted(false);
 
@@ -362,9 +363,11 @@ public class FrmChiTietDep extends javax.swing.JPanel {
 
             },
             new String [] {
-                "STT", "Tên", "Loại", "Màu sắc", "Chất liệu", "NSX", "Size", "Mô tả", "Số lượng", "Giá nhập", "Giá bán", "Trạng thái"
+                "STT", "Tên", "Loại", "Màu sắc", "Chất liệu", "NSX", "Size", "Mô tả", "Số lượng", "Giá nhập", "Giá bán", "Ngày thêm", "Ngày Sửa Cuối", "Trạng thái"
             }
         ));
+        tb_table.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tb_table.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tb_table.setSelectionBackground(new java.awt.Color(153, 153, 255));
         tb_table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -373,7 +376,8 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tb_table);
         if (tb_table.getColumnModel().getColumnCount() > 0) {
-            tb_table.getColumnModel().getColumn(10).setResizable(false);
+            tb_table.getColumnModel().getColumn(0).setPreferredWidth(30);
+            tb_table.getColumnModel().getColumn(3).setPreferredWidth(50);
         }
 
         tableScrollButton1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -455,7 +459,8 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                                     .addComponent(cb_mausac, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cb_size, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbl_image, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lbl_image, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txt_timkiem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -477,12 +482,11 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                         .addComponent(btn_last, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbl_page)
-                        .addGap(44, 44, 44)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                         .addComponent(btn_importExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_exportExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addComponent(btn_exportExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btn_exportExcel, btn_importExcel});
@@ -539,8 +543,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                     .addComponent(btn_last, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_page))
                 .addGap(18, 18, 18)
-                .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cb_chatlieu, cb_dep, cb_loaidep, cb_mausac, cb_nsx, cb_size});
@@ -667,16 +670,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             ChiTietDep ctd = iChiTietDepService.getObjByProperties(dep.getId(), loaiDep.getId(), mauSac.getId(), chatLieu.getId(), nhaSX.getId(), size.getId());
             int soLuong = (int) spinner1.getValue();
             ctd.setSoLuong(ctd.getSoLuong() + soLuong);
-            ctd.setMoTa(txt_mota.getText());
-            ctd.setGiaNhap(helper.convertToDecimal(txt_gianhap, "Error!"));
-            ctd.setGiaBan(helper.convertToDecimal(txt_giaban, "Error!"));
-            ctd.setNgayThem(new Date());
             ctd.setNgaySuaCuoi(new Date());
-            if (rd_ct_dangkd.isSelected()) {
-                ctd.setTrangThai(0);
-            } else {
-                ctd.setTrangThai(1);
-            }
             iChiTietDepService.save(ctd);
             loadData(iChiTietDepService.pagination(page, rowCountPerPage));
             NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.INFO, NotificationMess.Location.TOP_CENTER, "Sản phẩm đã tồn tại, cập nhật thêm số lượng");
