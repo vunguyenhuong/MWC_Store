@@ -59,26 +59,30 @@ public class HoaDon implements Serializable {
     @Column(name = "NgayNhanHang")
     @Temporal(TemporalType.DATE)
     private Date ngayNhanHang;
-    
+
     @Column(name = "trangThai")
     private int trangThai;
-    
+
     @Column(name = "diemTichLuy")
     private int diemTichLuy;
-    
+
     @ManyToOne
     @JoinColumn(name = "IdND")
     private NguoiDung nguoiDung;
-    
-     @ManyToOne
+
+    @ManyToOne
     @JoinColumn(name = "IdNDTT")
     private NguoiDung nguoiDungTT;
-    
+
     @ManyToOne
     @JoinColumn(name = "IdKH")
     private KhachHang khachHang;
-    
+
     @ManyToOne
     @JoinColumn(name = "IdKM")
     private KhuyenMai khuyenMai;
+    
+    @OneToMany
+    @JoinColumn(name = "IdHD")
+    private HoaDonChiTiet hoaDonChiTiet;
 }
