@@ -23,7 +23,7 @@ public class HoaDonCTRepository {
         List<HoaDonChiTiet> hdct = new ArrayList<>();
         return hdct;
     }
-
+  
     public boolean save(HoaDonChiTiet hdct) {
         try {
             transaction.begin();

@@ -573,11 +573,26 @@ public class FrmChiTietDep extends javax.swing.JPanel {
 
                 if (helper.confirm(this, "Xác nhận thêm " + list.size() + " sản phẩm ?")) {
                     for (ChiTietDep x : list) {
-                        iChiTietDepService.save(x);
+                        ChiTietDep ctd = iChiTietDepService.getObjByProperties(x.getDep().getId(), x.getLoaiDep().getId(), x.getMauSac().getId(), x.getChatLieu().getId(), x.getNhaSX().getId(), x.getSize().getId());
+                        if (ctd != null) {
+                            ctd.setSoLuong(ctd.getSoLuong() + x.getSoLuong());
+                            iChiTietDepService.save(ctd);
+                            continue;
+                        } else {
+                            iChiTietDepService.save(x);
+                        }
+
                     }
                     loadData(iChiTietDepService.getAll());
                     helper.alert(this, "Thêm thành công!");
                 }
+//                if (helper.confirm(this, "Xác nhận thêm " + list.size() + " sản phẩm ?")) {
+//                    for (ChiTietDep x : list) {
+//                        iChiTietDepService.save(x);
+//                    }
+//                    loadData(iChiTietDepService.getAll());
+//                    helper.alert(this, "Thêm thành công!");
+//                }
             } catch (Exception e) {
                 e.printStackTrace();
                 helper.alert(this, "Add File thất bại!");
