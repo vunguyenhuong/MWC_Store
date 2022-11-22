@@ -1,6 +1,8 @@
 package repositories;
 
+import java.util.Date;
 import java.util.List;
+import javax.persistence.TemporalType;
 import models.HoaDon;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -77,6 +79,40 @@ public class HoaDonRepository {
         List<HoaDon> list1 = query.getResultList();
         return list1;
     }
+    
+    public List<HoaDon> getObjByMaAndKH(String ten) {        
+            Query query = session.createQuery(" SELECT h FROM HoaDon h WHERE h.ma = :ten or h.khachHang.ten LIKE :ten");
+            query.setParameter("ten", "%" + ten + "%");
+            List<HoaDon> list2 = query.getResultList();
+       
+        return list2;
+    }
+    
+    public List<HoaDon> getHDByTT() {        
+            Query query = session.createQuery(" SELECT h FROM HoaDon h WHERE h.khachHang = NULL");
+            List<HoaDon> list3 = query.getResultList();
+       
+        return list3;
+    }
+    
+    public List<HoaDon> getHDByTT1() {        
+            Query query = session.createQuery(" SELECT h FROM HoaDon h WHERE h.khachHang != NULL");
+            List<HoaDon> list3 = query.getResultList();
+       
+        return list3;
+    }
+    
+    public List<HoaDon> getHDByTT2(int trangthai, String typeKH, Date from, Date to) {        
+            Query query = session.createQuery(" SELECT h FROM HoaDon h WHERE h.trangThai = :trangthai AND h.ngayTao BETWEEN :from AND :to AND h.khachHang " + typeKH);
+            query.setParameter("trangthai", trangthai);
+            query.setParameter("from", from);
+            query.setParameter("to", to);
+            List<HoaDon> list4 = query.getResultList();
+       
+        return list4;
+    }
+    
+    
 
     public static void main(String[] args) {
         HoaDonRepository hdr = new HoaDonRepository();

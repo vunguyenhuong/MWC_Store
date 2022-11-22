@@ -65,12 +65,12 @@ import utilities.Helper;
  * @author KenTizz
  */
 public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFactory {
-
+    
     private static final long serialVersionUID = 6441489157408381878L;
     private Executor executor = Executors.newSingleThreadExecutor(this);
     private Webcam webcam = null;
     private WebcamPanel panel = null;
-
+    
     private Helper helper = new Helper();
     private MigLayout layout;
     private Menu menu;
@@ -87,7 +87,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
     private IKhachHangService iKhachHangService = new KhachHangService();
     private IKhuyenMaiService iKhuyenMaiService = new KhuyenMaiService();
     private CardLayout cardLayout;
-
+    
     public FrmHome(NguoiDung nd) {
         initComponents();
         Image icon = Toolkit.getDefaultToolkit().getImage("images/suportUI/logo.png");
@@ -104,7 +104,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         loadSP(iChiTietDepService.findByTT(0, ""));
         loadHD(iHoaDonService.getAll());
     }
-
+    
     public FrmHome() {
         initComponents();
         Image icon = Toolkit.getDefaultToolkit().getImage("images/suportUI/logo.png");
@@ -119,7 +119,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         Table.apply(jScrollPane3, Table.TableType.MULTI_LINE);
         loadSP(iChiTietDepService.findByTT(0, ""));
     }
-
+    
     private void init() {
         layout = new MigLayout("fill", "0[]0[100%, fill]0", "0[fill, top]0");
         bg.setLayout(layout);
@@ -180,30 +180,32 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                     } else if (subMenuIndex == 6) {
 // NSX
                         main.showForm(new FrmNhaSanXuat());
+                        
                     }
                 }
                 if (menuIndex == 3) {
-                    if (subMenuIndex == 0) {
-
-                    } else if (subMenuIndex == 1) {
-
-                    }
+//                    if (subMenuIndex == 0) {
+//                        
+//                    } else if (subMenuIndex == 1) {
+//                        
+//                    }
+                    main.showForm(new FrmQLHD());
                 }
                 if (menuIndex == 4) {
                     cardLayout.show(pn_main, "banhang");
                     loadSP(iChiTietDepService.getAll());
                     initWebcam(pn_webcam);
                     if (subMenuIndex == 0) {
-
+                        
                     } else if (subMenuIndex == 1) {
-
+                        
                     }
                 }
                 if (menuIndex == 5) {
                     if (subMenuIndex == 0) {
                         main.showForm(new FrmThongKe1());
                     } else if (subMenuIndex == 1) {
-
+                        
                     }
                 }
                 if (menuIndex == 6) {
@@ -251,13 +253,13 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 layout.setComponentConstraints(menu, "w " + width + "!, spany2");
                 menu.revalidate();
             }
-
+            
             @Override
             public void end() {
                 menu.setShowMenu(!menu.isShowMenu());
                 menu.setEnableMenu(true);
             }
-
+            
         };
         animator = new Animator(500, target);
         animator.setResolution(0);
@@ -279,7 +281,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         //  Start with this form
         main.showForm(new FrmTrangChu());
     }
-
+    
     private void loadSP(List<ChiTietDep> list) {
         int stt = 1;
         defaultTableModel = (DefaultTableModel) tb_sanpham.getModel();
@@ -290,7 +292,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             });
         }
     }
-
+    
     private void loadHD(List<HoaDon> list) {
         defaultTableModel = (DefaultTableModel) tb_hoadon.getModel();
         defaultTableModel.setRowCount(0);
@@ -304,7 +306,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             });
         }
     }
-
+    
     private void loadGioHang(String maHD) {
         int stt = 1;
         defaultTableModel = (DefaultTableModel) tb_giohang.getModel();
@@ -315,7 +317,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             });
         }
     }
-
+    
     private void tongTien() {
         int row = tb_giohang.getRowCount();
         if (row > 0) {
@@ -328,7 +330,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 txt_giamgia.setText("0");
             }
             giamGia = tongTien - Double.parseDouble(txt_giamgia.getText());
-
+            
             txt_tongtien.setText(String.valueOf(tongTien));
             txt_phaitra.setText(String.valueOf(giamGia));
         } else {
@@ -345,7 +347,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
 //        } catch (Exception e) {
 //        }
     }
-
+    
     private void addSpToGH() {
         int row = tb_sanpham.getSelectedRow();
         int rowHD = tb_hoadon.getSelectedRow();
@@ -408,7 +410,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         }
         tongTien();
     }
-
+    
     private void clearForm() {
         tb_giohang.clearSelection();
         tb_hoadon.clearSelection();
@@ -429,7 +431,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         txt_tienkhachdua.setText("");
         txt_tienthua.setText("");
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -995,7 +997,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         } catch (Exception e) {
         }
     }//GEN-LAST:event_btn_returnActionPerformed
-
+    
     private int checkSearchSP = 0;
     private void txt_sp_timkiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_sp_timkiemCaretUpdate
         if (iChiTietDepService.findByTT(0, txt_sp_timkiem.getText()).size() == iChiTietDepService.getAll().size()) {
@@ -1148,7 +1150,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 }
             } catch (Exception e) {
             }
-
+            
             if (tienKhachDua >= phaiTra) {
                 if (helper.confirm(this, "Trả lại khách " + (tienKhachDua - phaiTra) + ". Xác nhận thanh toán " + txt_phaitra.getText() + "?")) {
                     hd.setNguoiDungTT(nguoiDung);
@@ -1228,7 +1230,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 panel.showNotification();
                 return;
             }
-
+            
             if (soLuong == 0) {
                 if (helper.confirm(this, "Xác nhận xóa " + hdct.getCtdep().getDep().getTen() + " khỏi giỏ hàng ?")) {
                     ctd.setSoLuong(ctd.getSoLuong() + hdct.getSoLuong());
@@ -1384,7 +1386,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         loadGioHang(hd.getMa());
         tongTien();
     }//GEN-LAST:event_tb_hoadonMousePressed
-
+    
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -1396,7 +1398,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -1457,17 +1459,17 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         Dimension size = WebcamResolution.QVGA.getSize();
         webcam = Webcam.getWebcams().get(0); //0 is default webcam
         webcam.setViewSize(size);
-
+        
         panel = new WebcamPanel(webcam);
         panel.setPreferredSize(size);
         panel.setFPSDisplayed(true);
         panel.setMirrored(true);
-
+        
         panelShow.add(panel, new AbsoluteConstraints(0, 0, panelShow.getWidth(), panelShow.getHeight()));
-
+        
         executor.execute(this);
     }
-
+    
     @Override
     public void run() {
         while (true) {
@@ -1476,26 +1478,26 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
+            
             Result result = null;
             BufferedImage image = null;
-
+            
             if (webcam.isOpen()) {
-
+                
                 if ((image = webcam.getImage()) == null) {
                     continue;
                 }
-
+                
                 LuminanceSource source = new BufferedImageLuminanceSource(image);
                 BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-
+                
                 try {
                     result = new MultiFormatReader().decode(bitmap);
                 } catch (NotFoundException e) {
                     // fall thru, it means there is no QR code in image
                 }
             }
-
+            
             if (result != null) {
                 try {
                     String maSP = result.getText().replace("MWCSTORES", "");
@@ -1510,7 +1512,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
+                
                 try {
                     HoaDon hd = iHoaDonService.getObj(txt_mahd.getText());
                     String maKhuyenMai = result.getText().replace("MWCSTORES", "");
@@ -1560,7 +1562,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             }
         }
     }
-
+    
     @Override
     public Thread newThread(Runnable r) {
         Thread t = new Thread(r, "example-runner");
