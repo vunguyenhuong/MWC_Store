@@ -18,12 +18,6 @@ import javax.swing.plaf.basic.BasicSpinnerUI;
 public class SpinnerUI extends BasicSpinnerUI {
 
     @Override
-    public void installUI(JComponent jc) {
-        super.installUI(jc);
-        spinner.setEditor(new Editor(spinner));
-    }
-
-    @Override
     protected Component createNextButton() {
         ArrowButton cmd = new ArrowButton(true);
         installNextButtonListeners(cmd);
@@ -37,20 +31,6 @@ public class SpinnerUI extends BasicSpinnerUI {
         return cmd;
     }
 
-    public class Editor extends TextField implements ChangeListener {
-
-        public Editor(JSpinner spinner) {
-            spinner.addChangeListener(this);
-            setEditable(true);
-            setText("0");
-        }
-
-        @Override
-        public void stateChanged(ChangeEvent ce) {
-            JSpinner spinner = (JSpinner) ce.getSource();
-            setText(spinner.getValue().toString());
-        }
-    }
 
     private class ArrowButton extends JButton {
 
