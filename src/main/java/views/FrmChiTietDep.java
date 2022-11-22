@@ -570,6 +570,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             File fileOpen = fileChooser.getSelectedFile();
             try {
                 List<ChiTietDep> list = ImportSP.readExcel(fileOpen.getAbsolutePath());
+
                 if (helper.confirm(this, "Xác nhận thêm " + list.size() + " sản phẩm ?")) {
                     for (ChiTietDep x : list) {
                         ChiTietDep ctd = iChiTietDepService.getObjByProperties(x.getDep().getId(), x.getLoaiDep().getId(), x.getMauSac().getId(), x.getChatLieu().getId(), x.getNhaSX().getId(), x.getSize().getId());
