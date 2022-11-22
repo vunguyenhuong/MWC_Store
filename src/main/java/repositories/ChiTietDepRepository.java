@@ -23,11 +23,6 @@ public class ChiTietDepRepository {
 //return session.createCriteria(ChiTietDep.class).list();
     }
 
-    public static void main(String[] args) {
-        ChiTietDepRepository ctdr = new ChiTietDepRepository();
-        System.out.println(ctdr.getAll());
-    }
-
     public boolean save(ChiTietDep ctd) {
         try {
             transaction.begin();
@@ -89,6 +84,25 @@ public class ChiTietDepRepository {
         List<ChiTietDep> list = query.getResultList();
         return list;
     }
-    
+    public ChiTietDep checkDuplicate(int idDep, int idLoaiDep, int idMauSac, int idChatLieu, int idNSX, int idSize) {
+        ChiTietDep ctd = null;
+        try {
+            Query query = session.createQuery("SELECT c FROM ChiTietDep c WHERE c.dep.id = :idDep AND c.loaiDep.id = :idLoaiDep AND c.mauSac.Id = :idMauSac AND c.chatLieu.id = :idChatLieu AND c.nhaSX.id = :idNSX AND c.size.id = :idSize");
+            query.setParameter("idDep", idDep);
+            query.setParameter("idLoaiDep", idLoaiDep);
+            query.setParameter("idMauSac", idMauSac);
+            query.setParameter("idChatLieu", idChatLieu);
+            query.setParameter("idNSX", idNSX);
+            query.setParameter("idSize", idSize);
+            ctd = (ChiTietDep) query.getSingleResult();
+        } catch (Exception e) {
+//            e.printStackTrace();
+        }
+        return ctd;
+    }
 
+    public static void main(String[] args) {
+        ChiTietDepRepository ctdr = new ChiTietDepRepository();
+        System.out.println(ctdr.checkDuplicate(1, 2, 3, 2, 1, 2));
+    }
 }

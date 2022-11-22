@@ -18,6 +18,8 @@ public class FrmThongKe1 extends javax.swing.JPanel {
         card3 = new swing.Card();
         card4 = new swing.Card();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         card1.setColorGradient(new java.awt.Color(211, 28, 215));
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
