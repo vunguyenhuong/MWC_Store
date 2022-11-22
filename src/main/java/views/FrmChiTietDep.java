@@ -32,6 +32,7 @@ import services.impl.MauSacService;
 import services.impl.NhaSXService;
 import services.impl.SizeService;
 import swing.Table;
+import ui.NotificationMess;
 import utilities.ExportSP;
 import utilities.Helper;
 import utilities.ImageUltil;
@@ -212,7 +213,6 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         rd_ct_dangkd = new swing.RadioButtonCustom();
         lbl_total = new javax.swing.JLabel();
         btn_importExcel = new swing.Button();
-        sp_soluong = new swing.Spinner();
         jLabel2 = new javax.swing.JLabel();
         btn_ctd_capnhat = new swing.Button();
         cb_mausac = new swing.Combobox();
@@ -235,6 +235,8 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         btn_previous = new swing.Button();
         btn_last = new swing.Button();
         lbl_page = new javax.swing.JLabel();
+        spinner1 = new swing.Spinner();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -268,8 +270,6 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                 btn_importExcelActionPerformed(evt);
             }
         });
-
-        sp_soluong.setLabelText("Số lượng");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("THÔNG TIN SẢN PHẨM");
@@ -367,8 +367,8 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         ));
         tb_table.setSelectionBackground(new java.awt.Color(153, 153, 255));
         tb_table.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tb_tableMouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tb_tableMousePressed(evt);
             }
         });
         jScrollPane1.setViewportView(tb_table);
@@ -411,6 +411,10 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         lbl_page.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_page.setText("Page: 0");
 
+        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel1.setText("Số lượng :");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -427,13 +431,16 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                                     .addComponent(txt_mota, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(spinner1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txt_giaban, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE))
+                                    .addComponent(jLabel1))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txt_giaban, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(rd_ct_ngungkd, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(sp_soluong, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
                                         .addComponent(rd_ct_dangkd, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -501,10 +508,14 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                                     .addComponent(cb_nsx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(cb_loaidep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(sp_soluong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_mota, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rd_ct_dangkd, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txt_mota, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(rd_ct_dangkd, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(spinner1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txt_gianhap, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -534,31 +545,9 @@ public class FrmChiTietDep extends javax.swing.JPanel {
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cb_chatlieu, cb_dep, cb_loaidep, cb_mausac, cb_nsx, cb_size});
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {rd_ct_dangkd, sp_soluong, txt_giaban, txt_gianhap, txt_mota});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {rd_ct_dangkd, txt_giaban, txt_gianhap, txt_mota});
 
     }// </editor-fold>//GEN-END:initComponents
-
-    private void tb_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_tableMouseClicked
-        int row = tb_table.getSelectedRow();
-        ChiTietDep ctd = iChiTietDepService.pagination(page, rowCountPerPage).get(row);
-        comboDep.setSelectedItem(ctd.getDep());
-        comboLoaiDep.setSelectedItem(ctd.getLoaiDep());
-        comboChatLieu.setSelectedItem(ctd.getChatLieu());
-        comboSize.setSelectedItem(ctd.getSize());
-        comboNSX.setSelectedItem(ctd.getNhaSX());
-        comboMauSac.setSelectedItem(ctd.getMauSac());
-        txt_mota.setText(ctd.getMoTa());
-        txt_gianhap.setText(ctd.getGiaNhap().toString());
-        txt_giaban.setText(ctd.getGiaBan().toString());
-        sp_soluong.setValue(ctd.getSoLuong());
-        if (ctd.getTrangThai() == 0) {
-            rd_ct_dangkd.setSelected(true);
-        } else {
-            rd_ct_ngungkd.setSelected(true);
-        }
-        lbl_image.setIcon(imageUltil.resizeIcon(new ImageIcon("images/products/" + ctd.getDep().getHinhAnh()), lbl_image.getWidth(), lbl_image.getHeight()));
-        System.out.println(ctd.getDep().getHinhAnh());
-    }//GEN-LAST:event_tb_tableMouseClicked
 
     private void btn_importExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_importExcelActionPerformed
         JFileChooser fileChooser = new JFileChooser();
@@ -584,11 +573,13 @@ public class FrmChiTietDep extends javax.swing.JPanel {
 
                     }
                     loadData(iChiTietDepService.pagination(page, rowCountPerPage));
-                    helper.alert(this, "Thêm thành công!");
+                    NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Import File Excel thành công");
+                    panel.showNotification();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                helper.alert(this, "Add File thất bại!");
+                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Import File Excel thất bại");
+                panel.showNotification();
             }
             System.out.println("Save as file: " + fileOpen.getAbsolutePath());
         }
@@ -597,7 +588,8 @@ public class FrmChiTietDep extends javax.swing.JPanel {
     private void btn_ctd_capnhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ctd_capnhatActionPerformed
         int row = tb_table.getSelectedRow();
         if (row == -1) {
-            helper.error(this, "Vui lòng chọn dòng cần sửa!");
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Vui lòng chọn dòng sản phẩm cần cập nhật");
+            panel.showNotification();
         } else {
             ChiTietDep ctd;
             if (checkSearchCT == 0) {
@@ -612,7 +604,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             ctd.setNhaSX((NhaSX) comboNSX.getSelectedItem());
             ctd.setSize((Size) comboSize.getSelectedItem());
             ctd.setMoTa(txt_mota.getText());
-            ctd.setSoLuong((int) sp_soluong.getValue());
+            ctd.setSoLuong((int) spinner1.getValue());
             ctd.setGiaNhap(helper.convertToDecimal(txt_gianhap, "Error!"));
             ctd.setGiaBan(helper.convertToDecimal(txt_giaban, "Error!"));
             ctd.setNgaySuaCuoi(new Date());
@@ -624,7 +616,8 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             iChiTietDepService.save(ctd);
             loadData(iChiTietDepService.pagination(page, rowCountPerPage));
             checkSearchCT = 0;
-            helper.alert(this, "Sửa thành công!");
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công");
+            panel.showNotification();
         }
     }//GEN-LAST:event_btn_ctd_capnhatActionPerformed
 
@@ -656,7 +649,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             ctd.setNhaSX((NhaSX) comboNSX.getSelectedItem());
             ctd.setSize((Size) comboSize.getSelectedItem());
             ctd.setMoTa(txt_mota.getText());
-            ctd.setSoLuong((int) sp_soluong.getValue());
+            ctd.setSoLuong((int) spinner1.getValue());
             ctd.setGiaNhap(helper.convertToDecimal(txt_gianhap, "Error!"));
             ctd.setGiaBan(helper.convertToDecimal(txt_giaban, "Error!"));
             ctd.setNgayThem(new Date());
@@ -668,10 +661,11 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             }
             iChiTietDepService.save(ctd);
             loadData(iChiTietDepService.pagination(page, rowCountPerPage));
-            helper.alert(this, "Thêm thành công!");
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Thêm thành công");
+            panel.showNotification();
         } else {
             ChiTietDep ctd = iChiTietDepService.getObjByProperties(dep.getId(), loaiDep.getId(), mauSac.getId(), chatLieu.getId(), nhaSX.getId(), size.getId());
-            int soLuong = (int) sp_soluong.getValue();
+            int soLuong = (int) spinner1.getValue();
             ctd.setSoLuong(ctd.getSoLuong() + soLuong);
             ctd.setMoTa(txt_mota.getText());
             ctd.setGiaNhap(helper.convertToDecimal(txt_gianhap, "Error!"));
@@ -685,14 +679,16 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             }
             iChiTietDepService.save(ctd);
             loadData(iChiTietDepService.pagination(page, rowCountPerPage));
-            helper.alert(this, "Sp đã tồn tại, cập nhật sl!");
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.INFO, NotificationMess.Location.TOP_CENTER, "Sản phẩm đã tồn tại, cập nhật thêm số lượng");
+            panel.showNotification();
         }
     }//GEN-LAST:event_btn_ctd_themActionPerformed
 
     private void btn_ctd_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ctd_xoaActionPerformed
         int row = tb_table.getSelectedRow();
         if (row == -1) {
-            helper.error(this, "Vui lòng chọn dòng cần sửa!");
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Vui lòng chọn dòng sản phẩm để xóa !");
+            panel.showNotification();
         } else {
             ChiTietDep ctd;
             if (checkSearchCT == 0) {
@@ -704,7 +700,8 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                 iChiTietDepService.delete(ctd);
                 loadData(iChiTietDepService.pagination(page, rowCountPerPage));
                 checkSearchCT = 0;
-                helper.alert(this, "Xóa thành công!");
+                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Xóa thành công");
+                panel.showNotification();
             }
         }
     }//GEN-LAST:event_btn_ctd_xoaActionPerformed
@@ -720,11 +717,13 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             try {
                 if (helper.confirm(this, "File Path: " + fileToSave.getAbsolutePath() + filter.getDescription() + ". Xác nhận xuất file ?")) {
                     ExportSP.writeExcel(iChiTietDepService.getAll(), fileToSave.getAbsolutePath() + filter.getDescription());
-                    helper.alert(this, "Xuất File thành công!");
+                    NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Xuất File Excel thành công");
+                    panel.showNotification();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                helper.alert(this, "Xuất File thất bại!");
+                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Xuất File Excel thất bại");
+                panel.showNotification();
             }
             System.out.println("Save as file: " + fileToSave.getAbsolutePath() + filter.getDescription());
         }
@@ -754,6 +753,29 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         initPagination();
     }//GEN-LAST:event_btn_lastActionPerformed
 
+    private void tb_tableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_tableMousePressed
+        // TODO add your handling code here:
+        int row = tb_table.getSelectedRow();
+        ChiTietDep ctd = iChiTietDepService.pagination(page, rowCountPerPage).get(row);
+        comboDep.setSelectedItem(ctd.getDep());
+        comboLoaiDep.setSelectedItem(ctd.getLoaiDep());
+        comboChatLieu.setSelectedItem(ctd.getChatLieu());
+        comboSize.setSelectedItem(ctd.getSize());
+        comboNSX.setSelectedItem(ctd.getNhaSX());
+        comboMauSac.setSelectedItem(ctd.getMauSac());
+        txt_mota.setText(ctd.getMoTa());
+        txt_gianhap.setText(ctd.getGiaNhap().toString());
+        txt_giaban.setText(ctd.getGiaBan().toString());
+        spinner1.setValue(ctd.getSoLuong());
+        if (ctd.getTrangThai() == 0) {
+            rd_ct_dangkd.setSelected(true);
+        } else {
+            rd_ct_ngungkd.setSelected(true);
+        }
+        lbl_image.setIcon(imageUltil.resizeIcon(new ImageIcon("images/products/" + ctd.getDep().getHinhAnh()), lbl_image.getWidth(), lbl_image.getHeight()));
+        System.out.println(ctd.getDep().getHinhAnh());
+    }//GEN-LAST:event_tb_tableMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private swing.Button btn_ctd_capnhat;
@@ -772,6 +794,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
     private swing.Combobox cb_mausac;
     private swing.Combobox cb_nsx;
     private swing.Combobox cb_size;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_image;
@@ -779,7 +802,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
     private javax.swing.JLabel lbl_total;
     private swing.RadioButtonCustom rd_ct_dangkd;
     private swing.RadioButtonCustom rd_ct_ngungkd;
-    private swing.Spinner sp_soluong;
+    private swing.Spinner spinner1;
     private swing.TableScrollButton tableScrollButton1;
     private javax.swing.JTable tb_table;
     private swing.TextField txt_giaban;
