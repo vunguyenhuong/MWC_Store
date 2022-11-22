@@ -570,6 +570,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             File fileOpen = fileChooser.getSelectedFile();
             try {
                 List<ChiTietDep> list = ImportSP.readExcel(fileOpen.getAbsolutePath());
+
                 if (helper.confirm(this, "Xác nhận thêm " + list.size() + " sản phẩm ?")) {
                     for (ChiTietDep x : list) {
                         ChiTietDep ctd = iChiTietDepService.getObjByProperties(x.getDep().getId(), x.getLoaiDep().getId(), x.getMauSac().getId(), x.getChatLieu().getId(), x.getNhaSX().getId(), x.getSize().getId());
@@ -582,16 +583,9 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                         }
 
                     }
-                    loadData(iChiTietDepService.getAll());
+                    loadData(iChiTietDepService.pagination(page, rowCountPerPage));
                     helper.alert(this, "Thêm thành công!");
                 }
-//                if (helper.confirm(this, "Xác nhận thêm " + list.size() + " sản phẩm ?")) {
-//                    for (ChiTietDep x : list) {
-//                        iChiTietDepService.save(x);
-//                    }
-//                    loadData(iChiTietDepService.getAll());
-//                    helper.alert(this, "Thêm thành công!");
-//                }
             } catch (Exception e) {
                 e.printStackTrace();
                 helper.alert(this, "Add File thất bại!");
@@ -628,7 +622,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                 ctd.setTrangThai(1);
             }
             iChiTietDepService.save(ctd);
-            loadData(iChiTietDepService.getAll());
+            loadData(iChiTietDepService.pagination(page, rowCountPerPage));
             checkSearchCT = 0;
             helper.alert(this, "Sửa thành công!");
         }
@@ -673,7 +667,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                 ctd.setTrangThai(1);
             }
             iChiTietDepService.save(ctd);
-            loadData(iChiTietDepService.getAll());
+            loadData(iChiTietDepService.pagination(page, rowCountPerPage));
             helper.alert(this, "Thêm thành công!");
         } else {
             ChiTietDep ctd = iChiTietDepService.getObjByProperties(dep.getId(), loaiDep.getId(), mauSac.getId(), chatLieu.getId(), nhaSX.getId(), size.getId());
@@ -690,7 +684,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                 ctd.setTrangThai(1);
             }
             iChiTietDepService.save(ctd);
-            loadData(iChiTietDepService.getAll());
+            loadData(iChiTietDepService.pagination(page, rowCountPerPage));
             helper.alert(this, "Sp đã tồn tại, cập nhật sl!");
         }
     }//GEN-LAST:event_btn_ctd_themActionPerformed

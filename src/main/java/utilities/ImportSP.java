@@ -26,6 +26,8 @@ import repositories.LoaiDepRepository;
 import repositories.MauSacRepository;
 import repositories.NhaSXRepository;
 import repositories.SizeRepository;
+import services.IChiTietDepService;
+import services.impl.ChiTietDepService;
 
 /**
  *
@@ -54,6 +56,7 @@ public class ImportSP {
     private static MauSacRepository mauSacRepo = new MauSacRepository();
     private static SizeRepository sizeRepo = new SizeRepository();
     private static NhaSXRepository nsxRepo = new NhaSXRepository();
+    private IChiTietDepService iChiTietDepService = new ChiTietDepService();
 
 //    public static void main(String[] args) throws IOException {
 //        final String excelFilePath = "D:\\Book1.xlsx";
@@ -66,6 +69,7 @@ public class ImportSP {
     public static List<ChiTietDep> readExcel(String excelFilePath)throws IOException{
         Date date = new Date();
         List<ChiTietDep> list = new ArrayList<>();
+        
 
         // Get file
         InputStream inputStream = new FileInputStream(new File(excelFilePath));
