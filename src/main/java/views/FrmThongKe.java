@@ -10,12 +10,12 @@ import services.impl.HoaDonCTService;
 import swing.Table;
 import ui.ModelCard;
 
-public class FrmThongKe1 extends javax.swing.JPanel {
+public class FrmThongKe extends javax.swing.JPanel {
 
     private IChiTietDepService iChiTietDepService = new ChiTietDepService();
     private IHoaDonCTService iHoaDonCTService = new HoaDonCTService();
 
-    public FrmThongKe1() {
+    public FrmThongKe() {
         initComponents();
         setOpaque(false);
         Table.apply(jScrollPane1, Table.TableType.DEFAULT);

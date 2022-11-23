@@ -57,10 +57,10 @@ public class SendMailUltil {
             Transport.send(msg);
 
             System.out.println("Successfully!!");
-            return "Mật khẩu mới đã gửi thành công đến Mail của bạn ... ";
+            return "Gửi thành công!";
         } catch (Exception e) {
             e.printStackTrace();
-            return "Gửi mật khẩu mới đến Mail của bạn thất bại !";
+            return "Gửi thất bại!";
         }
     }
 

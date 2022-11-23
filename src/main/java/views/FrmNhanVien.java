@@ -369,6 +369,8 @@ public class FrmNhanVien extends javax.swing.JPanel {
 //        } else {
 //            rd_nu.setSelected(true);
 //        }
+        System.out.println("Đã quét xong");
+        LoadData(nguoidungSV.getListNhanVien("CV2"));
     }//GEN-LAST:event_btn_scanqrActionPerformed
 
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
