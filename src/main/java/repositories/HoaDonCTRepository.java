@@ -111,22 +111,21 @@ public class HoaDonCTRepository {
         List list = query.list();
         return list;
     }
+    
+    public List<ChiTietDep> findTop5SP(){
+        Query query = session.createQuery("SELECT c FROM ChiTietDep c WHERE c.id IN (SELECT h FROM HoaDonChiTiet h ORDER BY COUNT(h.soLuong) DESC)");
+        List<ChiTietDep> list = query.getResultList();
+        return list;
+    }
 
     public static void main(String[] args) {
         HoaDonCTRepository hdctr = new HoaDonCTRepository();
         IChiTietDepService iChiTietDepService = new ChiTietDepService();
         
-        
-        List listTop5 = hdctr.findSP(1);
-        
-        for (int i = 0; i < listTop5.size(); i++) {
-            listTop5.get(i);
+
+        for (ChiTietDep x : hdctr.findTop5SP()) {
+            
         }
-//        for (Object x : listTop5) {
-////            ChiTietDep ctd = iChiTietDepService.getObj(x.);
-////            list.add(ctd);
-//            System.out.println(x);
-//        }
 //        System.out.println(hdctr.findSP(1));
     }
 }

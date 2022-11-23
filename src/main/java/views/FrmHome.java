@@ -160,7 +160,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                     }
                 }
                 if (menuIndex == 2) {
-                    main.showForm(new FrmQuanLiKH());
+                    main.showForm(new FrmQLKhachHang());
                 }
                 if (menuIndex == 3) {
                     if (subMenuIndex == 0) {
