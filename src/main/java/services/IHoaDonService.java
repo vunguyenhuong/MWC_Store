@@ -25,13 +25,11 @@ public interface IHoaDonService {
     
     List<HoaDon> findByName(String ma);
     
-    List<HoaDon> findByMaAndTen(String ten);
+    List<HoaDon> findByMaAndTen(String ten); 
     
-    List<HoaDon> getKHByTen();
+    List<HoaDon> getKH(String type);
     
-    List<HoaDon> getKHByTen1();
-    
-    List<HoaDon> getHDByTT(int trangthai, String type, Date from, Date to);
+    List<HoaDon> getHDByCombo(int trangthai, String type);
     
     List<HoaDon> getByTT(int trangThai);
 }

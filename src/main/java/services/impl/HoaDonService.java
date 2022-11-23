@@ -53,19 +53,15 @@ public class HoaDonService implements IHoaDonService {
         return hoadonRepo.getObjByMaAndKH(ten);
     }
 
+
     @Override
-    public List<HoaDon> getKHByTen() {
-        return hoadonRepo.getHDByTT();
+    public List<HoaDon> getKH(String type) {
+        return hoadonRepo.getHDByKH(type);
     }
 
     @Override
-    public List<HoaDon> getKHByTen1() {
-        return hoadonRepo.getHDByTT1();
-    }
-
-    @Override
-    public List<HoaDon> getHDByTT(int trangthai, String type, Date from, Date to) {
-        return hoadonRepo.getHDByTT2(trangthai, type, from, to);
+    public List<HoaDon> getHDByCombo(int trangthai, String type) {
+        return hoadonRepo.getHDCombo(trangthai, type);
     }
 
     @Override
