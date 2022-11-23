@@ -94,15 +94,8 @@ public class FrmQLHD extends javax.swing.JPanel {
             loadDataToHD(iHoaDonService.getAll());
             buttonGroup1.clearSelection();
         } else if (index == 1) {
-            Date date1;
-            Date date2;
-            try {
-                date1 = new SimpleDateFormat("yyyy-MM-dd").parse("2022-11-04");
-                date2 = new SimpleDateFormat("yyyy-MM-dd").parse("2022-11-24");
-                loadDataToHD(iHoaDonService.getHDByTT(0, typeKH, jdc_From.getDate(), jdc_To.getDate()));
-            } catch (ParseException ex) {
-                Logger.getLogger(FrmQLHD.class.getName()).log(Level.SEVERE, null, ex);
-            }
+
+            loadDataToHD(iHoaDonService.getHDByTT(0, typeKH, jdc_From.getDate(), jdc_To.getDate()));
 
         } else {
 
@@ -334,13 +327,13 @@ public class FrmQLHD extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_TimkiemCaretUpdate
 
     private void rdo_KhachhangleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo_KhachhangleActionPerformed
-        loadDataToHD(iHoaDonService.getKHByTen());
+        loadDataToHD(iHoaDonService.getKH("=null"));
 
         typeKH = "=null";
     }//GEN-LAST:event_rdo_KhachhangleActionPerformed
 
     private void rdo_KhachhangthanhvienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo_KhachhangthanhvienActionPerformed
-        loadDataToHD(iHoaDonService.getKHByTen1());
+        loadDataToHD(iHoaDonService.getKH("!=null"));
 
         typeKH = "!= null";
     }//GEN-LAST:event_rdo_KhachhangthanhvienActionPerformed

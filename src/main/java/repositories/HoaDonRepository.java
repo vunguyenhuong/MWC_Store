@@ -88,15 +88,8 @@ public class HoaDonRepository {
         return list2;
     }
 
-    public List<HoaDon> getHDByTT() {
-        Query query = session.createQuery(" SELECT h FROM HoaDon h WHERE h.khachHang = NULL");
-        List<HoaDon> list3 = query.getResultList();
-
-        return list3;
-    }
-
-    public List<HoaDon> getHDByTT1() {
-        Query query = session.createQuery(" SELECT h FROM HoaDon h WHERE h.khachHang != NULL");
+    public List<HoaDon> getHDByKH(String type) {
+        Query query = session.createQuery(" SELECT h FROM HoaDon h WHERE h.khachHang" + type);
         List<HoaDon> list3 = query.getResultList();
 
         return list3;

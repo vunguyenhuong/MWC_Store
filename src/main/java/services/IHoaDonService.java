@@ -25,11 +25,9 @@ public interface IHoaDonService {
     
     List<HoaDon> findByName(String ma);
     
-    List<HoaDon> findByMaAndTen(String ten);
+    List<HoaDon> findByMaAndTen(String ten); 
     
-    List<HoaDon> getKHByTen();
-    
-    List<HoaDon> getKHByTen1();
+    List<HoaDon> getKH(String type);
     
     List<HoaDon> getHDByTT(int trangthai, String type, Date from, Date to);
     
