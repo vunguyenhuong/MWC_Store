@@ -29,7 +29,7 @@ public interface IHoaDonService {
     
     List<HoaDon> getKH(String type);
     
-    List<HoaDon> getHDByTT(int trangthai, String type, Date from, Date to);
+    List<HoaDon> getHDByCombo(int trangthai, String type);
     
     List<HoaDon> getByTT(int trangThai);
 }

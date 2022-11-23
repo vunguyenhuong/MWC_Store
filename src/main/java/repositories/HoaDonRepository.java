@@ -81,28 +81,27 @@ public class HoaDonRepository {
     }
 
     public List<HoaDon> getObjByMaAndKH(String ten) {
-        Query query = session.createQuery(" SELECT h FROM HoaDon h WHERE h.ma = :ten or h.khachHang.ten LIKE :ten");
+        Query query = session.createQuery("SELECT h FROM HoaDon h WHERE h.khachHang.ten LIKE :ten or h.nguoiDung.ten like :ten");
+//        query.setParameter("ma", ten);
         query.setParameter("ten", "%" + ten + "%");
-        List<HoaDon> list2 = query.getResultList();
+        List<HoaDon> list = query.getResultList();
 
-        return list2;
+        return list;
     }
 
     public List<HoaDon> getHDByKH(String type) {
         Query query = session.createQuery(" SELECT h FROM HoaDon h WHERE h.khachHang" + type);
-        List<HoaDon> list3 = query.getResultList();
+        List<HoaDon> listHD = query.getResultList();
 
-        return list3;
+        return listHD;
     }
 
-    public List<HoaDon> getHDByTT2(int trangthai, String typeKH, Date from, Date to) {
-        Query query = session.createQuery(" SELECT h FROM HoaDon h WHERE h.trangThai = :trangthai AND h.ngayTao BETWEEN :from AND :to AND h.khachHang " + typeKH);
+    public List<HoaDon> getHDCombo(int trangthai, String typeKH) {
+        Query query = session.createQuery(" SELECT h FROM HoaDon h WHERE h.trangThai = :trangthai AND h.khachHang " + typeKH);
         query.setParameter("trangthai", trangthai);
-        query.setParameter("from", from);
-        query.setParameter("to", to);
-        List<HoaDon> list4 = query.getResultList();
+        List<HoaDon> listHD = query.getResultList();
 
-        return list4;
+        return listHD;
     }
 
     public List<HoaDon> getByTT(int trangThai) {
@@ -113,10 +112,5 @@ public class HoaDonRepository {
         return list;
     }
 
-    public static void main(String[] args) {
-        HoaDonRepository hdr = new HoaDonRepository();
-        for (HoaDon x : hdr.getByTT(1)) {
-            System.out.println(x);
-        }
-    }
+
 }
