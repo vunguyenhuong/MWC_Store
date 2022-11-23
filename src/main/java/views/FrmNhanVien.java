@@ -37,7 +37,7 @@ public class FrmNhanVien extends javax.swing.JPanel {
     public FrmNhanVien() {
         initComponents();
         nguoidungSV = new NguoiDungService();
-        LoadData(nguoidungSV.getListNhanVien("CV2"));
+        
         GioiTinh();
         iChucVuService = new ChucVuService();
         Table.apply(jScrollPane1, Table.TableType.DEFAULT);
@@ -471,6 +471,8 @@ public class FrmNhanVien extends javax.swing.JPanel {
 
     private void btn_xoa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoa1ActionPerformed
         // TODO add your handling code here:
+        LoadData(nguoidungSV.getListNhanVien("CV2"));
+        JOptionPane.showMessageDialog(this,"Hiển thị thành công");
     }//GEN-LAST:event_btn_xoa1ActionPerformed
 
  
