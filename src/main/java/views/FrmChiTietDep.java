@@ -235,7 +235,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         btn_previous = new swing.Button();
         btn_last = new swing.Button();
         lbl_page = new javax.swing.JLabel();
-        spinner1 = new swing.Spinner();
+        sp_SoLuong = new swing.Spinner();
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -436,7 +436,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(spinner1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(sp_SoLuong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(txt_giaban, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE))
                                     .addComponent(jLabel1))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -519,7 +519,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(spinner1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(sp_SoLuong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txt_gianhap, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -607,7 +607,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             ctd.setNhaSX((NhaSX) comboNSX.getSelectedItem());
             ctd.setSize((Size) comboSize.getSelectedItem());
             ctd.setMoTa(txt_mota.getText());
-            ctd.setSoLuong((int) spinner1.getValue());
+            ctd.setSoLuong((int) sp_SoLuong.getValue());
             ctd.setGiaNhap(helper.convertToDecimal(txt_gianhap, "Error!"));
             ctd.setGiaBan(helper.convertToDecimal(txt_giaban, "Error!"));
             ctd.setNgaySuaCuoi(new Date());
@@ -652,7 +652,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             ctd.setNhaSX((NhaSX) comboNSX.getSelectedItem());
             ctd.setSize((Size) comboSize.getSelectedItem());
             ctd.setMoTa(txt_mota.getText());
-            ctd.setSoLuong((int) spinner1.getValue());
+            ctd.setSoLuong((int) sp_SoLuong.getValue());
             ctd.setGiaNhap(helper.convertToDecimal(txt_gianhap, "Error!"));
             ctd.setGiaBan(helper.convertToDecimal(txt_giaban, "Error!"));
             ctd.setNgayThem(new Date());
@@ -668,7 +668,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             panel.showNotification();
         } else {
             ChiTietDep ctd = iChiTietDepService.getObjByProperties(dep.getId(), loaiDep.getId(), mauSac.getId(), chatLieu.getId(), nhaSX.getId(), size.getId());
-            int soLuong = (int) spinner1.getValue();
+            int soLuong = (int) sp_SoLuong.getValue();
             ctd.setSoLuong(ctd.getSoLuong() + soLuong);
             ctd.setNgaySuaCuoi(new Date());
             iChiTietDepService.save(ctd);
@@ -760,7 +760,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         txt_mota.setText(ctd.getMoTa());
         txt_gianhap.setText(ctd.getGiaNhap().toString());
         txt_giaban.setText(ctd.getGiaBan().toString());
-        spinner1.setValue(ctd.getSoLuong());
+        sp_SoLuong.setValue(ctd.getSoLuong());
         if (ctd.getTrangThai() == 0) {
             rd_ct_dangkd.setSelected(true);
         } else {
@@ -796,7 +796,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
     private javax.swing.JLabel lbl_total;
     private swing.RadioButtonCustom rd_ct_dangkd;
     private swing.RadioButtonCustom rd_ct_ngungkd;
-    private swing.Spinner spinner1;
+    private swing.Spinner sp_SoLuong;
     private swing.TableScrollButton tableScrollButton1;
     private javax.swing.JTable tb_table;
     private swing.TextField txt_giaban;
