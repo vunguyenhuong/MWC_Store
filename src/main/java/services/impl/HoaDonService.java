@@ -4,6 +4,7 @@
  */
 package services.impl;
 
+import java.util.Date;
 import java.util.List;
 import models.HoaDon;
 import repositories.HoaDonRepository;
@@ -46,5 +47,28 @@ public class HoaDonService implements IHoaDonService{
     public List<HoaDon> findByName(String ma) {
         return hoadonRepo.findByName(ma);
     }
+
+    @Override
+    public List<HoaDon> findByMaAndTen(String ten) {
+        return hoadonRepo.getObjByMaAndKH(ten);
+    }
+
+    @Override
+    public List<HoaDon> getKHByTen() {
+        return hoadonRepo.getHDByTT();
+    }
+
+    @Override
+    public List<HoaDon> getKHByTen1() {
+        return hoadonRepo.getHDByTT1();
+    }
+
+    @Override
+    public List<HoaDon> getHDByTT(int trangthai, String type, Date from, Date to) {
+        return hoadonRepo.getHDByTT2(trangthai, type, from, to);
+    }
+    
+    
+    
     
 }

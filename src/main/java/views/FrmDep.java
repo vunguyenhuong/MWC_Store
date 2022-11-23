@@ -12,6 +12,7 @@ import services.IDepService;
 import services.impl.DepService;
 import swing.Table;
 import ui.NotificationMess;
+import utilities.Helper;
 
 /**
  *
@@ -22,6 +23,7 @@ public class FrmDep extends javax.swing.JPanel {
     private DefaultTableModel dtm;
     private IDepService iDepService;
     private String fileName;
+    private Helper helper = new Helper();
 
     /**
      * Creates new form FrmDepOK
@@ -45,8 +47,8 @@ public class FrmDep extends javax.swing.JPanel {
                 dep.getMa(),
                 dep.getTen(),
                 dep.getHinhAnh(),
-                dep.getNgayThem(),
-                dep.getNgaySuaCuoi(),
+                helper.formatDate(dep.getNgayThem()),
+                helper.formatDate(dep.getNgaySuaCuoi()),
                 dep.getTrangThai() == 0 ? "Đang kinh doanh" : "Ngừng kinh doanh"
             };
             dtm.addRow(rowData);

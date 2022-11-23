@@ -4,6 +4,7 @@
  */
 package services;
 
+import java.util.Date;
 import java.util.List;
 import models.HoaDon;
 
@@ -23,4 +24,12 @@ public interface IHoaDonService {
     HoaDon getObjById(int id);
     
     List<HoaDon> findByName(String ma);
+    
+    List<HoaDon> findByMaAndTen(String ten);
+    
+    List<HoaDon> getKHByTen();
+    
+    List<HoaDon> getKHByTen1();
+    
+    List<HoaDon> getHDByTT(int trangthai, String type, Date from, Date to);
 }
