@@ -15,14 +15,14 @@ import utilities.Helper;
  *
  * @author KimChi
  */
-public class FrmQuanLiKH extends javax.swing.JPanel {
+public class FrmQLKH extends javax.swing.JPanel {
 
     private IKhachHangService iKhachHangService;
     private DefaultTableModel dtm = new DefaultTableModel();
     private Helper helper;
 
     private KhachHang khachHang = null;
-    public FrmQuanLiKH() {
+    public FrmQLKH() {
         initComponents();
         this.iKhachHangService = new KhachHangService();
         this.helper = new Helper();
