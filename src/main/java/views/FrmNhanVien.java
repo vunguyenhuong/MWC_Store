@@ -33,7 +33,6 @@ public class FrmNhanVien extends javax.swing.JPanel {
     private IChucVuService iChucVuService;
     private Helper helper;
     private String filename;
-    private int index=-1;
     
     public FrmNhanVien() {
         initComponents();
