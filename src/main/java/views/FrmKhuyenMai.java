@@ -9,9 +9,12 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.KhuyenMai;
 import services.IKhuyenMaiService;
@@ -32,6 +35,7 @@ public class FrmKhuyenMai extends java.awt.Dialog {
     private DefaultTableModel defaultTableModel = new DefaultTableModel();
     private IKhuyenMaiService iKhuyenMaiService = new KhuyenMaiService();
     private Helper helper = new Helper();
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     private KhuyenMai khuyenMai;
 
     public FrmKhuyenMai(java.awt.Frame parent, boolean modal) {
@@ -218,15 +222,20 @@ public class FrmKhuyenMai extends java.awt.Dialog {
                                 .addGap(154, 154, 154))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(122, 122, 122))
                                     .addComponent(date_NgayKetThuc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(date_NgayBatDau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel3))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel3))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(54, 54, 54)
+                                .addComponent(btn_ChonKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(btn_Them, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
@@ -234,11 +243,7 @@ public class FrmKhuyenMai extends java.awt.Dialog {
                                 .addComponent(btn_CapNhat, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_Xoa, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                                .addGap(24, 24, 24))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(54, 54, 54)
-                                .addComponent(btn_ChonKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGap(24, 24, 24))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txt_PhanTramGiam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -258,7 +263,7 @@ public class FrmKhuyenMai extends java.awt.Dialog {
                                 .addComponent(txt_Search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
                                 .addComponent(lbl_Total))
-                            .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -332,24 +337,25 @@ public class FrmKhuyenMai extends java.awt.Dialog {
         dispose();
     }//GEN-LAST:event_closeDialog
     private KhuyenMai getForm() {
-        String result = "MWCSTORES" + txt_Ma.getText().toUpperCase();
+        String ma = txt_Ma.getText().trim();
+        ma = ma.replaceAll(" ", "");
+        String result = "MWCSTORES" + ma.toUpperCase();
         KhuyenMai km = new KhuyenMai();
-        km.setMa(txt_Ma.getText().toUpperCase());
+        km.setMa(ma.toUpperCase());
         km.setTen(txt_TenKM.getText());
         km.setSoLuong((int) sp_SoLuong.getValue());
         km.setPhantramgiam(Float.parseFloat(txt_PhanTramGiam.getText()));
         km.setNgayBatDau(date_NgayBatDau.getDate());
         km.setNgayKetThuc(date_NgayKetThuc.getDate());
-        km.setHinhAnh(txt_Ma.getText().toUpperCase() + ".png");
+        km.setHinhAnh(ma.toUpperCase() + ".png");
         try {
-            String filePath = "images/voucher/" + txt_Ma.getText().toUpperCase() + ".png";
+            String filePath = "images/voucher/" + ma.toUpperCase() + ".png";
             String charset = "UTF-8";
             Map<EncodeHintType, ErrorCorrectionLevel> hintMap = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
             hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
             BitMatrix matrix = new MultiFormatWriter().encode(
                     new String(result.getBytes(charset), charset),
                     BarcodeFormat.QR_CODE, 500, 500, hintMap);
-
             MatrixToImageWriter.writeToFile(matrix, filePath.substring(filePath.lastIndexOf('.') + 1), new File(filePath));
             System.out.println("Qr code has been generated at the location " + filePath);
 
@@ -371,17 +377,46 @@ public class FrmKhuyenMai extends java.awt.Dialog {
         if (helper.checkNull(txt_Ma, "Mã") || helper.checkNull(txt_TenKM, "Tên khuyến mãi") || helper.checkNull(txt_PhanTramGiam, "Phần trăm giảm")) {
             return false;
         }
+        if (helper.checkRegex(txt_Ma, "[a-zA-Z0-9]*", "Mã không được chứa ký hiệu đặc biệt")) {
+            return false;
+        }
         try {
             float f = Float.parseFloat(txt_PhanTramGiam.getText().trim());
         } catch (NumberFormatException e) {
             helper.error(this, "Phần trăm giảm không chứa chữ !");
             return false;
         }
+        Date currentDate = new Date();
+        Date date1 = null;
+        Date date2 = null;
+        Date date3 = null;
+        try {
+            String batDau = sdf.format(date_NgayBatDau.getDate());
+            String ketThuc = sdf.format(date_NgayKetThuc.getDate());
+            String hienTai = sdf.format(currentDate);
+            date1 = sdf.parse(batDau);
+            date2 = sdf.parse(ketThuc);
+            date3 = sdf.parse(hienTai);
+            long getDiff = date2.getTime() - date1.getTime();
+            long getHienTai = date1.getTime() - date3.getTime();
+            if (getHienTai < 0) {
+                JOptionPane.showMessageDialog(this, "Ngày bắt đầu phải >= ngày hiện tại");
+                return false;
+            }
+            if (getDiff <= 0) {
+                JOptionPane.showMessageDialog(this, "Ngày kết thúc phải > ngày bắt đầu");
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return true;
     }
     private void btn_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemActionPerformed
+        String ma = txt_Ma.getText().trim();
+        ma = ma.replaceAll(" ", "");
         if (check()) {
-            if (iKhuyenMaiService.getObj(txt_Ma.getText()) == null) {
+            if (iKhuyenMaiService.getObj(ma) == null) {
                 iKhuyenMaiService.save(getForm());
                 loadData(iKhuyenMaiService.getAll());
                 clearForm();
