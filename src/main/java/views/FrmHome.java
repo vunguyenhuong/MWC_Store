@@ -160,6 +160,9 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                     }
                 }
                 if (menuIndex == 2) {
+                    main.showForm(new FrmQuanLiKH());
+                }
+                if (menuIndex == 3) {
                     if (subMenuIndex == 0) {
 // CTSPFrmCTD
                         main.showForm(new FrmChiTietDep());
@@ -185,7 +188,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
 
                     }
                 }
-                if (menuIndex == 3) {
+                if (menuIndex == 4) {
 //                    if (subMenuIndex == 0) {
 //                        
 //                    } else if (subMenuIndex == 1) {
@@ -193,7 +196,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
 //                    }
                     main.showForm(new FrmQLHD());
                 }
-                if (menuIndex == 4) {
+                if (menuIndex == 5) {
                     cardLayout.show(pn_main, "banhang");
                     loadSP(iChiTietDepService.getAll());
                     initWebcam(pn_webcam);
@@ -203,14 +206,14 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
 
                     }
                 }
-                if (menuIndex == 5) {
+                if (menuIndex == 6) {
                     if (subMenuIndex == 0) {
                         main.showForm(new FrmThongKe());
                     } else if (subMenuIndex == 1) {
                         main.showForm(new FrmThongKeHoaDon());
                     }
                 }
-                if (menuIndex == 6) {
+                if (menuIndex == 7) {
                     if (subMenuIndex == 0) {
                         if (helper.confirm(rootPane, "Bạn có chắc muốn đăng xuất ?")) {
                             dispose();
