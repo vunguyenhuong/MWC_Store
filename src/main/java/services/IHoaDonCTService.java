@@ -29,4 +29,6 @@ public interface IHoaDonCTService {
     List<HoaDonChiTiet> findByMa(String ma);
     
     List<HoaDonChiTiet> getDoanhThu(int trangThai,Date ngayThanhToan);
+    
+    List<HoaDonChiTiet> findByTT(int trangThaiHD);
 }

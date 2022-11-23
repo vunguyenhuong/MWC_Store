@@ -7,8 +7,12 @@ import java.util.List;
 import javax.persistence.Query;
 import models.ChiTietDep;
 import models.HoaDonChiTiet;
+import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import services.IChiTietDepService;
+import services.impl.ChiTietDepService;
 import utilities.HibernateUtil;
 
 /**
@@ -90,14 +94,34 @@ public class HoaDonCTRepository {
         return list;
     }
 
+    public List<HoaDonChiTiet> findByTT(int trangThaiHD) {
+        Query query = session.createQuery("SELECT h FROM HoaDonChiTiet h WHERE h.hoaDon.trangThai = :trangThai");
+        query.setParameter("trangThai", trangThaiHD);
+        List<HoaDonChiTiet> list = query.getResultList();
+        return list;
+    }
+
+    public List findSP(int trangThai) {
+        String sql = "SELECT TOP 5 IDCTD,COUNT(SOLUONG) FROM HOADONCHITIET A "
+                + "JOIN HOADON B ON A.IdHD = B.ID WHERE B.TrangThai = ? "
+                + "GROUP BY IDCTD ORDER BY COUNT(SOLUONG) DESC";
+        SQLQuery query = session.createSQLQuery(sql);
+        query.setParameter(1, trangThai);
+        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+        List list = query.list();
+        return list;
+    }
+
     public static void main(String[] args) {
         HoaDonCTRepository hdctr = new HoaDonCTRepository();
-        try {
-            for (HoaDonChiTiet x : hdctr.getDoanhThu(1, new Date())) {
+        IChiTietDepService iChiTietDepService = new ChiTietDepService();
+        List listTop5 = hdctr.findSP(1);
+        List<ChiTietDep> list = new ArrayList<>();
+        for (Object x : listTop5) {
+//            ChiTietDep ctd = iChiTietDepService.getObj(x.);
+//            list.add(ctd);
             System.out.println(x);
         }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        System.out.println(hdctr.findSP(1));
     }
 }

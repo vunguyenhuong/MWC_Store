@@ -27,11 +27,11 @@
                   <Group type="102" attributes="0">
                       <Component id="doanhthungay" max="32767" attributes="0"/>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                      <Component id="doanhthuthang" max="32767" attributes="0"/>
-                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Component id="spdangkd" max="32767" attributes="0"/>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Component id="spsaphethang" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                      <Component id="spngungkd" max="32767" attributes="0"/>
                   </Group>
                   <Component id="jPanel1" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
@@ -52,9 +52,9 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="doanhthungay" min="-2" max="-2" attributes="0"/>
-                  <Component id="doanhthuthang" min="-2" max="-2" attributes="0"/>
                   <Component id="spdangkd" min="-2" max="-2" attributes="0"/>
                   <Component id="spsaphethang" min="-2" max="-2" attributes="0"/>
+                  <Component id="spngungkd" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
@@ -81,10 +81,10 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="d2" green="48" red="4" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Dashboard / Home"/>
+        <Property name="text" type="java.lang.String" value="Th&#x1ed1;ng k&#xea; / S&#x1ea3;n ph&#x1ea9;m"/>
       </Properties>
     </Component>
-    <Component class="swing.Card" name="doanhthuthang">
+    <Component class="swing.Card" name="spdangkd">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="d6" green="1e" red="a" type="rgb"/>
@@ -94,7 +94,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="swing.Card" name="spdangkd">
+    <Component class="swing.Card" name="spsaphethang">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="1" green="55" red="c2" type="rgb"/>
@@ -104,13 +104,13 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="swing.Card" name="spsaphethang">
+    <Component class="swing.Card" name="spngungkd">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="c3" red="3c" type="rgb"/>
         </Property>
         <Property name="colorGradient" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="5a" green="ff" red="d0" type="rgb"/>
+          <Color blue="33" green="ff" red="0" type="rgb"/>
         </Property>
       </Properties>
     </Component>

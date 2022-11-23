@@ -32,4 +32,6 @@ public interface IHoaDonService {
     List<HoaDon> getKHByTen1();
     
     List<HoaDon> getHDByTT(int trangthai, String type, Date from, Date to);
+    
+    List<HoaDon> getByTT(int trangThai);
 }

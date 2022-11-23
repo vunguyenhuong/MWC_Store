@@ -32,9 +32,9 @@ public class FrmThongKe extends javax.swing.JPanel {
         } catch (Exception e) {
         }
         doanhthungay.setData(new ModelCard("Doanh thu ngày", doanhThuNgay, null));
-        spdangkd.setData(new ModelCard("Sản phẩm đang kinh doanh", iChiTietDepService.findByTT(0, "").size(), null));
-        spsaphethang.setData(new ModelCard("Sản phẩm sắp hết hàng", iChiTietDepService.findSLSPLess(5).size(), null));
-        doanhthuthang.setData(new ModelCard("Sản phẩm ngừng kinh doanh", iChiTietDepService.findByTT(1, "").size(), null));
+        spsaphethang.setData(new ModelCard("Sản phẩm đang kinh doanh", iChiTietDepService.findByTT(0, "").size(), null));
+        spngungkd.setData(new ModelCard("Sản phẩm sắp hết hàng", iChiTietDepService.findSLSPLess(5).size(), null));
+        spdangkd.setData(new ModelCard("Sản phẩm ngừng kinh doanh", iChiTietDepService.findByTT(1, "").size(), null));
     }
 
     @SuppressWarnings("unchecked")
@@ -43,9 +43,9 @@ public class FrmThongKe extends javax.swing.JPanel {
 
         doanhthungay = new swing.Card();
         jLabel1 = new javax.swing.JLabel();
-        doanhthuthang = new swing.Card();
         spdangkd = new swing.Card();
         spsaphethang = new swing.Card();
+        spngungkd = new swing.Card();
         jPanel1 = new javax.swing.JPanel();
         tableScrollButton1 = new swing.TableScrollButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -57,16 +57,16 @@ public class FrmThongKe extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(4, 72, 210));
-        jLabel1.setText("Dashboard / Home");
+        jLabel1.setText("Thống kê / Sản phẩm");
 
-        doanhthuthang.setBackground(new java.awt.Color(10, 30, 214));
-        doanhthuthang.setColorGradient(new java.awt.Color(72, 111, 252));
+        spdangkd.setBackground(new java.awt.Color(10, 30, 214));
+        spdangkd.setColorGradient(new java.awt.Color(72, 111, 252));
 
-        spdangkd.setBackground(new java.awt.Color(194, 85, 1));
-        spdangkd.setColorGradient(new java.awt.Color(255, 212, 99));
+        spsaphethang.setBackground(new java.awt.Color(194, 85, 1));
+        spsaphethang.setColorGradient(new java.awt.Color(255, 212, 99));
 
-        spsaphethang.setBackground(new java.awt.Color(60, 195, 0));
-        spsaphethang.setColorGradient(new java.awt.Color(208, 255, 90));
+        spngungkd.setBackground(new java.awt.Color(60, 195, 0));
+        spngungkd.setColorGradient(new java.awt.Color(0, 255, 51));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -104,11 +104,11 @@ public class FrmThongKe extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(doanhthungay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(doanhthuthang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
                         .addComponent(spdangkd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(spsaphethang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(spsaphethang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(spngungkd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -124,9 +124,9 @@ public class FrmThongKe extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(doanhthungay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(doanhthuthang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(spdangkd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spsaphethang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spsaphethang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spngungkd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -137,12 +137,12 @@ public class FrmThongKe extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private swing.Card doanhthungay;
-    private swing.Card doanhthuthang;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private swing.Card spdangkd;
+    private swing.Card spngungkd;
     private swing.Card spsaphethang;
     private swing.TableScrollButton tableScrollButton1;
     // End of variables declaration//GEN-END:variables

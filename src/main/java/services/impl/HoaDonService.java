@@ -14,8 +14,8 @@ import services.IHoaDonService;
  *
  * @author tt
  */
-public class HoaDonService implements IHoaDonService{
-    
+public class HoaDonService implements IHoaDonService {
+
     private HoaDonRepository hoadonRepo = new HoaDonRepository();
 
     @Override
@@ -67,8 +67,10 @@ public class HoaDonService implements IHoaDonService{
     public List<HoaDon> getHDByTT(int trangthai, String type, Date from, Date to) {
         return hoadonRepo.getHDByTT2(trangthai, type, from, to);
     }
-    
-    
-    
-    
+
+    @Override
+    public List<HoaDon> getByTT(int trangThai) {
+        return hoadonRepo.getByTT(trangThai);
+    }
+
 }

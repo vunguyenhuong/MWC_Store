@@ -65,9 +65,7 @@
                               <Component id="btn_sua" linkSize="2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btn_xoa" linkSize="2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btn_xoa1" linkSize="2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="96" max="32767" attributes="0"/>
+                              <EmptySpace pref="196" max="32767" attributes="0"/>
                               <Component id="txt_timkiem" min="-2" pref="234" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btn_scanqr" min="-2" max="-2" attributes="0"/>
@@ -120,7 +118,6 @@
                           <Component id="btn_xoa" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txt_timkiem" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btn_scanqr" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btn_xoa1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="lblHinhAnh" min="-2" pref="244" max="-2" attributes="0"/>
@@ -357,20 +354,6 @@
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblHinhAnhMouseClicked"/>
-      </Events>
-    </Component>
-    <Component class="swing.Button" name="btn_xoa1">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="66" green="66" red="66" type="rgb"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Load Data"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_xoa1ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
