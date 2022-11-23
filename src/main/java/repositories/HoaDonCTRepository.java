@@ -1,6 +1,8 @@
 package repositories;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Query;
 import models.ChiTietDep;
@@ -23,7 +25,7 @@ public class HoaDonCTRepository {
         List<HoaDonChiTiet> hdct = new ArrayList<>();
         return hdct;
     }
-  
+
     public boolean save(HoaDonChiTiet hdct) {
         try {
             transaction.begin();
@@ -67,8 +69,8 @@ public class HoaDonCTRepository {
         List<HoaDonChiTiet> list = query.getResultList();
         return list;
     }
-    
-    public HoaDonChiTiet getObj(int idSP, int idHD){
+
+    public HoaDonChiTiet getObj(int idSP, int idHD) {
         HoaDonChiTiet hdct = null;
         try {
             Query query = session.createQuery("SELECT c FROM HoaDonChiTiet c WHERE c.ctdep.id = :idSP AND c.hoaDon.id = :idHD");
@@ -78,5 +80,24 @@ public class HoaDonCTRepository {
         } catch (Exception e) {
         }
         return hdct;
+    }
+
+    public List<HoaDonChiTiet> getDoanhThu(int trangThai, Date ngayThanhToan) {
+        Query query = session.createQuery("SELECT h FROM HoaDonChiTiet h WHERE h.hoaDon.trangThai= :trangThai AND h.hoaDon.ngayThanhToan LIKE :ngayThanhToan");
+        query.setParameter("trangThai", trangThai);
+        query.setParameter("ngayThanhToan", ngayThanhToan);
+        List<HoaDonChiTiet> list = query.getResultList();
+        return list;
+    }
+
+    public static void main(String[] args) {
+        HoaDonCTRepository hdctr = new HoaDonCTRepository();
+        try {
+            for (HoaDonChiTiet x : hdctr.getDoanhThu(1, new Date())) {
+            System.out.println(x);
+        }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

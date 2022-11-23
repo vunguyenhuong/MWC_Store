@@ -63,6 +63,13 @@ public class ChiTietDepRepository {
         List<ChiTietDep> list = query.getResultList();
         return list;
     }
+    
+    public List<ChiTietDep> findSLSPLess(int soLuong){
+        Query query = session.createQuery("SELECT c FROM ChiTietDep c WHERE c.soLuong <= :soLuong");
+        query.setParameter("soLuong", soLuong);
+        List<ChiTietDep> list = query.getResultList();
+        return list;
+    }
 
     public ChiTietDep getObjById(int id) {
         ChiTietDep ctd = null;
@@ -84,6 +91,7 @@ public class ChiTietDepRepository {
         List<ChiTietDep> list = query.getResultList();
         return list;
     }
+
     public ChiTietDep checkDuplicate(int idDep, int idLoaiDep, int idMauSac, int idChatLieu, int idNSX, int idSize) {
         ChiTietDep ctd = null;
         try {

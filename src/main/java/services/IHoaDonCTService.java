@@ -1,5 +1,6 @@
 package services;
 
+import java.util.Date;
 import java.util.List;
 import models.ChiTietDep;
 import models.HoaDon;
@@ -26,4 +27,6 @@ public interface IHoaDonCTService {
     HoaDonChiTiet getobj(int idSP, int idHD);
 
     List<HoaDonChiTiet> findByMa(String ma);
+    
+    List<HoaDonChiTiet> getDoanhThu(int trangThai,Date ngayThanhToan);
 }

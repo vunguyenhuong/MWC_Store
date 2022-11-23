@@ -1,6 +1,7 @@
 package services.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import models.ChiTietDep;
 import models.HoaDon;
@@ -58,6 +59,11 @@ public class HoaDonCTService implements IHoaDonCTService {
     @Override
     public HoaDonChiTiet getobj(int idSP, int idHD) {
         return repo.getObj(idSP, idHD);
+    }
+
+    @Override
+    public List<HoaDonChiTiet> getDoanhThu(int trangThai, Date ngayThanhToan) {
+        return repo.getDoanhThu(trangThai, ngayThanhToan);
     }
 
 }
