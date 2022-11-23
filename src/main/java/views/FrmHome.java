@@ -1531,7 +1531,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                                 date1 = sdf.parse(ketThuc);
                                 date2 = sdf.parse(hienTai);
                                 long getDiff = date1.getTime() - date2.getTime();
-                                if (getDiff <= 0) {
+                                if (getDiff < 0) {
                                     NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Mã khuyến mại đã hết hạn !");
                                 panel.showNotification();
                                 break;

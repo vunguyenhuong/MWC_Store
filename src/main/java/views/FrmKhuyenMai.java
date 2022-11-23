@@ -467,7 +467,7 @@ public class FrmKhuyenMai extends java.awt.Dialog {
             date1 = sdf.parse(ketThuc);
             date2 = sdf.parse(hienTai);
             long getDiff = date1.getTime() - date2.getTime();
-            if (getDiff <= 0) {
+            if (getDiff < 0) {
                 helper.error(this, "Khuyến mại đã hết hạn");
                 return;
             }
@@ -477,7 +477,7 @@ public class FrmKhuyenMai extends java.awt.Dialog {
         if (km.getSoLuong() == 0) {
             helper.error(this, "Đã hết mã khuyến mãi!");
         } else {
-            String tenKM = (String) tb_danhSach.getValueAt(row, 1);
+            String tenKM = (String) tb_danhSach.getValueAt(row, 0);
             khuyenMai = km;
             NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Thêm thành công khuyến mãi " + tenKM);
             panel.showNotification();
