@@ -366,6 +366,8 @@ public class FrmKhuyenMai extends java.awt.Dialog {
     }
 
     public void clearForm() {
+        txt_Ma.setEditable(true);
+        tb_danhSach.setRowSelectionAllowed(false);
         txt_Ma.setText("");
         txt_TenKM.setText("");
         txt_PhanTramGiam.setText("");
@@ -400,11 +402,11 @@ public class FrmKhuyenMai extends java.awt.Dialog {
             long getDiff = date2.getTime() - date1.getTime();
             long getHienTai = date1.getTime() - date3.getTime();
             if (getHienTai < 0) {
-                JOptionPane.showMessageDialog(this, "Ngày bắt đầu phải >= ngày hiện tại");
+                helper.error(this, "Ngày bắt đầu phải >= ngày hiện tại");
                 return false;
             }
             if (getDiff <= 0) {
-                JOptionPane.showMessageDialog(this, "Ngày kết thúc phải > ngày bắt đầu");
+                helper.error(this, "Ngày kết thúc phải > ngày bắt đầu");
                 return false;
             }
         } catch (Exception e) {
@@ -433,32 +435,49 @@ public class FrmKhuyenMai extends java.awt.Dialog {
         if (row == -1) {
             helper.error(this, "Vui lòng chọn dòng cần cập nhật!");
         } else {
-            KhuyenMai km = iKhuyenMaiService.getObj(tb_danhSach.getValueAt(row, 0).toString());
-            km.setMa(txt_Ma.getText().toUpperCase());
-            km.setTen(txt_TenKM.getText());
-            km.setPhantramgiam(Float.parseFloat(txt_PhanTramGiam.getText()));
-            km.setSoLuong((int) sp_SoLuong.getValue());
-            km.setNgayBatDau(date_NgayBatDau.getDate());
-            km.setNgayKetThuc(date_NgayKetThuc.getDate());
-            iKhuyenMaiService.save(km);
-            loadData(iKhuyenMaiService.getAll());
-            clearForm();
-            helper.alert(this, "Cập nhật thành công");
+            if (check()) {
+                KhuyenMai km = iKhuyenMaiService.getObj(tb_danhSach.getValueAt(row, 0).toString());
+                km.setMa(txt_Ma.getText().toUpperCase());
+                km.setTen(txt_TenKM.getText());
+                km.setPhantramgiam(Float.parseFloat(txt_PhanTramGiam.getText()));
+                km.setSoLuong((int) sp_SoLuong.getValue());
+                km.setNgayBatDau(date_NgayBatDau.getDate());
+                km.setNgayKetThuc(date_NgayKetThuc.getDate());
+                iKhuyenMaiService.save(km);
+                loadData(iKhuyenMaiService.getAll());
+                clearForm();
+                helper.alert(this, "Cập nhật thành công");
+            }
         }
     }//GEN-LAST:event_btn_CapNhatActionPerformed
 
     private void btn_ChonKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ChonKhuyenMaiActionPerformed
         int row = tb_danhSach.getSelectedRow();
+        KhuyenMai km = iKhuyenMaiService.getObj(tb_danhSach.getValueAt(row, 0).toString());
         if (row == -1) {
-            helper.error(this, "Vui lòng chọn khuyến !");
+            helper.error(this, "Vui lòng chọn khuyến mãi!");
             return;
         }
-        int soLuong = Integer.parseInt(tb_danhSach.getValueAt(row, 3).toString());
-        if (soLuong == 0) {
+        Date currentDate = new Date();
+        Date date1 = null;
+        Date date2 = null;
+        try {
+            String ketThuc = sdf.format(km.getNgayKetThuc());
+            String hienTai = sdf.format(currentDate);
+            date1 = sdf.parse(ketThuc);
+            date2 = sdf.parse(hienTai);
+            long getDiff = date1.getTime() - date2.getTime();
+            if (getDiff < 0) {
+                helper.error(this, "Khuyến mại đã hết hạn");
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (km.getSoLuong() == 0) {
             helper.error(this, "Đã hết mã khuyến mãi!");
         } else {
-            String tenKM = (String) tb_danhSach.getValueAt(row, 1);
-            KhuyenMai km = iKhuyenMaiService.getObj(tb_danhSach.getValueAt(row, 0).toString());
+            String tenKM = (String) tb_danhSach.getValueAt(row, 0);
             khuyenMai = km;
             NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Thêm thành công khuyến mãi " + tenKM);
             panel.showNotification();
@@ -495,6 +514,8 @@ public class FrmKhuyenMai extends java.awt.Dialog {
 
     private void tb_danhSachMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_danhSachMousePressed
         // TODO add your handling code here:
+        tb_danhSach.setRowSelectionAllowed(true);
+        txt_Ma.setEditable(false);
         int row = tb_danhSach.getSelectedRow();
         KhuyenMai km = iKhuyenMaiService.getObj(tb_danhSach.getValueAt(row, 0).toString());
         txt_Ma.setText(km.getMa());
