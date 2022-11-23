@@ -115,13 +115,18 @@ public class HoaDonCTRepository {
     public static void main(String[] args) {
         HoaDonCTRepository hdctr = new HoaDonCTRepository();
         IChiTietDepService iChiTietDepService = new ChiTietDepService();
+        
+        
         List listTop5 = hdctr.findSP(1);
-        List<ChiTietDep> list = new ArrayList<>();
-        for (Object x : listTop5) {
-//            ChiTietDep ctd = iChiTietDepService.getObj(x.);
-//            list.add(ctd);
-            System.out.println(x);
+        
+        for (int i = 0; i < listTop5.size(); i++) {
+            listTop5.get(i);
         }
+//        for (Object x : listTop5) {
+////            ChiTietDep ctd = iChiTietDepService.getObj(x.);
+////            list.add(ctd);
+//            System.out.println(x);
+//        }
 //        System.out.println(hdctr.findSP(1));
     }
 }
