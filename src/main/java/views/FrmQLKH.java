@@ -13,7 +13,7 @@ import utilities.Helper;
  *
  * @author KimChi
  */
-public class FrmQLKhachHang extends javax.swing.JPanel {
+public class FrmQLKH extends javax.swing.JPanel {
 
     private IKhachHangService iKhachHangService;
     private DefaultTableModel dtm = new DefaultTableModel();
@@ -21,7 +21,7 @@ public class FrmQLKhachHang extends javax.swing.JPanel {
 
     private KhachHang khachHang = null;
 
-    public FrmQLKhachHang() {
+    public FrmQLKH() {
         initComponents();
         this.iKhachHangService = new KhachHangService();
         this.helper = new Helper();
