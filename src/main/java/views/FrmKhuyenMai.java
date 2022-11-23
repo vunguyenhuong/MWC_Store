@@ -377,6 +377,9 @@ public class FrmKhuyenMai extends java.awt.Dialog {
         if (helper.checkNull(txt_Ma, "Mã") || helper.checkNull(txt_TenKM, "Tên khuyến mãi") || helper.checkNull(txt_PhanTramGiam, "Phần trăm giảm")) {
             return false;
         }
+        if (helper.checkRegex(txt_Ma, "[a-zA-Z0-9]*", "Mã không được chứa ký hiệu đặc biệt")) {
+            return false;
+        }
         try {
             float f = Float.parseFloat(txt_PhanTramGiam.getText().trim());
         } catch (NumberFormatException e) {
