@@ -66,6 +66,9 @@ public class ChiTietDep implements Serializable {
 
     @Column
     private int soLuong;
+    
+    @Column
+    private int soLuongBanRa;
 
     @Column
     private BigDecimal giaNhap;

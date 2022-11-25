@@ -75,6 +75,7 @@ CREATE TABLE CHITIETDEP (
 	IdSize INT,
 	MoTa NVARCHAR(50),
 	SoLuong INT,
+	SoLuongBanRa INT,
 	GiaNhap DECIMAL(20,0),
 	GiaBan DECIMAL(20,0),
 	NgayThem DATE,
@@ -270,13 +271,13 @@ GO
 INSERT SIZE (Ma, KichCo, NgayThem, NgaySuaCuoi, TrangThai) VALUES (N'SZ9', 44, CAST(N'2022-11-11' AS Date), CAST(N'2022-11-11' AS Date), 0)
 
 GO
-INSERT CHITIETDEP (IdDep, IdLoaiDep, IdMauSac, IdChatLieu, IdNsx, IdSize, MoTa, SoLuong, GiaNhap, GiaBan, NgayThem, NgaySuaCuoi, TrangThai) VALUES (1, 1, 3, 2, 1, 2, N'Đẹp', 5, CAST(1000 AS Decimal(20, 0)), CAST(2000 AS Decimal(20, 0)), CAST(N'2022-11-11' AS Date), CAST(N'2022-11-11' AS Date), 0)
+INSERT CHITIETDEP (IdDep, IdLoaiDep, IdMauSac, IdChatLieu, IdNsx, IdSize, MoTa, SoLuong, SoLuongBanRa, GiaNhap, GiaBan, NgayThem, NgaySuaCuoi, TrangThai) VALUES (1, 1, 3, 2, 1, 2, N'Đẹp', 5,0, CAST(1000 AS Decimal(20, 0)), CAST(2000 AS Decimal(20, 0)), CAST(N'2022-11-11' AS Date), CAST(N'2022-11-11' AS Date), 0)
 GO
-INSERT CHITIETDEP (IdDep, IdLoaiDep, IdMauSac, IdChatLieu, IdNsx, IdSize, MoTa, SoLuong, GiaNhap, GiaBan, NgayThem, NgaySuaCuoi, TrangThai) VALUES (2, 2, 2, 2, 5, 3, N'Rất đẹp', 10, CAST(1500 AS Decimal(20, 0)), CAST(2500 AS Decimal(20, 0)), CAST(N'2022-11-11' AS Date), CAST(N'2022-11-11' AS Date), 0)
+INSERT CHITIETDEP (IdDep, IdLoaiDep, IdMauSac, IdChatLieu, IdNsx, IdSize, MoTa, SoLuong, SoLuongBanRa, GiaNhap, GiaBan, NgayThem, NgaySuaCuoi, TrangThai) VALUES (2, 2, 2, 2, 5, 3, N'Rất đẹp', 10,0, CAST(1500 AS Decimal(20, 0)), CAST(2500 AS Decimal(20, 0)), CAST(N'2022-11-11' AS Date), CAST(N'2022-11-11' AS Date), 0)
 GO
-INSERT CHITIETDEP (IdDep, IdLoaiDep, IdMauSac, IdChatLieu, IdNsx, IdSize, MoTa, SoLuong, GiaNhap, GiaBan, NgayThem, NgaySuaCuoi, TrangThai) VALUES (3, 3, 3, 4, 3, 2, N'Rất rất đẹp', 30, CAST(2000 AS Decimal(20, 0)), CAST(3000 AS Decimal(20, 0)), CAST(N'2022-11-11' AS Date), CAST(N'2022-11-11' AS Date), 0)
+INSERT CHITIETDEP (IdDep, IdLoaiDep, IdMauSac, IdChatLieu, IdNsx, IdSize, MoTa, SoLuong, SoLuongBanRa, GiaNhap, GiaBan, NgayThem, NgaySuaCuoi, TrangThai) VALUES (3, 3, 3, 4, 3, 2, N'Rất rất đẹp', 30,0, CAST(2000 AS Decimal(20, 0)), CAST(3000 AS Decimal(20, 0)), CAST(N'2022-11-11' AS Date), CAST(N'2022-11-11' AS Date), 0)
 GO
-INSERT CHITIETDEP (IdDep, IdLoaiDep, IdMauSac, IdChatLieu, IdNsx, IdSize, MoTa, SoLuong, GiaNhap, GiaBan, NgayThem, NgaySuaCuoi, TrangThai) VALUES (5, 4, 4, 5, 2, 3, N'Sang chảnh', 25, CAST(2000 AS Decimal(20, 0)), CAST(4000 AS Decimal(20, 0)), CAST(N'2022-11-11' AS Date), CAST(N'2022-11-11' AS Date), 0)
+INSERT CHITIETDEP (IdDep, IdLoaiDep, IdMauSac, IdChatLieu, IdNsx, IdSize, MoTa, SoLuong, SoLuongBanRa, GiaNhap, GiaBan, NgayThem, NgaySuaCuoi, TrangThai) VALUES (5, 4, 4, 5, 2, 3, N'Sang chảnh', 25,0, CAST(2000 AS Decimal(20, 0)), CAST(4000 AS Decimal(20, 0)), CAST(N'2022-11-11' AS Date), CAST(N'2022-11-11' AS Date), 0)
 
 GO
 INSERT KHACHHANG (Ma, Ten, Sdt, DiaChi, DiemTichLuy, TongDiemTichLuy) VALUES (N'KH1', N'Đinh Hải Dương', N'0666777555', N'Giao Thủy', 0,0)
@@ -317,3 +318,8 @@ SELECT * FROM HOADONCHITIET A JOIN HOADON B ON A.IdHD = B.ID WHERE B.NgayThanhTo
 SELECT SUM(DONGIA*SOLUONG) FROM HOADONCHITIET WHERE IDHD =2 ORDER BY IDHD GROUP BY IDHD
 
 SELECT TOP 5 IDCTD,a.DonGia,COUNT(SOLUONG) FROM HOADONCHITIET A JOIN HOADON B ON A.IdHD = B.ID WHERE B.TrangThai = 1GROUP BY IDCTD,a.DonGia ORDER BY COUNT(SOLUONG) DESC
+
+
+
+
+SELECT * FROM CHITIETDEP WHERE ID IN (SELECT TOP 5 IDCTD,count(SoLuong) FROM HOADONCHITIET A JOIN HOADON B ON A.IdHD = B.ID WHERE B.TrangThai = 1 GROUP BY IDCTD ORDER BY COUNT(SOLUONG) DESC)
