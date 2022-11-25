@@ -285,18 +285,18 @@ public class FrmQLHD extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel2.setText("Tổng tiền");
+        jLabel2.setText("Tổng tiền :");
 
         lblTongtien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblTongtien.setText("0");
 
         lbl_voucher.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_voucher.setForeground(new java.awt.Color(255, 0, 0));
-        lbl_voucher.setText("Khuyến mãi");
+        lbl_voucher.setText("Khuyến mãi :");
 
         lbl_Change.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_Change.setForeground(new java.awt.Color(255, 0, 0));
-        lbl_Change.setText("Thanh toán");
+        lbl_Change.setText("Thanh toán :");
 
         lblKhuyenmai.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblKhuyenmai.setText("0");
@@ -318,15 +318,15 @@ public class FrmQLHD extends javax.swing.JPanel {
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblTongtien)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lbl_voucher)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblKhuyenmai)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lbl_Change)
-                                .addGap(21, 21, 21)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblThanhtoan)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -340,14 +340,13 @@ public class FrmQLHD extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblTongtien)
-                        .addComponent(lbl_voucher)
-                        .addComponent(lblKhuyenmai)
-                        .addComponent(lbl_Change)
-                        .addComponent(lblThanhtoan))
-                    .addComponent(jLabel2))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(lblTongtien)
+                    .addComponent(lbl_voucher)
+                    .addComponent(lblKhuyenmai)
+                    .addComponent(lbl_Change)
+                    .addComponent(lblThanhtoan))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents

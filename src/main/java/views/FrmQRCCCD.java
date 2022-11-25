@@ -32,12 +32,12 @@ import utilities.Helper;
  * @author VU NGUYEN HUONG
  */
 public class FrmQRCCCD extends java.awt.Dialog implements Runnable, ThreadFactory {
-    
+
     private static final long serialVersionUID = 6441489157408381878L;
     private Executor executor = Executors.newSingleThreadExecutor(this);
     private Webcam webcam = null;
     private WebcamPanel panel = null;
-    
+
     private INguoiDungService iNguoiDungService = new NguoiDungService();
     private IChucVuService iChucVuService = new ChucVuService();
     private Helper helper = new Helper();
@@ -129,17 +129,17 @@ public class FrmQRCCCD extends java.awt.Dialog implements Runnable, ThreadFactor
         Dimension size = WebcamResolution.QVGA.getSize();
         webcam = Webcam.getWebcams().get(0); //0 is default webcam
         webcam.setViewSize(size);
-        
+
         panel = new WebcamPanel(webcam);
         panel.setPreferredSize(size);
         panel.setFPSDisplayed(true);
         panel.setMirrored(true);
-        
+
         panelShow.add(panel, new AbsoluteConstraints(0, 0, panelShow.getWidth(), panelShow.getHeight()));
-        
+
         executor.execute(this);
     }
-    
+
     @Override
     public void run() {
         while (true) {
@@ -148,26 +148,26 @@ public class FrmQRCCCD extends java.awt.Dialog implements Runnable, ThreadFactor
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            
+
             Result result = null;
             BufferedImage image = null;
-            
+
             if (webcam.isOpen()) {
-                
+
                 if ((image = webcam.getImage()) == null) {
                     continue;
                 }
-                
+
                 LuminanceSource source = new BufferedImageLuminanceSource(image);
                 BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-                
+
                 try {
                     result = new MultiFormatReader().decode(bitmap);
                 } catch (NotFoundException e) {
                     // fall thru, it means there is no QR code in image
                 }
             }
-            
+
             if (result != null) {
                 try {
                     System.out.println(result.getText());
@@ -180,7 +180,7 @@ public class FrmQRCCCD extends java.awt.Dialog implements Runnable, ThreadFactor
                         nguoiDung.setMa(input.substring(0, 12));
                         nguoiDung.setTen(splits[0]);
                         nguoiDung.setDiaChi(splits[3]);
-                        if (splits[2] == "Nam") {
+                        if (splits[2].equals("Nam")) {
                             nguoiDung.setGioiTinh(0);
                         } else {
                             nguoiDung.setGioiTinh(1);
@@ -199,12 +199,12 @@ public class FrmQRCCCD extends java.awt.Dialog implements Runnable, ThreadFactor
                         }
                     }
                 } catch (Exception e) {
-                    
+
                 }
             }
         }
     }
-    
+
     @Override
     public Thread newThread(Runnable r) {
         Thread t = new Thread(r, "example-runner");
