@@ -11,7 +11,10 @@ import services.INguoiDungService;
 import services.impl.ChucVuService;
 import services.impl.NguoiDungService;
 import swing.Table;
+import ui.EventPagination;
 import ui.NotificationMess;
+import ui.Page;
+import ui.PaginationItemRenderStyle1;
 import utilities.Helper;
 
 /**
@@ -27,6 +30,12 @@ public class FrmNhanVien extends javax.swing.JPanel {
     private IChucVuService iChucVuService;
     private Helper helper;
     private String filename;
+    
+    private Page pg = new Page();
+    private int checkSearchCT = 0;
+    
+    Integer limit = 5;
+    Integer totalData = 0;
 
     public FrmNhanVien() {
         initComponents();
@@ -34,8 +43,27 @@ public class FrmNhanVien extends javax.swing.JPanel {
         iChucVuService = new ChucVuService();
         Table.apply(jScrollPane1, Table.TableType.DEFAULT);
         helper = new Helper();
-        LoadData(nguoidungSV.getListNhanVien("CV2"));
+//        LoadData(nguoidungSV.getListNhanVien("CV2"));
+        pagination();
+        pagination1.setPagegination(1, pg.getTotalPage());
+        pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
 
+    }
+    
+    public void pagination() {
+        LoadData(nguoidungSV.pagination("CV2",pg.getCurrent(), limit));
+        totalData = nguoidungSV.getAll().size();
+        int totalPage = (int) Math.ceil(totalData.doubleValue() / limit);
+        pg.setTotalPage(totalPage);
+        pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
+        pagination1.addEventPagination(new EventPagination() {
+            @Override
+            public void pageChanged(int page) {
+                LoadData(nguoidungSV.pagination("CV2",page, limit));
+                pg.setCurrent(page);
+                pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
+            }
+        });
     }
 
     public void LoadData(List<NguoiDung> list) {
@@ -128,6 +156,8 @@ public class FrmNhanVien extends javax.swing.JPanel {
         txt_timkiem = new swing.TextField();
         lblHinhAnh = new javax.swing.JLabel();
         lbl_Total = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        pagination1 = new swing.Pagination();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -227,6 +257,26 @@ public class FrmNhanVien extends javax.swing.JPanel {
         lbl_Total.setForeground(new java.awt.Color(255, 0, 0));
         lbl_Total.setText("Total : 0");
 
+        jPanel1.setBackground(new java.awt.Color(0, 0, 255));
+
+        pagination1.setBackground(new java.awt.Color(0, 0, 255));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(544, Short.MAX_VALUE)
+                .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(537, 537, 537))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -274,6 +324,7 @@ public class FrmNhanVien extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblHinhAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btn_sua, btn_them, btn_xoa});
@@ -318,8 +369,9 @@ public class FrmNhanVien extends javax.swing.JPanel {
                                 .addComponent(lbl_Total))))
                     .addComponent(lblHinhAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(tableScrollButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btn_sua, btn_them, btn_xoa});
@@ -368,7 +420,7 @@ public class FrmNhanVien extends javax.swing.JPanel {
         }
         if (nguoidungSV.getObj(txt_ma.getText()) == null) {
             this.nguoidungSV.save(getForm());
-            LoadData(nguoidungSV.getListNhanVien("CV2"));
+            pagination();
             NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Thêm thành công");
             panel.showNotification();
             clearForm();
@@ -405,7 +457,12 @@ public class FrmNhanVien extends javax.swing.JPanel {
         }
         nd.setMatKhau(txt_matkhau.getText());
         this.nguoidungSV.save(nd);
-        LoadData(nguoidungSV.getListNhanVien("CV2"));
+        if (checkSearchCT == 0) {
+                nd = nguoidungSV.pagination("CV2",pg.getCurrent(), limit).get(row);
+            } else {
+                nd = nguoidungSV.findByName("CV2",txt_timkiem.getText()).get(row);
+            }
+        pagination();
         NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công");
         panel.showNotification();
         clearForm();
@@ -420,7 +477,12 @@ public class FrmNhanVien extends javax.swing.JPanel {
         }
         NguoiDung nguoiDung = nguoidungSV.getListNhanVien("CV2").get(row);
         this.nguoidungSV.delete(nguoiDung);
-        LoadData(nguoidungSV.getListNhanVien("CV2"));
+        if (checkSearchCT == 0) {
+                nguoiDung = nguoidungSV.pagination("CV2",pg.getCurrent(), limit).get(row);
+            } else {
+                nguoiDung = nguoidungSV.findByName("CV2",txt_timkiem.getText()).get(row);
+            }
+        pagination();
         NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Xóa thành công");
         panel.showNotification();
         clearForm();
@@ -436,7 +498,7 @@ public class FrmNhanVien extends javax.swing.JPanel {
         int row = tb_nhanvien.getSelectedRow();
         tb_nhanvien.setRowSelectionAllowed(true);
         txt_ma.setEditable(false);
-        NguoiDung nd = nguoidungSV.getObj(tb_nhanvien.getValueAt(row, 1).toString());
+        NguoiDung nd = nguoidungSV.pagination("CV2",pg.getCurrent(), limit).get(row);
         txt_ma.setText(nd.getMa());
         txt_diachi.setText(nd.getDiaChi());
         txt_email.setText(nd.getEmail());
@@ -460,9 +522,11 @@ public class FrmNhanVien extends javax.swing.JPanel {
     private javax.swing.ButtonGroup buttonGroup1;
     private swing.Combobox cb_trangthai;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblHinhAnh;
     private javax.swing.JLabel lbl_Total;
+    private swing.Pagination pagination1;
     private swing.RadioButtonCustom rd_nam;
     private swing.RadioButtonCustom rd_nu;
     private swing.TableScrollButton tableScrollButton1;
