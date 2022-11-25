@@ -35,15 +35,15 @@
                           <Component id="jLabel1" min="-2" pref="180" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="lblTongtien" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="lbl_voucher" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="lblKhuyenmai" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="lbl_Change" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="lblThanhtoan" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -63,15 +63,13 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel2" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="lblTongtien" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbl_voucher" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblKhuyenmai" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbl_Change" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblThanhtoan" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblTongtien" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_voucher" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblKhuyenmai" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_Change" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblThanhtoan" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
@@ -379,7 +377,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="T&#x1ed5;ng ti&#x1ec1;n"/>
+        <Property name="text" type="java.lang.String" value="T&#x1ed5;ng ti&#x1ec1;n :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblTongtien">
@@ -398,7 +396,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Khuy&#x1ebf;n m&#xe3;i"/>
+        <Property name="text" type="java.lang.String" value="Khuy&#x1ebf;n m&#xe3;i :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbl_Change">
@@ -409,7 +407,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Thanh to&#xe1;n"/>
+        <Property name="text" type="java.lang.String" value="Thanh to&#xe1;n :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblKhuyenmai">
