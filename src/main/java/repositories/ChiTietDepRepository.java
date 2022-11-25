@@ -5,6 +5,7 @@ import javax.persistence.Query;
 import models.ChiTietDep;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.NativeQuery;
 import utilities.HibernateUtil;
 
 /**
@@ -56,6 +57,14 @@ public class ChiTietDepRepository {
         return list;
     }
 
+    public List<ChiTietDep> filter(String tenDep, String tenMauSac) {
+        Query query = session.createQuery("SELECT c FROM ChiTietDep c WHERE c.dep.ten LIKE :tenDep AND c.mauSac.ten LIKE :tenMauSac");
+        query.setParameter("tenDep", "%" + tenDep + "%");
+        query.setParameter("tenMauSac", "%" + tenMauSac + "%");
+        List<ChiTietDep> list = query.getResultList();
+        return list;
+    }
+
     public List<ChiTietDep> findByTT(int trangThai, String ten) {
         Query query = session.createQuery("SELECT c FROM ChiTietDep c WHERE c.trangThai = :trangThai AND c.dep.ten LIKE :ten");
         query.setParameter("trangThai", trangThai);
@@ -63,8 +72,8 @@ public class ChiTietDepRepository {
         List<ChiTietDep> list = query.getResultList();
         return list;
     }
-    
-    public List<ChiTietDep> findSLSPLess(int soLuong){
+
+    public List<ChiTietDep> findSLSPLess(int soLuong) {
         Query query = session.createQuery("SELECT c FROM ChiTietDep c WHERE c.soLuong <= :soLuong");
         query.setParameter("soLuong", soLuong);
         List<ChiTietDep> list = query.getResultList();
@@ -109,8 +118,19 @@ public class ChiTietDepRepository {
         return ctd;
     }
 
+    public List<ChiTietDep> top5SPBanChay() {
+        NativeQuery query = session.createNativeQuery("SELECT * FROM CHITIETDEP WHERE ID IN "
+                + "(SELECT TOP 5 IDCTD FROM HOADONCHITIET A JOIN HOADON B "
+                + "ON A.IdHD = B.ID WHERE B.TrangThai = 1 "
+                + "GROUP BY IDCTD ORDER BY COUNT(SOLUONG) DESC)", ChiTietDep.class);
+        List<ChiTietDep> list = query.getResultList();
+        return list;
+    }
+
     public static void main(String[] args) {
         ChiTietDepRepository ctdr = new ChiTietDepRepository();
-        System.out.println(ctdr.checkDuplicate(1, 2, 3, 2, 1, 2));
+        for (ChiTietDep x : ctdr.filter("Tông lào", "")) {
+            System.out.println(x);
+        }
     }
 }

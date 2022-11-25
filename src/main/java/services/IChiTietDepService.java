@@ -44,4 +44,6 @@ public interface IChiTietDepService {
     ChiTietDep getObjByProperties(int idDep, int idLoaiDep, int idMauSac, int idChatLieu, int idNSX, int idSize);
     
     List<ChiTietDep> findSLSPLess(int soLuong);
+    
+    List<ChiTietDep> filter(String tenDep, String tenMauSac);
 }

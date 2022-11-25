@@ -65,23 +65,28 @@ public class QLDepService implements IQLDepService {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
-    @Override
-    public List<CTDepCustom> findByName(String ten) {
-        list = new ArrayList<>();
-        for (ChiTietDep x : repo.findByName(ten)) {
-            list.add(new CTDepCustom(x,
-                    depRepo.getObj(x.getDep().getMa()),
-                    loaiDepRepo.getObj(x.getLoaiDep().getMa()),
-                    chatLieuRepo.getObj(x.getChatLieu().getMa()),
-                    mauSacRepo.getObj(x.getMauSac().getMa()),
-                    sizeRepo.getObject(x.getSize().getMa()),
-                    nsxRepo.getObj(x.getNhaSX().getMa())));
-        }
-        return list;
-    }
+//    @Override
+//    public List<CTDepCustom> findByName(String ten) {
+//        list = new ArrayList<>();
+//        for (ChiTietDep x : repo.findByName(ten)) {
+//            list.add(new CTDepCustom(x,
+//                    depRepo.getObj(x.getDep().getMa()),
+//                    loaiDepRepo.getObj(x.getLoaiDep().getMa()),
+//                    chatLieuRepo.getObj(x.getChatLieu().getMa()),
+//                    mauSacRepo.getObj(x.getMauSac().getMa()),
+//                    sizeRepo.getObject(x.getSize().getMa()),
+//                    nsxRepo.getObj(x.getNhaSX().getMa())));
+//        }
+//        return list;
+//    }
     
     @Override
     public CTDepCustom getObjById(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<CTDepCustom> findByName(String ten) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
