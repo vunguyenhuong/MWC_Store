@@ -30,10 +30,10 @@ public class FrmNhanVien extends javax.swing.JPanel {
     private IChucVuService iChucVuService;
     private Helper helper;
     private String filename;
-    
+
     private Page pg = new Page();
     private int checkSearchCT = 0;
-    
+
     Integer limit = 5;
     Integer totalData = 0;
 
@@ -49,9 +49,9 @@ public class FrmNhanVien extends javax.swing.JPanel {
         pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
 
     }
-    
+
     public void pagination() {
-        LoadData(nguoidungSV.pagination("CV2",pg.getCurrent(), limit));
+        LoadData(nguoidungSV.pagination("CV2", pg.getCurrent(), limit));
         totalData = nguoidungSV.getAll().size();
         int totalPage = (int) Math.ceil(totalData.doubleValue() / limit);
         pg.setTotalPage(totalPage);
@@ -59,7 +59,7 @@ public class FrmNhanVien extends javax.swing.JPanel {
         pagination1.addEventPagination(new EventPagination() {
             @Override
             public void pageChanged(int page) {
-                LoadData(nguoidungSV.pagination("CV2",page, limit));
+                LoadData(nguoidungSV.pagination("CV2", page, limit));
                 pg.setCurrent(page);
                 pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
             }
@@ -458,10 +458,10 @@ public class FrmNhanVien extends javax.swing.JPanel {
         nd.setMatKhau(txt_matkhau.getText());
         this.nguoidungSV.save(nd);
         if (checkSearchCT == 0) {
-                nd = nguoidungSV.pagination("CV2",pg.getCurrent(), limit).get(row);
-            } else {
-                nd = nguoidungSV.findByName("CV2",txt_timkiem.getText()).get(row);
-            }
+            nd = nguoidungSV.pagination("CV2", pg.getCurrent(), limit).get(row);
+        } else {
+            nd = nguoidungSV.findByName("CV2", txt_timkiem.getText()).get(row);
+        }
         pagination();
         NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công");
         panel.showNotification();
@@ -474,19 +474,29 @@ public class FrmNhanVien extends javax.swing.JPanel {
             NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Chọn 1 dòng nhân viên để xóa");
             panel.showNotification();
             return;
-        }
-        NguoiDung nguoiDung = nguoidungSV.getListNhanVien("CV2").get(row);
-        this.nguoidungSV.delete(nguoiDung);
-        if (checkSearchCT == 0) {
-                nguoiDung = nguoidungSV.pagination("CV2",pg.getCurrent(), limit).get(row);
+        } else {
+            NguoiDung nguoiDung;
+            if (checkSearchCT == 0) {
+                nguoiDung = nguoidungSV.pagination("CV2", pg.getCurrent(), limit).get(row);
             } else {
-                nguoiDung = nguoidungSV.findByName("CV2",txt_timkiem.getText()).get(row);
+                nguoiDung = nguoidungSV.findByName("CV2", txt_timkiem.getText()).get(row);
             }
-        pagination();
-        NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Xóa thành công");
-        panel.showNotification();
-        clearForm();
-
+            if (helper.confirm(this, "Xác nhận xóa")) {
+                nguoidungSV.delete(nguoiDung);
+                List<NguoiDung> c = nguoidungSV.pagination("CV2", pg.getCurrent(), limit);
+                int r = c.size();
+                if (r == 0) {
+                    pagination();
+                    pagination1.setPagegination(pg.getCurrent(), (pg.getTotalPage()) + 1);
+                } else {
+                    pagination();
+                }
+                checkSearchCT = 0;
+                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Xóa thành công");
+                panel.showNotification();
+                clearForm();
+            }
+        }
     }//GEN-LAST:event_btn_xoaActionPerformed
 
     private void txt_timkiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_timkiemCaretUpdate
@@ -498,7 +508,7 @@ public class FrmNhanVien extends javax.swing.JPanel {
         int row = tb_nhanvien.getSelectedRow();
         tb_nhanvien.setRowSelectionAllowed(true);
         txt_ma.setEditable(false);
-        NguoiDung nd = nguoidungSV.pagination("CV2",pg.getCurrent(), limit).get(row);
+        NguoiDung nd = nguoidungSV.pagination("CV2", pg.getCurrent(), limit).get(row);
         txt_ma.setText(nd.getMa());
         txt_diachi.setText(nd.getDiaChi());
         txt_email.setText(nd.getEmail());
