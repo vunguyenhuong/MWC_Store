@@ -80,8 +80,7 @@ public class FrmQLHD extends javax.swing.JPanel {
                 hd.getKhuyenMai() == null ? "Không" : hd.getKhuyenMai(),
                 helper.formatDate(hd.getNgayTao()),
                 hd.getNgayThanhToan() == null ? "Chưa thanh toán" : helper.formatDate(hd.getNgayThanhToan()),
-                hd.getTrangThai() == 1 ? "Đã thanh toán" : "Chưa thanh toán",
-                hd.getTrangThai() == 1 ? hd.getTongTien() : "Chưa thanh toán"
+                hd.getTrangThai() == 1 ? "Đã thanh toán" : "Chưa thanh toán"
             };
             dtm.addRow(rowData);
         }
@@ -199,10 +198,13 @@ public class FrmQLHD extends javax.swing.JPanel {
 
         tb_hoadon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã HD", "Khách hàng", "Người tạo", "Người thanh toán", "Khuyến mãi", "Ngày tạo", "Ngày thanh toán", "Trạng thái", "Tổng tiền"
+                "STT", "Mã HD", "Khách hàng", "Người tạo", "Người thanh toán", "Khuyến mãi", "Ngày tạo", "Ngày thanh toán", "Trạng thái"
             }
         ));
         tb_hoadon.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -245,8 +247,7 @@ public class FrmQLHD extends javax.swing.JPanel {
                     .addComponent(cbo_Trangthai, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chk_Khachhangle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(tableScrollButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(tableScrollButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -254,15 +255,16 @@ public class FrmQLHD extends javax.swing.JPanel {
 
         tb_HDCT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
                 "STT", "Mã HD", "Tên sản phẩm", "Số lượng", "Đơn giá", "Thành tiền"
             }
         ));
         jScrollPane2.setViewportView(tb_HDCT);
-
-        tableScrollButton2.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -350,10 +352,14 @@ public class FrmQLHD extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 <<<<<<< HEAD
+<<<<<<< HEAD
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 =======
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+=======
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+>>>>>>> 01ea4cb2e49455e5470f9e52b58aab67792d584e
                 .addGap(18, 18, 18)
 >>>>>>> 464451a730a69199195e37bad47750e107309d1d
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
