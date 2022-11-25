@@ -108,7 +108,7 @@
                           <Component id="txt_Timkiem" min="-2" pref="251" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="cbo_Trangthai" min="-2" pref="162" max="-2" attributes="0"/>
-                          <EmptySpace pref="152" max="32767" attributes="0"/>
+                          <EmptySpace pref="130" max="32767" attributes="0"/>
                           <Component id="chk_Khachhangle" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -283,7 +283,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="tableScrollButton2" pref="211" max="32767" attributes="0"/>
+                  <Component id="tableScrollButton2" pref="170" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
