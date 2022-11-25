@@ -76,10 +76,18 @@ public class KhachHangRepository {
         }
         return kh;
     }
+    
+    public List<KhachHang> findTop(int firstResult, int maxResult) {
+        Query query = session.createQuery("SELECT kh FROM KhachHang kh ORDER BY kh.tongDiemTichLuy DESC");
+        query.setFirstResult(firstResult);
+        query.setMaxResults(maxResult);
+        List<KhachHang> list = query.getResultList();
+        return list;
+    }
 
     public static void main(String[] args) {
         KhachHangRepository khr = new KhachHangRepository();
-        for (KhachHang x : khr.getAll()) {
+        for (KhachHang x : khr.findTop(0, 5)) {
             System.out.println(x);
         }
     }
