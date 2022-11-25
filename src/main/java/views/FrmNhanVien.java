@@ -71,13 +71,11 @@ public class FrmNhanVien extends javax.swing.JPanel {
             gioitinh = 1;
         }
         nguoidung.setGioiTinh(gioitinh);
-        int trangthai;
-        if (cb_trangthai.getSelectedItem().equals("Đang Làm")) {
-            trangthai = 0;
+        if (cb_trangthai.getSelectedItem().equals("Đang làm")) {
+            nguoidung.setTrangThai(0);
         } else {
-            trangthai = 1;
+            nguoidung.setTrangThai(1);
         }
-        nguoidung.setTrangThai(trangthai);
         nguoidung.setHinhAnh("defaultavt.jpg");
         return nguoidung;
     }
