@@ -1179,6 +1179,11 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                         khuyenMai.setSoLuong(khuyenMai.getSoLuong() - 1);
                     }
                     hd.setTongTien(BigDecimal.valueOf(phaiTra));
+                    for (HoaDonChiTiet x : listHDCT) {
+                        ChiTietDep ctd = x.getCtdep();
+                        ctd.setSoLuongBanRa(x.getCtdep().getSoLuong());
+                        iChiTietDepService.save(ctd);
+                    }
                     iHoaDonService.save(hd);
                     loadHD(iHoaDonService.getAll());
                     iKhachHangService.save(khachHang);

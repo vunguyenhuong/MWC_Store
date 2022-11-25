@@ -118,11 +118,14 @@ public class ChiTietDepRepository {
         return ctd;
     }
 
-    public List<ChiTietDep> top5SPBanChay() {
-        NativeQuery query = session.createNativeQuery("SELECT * FROM CHITIETDEP WHERE ID IN "
-                + "(SELECT TOP 5 IDCTD FROM HOADONCHITIET A JOIN HOADON B "
-                + "ON A.IdHD = B.ID WHERE B.TrangThai = 1 "
-                + "GROUP BY IDCTD ORDER BY COUNT(SOLUONG) DESC)", ChiTietDep.class);
+    public List<ChiTietDep> topSPBanChay(int firstResult,int maxResult) {
+//        NativeQuery query = session.createNativeQuery("SELECT * FROM CHITIETDEP WHERE ID IN "
+//                + "(SELECT TOP 5 IDCTD FROM HOADONCHITIET A JOIN HOADON B "
+//                + "ON A.IdHD = B.ID WHERE B.TrangThai = 1 "
+//                + "GROUP BY IDCTD ORDER BY COUNT(SOLUONG) DESC)", ChiTietDep.class);
+        Query query = session.createQuery("SELECT c FROM ChiTietDep c ORDER BY c.soLuongBanRa DESC");
+        query.setFirstResult(firstResult);
+        query.setMaxResults(maxResult);
         List<ChiTietDep> list = query.getResultList();
         return list;
     }

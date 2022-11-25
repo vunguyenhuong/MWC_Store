@@ -45,5 +45,7 @@ public interface IChiTietDepService {
     
     List<ChiTietDep> findSLSPLess(int soLuong);
     
+    List<ChiTietDep> topSPBanChay(int firstResult,int maxResult);
+    
     List<ChiTietDep> filter(String tenDep, String tenMauSac);
 }

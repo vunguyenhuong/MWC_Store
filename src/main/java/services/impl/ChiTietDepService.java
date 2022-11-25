@@ -98,4 +98,9 @@ public class ChiTietDepService implements IChiTietDepService {
     public List<ChiTietDep> filter(String tenDep, String tenMauSac) {
         return repo.filter(tenDep, tenMauSac);
     }
+
+    @Override
+    public List<ChiTietDep> topSPBanChay(int firstResult,int maxResult) {
+        return repo.topSPBanChay(firstResult, maxResult);
+    }
 }
