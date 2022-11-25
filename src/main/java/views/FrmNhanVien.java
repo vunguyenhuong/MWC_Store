@@ -43,7 +43,6 @@ public class FrmNhanVien extends javax.swing.JPanel {
         iChucVuService = new ChucVuService();
         Table.apply(jScrollPane1, Table.TableType.DEFAULT);
         helper = new Helper();
-//        LoadData(nguoidungSV.getListNhanVien("CV2"));
         pagination();
         pagination1.setPagegination(1, pg.getTotalPage());
         pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
@@ -501,6 +500,11 @@ public class FrmNhanVien extends javax.swing.JPanel {
 
     private void txt_timkiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_timkiemCaretUpdate
         LoadData(nguoidungSV.findByName("CV2", txt_timkiem.getText().trim()));
+        if (nguoidungSV.findByName("CV2", txt_timkiem.getText()).size() == nguoidungSV.getAll().size()) {
+            checkSearchCT = 0;
+        } else {
+            checkSearchCT = 1;
+        }
     }//GEN-LAST:event_txt_timkiemCaretUpdate
 
     private void tb_nhanvienMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_nhanvienMousePressed

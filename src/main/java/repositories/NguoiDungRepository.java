@@ -16,14 +16,13 @@ public class NguoiDungRepository {
 
     private static final Session session = HibernateUtil.getSessionFactory().openSession();
     private Transaction transaction = session.getTransaction();
-     
-public List<NguoiDung> getListNhanVien(String ma) {
+
+    public List<NguoiDung> getListNhanVien(String ma) {
         Query query = session.createQuery(" SELECT n FROM NguoiDung n WHERE n.chucVu.ma = :ma ");
         query.setParameter("ma", ma);
         List<NguoiDung> list = query.getResultList();
         return list;
     }
-
 
     public List<NguoiDung> getAll() {
         Query query = session.createQuery("SELECT n FROM NguoiDung n");
@@ -67,14 +66,15 @@ public List<NguoiDung> getListNhanVien(String ma) {
         }
         return nd;
     }
-    public List<NguoiDung> findByName(String ma,String ten) {
+
+    public List<NguoiDung> findByName(String ma, String ten) {
         Query query = session.createQuery(" SELECT n FROM NguoiDung n WHERE n.chucVu.ma = :ma AND n.ten LIKE :ten ");
         query.setParameter("ma", ma);
         query.setParameter("ten", "%" + ten + "%");
         List<NguoiDung> list = query.getResultList();
         return list;
     }
-    
+
     public List<NguoiDung> pagination(String ma, int pageNumber, int pageSize) {
         Query query = session.createQuery("SELECT c FROM NguoiDung c WHERE c.chucVu.ma = :ma");
         int pageIndex = pageNumber - 1 < 0 ? 0 : pageNumber - 1;
@@ -85,7 +85,7 @@ public List<NguoiDung> getListNhanVien(String ma) {
         List<NguoiDung> list = query.getResultList();
         return list;
     }
-    
+
     public static void main(String[] args) {
         NguoiDungRepository ndr = new NguoiDungRepository();
         for (NguoiDung x : ndr.getListNhanVien("CV1")) {
