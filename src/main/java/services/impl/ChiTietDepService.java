@@ -93,4 +93,9 @@ public class ChiTietDepService implements IChiTietDepService {
     public List<ChiTietDep> findSLSPLess(int soLuong) {
         return repo.findSLSPLess(soLuong);
     }
+
+    @Override
+    public List<ChiTietDep> filter(String tenDep, String tenMauSac) {
+        return repo.filter(tenDep, tenMauSac);
+    }
 }

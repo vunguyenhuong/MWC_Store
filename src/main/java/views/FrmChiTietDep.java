@@ -59,6 +59,9 @@ public class FrmChiTietDep extends javax.swing.JPanel {
     private DefaultComboBoxModel<MauSac> comboMauSac = new DefaultComboBoxModel<>();
     private DefaultComboBoxModel<Size> comboSize = new DefaultComboBoxModel<>();
     private DefaultComboBoxModel<NhaSX> comboNSX = new DefaultComboBoxModel<>();
+    private DefaultComboBoxModel<Dep> comboFilterDep = new DefaultComboBoxModel<>();
+    private DefaultComboBoxModel<Size> comboFilterSize = new DefaultComboBoxModel<>();
+    private DefaultComboBoxModel<MauSac> comboFilterMauSac = new DefaultComboBoxModel<>();
 
     private IDepService iDepService = new DepService();
     private ILoaiDepService iLoaiDepService = new LoaiDepService();
@@ -117,12 +120,17 @@ public class FrmChiTietDep extends javax.swing.JPanel {
 
     private void addCbDep() {
         cb_dep.setModel((DefaultComboBoxModel) comboDep);
+        cb_filter_dep.setModel((DefaultComboBoxModel) comboFilterDep);
         cb_dep.removeAllItems();
+        cb_filter_dep.addItem("");
+        cb_filter_dep.setSelectedIndex(0);
         for (Dep x : iChiTietDepService.getAllDep()) {
             if (x.getTrangThai() == 1) {
                 comboDep.removeElement(x);
+                comboFilterDep.removeElement(x);
             } else {
                 comboDep.addElement(x);
+                comboFilterDep.addElement(x);
             }
         }
     }
@@ -153,24 +161,32 @@ public class FrmChiTietDep extends javax.swing.JPanel {
 
     private void addCbMauSac() {
         cb_mausac.setModel((DefaultComboBoxModel) comboMauSac);
+        cb_filter_mausac.setModel((DefaultComboBoxModel) comboFilterMauSac);
         cb_mausac.removeAllItems();
+        cb_filter_mausac.addItem("");
+        cb_filter_mausac.setSelectedIndex(0);;
         for (MauSac x : iChiTietDepService.getAllMauSac()) {
             if (x.getTrangThai() == 1) {
                 comboMauSac.removeElement(x);
+                comboFilterMauSac.removeElement(x);
             } else {
                 comboMauSac.addElement(x);
+                comboFilterMauSac.addElement(x);
             }
         }
     }
 
     private void addCbSize() {
         cb_size.setModel((DefaultComboBoxModel) comboSize);
+        cb_filter_size.setModel((DefaultComboBoxModel) comboFilterSize);
         cb_size.removeAllItems();
         for (Size x : iChiTietDepService.getAllSize()) {
             if (x.getTrangThai() == 1) {
                 comboSize.removeElement(x);
+                comboFilterDep.removeElement(x);
             } else {
                 comboSize.addElement(x);
+                comboFilterSize.addElement(x);
             }
         }
     }
@@ -218,6 +234,10 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         pagination1 = new swing.Pagination();
+        jPanel2 = new javax.swing.JPanel();
+        cb_filter_dep = new swing.Combobox();
+        cb_filter_size = new swing.Combobox();
+        cb_filter_mausac = new swing.Combobox();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -375,7 +395,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(410, 410, 410)
                 .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(404, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -384,11 +404,60 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                 .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Filter"));
+
+        cb_filter_dep.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Chọn dép" }));
+        cb_filter_dep.setLabeText("Dép");
+        cb_filter_dep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_filter_depActionPerformed(evt);
+            }
+        });
+
+        cb_filter_size.setLabeText("Size");
+        cb_filter_size.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_filter_sizeActionPerformed(evt);
+            }
+        });
+
+        cb_filter_mausac.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Chọn màu sắc" }));
+        cb_filter_mausac.setLabeText("Màu sắc");
+        cb_filter_mausac.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_filter_mausacActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cb_filter_dep, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cb_filter_size, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cb_filter_mausac, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cb_filter_dep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_filter_size, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_filter_mausac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(49, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -424,10 +493,11 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cb_mausac, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cb_size, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 225, Short.MAX_VALUE)
-                        .addComponent(lbl_image, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbl_image, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txt_timkiem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -436,11 +506,13 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                                 .addComponent(btn_ctd_capnhat, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_ctd_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_importExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_exportExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btn_exportExcel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_importExcel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btn_exportExcel, btn_importExcel});
@@ -481,19 +553,24 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                             .addComponent(rd_ct_ngungkd, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(lbl_image, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_ctd_capnhat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_ctd_them, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_ctd_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_exportExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_importExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btn_ctd_capnhat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_ctd_them, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_ctd_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btn_importExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(btn_exportExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+                .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cb_chatlieu, cb_dep, cb_loaidep, cb_mausac, cb_nsx, cb_size});
@@ -545,11 +622,11 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             panel.showNotification();
         } else {
             ChiTietDep ctd;
-            if (checkSearchCT == 0) {
-                ctd = iChiTietDepService.pagination(pg.getCurrent(), limit).get(row);
-            } else {
-                ctd = iChiTietDepService.findByName(txt_timkiem.getText()).get(row);
-            }
+//            if (checkSearchCT == 0) {
+//                ctd = iChiTietDepService.pagination(pg.getCurrent(), limit).get(row);
+//            } else {
+            ctd = iChiTietDepService.filter(cb_filter_dep.getSelectedItem().toString(), cb_filter_mausac.getSelectedItem().toString()).get(row);
+//            }
             ctd.setDep((Dep) comboDep.getSelectedItem());
             ctd.setLoaiDep((LoaiDep) comboLoaiDep.getSelectedItem());
             ctd.setMauSac((MauSac) comboMauSac.getSelectedItem());
@@ -604,7 +681,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             if (soluong < 0) {
                 helper.alert(this, "Số lượng không hợp lệ");
                 return;
-            }           
+            }
             ctd.setSoLuong(soluong);
             ctd.setGiaNhap(helper.convertToDecimal(txt_gianhap, "Error!"));
             ctd.setGiaBan(helper.convertToDecimal(txt_giaban, "Error!"));
@@ -638,11 +715,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             panel.showNotification();
         } else {
             ChiTietDep ctd;
-            if (checkSearchCT == 0) {
-                ctd = iChiTietDepService.pagination(pg.getCurrent(), limit).get(row);
-            } else {
-                ctd = iChiTietDepService.findByName(txt_timkiem.getText()).get(row);
-            }
+            ctd = ctd = iChiTietDepService.filter(cb_filter_dep.getSelectedItem().toString(), cb_filter_mausac.getSelectedItem().toString()).get(row);
             if (helper.confirm(this, "Xác nhận xóa")) {
                 iChiTietDepService.delete(ctd);
                 List<ChiTietDep> c = iChiTietDepService.pagination(pg.getCurrent(), limit);
@@ -686,7 +759,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
     private void tb_tableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_tableMousePressed
         // TODO add your handling code here:
         int row = tb_table.getSelectedRow();
-        ChiTietDep ctd = iChiTietDepService.pagination(pg.getCurrent(), limit).get(row);
+        ChiTietDep ctd = ctd = iChiTietDepService.filter(cb_filter_dep.getSelectedItem().toString(), cb_filter_mausac.getSelectedItem().toString()).get(row);
         comboDep.setSelectedItem(ctd.getDep());
         comboLoaiDep.setSelectedItem(ctd.getLoaiDep());
         comboChatLieu.setSelectedItem(ctd.getChatLieu());
@@ -706,6 +779,18 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         System.out.println(ctd.getDep().getHinhAnh());
     }//GEN-LAST:event_tb_tableMousePressed
 
+    private void cb_filter_depActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_filter_depActionPerformed
+        loadData(iChiTietDepService.filter(cb_filter_dep.getSelectedItem().toString(), cb_filter_mausac.getSelectedItem().toString()));
+    }//GEN-LAST:event_cb_filter_depActionPerformed
+
+    private void cb_filter_sizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_filter_sizeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cb_filter_sizeActionPerformed
+
+    private void cb_filter_mausacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_filter_mausacActionPerformed
+        loadData(iChiTietDepService.filter(cb_filter_dep.getSelectedItem().toString(), cb_filter_mausac.getSelectedItem().toString()));
+    }//GEN-LAST:event_cb_filter_mausacActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private swing.Button btn_ctd_capnhat;
@@ -716,6 +801,9 @@ public class FrmChiTietDep extends javax.swing.JPanel {
     private javax.swing.ButtonGroup buttonGroup1;
     private swing.Combobox cb_chatlieu;
     private swing.Combobox cb_dep;
+    private swing.Combobox cb_filter_dep;
+    private swing.Combobox cb_filter_mausac;
+    private swing.Combobox cb_filter_size;
     private swing.Combobox cb_loaidep;
     private swing.Combobox cb_mausac;
     private swing.Combobox cb_nsx;
@@ -723,6 +811,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_image;
     private swing.Pagination pagination1;
