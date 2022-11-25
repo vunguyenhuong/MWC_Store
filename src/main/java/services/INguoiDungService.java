@@ -20,4 +20,6 @@ public interface INguoiDungService {
     boolean delete(NguoiDung nd);
 
     NguoiDung getObj(String ma);
+    
+    List<NguoiDung> pagination(String ma, int pageNumber, int pageSize);
 }

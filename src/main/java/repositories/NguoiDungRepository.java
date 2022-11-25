@@ -75,10 +75,22 @@ public List<NguoiDung> getListNhanVien(String ma) {
         return list;
     }
     
+    public List<NguoiDung> pagination(String ma, int pageNumber, int pageSize) {
+        Query query = session.createQuery("SELECT c FROM NguoiDung c WHERE c.chucVu.ma = :ma");
+        int pageIndex = pageNumber - 1 < 0 ? 0 : pageNumber - 1;
+        int fromRecordIndex = pageIndex * pageSize;
+        query.setFirstResult(fromRecordIndex);
+        query.setMaxResults(pageSize);
+        query.setParameter("ma", ma);
+        List<NguoiDung> list = query.getResultList();
+        return list;
+    }
+    
     public static void main(String[] args) {
         NguoiDungRepository ndr = new NguoiDungRepository();
         for (NguoiDung x : ndr.getListNhanVien("CV1")) {
             System.out.println(x);
         }
     }
+
 }
