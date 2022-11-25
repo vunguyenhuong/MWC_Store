@@ -652,7 +652,12 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             ctd.setNhaSX((NhaSX) comboNSX.getSelectedItem());
             ctd.setSize((Size) comboSize.getSelectedItem());
             ctd.setMoTa(txt_mota.getText());
-            ctd.setSoLuong((int) sp_SoLuong.getValue());
+            int soluong = (int) sp_SoLuong.getValue();
+            if (soluong < 0) {
+                helper.alert(this, "Số lượng không hợp lệ");
+                return;
+            }           
+            ctd.setSoLuong(soluong);
             ctd.setGiaNhap(helper.convertToDecimal(txt_gianhap, "Error!"));
             ctd.setGiaBan(helper.convertToDecimal(txt_giaban, "Error!"));
             ctd.setNgayThem(new Date());
