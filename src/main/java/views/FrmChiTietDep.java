@@ -1,6 +1,5 @@
 package views;
 
-import java.awt.Color;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,7 +31,10 @@ import services.impl.MauSacService;
 import services.impl.NhaSXService;
 import services.impl.SizeService;
 import swing.Table;
+import ui.EventPagination;
 import ui.NotificationMess;
+import ui.Page;
+import ui.PaginationItemRenderStyle1;
 import utilities.ExportSP;
 import utilities.Helper;
 import utilities.ImageUltil;
@@ -64,19 +66,16 @@ public class FrmChiTietDep extends javax.swing.JPanel {
     private IChatLieuService iChatLieuService = new ChatLieuService();
     private INhaSXService iNhaSXService = new NhaSXService();
     private ISizeService iSizeService = new SizeService();
+    private Page pg = new Page();
 
     private int checkSearchCT = 0;
 
-    Integer page = 1;
-    Integer rowCountPerPage = 5;
-    Integer totalPage = 1;
+    Integer limit = 5;
     Integer totalData = 0;
 
     public FrmChiTietDep() {
         initComponents();
         iChiTietDepService = new ChiTietDepService();
-//        loadData(iChiTietDepService.getAll());
-        initPagination();
         Table.apply(jScrollPane1, Table.TableType.MULTI_LINE);
         addCbChatLieu();
         addCbDep();
@@ -84,38 +83,25 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         addCbMauSac();
         addCbNhaSX();
         addCbSize();
+        pagination();
+        pagination1.setPagegination(1, pg.getTotalPage());
+        pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
     }
 
-    public void initPagination() {
+    public void pagination() {
+        loadData(iChiTietDepService.pagination(pg.getCurrent(), limit));
         totalData = iChiTietDepService.getAll().size();
-        rowCountPerPage = 5;
-        Double totalPageD = Math.ceil(totalData.doubleValue() / rowCountPerPage.doubleValue());
-        totalPage = totalPageD.intValue();
-
-        if (page.equals(1)) {
-            btn_frist.setEnabled(false);
-            btn_previous.setEnabled(false);
-        } else {
-            btn_frist.setEnabled(true);
-            btn_previous.setEnabled(true);
-        }
-
-        if (page.equals(totalPage)) {
-            btn_last.setEnabled(false);
-            btn_next.setEnabled(false);
-        } else {
-            btn_last.setEnabled(true);
-            btn_next.setEnabled(true);
-        }
-
-        if (page > totalPage) {
-            page = 1;
-        }
-
-        List<ChiTietDep> listCTDep = iChiTietDepService.pagination(page, rowCountPerPage);
-        lbl_page.setText("Page: " + page);
-
-        loadData(listCTDep);
+        int totalPage = (int) Math.ceil(totalData.doubleValue() / limit);
+        pg.setTotalPage(totalPage);
+        pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
+        pagination1.addEventPagination(new EventPagination() {
+            @Override
+            public void pageChanged(int page) {
+                loadData(iChiTietDepService.pagination(page, limit));
+                pg.setCurrent(page);
+                pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
+            }
+        });
     }
 
     private void loadData(List<ChiTietDep> list) {
@@ -127,7 +113,6 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                 stt++, x.getDep().getTen(), x.getLoaiDep().getTen(), x.getMauSac().getTen(), x.getChatLieu().getTen(), x.getNhaSX().getTen(), x.getSize().getKichCo(), x.getMoTa(), x.getSoLuong(), x.getGiaNhap(), x.getGiaBan(), helper.formatDate(x.getNgayThem()), helper.formatDate(x.getNgaySuaCuoi()), x.getTrangThai() == 0 ? "Đang kinh doanh" : "Ngừng kinh doanh"
             });
         }
-        lbl_total.setText("Total: " + list.size());
     }
 
     private void addCbDep() {
@@ -211,7 +196,6 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         rd_ct_ngungkd = new swing.RadioButtonCustom();
         cb_loaidep = new swing.Combobox();
         rd_ct_dangkd = new swing.RadioButtonCustom();
-        lbl_total = new javax.swing.JLabel();
         btn_importExcel = new swing.Button();
         jLabel2 = new javax.swing.JLabel();
         btn_ctd_capnhat = new swing.Button();
@@ -230,13 +214,10 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         tableScrollButton1 = new swing.TableScrollButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_table = new javax.swing.JTable();
-        btn_frist = new swing.Button();
-        btn_next = new swing.Button();
-        btn_previous = new swing.Button();
-        btn_last = new swing.Button();
-        lbl_page = new javax.swing.JLabel();
         sp_SoLuong = new swing.Spinner();
         jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        pagination1 = new swing.Pagination();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -256,10 +237,6 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         rd_ct_dangkd.setSelected(true);
         rd_ct_dangkd.setText("Đang kinh doanh");
         rd_ct_dangkd.setFocusPainted(false);
-
-        lbl_total.setForeground(java.awt.Color.red);
-        lbl_total.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lbl_total.setText("Total: 0");
 
         btn_importExcel.setBackground(new java.awt.Color(0, 102, 0));
         btn_importExcel.setForeground(new java.awt.Color(255, 255, 255));
@@ -382,47 +359,36 @@ public class FrmChiTietDep extends javax.swing.JPanel {
 
         tableScrollButton1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        btn_frist.setText("Frist");
-        btn_frist.setActionCommand("First");
-        btn_frist.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_fristActionPerformed(evt);
-            }
-        });
-
-        btn_next.setText("Next");
-        btn_next.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_nextActionPerformed(evt);
-            }
-        });
-
-        btn_previous.setText("Previous");
-        btn_previous.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_previousActionPerformed(evt);
-            }
-        });
-
-        btn_last.setText("Last");
-        btn_last.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_lastActionPerformed(evt);
-            }
-        });
-
-        lbl_page.setForeground(java.awt.Color.red);
-        lbl_page.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lbl_page.setText("Page: 0");
-
         jLabel1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(153, 153, 153));
         jLabel1.setText("Số lượng :");
+
+        jPanel1.setBackground(new java.awt.Color(0, 0, 255));
+
+        pagination1.setBackground(new java.awt.Color(0, 0, 255));
+        pagination1.setForeground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(410, 410, 410)
+                .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(404, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -458,7 +424,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cb_mausac, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cb_size, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 225, Short.MAX_VALUE)
                         .addComponent(lbl_image, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
@@ -470,23 +436,11 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                                 .addComponent(btn_ctd_capnhat, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_ctd_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbl_total)
-                        .addGap(43, 43, 43)
-                        .addComponent(btn_frist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_next, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_previous, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_last, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_page)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btn_importExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_exportExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-            .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btn_exportExcel, btn_importExcel});
@@ -534,16 +488,12 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_total)
                     .addComponent(btn_exportExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_importExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_frist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_next, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_previous, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_last, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_page))
+                    .addComponent(btn_importExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE))
+                .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cb_chatlieu, cb_dep, cb_loaidep, cb_mausac, cb_nsx, cb_size});
@@ -575,7 +525,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                         }
 
                     }
-                    loadData(iChiTietDepService.pagination(page, rowCountPerPage));
+                    pagination();
                     NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Import File Excel thành công");
                     panel.showNotification();
                 }
@@ -596,7 +546,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         } else {
             ChiTietDep ctd;
             if (checkSearchCT == 0) {
-                ctd = iChiTietDepService.getAll().get(row);
+                ctd = iChiTietDepService.pagination(pg.getCurrent(), limit).get(row);
             } else {
                 ctd = iChiTietDepService.findByName(txt_timkiem.getText()).get(row);
             }
@@ -617,7 +567,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                 ctd.setTrangThai(1);
             }
             iChiTietDepService.save(ctd);
-            loadData(iChiTietDepService.pagination(page, rowCountPerPage));
+            pagination();
             checkSearchCT = 0;
             NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công");
             panel.showNotification();
@@ -635,14 +585,12 @@ public class FrmChiTietDep extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_timkiemCaretUpdate
 
     private void btn_ctd_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ctd_themActionPerformed
-
         Dep dep = (Dep) comboDep.getSelectedItem();
         ChatLieu chatLieu = (ChatLieu) comboChatLieu.getSelectedItem();
         MauSac mauSac = (MauSac) comboMauSac.getSelectedItem();
         Size size = (Size) comboSize.getSelectedItem();
         LoaiDep loaiDep = (LoaiDep) comboLoaiDep.getSelectedItem();
         NhaSX nhaSX = (NhaSX) comboNSX.getSelectedItem();
-
         if (iChiTietDepService.getObjByProperties(dep.getId(), loaiDep.getId(), mauSac.getId(), chatLieu.getId(), nhaSX.getId(), size.getId()) == null) {
             ChiTietDep ctd = new ChiTietDep();
             ctd.setDep((Dep) comboDep.getSelectedItem());
@@ -652,7 +600,12 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             ctd.setNhaSX((NhaSX) comboNSX.getSelectedItem());
             ctd.setSize((Size) comboSize.getSelectedItem());
             ctd.setMoTa(txt_mota.getText());
-            ctd.setSoLuong((int) sp_SoLuong.getValue());
+            int soluong = (int) sp_SoLuong.getValue();
+            if (soluong < 0) {
+                helper.alert(this, "Số lượng không hợp lệ");
+                return;
+            }           
+            ctd.setSoLuong(soluong);
             ctd.setGiaNhap(helper.convertToDecimal(txt_gianhap, "Error!"));
             ctd.setGiaBan(helper.convertToDecimal(txt_giaban, "Error!"));
             ctd.setNgayThem(new Date());
@@ -663,7 +616,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                 ctd.setTrangThai(1);
             }
             iChiTietDepService.save(ctd);
-            loadData(iChiTietDepService.pagination(page, rowCountPerPage));
+            pagination();
             NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Thêm thành công");
             panel.showNotification();
         } else {
@@ -672,7 +625,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             ctd.setSoLuong(ctd.getSoLuong() + soLuong);
             ctd.setNgaySuaCuoi(new Date());
             iChiTietDepService.save(ctd);
-            loadData(iChiTietDepService.pagination(page, rowCountPerPage));
+            pagination();
             NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.INFO, NotificationMess.Location.TOP_CENTER, "Sản phẩm đã tồn tại, cập nhật thêm số lượng");
             panel.showNotification();
         }
@@ -686,13 +639,20 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         } else {
             ChiTietDep ctd;
             if (checkSearchCT == 0) {
-                ctd = iChiTietDepService.getAll().get(row);
+                ctd = iChiTietDepService.pagination(pg.getCurrent(), limit).get(row);
             } else {
                 ctd = iChiTietDepService.findByName(txt_timkiem.getText()).get(row);
             }
             if (helper.confirm(this, "Xác nhận xóa")) {
                 iChiTietDepService.delete(ctd);
-                loadData(iChiTietDepService.pagination(page, rowCountPerPage));
+                List<ChiTietDep> c = iChiTietDepService.pagination(pg.getCurrent(), limit);
+                int r = c.size();
+                if (r == 0) {
+                    pagination();
+                    pagination1.setPagegination(pg.getCurrent(), (pg.getTotalPage()) + 1);
+                } else {
+                    pagination();
+                }
                 checkSearchCT = 0;
                 NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Xóa thành công");
                 panel.showNotification();
@@ -723,34 +683,10 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btn_exportExcelActionPerformed
 
-    private void btn_fristActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_fristActionPerformed
-        page = 1;
-        initPagination();
-    }//GEN-LAST:event_btn_fristActionPerformed
-
-    private void btn_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nextActionPerformed
-        if (page < totalPage) {
-            page++;
-            initPagination();
-        }
-    }//GEN-LAST:event_btn_nextActionPerformed
-
-    private void btn_previousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_previousActionPerformed
-        if (page > 1) {
-            page--;
-            initPagination();
-        }
-    }//GEN-LAST:event_btn_previousActionPerformed
-
-    private void btn_lastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lastActionPerformed
-        page = totalPage;
-        initPagination();
-    }//GEN-LAST:event_btn_lastActionPerformed
-
     private void tb_tableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_tableMousePressed
         // TODO add your handling code here:
         int row = tb_table.getSelectedRow();
-        ChiTietDep ctd = iChiTietDepService.pagination(page, rowCountPerPage).get(row);
+        ChiTietDep ctd = iChiTietDepService.pagination(pg.getCurrent(), limit).get(row);
         comboDep.setSelectedItem(ctd.getDep());
         comboLoaiDep.setSelectedItem(ctd.getLoaiDep());
         comboChatLieu.setSelectedItem(ctd.getChatLieu());
@@ -776,11 +712,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
     private swing.Button btn_ctd_them;
     private swing.Button btn_ctd_xoa;
     private swing.Button btn_exportExcel;
-    private swing.Button btn_frist;
     private swing.Button btn_importExcel;
-    private swing.Button btn_last;
-    private swing.Button btn_next;
-    private swing.Button btn_previous;
     private javax.swing.ButtonGroup buttonGroup1;
     private swing.Combobox cb_chatlieu;
     private swing.Combobox cb_dep;
@@ -790,10 +722,10 @@ public class FrmChiTietDep extends javax.swing.JPanel {
     private swing.Combobox cb_size;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_image;
-    private javax.swing.JLabel lbl_page;
-    private javax.swing.JLabel lbl_total;
+    private swing.Pagination pagination1;
     private swing.RadioButtonCustom rd_ct_dangkd;
     private swing.RadioButtonCustom rd_ct_ngungkd;
     private swing.Spinner sp_SoLuong;
