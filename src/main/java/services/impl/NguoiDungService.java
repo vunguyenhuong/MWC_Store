@@ -43,6 +43,11 @@ public class NguoiDungService implements INguoiDungService {
         return repo.findByName(ma, ten);
     }
 
+    @Override
+    public List<NguoiDung> pagination(String ma, int pageNumber, int pageSize) {
+        return repo.pagination(ma, pageNumber, pageSize);
+    }
+
    
 
 }
