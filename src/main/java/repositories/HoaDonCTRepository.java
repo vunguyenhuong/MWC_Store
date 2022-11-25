@@ -102,7 +102,7 @@ public class HoaDonCTRepository {
     }
 
     public List findSP(int trangThai) {
-        String sql = "SELECT TOP 5 IDCTD,COUNT(SOLUONG) FROM HOADONCHITIET A "
+        String sql = "SELECT TOP 5 IDCTD FROM HOADONCHITIET A "
                 + "JOIN HOADON B ON A.IdHD = B.ID WHERE B.TrangThai = ? "
                 + "GROUP BY IDCTD ORDER BY COUNT(SOLUONG) DESC";
         SQLQuery query = session.createSQLQuery(sql);
@@ -113,7 +113,8 @@ public class HoaDonCTRepository {
     }
     
     public List<ChiTietDep> findTop5SP(){
-        Query query = session.createQuery("SELECT c FROM ChiTietDep c WHERE c.id IN (SELECT h FROM HoaDonChiTiet h ORDER BY COUNT(h.soLuong) DESC)");
+//        SELECT c FROM ChiTietDep c WHERE c.id IN (SELECT h FROM HoaDonChiTiet h ORDER BY COUNT(h.soLuong) DESC)
+        Query query = session.createQuery("SELECT f.ctdep.id FROM HoaDonChiTiet f GROUP BY f.hoaDon.ma");
         List<ChiTietDep> list = query.getResultList();
         return list;
     }
@@ -123,8 +124,8 @@ public class HoaDonCTRepository {
         IChiTietDepService iChiTietDepService = new ChiTietDepService();
         
 
-        for (ChiTietDep x : hdctr.findTop5SP()) {
-            
+        for (Object x : hdctr.findSP(1)) {
+            System.out.println(x);
         }
 //        System.out.println(hdctr.findSP(1));
     }

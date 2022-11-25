@@ -29,6 +29,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -907,7 +908,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
 
         tableScrollButton1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        cb_trangthai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tất cả", "Chưa thanh toán", "Đã thanh toán", "Đang giao", "Đã giao", "Đã hủy" }));
+        cb_trangthai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tất cả", "Chưa thanh toán", "Đã thanh toán" }));
         cb_trangthai.setLabeText("Trạng thái");
         cb_trangthai.setLineColor(new java.awt.Color(102, 102, 102));
 
@@ -1166,15 +1167,18 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                         if (chk_tichluy.isSelected()) {
                             hd.setDiemTichLuy(khachHang.getDiemTichLuy());
                             khachHang.setDiemTichLuy(1);
+                            khachHang.setTongDiemTichLuy(khachHang.getTongDiemTichLuy()+1);
                         } else {
                             hd.setDiemTichLuy(0);
                             khachHang.setDiemTichLuy(khachHang.getDiemTichLuy() + 1);
+                            khachHang.setTongDiemTichLuy(khachHang.getTongDiemTichLuy()+1);
                         }
                     }
                     if (khuyenMai != null) {
                         hd.setKhuyenMai(khuyenMai);
                         khuyenMai.setSoLuong(khuyenMai.getSoLuong() - 1);
                     }
+                    hd.setTongTien(BigDecimal.valueOf(phaiTra));
                     iHoaDonService.save(hd);
                     loadHD(iHoaDonService.getAll());
                     iKhachHangService.save(khachHang);

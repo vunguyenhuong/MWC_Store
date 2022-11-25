@@ -1,6 +1,7 @@
 package models;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
@@ -65,6 +66,9 @@ public class HoaDon implements Serializable {
 
     @Column(name = "diemTichLuy")
     private int diemTichLuy;
+    
+    @Column(name = "tongTien")
+    private BigDecimal tongTien;
 
     @ManyToOne
     @JoinColumn(name = "IdND")
