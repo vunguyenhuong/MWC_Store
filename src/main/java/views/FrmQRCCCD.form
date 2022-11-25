@@ -26,14 +26,14 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="button1" alignment="0" pref="493" max="32767" attributes="0"/>
           <Component id="pn_webcam" alignment="0" max="32767" attributes="0"/>
-          <Component id="button1" alignment="0" pref="279" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="pn_webcam" pref="252" max="32767" attributes="0"/>
+              <Component id="pn_webcam" pref="351" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="button1" min="-2" max="-2" attributes="0"/>
           </Group>
