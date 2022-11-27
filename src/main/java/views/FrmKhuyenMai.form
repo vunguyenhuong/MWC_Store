@@ -55,26 +55,29 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="imageAvatar1" min="-2" pref="195" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="btn_Them" linkSize="1" min="-2" pref="103" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="btn_CapNhat" linkSize="1" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="btn_Xoa" linkSize="1" min="-2" pref="77" max="-2" attributes="0"/>
+                                          <EmptySpace min="213" pref="213" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="btn_Them" linkSize="1" min="-2" pref="103" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="btn_CapNhat" linkSize="1" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="btn_Xoa" linkSize="1" min="-2" pref="77" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Component id="btn_ChonKhuyenMai" min="-2" pref="323" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
-                                      <Component id="btn_ChonKhuyenMai" min="-2" pref="323" max="-2" attributes="0"/>
+                                      <Component id="tableScrollButton1" alignment="0" min="-2" pref="535" max="-2" attributes="0"/>
                                   </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="imageAvatar1" min="-2" pref="195" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="txt_Search" max="32767" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="lbl_Total" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="tableScrollButton1" min="-2" pref="535" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="txt_Search" min="-2" pref="491" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="lbl_Total" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -89,7 +92,7 @@
                       <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="date_NgayKetThuc" min="-2" pref="195" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="106" pref="12" max="32767" attributes="0"/>
+                  <EmptySpace min="107" pref="13" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -101,14 +104,14 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txt_Search" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                              <Component id="txt_Search" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lbl_Total" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <Component id="txt_Ma" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="txt_TenKM" min="-2" max="-2" attributes="0"/>
@@ -116,12 +119,7 @@
                           <Component id="txt_PhanTramGiam" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="sp_SoLuong" min="-2" pref="38" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="tableScrollButton1" alignment="0" min="-2" pref="203" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -136,6 +134,7 @@
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
+                          <Component id="tableScrollButton1" min="-2" pref="203" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btn_Xoa" alignment="3" min="-2" max="-2" attributes="0"/>
