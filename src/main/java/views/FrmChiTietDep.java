@@ -103,6 +103,8 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                 loadData(iChiTietDepService.pagination(page, limit));
                 pg.setCurrent(page);
                 pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
+                cb_filter_dep.setSelectedIndex(0);
+                cb_filter_mausac.setSelectedIndex(0);
             }
         });
     }
