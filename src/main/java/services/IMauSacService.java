@@ -18,4 +18,6 @@ public interface IMauSacService {
     MauSac getObjectById(int id);
 
     List<MauSac> findByName(String ten);
+    
+    List<MauSac> pagination(int pageNumber, int pageSize);
 }

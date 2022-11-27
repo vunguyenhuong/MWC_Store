@@ -8,7 +8,10 @@ import models.ChatLieu;
 import services.IChatLieuService;
 import services.impl.ChatLieuService;
 import swing.Table;
+import ui.EventPagination;
 import ui.NotificationMess;
+import ui.Page;
+import ui.PaginationItemRenderStyle1;
 
 /**
  *
@@ -19,6 +22,13 @@ public class FrmChatLieu extends javax.swing.JPanel {
     private DefaultTableModel defaultTableModel;
     private IChatLieuService chatLieuService;
     private SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+    
+    
+    private Page pg = new Page();
+    private int checkSearchCT = 0;
+
+    Integer limit = 5;
+    Integer totalData = 0;
 
     /**
      * Creates new form FrmSizeOK
@@ -27,8 +37,26 @@ public class FrmChatLieu extends javax.swing.JPanel {
         initComponents();
         chatLieuService = new ChatLieuService();
         initComponents();
-        loadTable(chatLieuService.getListSize());
+        pagination();
+        pagination1.setPagegination(1, pg.getTotalPage());
+        pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
         Table.apply(jScrollPane1, Table.TableType.MULTI_LINE);
+    }
+    
+    public void pagination() {
+        loadTable(chatLieuService.pagination( pg.getCurrent(), limit));
+        totalData = chatLieuService.getListSize().size();
+        int totalPage = (int) Math.ceil(totalData.doubleValue() / limit);
+        pg.setTotalPage(totalPage);
+        pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
+        pagination1.addEventPagination(new EventPagination() {
+            @Override
+            public void pageChanged(int page) {
+                loadTable(chatLieuService.pagination( page, limit));
+                pg.setCurrent(page);
+                pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
+            }
+        });
     }
 
     public void loadTable(List<ChatLieu> list) {
@@ -86,6 +114,8 @@ public class FrmChatLieu extends javax.swing.JPanel {
         tbl_Table = new javax.swing.JTable();
         lbl_Total = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        pagination1 = new swing.Pagination();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -150,6 +180,26 @@ public class FrmChatLieu extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("CHẤT LIỆU");
 
+        jPanel1.setBackground(new java.awt.Color(0, 0, 255));
+
+        pagination1.setBackground(new java.awt.Color(0, 0, 255));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(170, 170, 170)
+                .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -157,6 +207,7 @@ public class FrmChatLieu extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txt_search, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -203,7 +254,9 @@ public class FrmChatLieu extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(175, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(133, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -216,7 +269,7 @@ public class FrmChatLieu extends javax.swing.JPanel {
             return;
         }
         ChatLieu chatLieu = getdata();
-        String ma = tbl_Table.getValueAt(row, 1).toString();
+        String ma = tbl_Table.getValueAt(row, 0).toString();
         if (txt_Ten.getText().trim().length() == 0) {
             NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Không được sửa rỗng !");
             panel.showNotification();
@@ -227,9 +280,15 @@ public class FrmChatLieu extends javax.swing.JPanel {
         cl.setTrangThai(chatLieu.getTrangThai());
         cl.setNgaySuaCuoi(chatLieu.getNgaySuaCuoi());
         chatLieuService.save(cl);
+        if (checkSearchCT == 0) {
+            cl = chatLieuService.pagination( pg.getCurrent(), limit).get(row);
+        } else {
+            cl = chatLieuService.getSearch(txt_search.getText()).get(row);
+        }
+        pagination();
         NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập Nhật Thành Công !");
         panel.showNotification();
-        loadTable(chatLieuService.getListSize());
+      
     }//GEN-LAST:event_btn_updateActionPerformed
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
@@ -252,9 +311,10 @@ public class FrmChatLieu extends javax.swing.JPanel {
             return;
         }
         chatLieuService.save(cl);
+        pagination();
         NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Thêm thành công");
         panel.showNotification();
-        loadTable(chatLieuService.getListSize());
+ 
     }//GEN-LAST:event_btn_addActionPerformed
 
     private void txt_searchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_searchCaretUpdate
@@ -265,9 +325,9 @@ public class FrmChatLieu extends javax.swing.JPanel {
     private void tbl_TableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_TableMouseClicked
         // TODO add your handling code here:
         int row = tbl_Table.getSelectedRow();
-        txt_Ma.setText(tbl_Table.getValueAt(row, 1).toString());
-        txt_Ten.setText(tbl_Table.getValueAt(row, 2).toString());
-        if (tbl_Table.getValueAt(row, 5).toString().equals("Đang kinh doanh")) {
+        txt_Ma.setText(tbl_Table.getValueAt(row, 0).toString());
+        txt_Ten.setText(tbl_Table.getValueAt(row, 1).toString());
+        if (tbl_Table.getValueAt(row, 4).toString().equals("Đang kinh doanh")) {
             rd_DangKinhDoanh.setSelected(true);
         } else {
             rd_NgungKinhDoanh.setSelected(true);
@@ -280,8 +340,10 @@ public class FrmChatLieu extends javax.swing.JPanel {
     private swing.Button btn_update;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_Total;
+    private swing.Pagination pagination1;
     private swing.RadioButtonCustom rd_DangKinhDoanh;
     private swing.RadioButtonCustom rd_NgungKinhDoanh;
     private swing.TableScrollButton tableScrollButton1;

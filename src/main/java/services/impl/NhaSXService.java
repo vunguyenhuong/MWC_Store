@@ -41,4 +41,9 @@ public class NhaSXService implements INhaSXService{
     public NhaSX getObjById(int id) {
         return repo.getObjById(id);
     }
+
+    @Override
+    public List<NhaSX> pagination(int pageNumber, int pageSize) {
+        return repo.pagination(pageNumber, pageSize);
+    }
 }

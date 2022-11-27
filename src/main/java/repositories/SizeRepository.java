@@ -79,4 +79,14 @@ public class SizeRepository {
         }
         return sz;
     }
+    
+    public List<Size> pagination(int pageNumber, int pageSize){
+        Query query = session.createQuery(" SELECT s FROM Size s  ");
+        int pageIndex = pageNumber - 1 < 0 ? 0 : pageNumber - 1;
+        int fromRecordIndex = pageIndex * pageSize;
+        query.setFirstResult(fromRecordIndex);
+        query.setMaxResults(pageSize);
+        List<Size> list = query.getResultList();
+        return list;
+    }
 }

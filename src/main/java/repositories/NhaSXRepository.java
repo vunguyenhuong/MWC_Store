@@ -73,4 +73,14 @@ public class NhaSXRepository {
         }
         return nsx;
     }
+    
+    public List<NhaSX> pagination(int pageNumber, int pageSize) {
+        Query query = se.createQuery("SELECT n FROM NhaSX n ");
+        int pageIndex = pageNumber - 1 < 0 ? 0 : pageNumber - 1;
+        int fromRecordIndex = pageIndex * pageSize;
+        query.setFirstResult(fromRecordIndex);
+        query.setMaxResults(pageSize);
+        List<NhaSX> list = query.getResultList();
+        return list;
+    }
 }

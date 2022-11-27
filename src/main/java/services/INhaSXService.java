@@ -20,4 +20,6 @@ public interface INhaSXService {
     NhaSX getObj(String ma);
     
     NhaSX getObjById(int id);
+    
+    List<NhaSX> pagination(int pageNumber, int pageSize);
 }

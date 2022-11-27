@@ -41,5 +41,10 @@ public class DepService implements IDepService {
     public Dep getObjById(int id) {
         return depRepository.getObjById(id);
     }
+
+    @Override
+    public List<Dep> pagination(int pageNumber, int pageSize) {
+        return depRepository.pagination(pageNumber, pageSize);
+    }
     
 }
