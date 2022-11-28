@@ -89,4 +89,15 @@ public class SizeRepository {
         List<Size> list = query.getResultList();
         return list;
     }
+    
+    public List<Size> pagination1(int pageNumber, int pageSize, String ten) {
+        Query query = session.createQuery("SELECT n FROM Size n WHERE n.ma like :ten");
+        int pageIndex = pageNumber - 1 < 0 ? 0 : pageNumber - 1;
+        int fromRecordIndex = pageIndex * pageSize;
+        query.setFirstResult(fromRecordIndex);
+        query.setMaxResults(pageSize);
+        query.setParameter("ten", "%" + ten + "%");
+        List<Size> list = query.getResultList();
+        return list;
+    }
 }
