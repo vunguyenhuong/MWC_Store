@@ -43,4 +43,9 @@ public class SizeService implements ISizeService {
         return repo.getObjById(id);
     }
 
+    @Override
+    public List<Size> pagination(int pageNumber, int pageSize) {
+        return repo.pagination(pageNumber, pageSize);
+    }
+
 }

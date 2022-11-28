@@ -79,5 +79,15 @@ public class ChatLieuRepository {
         return cl;
     }
     
+    public List<ChatLieu> pagination(int pageNumber, int pageSize) {
+        Query query = session.createQuery("SELECT c FROM ChatLieu c  ");
+        int pageIndex = pageNumber - 1 < 0 ? 0 : pageNumber - 1;
+        int fromRecordIndex = pageIndex * pageSize;
+        query.setFirstResult(fromRecordIndex);
+        query.setMaxResults(pageSize);
+        List<ChatLieu> list = query.getResultList();
+        return list;
+    }
+    
     
 }

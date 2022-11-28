@@ -38,5 +38,10 @@ public class LoaiDepService implements ILoaiDepService {
     public LoaiDep getObjectById(int id) {
         return loaiDepRepository.getObjectById(id);
     }
+
+    @Override
+    public List<LoaiDep> pagination(int pageNumber, int pageSize) {
+        return loaiDepRepository.pagination(pageNumber, pageSize);
+    }
     
 }

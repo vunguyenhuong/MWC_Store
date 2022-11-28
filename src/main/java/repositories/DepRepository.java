@@ -64,4 +64,14 @@ public class DepRepository {
         }
         return d;
     }
+    
+    public List<Dep> pagination(int pageNumber, int pageSize){
+        Query query = session.createQuery(" SELECT d FROM Dep d  ");
+        int pageIndex = pageNumber - 1 < 0 ? 0 : pageNumber - 1;
+        int fromRecordIndex = pageIndex * pageSize;
+        query.setFirstResult(fromRecordIndex);
+        query.setMaxResults(pageSize);
+        List<Dep> list = query.getResultList();
+        return list;
+    }
 }

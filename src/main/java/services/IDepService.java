@@ -19,4 +19,6 @@ public interface IDepService {
     
     public Dep getObjById(int id);
     
+    List<Dep> pagination(int pageNumber, int pageSize);
+    
 }

@@ -65,4 +65,14 @@ public class MauSacRepository {
         }
         return n;
     }
+    
+    public List<MauSac> pagination(int pageNumber, int pageSize){
+        Query query = session.createQuery(" SELECT m FROM MauSac m  ");
+        int pageIndex = pageNumber - 1 < 0 ? 0 : pageNumber - 1;
+        int fromRecordIndex = pageIndex * pageSize;
+        query.setFirstResult(fromRecordIndex);
+        query.setMaxResults(pageSize);
+        List<MauSac> list = query.getResultList();
+        return list;
+    }
 }

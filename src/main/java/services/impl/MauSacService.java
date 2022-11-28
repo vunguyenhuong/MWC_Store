@@ -42,4 +42,9 @@ public class MauSacService implements IMauSacService {
         return repo.getObjectById(id);
     }
 
+    @Override
+    public List<MauSac> pagination(int pageNumber, int pageSize) {
+        return repo.pagination(pageNumber, pageSize);
+    }
+
 }

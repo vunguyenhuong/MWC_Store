@@ -58,9 +58,11 @@ public class ChiTietDepRepository {
     }
 
     public List<ChiTietDep> filter(String tenDep, String tenMauSac) {
-        Query query = session.createQuery("SELECT c FROM ChiTietDep c WHERE c.dep.ten LIKE :tenDep AND c.mauSac.ten LIKE :tenMauSac");
-        query.setParameter("tenDep", "%" + tenDep + "%");
-        query.setParameter("tenMauSac", "%" + tenMauSac + "%");
+        Query query = session.createQuery("SELECT c FROM ChiTietDep c "
+                + " WHERE (c.dep.ten = :tenDep or :tenDep is null or :tenDep = '' )"
+                + " AND (c.mauSac.ten = :tenMauSac or :tenMauSac is null or :tenMauSac = '' )");
+        query.setParameter("tenDep", tenDep);
+        query.setParameter("tenMauSac", tenMauSac);
         List<ChiTietDep> list = query.getResultList();
         return list;
     }
@@ -118,7 +120,7 @@ public class ChiTietDepRepository {
         return ctd;
     }
 
-    public List<ChiTietDep> topSPBanChay(int firstResult,int maxResult) {
+    public List<ChiTietDep> topSPBanChay(int firstResult, int maxResult) {
 //        NativeQuery query = session.createNativeQuery("SELECT * FROM CHITIETDEP WHERE ID IN "
 //                + "(SELECT TOP 5 IDCTD FROM HOADONCHITIET A JOIN HOADON B "
 //                + "ON A.IdHD = B.ID WHERE B.TrangThai = 1 "

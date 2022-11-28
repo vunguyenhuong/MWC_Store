@@ -43,5 +43,10 @@ public class ChatLieuService implements IChatLieuService {
         return repo.getObjById(id);
     }
 
+    @Override
+    public List<ChatLieu> pagination( int pageNumber, int pageSize) {
+        return repo.pagination( pageNumber, pageSize);
+    }
+
     
 }

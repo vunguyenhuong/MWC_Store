@@ -11,7 +11,10 @@ import models.Dep;
 import services.IDepService;
 import services.impl.DepService;
 import swing.Table;
+import ui.EventPagination;
 import ui.NotificationMess;
+import ui.Page;
+import ui.PaginationItemRenderStyle1;
 import utilities.Helper;
 
 /**
@@ -24,6 +27,12 @@ public class FrmDep extends javax.swing.JPanel {
     private IDepService iDepService;
     private String fileName;
     private Helper helper = new Helper();
+    
+    private Page pg = new Page();
+    private int checkSearchCT = 0;
+
+    Integer limit = 5;
+    Integer totalData = 0;
 
     /**
      * Creates new form FrmDepOK
@@ -32,9 +41,28 @@ public class FrmDep extends javax.swing.JPanel {
         initComponents();
         this.dtm = new DefaultTableModel();
         this.iDepService = new DepService();
-        loadDataToTable(this.iDepService.getList());
+        initComponents();
+        pagination();
+        pagination1.setPagegination(1, pg.getTotalPage());
+        pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
         tblDep.getTableHeader().setReorderingAllowed(false);
         Table.apply(jScrollPane1, Table.TableType.MULTI_LINE);
+    }
+    
+    public void pagination() {
+        loadDataToTable(iDepService.pagination( pg.getCurrent(), limit));
+        totalData = iDepService.getList().size();
+        int totalPage = (int) Math.ceil(totalData.doubleValue() / limit);
+        pg.setTotalPage(totalPage);
+        pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
+        pagination1.addEventPagination(new EventPagination() {
+            @Override
+            public void pageChanged(int page) {
+                loadDataToTable(iDepService.pagination( page, limit));
+                pg.setCurrent(page);
+                pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
+            }
+        });
     }
 
     private void loadDataToTable(List<Dep> list) {
@@ -130,6 +158,8 @@ public class FrmDep extends javax.swing.JPanel {
         tblDep = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         lbl_Total = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        pagination1 = new swing.Pagination();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -199,6 +229,24 @@ public class FrmDep extends javax.swing.JPanel {
         lbl_Total.setForeground(new java.awt.Color(255, 0, 51));
         lbl_Total.setText("Total: 0");
 
+        jPanel1.setBackground(new java.awt.Color(0, 0, 255));
+
+        pagination1.setBackground(new java.awt.Color(0, 0, 255));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -226,9 +274,12 @@ public class FrmDep extends javax.swing.JPanel {
                             .addComponent(jLabel1))
                         .addGap(18, 18, 18)
                         .addComponent(lblHinhAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE))
-                    .addComponent(tableScrollButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addContainerGap(54, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,7 +307,9 @@ public class FrmDep extends javax.swing.JPanel {
                     .addComponent(lblHinhAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(tableScrollButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -306,7 +359,7 @@ public class FrmDep extends javax.swing.JPanel {
             return;
         }
         this.iDepService.save(dep);
-        this.loadDataToTable(this.iDepService.getList());
+        pagination();
         NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Thêm thành công");
         panel.showNotification();
     }//GEN-LAST:event_btnThemActionPerformed
@@ -327,7 +380,12 @@ public class FrmDep extends javax.swing.JPanel {
         d.setNgaySuaCuoi(date);
         d.setTrangThai(dep.getTrangThai());
         this.iDepService.save(d);
-        loadDataToTable(this.iDepService.getList());
+        if (checkSearchCT == 0) {
+            d = iDepService.pagination( pg.getCurrent(), limit).get(index);
+        } else {
+            d = iDepService.getObjByName(txtTimKiem.getText()).get(index);
+        }
+        pagination();
         NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Đã cập nhật thành công");
         panel.showNotification();
     }//GEN-LAST:event_btnSuaActionPerformed
@@ -339,9 +397,11 @@ public class FrmDep extends javax.swing.JPanel {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblHinhAnh;
     private javax.swing.JLabel lbl_Total;
+    private swing.Pagination pagination1;
     private swing.RadioButtonCustom rdoDangkinhdoanh;
     private swing.RadioButtonCustom rdoNgungkinhdoanh;
     private swing.TableScrollButton tableScrollButton1;

@@ -18,4 +18,6 @@ public interface ILoaiDepService {
     LoaiDep getObjectById(int id);
 
     List<LoaiDep> findByName(String ten);
+    
+    List<LoaiDep> pagination(int pageNumber, int pageSize);
 }

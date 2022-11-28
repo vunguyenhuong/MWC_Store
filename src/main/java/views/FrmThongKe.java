@@ -6,6 +6,7 @@ import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import models.ChiTietDep;
+import models.Dep;
 import models.HoaDonChiTiet;
 import services.IChiTietDepService;
 import services.IHoaDonCTService;
@@ -45,11 +46,15 @@ public class FrmThongKe extends javax.swing.JPanel {
         spsaphethang.setData(new ModelCard("Sản phẩm đang kinh doanh", iChiTietDepService.findByTT(0, "").size(), null));
         spngungkd.setData(new ModelCard("Sản phẩm sắp hết hàng", 0, null));
         spdangkd.setData(new ModelCard("Sản phẩm ngừng kinh doanh", iChiTietDepService.findByTT(1, "").size(), null));
-
         pieChart1.setChartType(PieChart.PeiChartType.DEFAULT);
-        pieChart1.addData(new ModelPieChart("Tigher", 150, new Color(23, 126, 238)));
-        pieChart1.addData(new ModelPieChart("ABC", 100, new Color(221, 65, 65)));
-        pieChart1.addData(new ModelPieChart("Vita", 60, new Color(196, 151, 58)));
+        List<ChiTietDep> listCTD = iChiTietDepService.topSPBanChay(0, 5);
+        try {
+            for (int i = 0; i < listCTD.size(); i++) {
+            Dep dep = listCTD.get(i).getDep();
+            pieChart1.addData(new ModelPieChart(dep.getTen(), listCTD.get(i).getSoLuongBanRa(), new Color(23 + i*50, 126 - i*30, 238 - i*20)));
+        }
+        } catch (Exception e) {
+        }
 
         loadData(iChiTietDepService.topSPBanChay(0, 5), tb_top5sp);
     }
