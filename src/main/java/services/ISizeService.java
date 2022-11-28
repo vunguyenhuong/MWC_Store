@@ -16,11 +16,9 @@ public interface ISizeService {
     
     Size getObj(String ma);
     
-    List<Size> findByName(String ten);
+    List<Size> findByName(Float ten);
     
     Size getObjById(int id);
-    
-    List<Size> pagination(int pageNumber, int pageSize);
 
-    List<Size> pagination1(int pageNumber, int pageSize, String ten);
+    List<Size> pagination(int pageNumber, int pageSize);
 }

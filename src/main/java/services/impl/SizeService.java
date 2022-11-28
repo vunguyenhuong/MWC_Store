@@ -34,8 +34,8 @@ public class SizeService implements ISizeService {
     }
 
     @Override
-    public List<Size> findByName(String ten) {
-        return repo.getSearch(ten);
+    public List<Size> findByName(Float ten) {
+        return repo.findByName(ten);
     }
 
     @Override
@@ -46,11 +46,6 @@ public class SizeService implements ISizeService {
     @Override
     public List<Size> pagination(int pageNumber, int pageSize) {
         return repo.pagination(pageNumber, pageSize);
-    }
-
-    @Override
-    public List<Size> pagination1(int pageNumber, int pageSize, String ten) {
-        return repo.pagination1(pageNumber, pageSize, ten);
     }
 
 }

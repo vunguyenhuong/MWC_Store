@@ -50,23 +50,6 @@ public class ChiTietDepRepository {
         }
     }
 
-    public List<ChiTietDep> findByName(String ten) {
-        Query query = session.createQuery("SELECT c FROM ChiTietDep c WHERE c.dep.ten LIKE :ten");
-        query.setParameter("ten", "%" + ten + "%");
-        List<ChiTietDep> list = query.getResultList();
-        return list;
-    }
-
-    public List<ChiTietDep> filter(String tenDep, String tenMauSac) {
-        Query query = session.createQuery("SELECT c FROM ChiTietDep c "
-                + " WHERE (c.dep.ten = :tenDep or :tenDep is null or :tenDep = '')"
-                + " AND (c.mauSac.ten = :tenMauSac or :tenMauSac is null or :tenMauSac = '')");
-        query.setParameter("tenDep", tenDep);
-        query.setParameter("tenMauSac", tenMauSac);
-        List<ChiTietDep> list = query.getResultList();
-        return list;
-    }
-
     public List<ChiTietDep> findByTT(int trangThai, String ten) {
         Query query = session.createQuery("SELECT c FROM ChiTietDep c WHERE c.trangThai = :trangThai AND c.dep.ten LIKE :ten");
         query.setParameter("trangThai", trangThai);
@@ -91,16 +74,6 @@ public class ChiTietDepRepository {
         } catch (Exception e) {
         }
         return ctd;
-    }
-
-    public List<ChiTietDep> pagination(int pageNumber, int pageSize) {
-        Query query = session.createQuery("SELECT c FROM ChiTietDep c");
-        int pageIndex = pageNumber - 1 < 0 ? 0 : pageNumber - 1;
-        int fromRecordIndex = pageIndex * pageSize;
-        query.setFirstResult(fromRecordIndex);
-        query.setMaxResults(pageSize);
-        List<ChiTietDep> list = query.getResultList();
-        return list;
     }
 
     public ChiTietDep checkDuplicate(int idDep, int idLoaiDep, int idMauSac, int idChatLieu, int idNSX, int idSize) {
@@ -132,10 +105,29 @@ public class ChiTietDepRepository {
         return list;
     }
 
+    public List<ChiTietDep> pagination(int pageNumber, int pageSize, String tenDep, String tenLoaiDep, String tenMauSac, String tenChatLieu) {
+        Query query = session.createQuery("SELECT c FROM ChiTietDep c "
+                + " WHERE (c.dep.ten = :tenDep or :tenDep is null or :tenDep = '')"
+                + " AND (c.mauSac.ten = :tenMauSac or :tenMauSac is null or :tenMauSac = '')"
+                + " AND (c.chatLieu.ten = :tenChatLieu or :tenChatLieu is null or :tenChatLieu = '')"
+                + " AND (c.loaiDep.ten = :tenLoaiDep or :tenLoaiDep is null or :tenLoaiDep = '')");
+        query.setParameter("tenDep", tenDep);
+        query.setParameter("tenMauSac", tenMauSac);
+        query.setParameter("tenChatLieu", tenChatLieu);
+        query.setParameter("tenLoaiDep", tenLoaiDep);
+        int pageIndex = pageNumber - 1 < 0 ? 0 : pageNumber - 1;
+        int fromRecordIndex = pageIndex * pageSize;
+        query.setFirstResult(fromRecordIndex);
+        query.setMaxResults(pageSize);
+        List<ChiTietDep> list = query.getResultList();
+        return list;
+    }
+
     public static void main(String[] args) {
         ChiTietDepRepository ctdr = new ChiTietDepRepository();
-        for (ChiTietDep x : ctdr.filter("Tông lào", "")) {
-            System.out.println(x);
+        try {
+            System.out.println(ctdr.pagination(1, 1000, "", "", "","").size());
+        } catch (Exception e) {
         }
     }
 }
