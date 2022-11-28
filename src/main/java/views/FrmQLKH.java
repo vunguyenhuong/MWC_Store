@@ -21,7 +21,7 @@ public class FrmQLKH extends javax.swing.JPanel {
     private IKhachHangService iKhachHangService;
     private DefaultTableModel dtm = new DefaultTableModel();
     private Helper helper;
-    
+
     private Page pg = new Page();
     private int checkSearchCT = 0;
 
@@ -39,22 +39,28 @@ public class FrmQLKH extends javax.swing.JPanel {
         pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
         Table.apply(jScrollPane1, Table.TableType.MULTI_LINE);
     }
-    
+
     public void pagination(String ten) {
         totalData = iKhachHangService.findByName(ten).size();
         int totalPage = (int) Math.ceil(totalData.doubleValue() / limit);
         pg.setTotalPage(totalPage);
-        pagination1.setPagegination(1, pg.getTotalPage());
-        loadDataToTabel(iKhachHangService.pagination(1, limit, ten));
+        if (pg.getTotalPage() < pg.getCurrent()) {
+            pagination1.setPagegination(pg.getTotalPage(), pg.getTotalPage());
+            loadDataToTabel(iKhachHangService.pagination(pg.getTotalPage(), limit, ten));
+        } else {
+            pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
+            loadDataToTabel(iKhachHangService.pagination(pg.getCurrent(), limit, ten));
+        }
         clear();
         pagination1.addEventPagination(new EventPagination() {
             @Override
             public void pageChanged(int page) {
                 loadDataToTabel(iKhachHangService.pagination(page, limit, ten));
+                pg.setCurrent(page);
             }
         });
     }
-    
+
     private void clear() {
         txt_Ma.setText("");
         txt_Ten.setText("");
@@ -74,7 +80,6 @@ public class FrmQLKH extends javax.swing.JPanel {
         txt_Search = new swing.TextField();
         btn_delete = new swing.Button();
         txt_Ma = new swing.TextField();
-        lbl_Total = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         btn_update = new swing.Button();
         btn_add = new swing.Button();
@@ -109,10 +114,6 @@ public class FrmQLKH extends javax.swing.JPanel {
         txt_Ma.setEditable(false);
         txt_Ma.setToolTipText("");
         txt_Ma.setLabelText("Mã :");
-
-        lbl_Total.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lbl_Total.setForeground(new java.awt.Color(255, 51, 51));
-        lbl_Total.setText("Total : 0");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("QUẢN LÝ KHÁCH HÀNG");
@@ -153,30 +154,33 @@ public class FrmQLKH extends javax.swing.JPanel {
             }
         ));
         tbl_Khachhang.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbl_KhachhangMouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tbl_KhachhangMousePressed(evt);
             }
         });
         jScrollPane1.setViewportView(tbl_Khachhang);
 
         tableScrollButton1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 255));
+        jPanel1.setBackground(new java.awt.Color(153, 51, 255));
 
-        pagination1.setBackground(new java.awt.Color(0, 0, 255));
+        pagination1.setBackground(new java.awt.Color(153, 51, 255));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(62, 62, 62)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -184,30 +188,25 @@ public class FrmQLKH extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txt_Ma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_DiaChi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txt_SDT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txt_Ten, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_Ma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txt_DiaChi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_SDT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_Ten, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txt_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(886, Short.MAX_VALUE)
-                        .addComponent(lbl_Total, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txt_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -219,45 +218,33 @@ public class FrmQLKH extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(40, 40, 40)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_Ma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_Search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(2, 2, 2)
-                .addComponent(lbl_Total)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txt_Ten, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(txt_SDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(txt_DiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(tableScrollButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                        .addComponent(txt_DiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt_SearchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_SearchCaretUpdate
         pagination(txt_Search.getText());
     }//GEN-LAST:event_txt_SearchCaretUpdate
-
-    private void tbl_KhachhangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_KhachhangMouseClicked
-        int index = tbl_Khachhang.getSelectedRow();
-        txt_Ma.setText(tbl_Khachhang.getValueAt(index, 1).toString());
-        txt_Ten.setText(tbl_Khachhang.getValueAt(index, 2).toString());
-        txt_DiaChi.setText(tbl_Khachhang.getValueAt(index, 3).toString());
-        txt_SDT.setText(tbl_Khachhang.getValueAt(index, 4).toString());
-
-    }//GEN-LAST:event_tbl_KhachhangMouseClicked
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
         int row = tbl_Khachhang.getSelectedRow();
@@ -267,7 +254,7 @@ public class FrmQLKH extends javax.swing.JPanel {
         } else {
             KhachHang kh = iKhachHangService.getObj((String) tbl_Khachhang.getValueAt(row, 1));
             iKhachHangService.delete(kh);
-            loadDataToTabel(iKhachHangService.getAll());
+            pagination(txt_Search.getText());
             NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Xóa thành công");
             panel.showNotification();
         }
@@ -301,6 +288,16 @@ public class FrmQLKH extends javax.swing.JPanel {
         panel.showNotification();
     }//GEN-LAST:event_btn_addActionPerformed
 
+    private void tbl_KhachhangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_KhachhangMousePressed
+        // TODO add your handling code here:
+        int index = tbl_Khachhang.getSelectedRow();
+        KhachHang kh = iKhachHangService.getObj(tbl_Khachhang.getValueAt(index, 1).toString());
+        txt_Ma.setText(kh.getMa());
+        txt_Ten.setText(kh.getTen());
+        txt_SDT.setText(kh.getSoDt());
+        txt_DiaChi.setText(kh.getDiaChi());
+    }//GEN-LAST:event_tbl_KhachhangMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private swing.Button btn_add;
@@ -309,7 +306,6 @@ public class FrmQLKH extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lbl_Total;
     private swing.Pagination pagination1;
     private swing.TableScrollButton tableScrollButton1;
     private javax.swing.JTable tbl_Khachhang;
@@ -336,7 +332,6 @@ public class FrmQLKH extends javax.swing.JPanel {
             };
             dtm.addRow(rowData);
         }
-        lbl_Total.setText("Total:" + list.size());
 
     }
 
@@ -359,7 +354,6 @@ public class FrmQLKH extends javax.swing.JPanel {
 
     private KhachHang getDataFromInput() {
         KhachHang kh = new KhachHang();
-
         String result;
         for (int i = 0; i < iKhachHangService.getAll().size() + 1; i++) {
             result = "KH" + i;
@@ -372,9 +366,8 @@ public class FrmQLKH extends javax.swing.JPanel {
         }
 
         String tenKH = txt_Ten.getText().trim();
-        String diachi = txt_SDT.getText().trim();
-        String sdt = txt_DiaChi.getText().trim();
-
+        String sdt = txt_SDT.getText().trim();
+        String diachi = txt_DiaChi.getText().trim();
         kh.setTen(tenKH);
         kh.setDiaChi(diachi);
         kh.setSoDt(sdt);
