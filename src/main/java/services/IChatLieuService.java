@@ -20,6 +20,6 @@ public interface IChatLieuService {
     
     public ChatLieu getObjById(int id);
     
-    List<ChatLieu> pagination(int pageNumber, int pageSize);
+    List<ChatLieu> pagination(int pageNumber, int pageSize, String ten);
     
 }

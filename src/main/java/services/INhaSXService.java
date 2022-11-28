@@ -18,8 +18,8 @@ public interface INhaSXService {
     boolean delete(NhaSX nsx);
 
     NhaSX getObj(String ma);
-    
+
     NhaSX getObjById(int id);
-    
-    List<NhaSX> pagination(int pageNumber, int pageSize);
+
+    List<NhaSX> pagination1(int pageNumber, int pageSize, String ten);
 }

@@ -79,11 +79,12 @@ public class ChatLieuRepository {
         return cl;
     }
     
-    public List<ChatLieu> pagination(int pageNumber, int pageSize) {
-        Query query = session.createQuery("SELECT c FROM ChatLieu c  ");
+    public List<ChatLieu> pagination(int pageNumber, int pageSize, String ten) {
+        Query query = session.createQuery("SELECT c FROM ChatLieu c WHERE c.ten LIKE :ten");
         int pageIndex = pageNumber - 1 < 0 ? 0 : pageNumber - 1;
         int fromRecordIndex = pageIndex * pageSize;
         query.setFirstResult(fromRecordIndex);
+        query.setParameter("ten", "%" + ten + "%");
         query.setMaxResults(pageSize);
         List<ChatLieu> list = query.getResultList();
         return list;
