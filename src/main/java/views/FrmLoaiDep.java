@@ -26,10 +26,7 @@ public class FrmLoaiDep extends javax.swing.JPanel {
     private DefaultTableModel defaultTableModel;
     private Helper helper;
     private SimpleDateFormat formatD = new SimpleDateFormat("dd-MM-yyyy");
-    
     private Page pg = new Page();
-    private int checkSearchCT = 0;
-
     Integer limit = 2;
     Integer totalData = 0;
 
@@ -45,26 +42,29 @@ public class FrmLoaiDep extends javax.swing.JPanel {
         pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
         Table.apply(jScrollPane1, Table.TableType.MULTI_LINE);
     }
-    
+
     public void pagination(String ten) {
-        LoadTabale(loaidepSV.pagination( pg.getCurrent(), limit,ten));
         totalData = loaidepSV.findByName(ten).size();
         int totalPage = (int) Math.ceil(totalData.doubleValue() / limit);
-        System.out.println(totalPage);
         pg.setTotalPage(totalPage);
         pagination1.setPagegination(1, pg.getTotalPage());
-        LoadTabale(loaidepSV.pagination( 1, limit, ten));
+        loadTable(loaidepSV.pagination(1, limit, ten));
+        clear();
         pagination1.addEventPagination(new EventPagination() {
             @Override
             public void pageChanged(int page) {
-                LoadTabale(loaidepSV.pagination( page, limit, ten));
-                pg.setCurrent(page);
-                pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
+                loadTable(loaidepSV.pagination(page, limit, ten));
             }
         });
     }
 
-    public void LoadTabale(List<LoaiDep> list) {
+    public void clear() {
+        txt_Ma.setText("");
+        txt_Ten.setText("");
+        rd_DangKinhDoanh.setSelected(true);
+    }
+
+    public void loadTable(List<LoaiDep> list) {
         defaultTableModel = (DefaultTableModel) tb_Table.getModel();
         defaultTableModel.setRowCount(0);
         for (LoaiDep x : list) {
@@ -74,7 +74,6 @@ public class FrmLoaiDep extends javax.swing.JPanel {
             };
             defaultTableModel.addRow(row);
         }
-        lbl_Total.setText("Total:" + list.size());
     }
 
     private boolean checkNull() {
@@ -133,7 +132,6 @@ public class FrmLoaiDep extends javax.swing.JPanel {
         tableScrollButton1 = new swing.TableScrollButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_Table = new javax.swing.JTable();
-        lbl_Total = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         pagination1 = new swing.Pagination();
@@ -195,28 +193,28 @@ public class FrmLoaiDep extends javax.swing.JPanel {
 
         tableScrollButton1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        lbl_Total.setForeground(new java.awt.Color(255, 0, 51));
-        lbl_Total.setText("Total: 0");
-
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("LOẠI DÉP");
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 255));
+        jPanel1.setBackground(new java.awt.Color(153, 51, 255));
 
-        pagination1.setBackground(new java.awt.Color(0, 0, 255));
+        pagination1.setBackground(new java.awt.Color(153, 51, 255));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(228, 228, 228)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pagination1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -226,10 +224,10 @@ public class FrmLoaiDep extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -242,8 +240,7 @@ public class FrmLoaiDep extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(rd_NgungKinhDoanh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rd_DangKinhDoanh, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_Total))
+                            .addComponent(rd_DangKinhDoanh, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -256,8 +253,7 @@ public class FrmLoaiDep extends javax.swing.JPanel {
                 .addGap(12, 12, 12)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tableScrollButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txt_Ma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -267,16 +263,15 @@ public class FrmLoaiDep extends javax.swing.JPanel {
                             .addComponent(txt_Ten, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(rd_NgungKinhDoanh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_Total))
+                        .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(tableScrollButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -284,7 +279,7 @@ public class FrmLoaiDep extends javax.swing.JPanel {
         // TODO add your handling code here:
         int row = tb_Table.getSelectedRow();
         if (row == -1) {
-            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Chọn 1 dòng loại dép để cập nhật");
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Chọn 1 dòng loại dép để cập nhật");
             panel.showNotification();
             return;
         }
@@ -312,6 +307,7 @@ public class FrmLoaiDep extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_addActionPerformed
 
     private void txt_searchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_searchCaretUpdate
+        // TODO add your handling code here:
         pagination(txt_search.getText());
     }//GEN-LAST:event_txt_searchCaretUpdate
 
@@ -335,7 +331,6 @@ public class FrmLoaiDep extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lbl_Total;
     private swing.Pagination pagination1;
     private swing.RadioButtonCustom rd_DangKinhDoanh;
     private swing.RadioButtonCustom rd_NgungKinhDoanh;

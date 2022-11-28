@@ -61,15 +61,15 @@ public class SizeRepository {
         return s;
     }
 
-    public List<Size> getSearch(String ten) {
+    public List<Size> findByName(Float ten) {
         List<Size> list = new ArrayList<>();
-        Query query = session.createQuery("SELECT s FROM Size s WHERE s.ma LIKE :ma");
-        query.setParameter("ma", "%" + ten + "%");
+        Query query = session.createQuery("SELECT s FROM Size s WHERE s.kichCo LIKE :ten");
+        query.setParameter("ten", "%" + ten + "%");
         list = query.getResultList();
         return list;
     }
-    
-    public Size getObjById(int id){
+
+    public Size getObjById(int id) {
         Size sz = null;
         try {
             Query query = session.createQuery("SELECT sz FROM Size sz WHERE sz.id = :id ");
@@ -79,9 +79,9 @@ public class SizeRepository {
         }
         return sz;
     }
-    
-    public List<Size> pagination(int pageNumber, int pageSize){
-        Query query = session.createQuery(" SELECT s FROM Size s  ");
+
+    public List<Size> pagination(int pageNumber, int pageSize) {
+        Query query = session.createQuery(" SELECT s FROM Size s");
         int pageIndex = pageNumber - 1 < 0 ? 0 : pageNumber - 1;
         int fromRecordIndex = pageIndex * pageSize;
         query.setFirstResult(fromRecordIndex);
@@ -89,4 +89,5 @@ public class SizeRepository {
         List<Size> list = query.getResultList();
         return list;
     }
+
 }
