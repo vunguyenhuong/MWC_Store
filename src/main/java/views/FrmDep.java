@@ -29,8 +29,6 @@ public class FrmDep extends javax.swing.JPanel {
     private Helper helper = new Helper();
     
     private Page pg = new Page();
-    private int checkSearchCT = 0;
-
     Integer limit = 5;
     Integer totalData = 0;
 
@@ -53,13 +51,19 @@ public class FrmDep extends javax.swing.JPanel {
         totalData = iDepService.getObjByName(ten).size();
         int totalPage = (int) Math.ceil(totalData.doubleValue() / limit);
         pg.setTotalPage(totalPage);
-        pagination1.setPagegination(1, pg.getTotalPage());
-        loadDataToTable(iDepService.pagination(1, limit, ten));
+        if (pg.getTotalPage() < pg.getCurrent()) {
+            pagination1.setPagegination(pg.getTotalPage(), pg.getTotalPage());
+            loadDataToTable(iDepService.pagination(pg.getTotalPage(), limit, ten));
+        } else {
+            pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
+            loadDataToTable(iDepService.pagination(pg.getCurrent(), limit, ten));
+        }
         clear();
         pagination1.addEventPagination(new EventPagination() {
             @Override
             public void pageChanged(int page) {
                 loadDataToTable(iDepService.pagination(page, limit, ten));
+                pg.setCurrent(page);
             }
         });
     }
@@ -204,6 +208,8 @@ public class FrmDep extends javax.swing.JPanel {
             }
         });
 
+        btnThem.setBackground(new java.awt.Color(102, 102, 102));
+        btnThem.setForeground(new java.awt.Color(255, 255, 255));
         btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,6 +217,8 @@ public class FrmDep extends javax.swing.JPanel {
             }
         });
 
+        btnSua.setBackground(new java.awt.Color(102, 102, 102));
+        btnSua.setForeground(new java.awt.Color(255, 255, 255));
         btnSua.setText("Cập nhật");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -317,7 +325,7 @@ public class FrmDep extends javax.swing.JPanel {
                             .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(lblHinhAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tableScrollButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

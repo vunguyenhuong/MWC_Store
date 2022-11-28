@@ -302,7 +302,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("THÔNG TIN SẢN PHẨM");
 
-        btn_ctd_capnhat.setBackground(new java.awt.Color(153, 153, 153));
+        btn_ctd_capnhat.setBackground(new java.awt.Color(102, 102, 102));
         btn_ctd_capnhat.setForeground(new java.awt.Color(255, 255, 255));
         btn_ctd_capnhat.setText("Cập nhật");
         btn_ctd_capnhat.setFocusPainted(false);
@@ -328,7 +328,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         txt_giaban.setLabelText("Giá bán");
         txt_giaban.setLineColor(new java.awt.Color(102, 102, 102));
 
-        btn_ctd_them.setBackground(new java.awt.Color(153, 153, 153));
+        btn_ctd_them.setBackground(new java.awt.Color(102, 102, 102));
         btn_ctd_them.setForeground(new java.awt.Color(255, 255, 255));
         btn_ctd_them.setText("Thêm");
         btn_ctd_them.setFocusPainted(false);
@@ -351,7 +351,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         txt_gianhap.setLabelText("Giá nhập");
         txt_gianhap.setLineColor(new java.awt.Color(102, 102, 102));
 
-        btn_ctd_xoa.setBackground(new java.awt.Color(153, 153, 153));
+        btn_ctd_xoa.setBackground(new java.awt.Color(102, 102, 102));
         btn_ctd_xoa.setForeground(new java.awt.Color(255, 255, 255));
         btn_ctd_xoa.setText("Xóa");
         btn_ctd_xoa.setFocusPainted(false);

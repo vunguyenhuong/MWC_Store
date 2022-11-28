@@ -47,13 +47,19 @@ public class FrmLoaiDep extends javax.swing.JPanel {
         totalData = loaidepSV.findByName(ten).size();
         int totalPage = (int) Math.ceil(totalData.doubleValue() / limit);
         pg.setTotalPage(totalPage);
-        pagination1.setPagegination(1, pg.getTotalPage());
-        loadTable(loaidepSV.pagination(1, limit, ten));
+        if (pg.getTotalPage() < pg.getCurrent()) {
+            pagination1.setPagegination(pg.getTotalPage(), pg.getTotalPage());
+            loadTable(loaidepSV.pagination(pg.getTotalPage(), limit, ten));
+        } else {
+            pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
+            loadTable(loaidepSV.pagination(pg.getCurrent(), limit, ten));
+        }
         clear();
         pagination1.addEventPagination(new EventPagination() {
             @Override
             public void pageChanged(int page) {
                 loadTable(loaidepSV.pagination(page, limit, ten));
+                pg.setCurrent(page);
             }
         });
     }
@@ -149,6 +155,8 @@ public class FrmLoaiDep extends javax.swing.JPanel {
         buttonGroup1.add(rd_NgungKinhDoanh);
         rd_NgungKinhDoanh.setText("Ngừng kinh doanh");
 
+        btn_update.setBackground(new java.awt.Color(102, 102, 102));
+        btn_update.setForeground(new java.awt.Color(255, 255, 255));
         btn_update.setText("Cập nhật");
         btn_update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,6 +164,8 @@ public class FrmLoaiDep extends javax.swing.JPanel {
             }
         });
 
+        btn_add.setBackground(new java.awt.Color(102, 102, 102));
+        btn_add.setForeground(new java.awt.Color(255, 255, 255));
         btn_add.setText("Thêm");
         btn_add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
