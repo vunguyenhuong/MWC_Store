@@ -75,13 +75,14 @@ public class NguoiDungRepository {
         return list;
     }
 
-    public List<NguoiDung> pagination(String ma, int pageNumber, int pageSize) {
-        Query query = session.createQuery("SELECT c FROM NguoiDung c WHERE c.chucVu.ma = :ma");
+    public List<NguoiDung> pagination(String ma, int pageNumber, int pageSize, String ten) {
+        Query query = session.createQuery("SELECT c FROM NguoiDung c WHERE c.chucVu.ma = :ma AND c.ten LIKE :ten ");
         int pageIndex = pageNumber - 1 < 0 ? 0 : pageNumber - 1;
         int fromRecordIndex = pageIndex * pageSize;
         query.setFirstResult(fromRecordIndex);
         query.setMaxResults(pageSize);
         query.setParameter("ma", ma);
+        query.setParameter("ten", "%" + ten + "%");
         List<NguoiDung> list = query.getResultList();
         return list;
     }
