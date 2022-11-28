@@ -486,7 +486,6 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_hoadon = new javax.swing.JTable();
         cb_trangthai = new swing.Combobox();
-        txt_hd_timkiem = new swing.TextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MWC_Store");
@@ -911,8 +910,11 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         cb_trangthai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tất cả", "Chưa thanh toán", "Đã thanh toán" }));
         cb_trangthai.setLabeText("Trạng thái");
         cb_trangthai.setLineColor(new java.awt.Color(102, 102, 102));
-
-        txt_hd_timkiem.setLabelText("Tìm kiếm hóa đơn");
+        cb_trangthai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_trangthaiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -923,8 +925,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(txt_hd_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(347, 347, 347)
                         .addComponent(cb_trangthai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -934,9 +935,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 .addContainerGap()
                 .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cb_trangthai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_hd_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(cb_trangthai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(7, 7, 7))
         );
 
@@ -1167,11 +1166,11 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                         if (chk_tichluy.isSelected()) {
                             hd.setDiemTichLuy(khachHang.getDiemTichLuy());
                             khachHang.setDiemTichLuy(1);
-                            khachHang.setTongDiemTichLuy(khachHang.getTongDiemTichLuy()+1);
+                            khachHang.setTongDiemTichLuy(khachHang.getTongDiemTichLuy() + 1);
                         } else {
                             hd.setDiemTichLuy(0);
                             khachHang.setDiemTichLuy(khachHang.getDiemTichLuy() + 1);
-                            khachHang.setTongDiemTichLuy(khachHang.getTongDiemTichLuy()+1);
+                            khachHang.setTongDiemTichLuy(khachHang.getTongDiemTichLuy() + 1);
                         }
                     }
                     if (khuyenMai != null) {
@@ -1401,6 +1400,18 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         tongTien();
     }//GEN-LAST:event_tb_hoadonMousePressed
 
+    private void cb_trangthaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_trangthaiActionPerformed
+
+        if (cb_trangthai.getSelectedIndex() == -1 || cb_trangthai.getSelectedIndex() == 0) {
+            loadHD(iHoaDonService.getAll());
+        } else if (cb_trangthai.getSelectedIndex() == 1) {
+            loadHD(iHoaDonService.getByTT(0));
+        } else {
+            loadHD(iHoaDonService.getByTT(1));
+        }
+       
+    }//GEN-LAST:event_cb_trangthaiActionPerformed
+
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -1456,7 +1467,6 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
     private javax.swing.JTable tb_hoadon;
     private javax.swing.JTable tb_sanpham;
     private swing.TextField txt_giamgia;
-    private swing.TextField txt_hd_timkiem;
     private swing.TextField txt_mahd;
     private swing.TextField txt_makh;
     private swing.TextField txt_makm;
@@ -1545,8 +1555,8 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                                 long getDiff = date1.getTime() - date2.getTime();
                                 if (getDiff < 0) {
                                     NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Mã khuyến mại đã hết hạn !");
-                                panel.showNotification();
-                                break;
+                                    panel.showNotification();
+                                    break;
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();

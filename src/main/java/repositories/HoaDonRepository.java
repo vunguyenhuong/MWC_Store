@@ -82,7 +82,6 @@ public class HoaDonRepository {
 
     public List<HoaDon> getObjByMaAndKH(String ten) {
         Query query = session.createQuery("SELECT h FROM HoaDon h WHERE h.khachHang.ten LIKE :ten or h.nguoiDung.ten like :ten");
-//        query.setParameter("ma", ten);
         query.setParameter("ten", "%" + ten + "%");
         List<HoaDon> list = query.getResultList();
 
