@@ -50,9 +50,9 @@ public class FrmThongKe extends javax.swing.JPanel {
         List<ChiTietDep> listCTD = iChiTietDepService.topSPBanChay(0, 5);
         try {
             for (int i = 0; i < listCTD.size(); i++) {
-            Dep dep = listCTD.get(i).getDep();
-            pieChart1.addData(new ModelPieChart(dep.getTen(), listCTD.get(i).getSoLuongBanRa(), new Color(23 + i*50, 126 - i*30, 238 - i*20)));
-        }
+                Dep dep = listCTD.get(i).getDep();
+                pieChart1.addData(new ModelPieChart(dep.getTen(), listCTD.get(i).getSoLuongBanRa(), new Color(23 + i * 50, 126 - i * 30, 238 - i * 20)));
+            }
         } catch (Exception e) {
         }
 
@@ -241,14 +241,6 @@ public class FrmThongKe extends javax.swing.JPanel {
         }
         List<ChiTietDep> list = iChiTietDepService.findSLSPLess(soLuong);
         loadData(list, tb_spsaphethang);
-        if(list.size()>0){
-            for (int i = 0; i < tb_spsaphethang.getRowCount(); i++) {
-                if(Integer.parseInt(tb_spsaphethang.getValueAt(i,3).toString()) < 30){
-                    tb_spsaphethang.getRowHeight(i).setBackground(Color.red);
-                    System.out.println(tb_spsaphethang.getValueAt(i,3));
-                }
-            }
-        }
     }//GEN-LAST:event_txt_soluongCaretUpdate
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
