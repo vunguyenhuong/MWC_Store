@@ -41,7 +41,6 @@ public class FrmQRCCCD extends java.awt.Dialog implements Runnable, ThreadFactor
     private INguoiDungService iNguoiDungService = new NguoiDungService();
     private IChucVuService iChucVuService = new ChucVuService();
     private Helper helper = new Helper();
-    private NguoiDung nguoiDung = new NguoiDung();
 
     public FrmQRCCCD(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -144,7 +143,7 @@ public class FrmQRCCCD extends java.awt.Dialog implements Runnable, ThreadFactor
     public void run() {
         while (true) {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -175,8 +174,10 @@ public class FrmQRCCCD extends java.awt.Dialog implements Runnable, ThreadFactor
                     String withoutTen = input.substring(14, input.length());
                     String[] splits = withoutTen.split("[|]");
                     if (iNguoiDungService.getObj(input.substring(0, 12)) != null) {
-                        helper.error(this, "Đã tồn tại trong danh sách!");
+                        NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Đã tồn tại trong danh sách!");
+                        panel.showNotification();
                     } else {
+                        NguoiDung nguoiDung = new NguoiDung();
                         nguoiDung.setMa(input.substring(0, 12));
                         nguoiDung.setTen(splits[0]);
                         nguoiDung.setDiaChi(splits[3]);
@@ -186,16 +187,17 @@ public class FrmQRCCCD extends java.awt.Dialog implements Runnable, ThreadFactor
                             nguoiDung.setGioiTinh(1);
                         }
                         if (nguoiDung.getMa() != null) {
-                            if (helper.confirm(this, "Xác nhận thêm " + splits[0] + " ?")) {
-                                ChucVu cv = iChucVuService.getAll().get(1);
-                                nguoiDung.setChucVu(cv);
-                                nguoiDung.setHinhAnh("defaultavt.jpg");
-                                nguoiDung.setMatKhau(UUID.randomUUID().toString().substring(0, 8));
-                                iNguoiDungService.save(nguoiDung);
-                                helper.alert(this, "Thêm thành công!");
-                                webcam.close();
-                                this.dispose();
-                            }
+//                            if (helper.confirm(this, "Xác nhận thêm " + splits[0] + " ?")) {
+                            ChucVu cv = iChucVuService.getAll().get(1);
+                            nguoiDung.setChucVu(cv);
+                            nguoiDung.setHinhAnh("defaultavt.jpg");
+                            nguoiDung.setMatKhau(UUID.randomUUID().toString().substring(0, 8));
+                            iNguoiDungService.save(nguoiDung);
+                            webcam.close();
+                            this.dispose();
+                            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Thêm thành công!");
+                            panel.showNotification();
+//                            }
                         }
                     }
                 } catch (Exception e) {
