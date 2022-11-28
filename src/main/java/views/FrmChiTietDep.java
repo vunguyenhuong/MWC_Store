@@ -59,8 +59,9 @@ public class FrmChiTietDep extends javax.swing.JPanel {
     private DefaultComboBoxModel<MauSac> comboMauSac = new DefaultComboBoxModel<>();
     private DefaultComboBoxModel<Size> comboSize = new DefaultComboBoxModel<>();
     private DefaultComboBoxModel<NhaSX> comboNSX = new DefaultComboBoxModel<>();
-    private DefaultComboBoxModel<Dep> comboFilterDep = new DefaultComboBoxModel<>();
-    private DefaultComboBoxModel<Size> comboFilterSize = new DefaultComboBoxModel<>();
+
+    private DefaultComboBoxModel<LoaiDep> comboFilterLoaiDep = new DefaultComboBoxModel<>();
+    private DefaultComboBoxModel<ChatLieu> comboFilterChatLieu = new DefaultComboBoxModel<>();
     private DefaultComboBoxModel<MauSac> comboFilterMauSac = new DefaultComboBoxModel<>();
 
     private IDepService iDepService = new DepService();
@@ -92,17 +93,21 @@ public class FrmChiTietDep extends javax.swing.JPanel {
     }
 
     public void pagination() {
-        loadData(iChiTietDepService.pagination(pg.getCurrent(), limit));
+        String tenChatLieuFilter = cb_filter_chatlieu.getSelectedItem().toString();
+        String tenLoaiDepFilter = cb_filter_loaidep.getSelectedItem().toString();
+        String tenMauSacFilter = cb_filter_mausac.getSelectedItem().toString();
+        loadData(iChiTietDepService.test(pg.getCurrent(), limit, txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter));
         totalData = iChiTietDepService.getAll().size();
         int totalPage = (int) Math.ceil(totalData.doubleValue() / limit);
         pg.setTotalPage(totalPage);
-        pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
+        pagination1.setPagegination(1, pg.getTotalPage());
+        loadData(iChiTietDepService.test(1, limit, txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter));
+
+        System.out.println(totalPage);
         pagination1.addEventPagination(new EventPagination() {
             @Override
             public void pageChanged(int page) {
-                cb_filter_dep.setSelectedIndex(0);
-                cb_filter_mausac.setSelectedIndex(0);
-                loadData(iChiTietDepService.pagination(page, limit));
+                loadData(iChiTietDepService.test(page, limit, txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter));
                 pg.setCurrent(page);
                 pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
                 clearForm();
@@ -123,41 +128,47 @@ public class FrmChiTietDep extends javax.swing.JPanel {
 
     private void addCbDep() {
         cb_dep.setModel((DefaultComboBoxModel) comboDep);
-        cb_filter_dep.setModel((DefaultComboBoxModel) comboFilterDep);
+
         cb_dep.removeAllItems();
-        cb_filter_dep.addItem("");
-        cb_filter_dep.setSelectedIndex(0);
+        cb_filter_loaidep.addItem("");
+        cb_filter_loaidep.setSelectedIndex(0);
         for (Dep x : iChiTietDepService.getAllDep()) {
             if (x.getTrangThai() == 1) {
                 comboDep.removeElement(x);
-                comboFilterDep.removeElement(x);
             } else {
                 comboDep.addElement(x);
-                comboFilterDep.addElement(x);
             }
         }
     }
 
     private void addCbLoaiDep() {
         cb_loaidep.setModel((DefaultComboBoxModel) comboLoaiDep);
+        cb_filter_loaidep.setModel((DefaultComboBoxModel) comboFilterLoaiDep);
         cb_loaidep.removeAllItems();
+        cb_filter_loaidep.addItem("");
         for (LoaiDep x : iChiTietDepService.getAllLoaiDep()) {
             if (x.getTrangThai() == 1) {
                 comboLoaiDep.removeElement(x);
+                comboFilterLoaiDep.removeElement(x);
             } else {
                 comboLoaiDep.addElement(x);
+                comboFilterLoaiDep.addElement(x);
             }
         }
     }
 
     private void addCbChatLieu() {
         cb_chatlieu.setModel((DefaultComboBoxModel) comboChatLieu);
+        cb_filter_chatlieu.setModel((DefaultComboBoxModel) comboFilterChatLieu);
         cb_chatlieu.removeAllItems();
+        cb_filter_chatlieu.addItem("");
         for (ChatLieu x : iChiTietDepService.getAllChatLieu()) {
             if (x.getTrangThai() == 1) {
                 comboChatLieu.removeElement(x);
+                comboFilterChatLieu.removeElement(x);
             } else {
                 comboChatLieu.addElement(x);
+                comboFilterChatLieu.addElement(x);
             }
         }
     }
@@ -181,15 +192,12 @@ public class FrmChiTietDep extends javax.swing.JPanel {
 
     private void addCbSize() {
         cb_size.setModel((DefaultComboBoxModel) comboSize);
-        cb_filter_size.setModel((DefaultComboBoxModel) comboFilterSize);
         cb_size.removeAllItems();
         for (Size x : iChiTietDepService.getAllSize()) {
             if (x.getTrangThai() == 1) {
                 comboSize.removeElement(x);
-                comboFilterDep.removeElement(x);
             } else {
                 comboSize.addElement(x);
-                comboFilterSize.addElement(x);
             }
         }
     }
@@ -252,8 +260,8 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         pagination1 = new swing.Pagination();
         jPanel2 = new javax.swing.JPanel();
-        cb_filter_dep = new swing.Combobox();
-        cb_filter_size = new swing.Combobox();
+        cb_filter_loaidep = new swing.Combobox();
+        cb_filter_chatlieu = new swing.Combobox();
         cb_filter_mausac = new swing.Combobox();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -425,18 +433,19 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Filter"));
 
-        cb_filter_dep.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Chọn dép" }));
-        cb_filter_dep.setLabeText("Dép");
-        cb_filter_dep.addActionListener(new java.awt.event.ActionListener() {
+        cb_filter_loaidep.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Chọn loại dép" }));
+        cb_filter_loaidep.setLabeText("Loại dép");
+        cb_filter_loaidep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb_filter_depActionPerformed(evt);
+                cb_filter_loaidepActionPerformed(evt);
             }
         });
 
-        cb_filter_size.setLabeText("Size");
-        cb_filter_size.addActionListener(new java.awt.event.ActionListener() {
+        cb_filter_chatlieu.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Chọn chất liệu" }));
+        cb_filter_chatlieu.setLabeText("Chất liệu");
+        cb_filter_chatlieu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb_filter_sizeActionPerformed(evt);
+                cb_filter_chatlieuActionPerformed(evt);
             }
         });
 
@@ -454,9 +463,9 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cb_filter_dep, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cb_filter_loaidep, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cb_filter_size, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cb_filter_chatlieu, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cb_filter_mausac, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -466,8 +475,8 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cb_filter_dep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cb_filter_size, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_filter_loaidep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_filter_chatlieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cb_filter_mausac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
@@ -634,28 +643,24 @@ public class FrmChiTietDep extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_importExcelActionPerformed
 
     private void btn_ctd_capnhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ctd_capnhatActionPerformed
+        String tenChatLieuFilter = cb_filter_chatlieu.getSelectedItem().toString();
+        String tenLoaiDepFilter = cb_filter_loaidep.getSelectedItem().toString();
+        String tenMauSacFilter = cb_filter_mausac.getSelectedItem().toString();
         int row = tb_table.getSelectedRow();
         if (row == -1) {
             NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Vui lòng chọn dòng sản phẩm cần cập nhật");
             panel.showNotification();
         } else {
             if (helper.confirm(this, "Xác nhận cập nhật")) {
-                if (cb_filter_dep.getSelectedIndex() == 0 && cb_filter_mausac.getSelectedIndex() == 0) {
-                    ChiTietDep ctd = iChiTietDepService.pagination(pg.getCurrent(), limit).get(row);
-//                    MousePressed(ctd);
-                    capNhat(ctd);
-                } else {
-                    ChiTietDep ctd = iChiTietDepService.filter(cb_filter_dep.getSelectedItem().toString(), cb_filter_mausac.getSelectedItem().toString()).get(row);
-                    MousePressed(ctd);
-                    capNhat(ctd);
-                }
+                ChiTietDep ctd = iChiTietDepService.test(pg.getCurrent(), limit, txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter).get(row);
+                capNhat(ctd);
+                MousePressed(ctd);
                 NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công");
                 panel.showNotification();
             }
         }
     }//GEN-LAST:event_btn_ctd_capnhatActionPerformed
     private void capNhat(ChiTietDep ctd) {
-        MousePressed(ctd);
         ctd.setDep((Dep) comboDep.getSelectedItem());
         ctd.setLoaiDep((LoaiDep) comboLoaiDep.getSelectedItem());
         ctd.setMauSac((MauSac) comboMauSac.getSelectedItem());
@@ -681,13 +686,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         pagination();
     }
     private void txt_timkiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_timkiemCaretUpdate
-        loadData(iChiTietDepService.findByName(txt_timkiem.getText()));
-        if (iChiTietDepService.findByName(txt_timkiem.getText()).size() == iChiTietDepService.getAll().size()) {
-            checkSearchCT = 0;
-        } else {
-            checkSearchCT = 1;
-        }
-
+        pagination();
     }//GEN-LAST:event_txt_timkiemCaretUpdate
 
     private void btn_ctd_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ctd_themActionPerformed
@@ -738,30 +737,18 @@ public class FrmChiTietDep extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_ctd_themActionPerformed
 
     private void btn_ctd_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ctd_xoaActionPerformed
+        String tenChatLieuFilter = cb_filter_chatlieu.getSelectedItem().toString();
+        String tenLoaiDepFilter = cb_filter_loaidep.getSelectedItem().toString();
+        String tenMauSacFilter = cb_filter_mausac.getSelectedItem().toString();
         int row = tb_table.getSelectedRow();
         if (row == -1) {
             NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Vui lòng chọn dòng sản phẩm để xóa !");
             panel.showNotification();
         } else {
             if (helper.confirm(this, "Xác nhận xóa")) {
-                if (cb_filter_dep.getSelectedIndex() == 0 && cb_filter_mausac.getSelectedIndex() == 0) {
-                    ChiTietDep ctd = iChiTietDepService.pagination(pg.getCurrent(), limit).get(row);
-                    MousePressed(ctd);
-                    iChiTietDepService.delete(ctd);
-                    List<ChiTietDep> c = iChiTietDepService.pagination(pg.getCurrent(), limit);
-                    int r = c.size();
-                    if (r == 0) {
-                        pagination();
-                        pagination1.setPagegination(pg.getCurrent(), (pg.getTotalPage()) + 1);
-                    } else {
-                        pagination();
-                    }
-                } else {
-                    ChiTietDep ctd = iChiTietDepService.filter(cb_filter_dep.getSelectedItem().toString(), cb_filter_mausac.getSelectedItem().toString()).get(row);
-                    MousePressed(ctd);
-                    iChiTietDepService.delete(ctd);
-                    pagination();
-                }
+                ChiTietDep ctd = iChiTietDepService.test(pg.getCurrent(), limit, txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter).get(row);
+                iChiTietDepService.delete(ctd);
+                pagination();
                 NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Xóa thành công");
                 panel.showNotification();
             }
@@ -792,16 +779,13 @@ public class FrmChiTietDep extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_exportExcelActionPerformed
 
     private void tb_tableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_tableMousePressed
-        // TODO add your handling code here:
+        String tenChatLieuFilter = cb_filter_chatlieu.getSelectedItem().toString();
+        String tenLoaiDepFilter = cb_filter_loaidep.getSelectedItem().toString();
+        String tenMauSacFilter = cb_filter_mausac.getSelectedItem().toString();
         tb_table.setRowSelectionAllowed(true);
         int row = tb_table.getSelectedRow();
-        if (cb_filter_dep.getSelectedIndex() == 0 && cb_filter_mausac.getSelectedIndex() == 0) {
-            ChiTietDep ctd = iChiTietDepService.pagination(pg.getCurrent(), limit).get(row);
-            MousePressed(ctd);
-        } else {
-            ChiTietDep ctd = iChiTietDepService.filter(cb_filter_dep.getSelectedItem().toString(), cb_filter_mausac.getSelectedItem().toString()).get(row);
-            MousePressed(ctd);
-        }
+        ChiTietDep ctd = iChiTietDepService.test(pg.getCurrent(), limit, txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter).get(row);
+        MousePressed(ctd);
     }//GEN-LAST:event_tb_tableMousePressed
     public void MousePressed(ChiTietDep ctd) {
         comboDep.setSelectedItem(ctd.getDep());
@@ -821,16 +805,16 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         }
         lbl_image.setIcon(imageUltil.resizeIcon(new ImageIcon("images/products/" + ctd.getDep().getHinhAnh()), lbl_image.getWidth(), lbl_image.getHeight()));
     }
-    private void cb_filter_depActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_filter_depActionPerformed
-        loadData(iChiTietDepService.filter(cb_filter_dep.getSelectedItem().toString(), cb_filter_mausac.getSelectedItem().toString()));
-    }//GEN-LAST:event_cb_filter_depActionPerformed
+    private void cb_filter_loaidepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_filter_loaidepActionPerformed
+        pagination();
+    }//GEN-LAST:event_cb_filter_loaidepActionPerformed
 
-    private void cb_filter_sizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_filter_sizeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cb_filter_sizeActionPerformed
+    private void cb_filter_chatlieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_filter_chatlieuActionPerformed
+        pagination();
+    }//GEN-LAST:event_cb_filter_chatlieuActionPerformed
 
     private void cb_filter_mausacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_filter_mausacActionPerformed
-        loadData(iChiTietDepService.filter(cb_filter_dep.getSelectedItem().toString(), cb_filter_mausac.getSelectedItem().toString()));
+        pagination();
     }//GEN-LAST:event_cb_filter_mausacActionPerformed
 
 
@@ -843,9 +827,9 @@ public class FrmChiTietDep extends javax.swing.JPanel {
     private javax.swing.ButtonGroup buttonGroup1;
     private swing.Combobox cb_chatlieu;
     private swing.Combobox cb_dep;
-    private swing.Combobox cb_filter_dep;
+    private swing.Combobox cb_filter_chatlieu;
+    private swing.Combobox cb_filter_loaidep;
     private swing.Combobox cb_filter_mausac;
-    private swing.Combobox cb_filter_size;
     private swing.Combobox cb_loaidep;
     private swing.Combobox cb_mausac;
     private swing.Combobox cb_nsx;

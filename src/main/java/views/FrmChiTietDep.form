@@ -591,9 +591,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="cb_filter_dep" min="-2" pref="122" max="-2" attributes="0"/>
+                  <Component id="cb_filter_loaidep" min="-2" pref="122" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="cb_filter_size" min="-2" pref="129" max="-2" attributes="0"/>
+                  <Component id="cb_filter_chatlieu" min="-2" pref="129" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="cb_filter_mausac" min="-2" pref="130" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -605,8 +605,8 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="cb_filter_dep" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cb_filter_size" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cb_filter_loaidep" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cb_filter_chatlieu" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cb_filter_mausac" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="49" max="32767" attributes="0"/>
@@ -615,25 +615,30 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="swing.Combobox" name="cb_filter_dep">
+        <Component class="swing.Combobox" name="cb_filter_loaidep">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="1">
-                <StringItem index="0" value="Ch&#x1ecd;n d&#xe9;p"/>
+                <StringItem index="0" value="Ch&#x1ecd;n lo&#x1ea1;i d&#xe9;p"/>
               </StringArray>
             </Property>
-            <Property name="labeText" type="java.lang.String" value="D&#xe9;p"/>
+            <Property name="labeText" type="java.lang.String" value="Lo&#x1ea1;i d&#xe9;p"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_filter_depActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_filter_loaidepActionPerformed"/>
           </Events>
         </Component>
-        <Component class="swing.Combobox" name="cb_filter_size">
+        <Component class="swing.Combobox" name="cb_filter_chatlieu">
           <Properties>
-            <Property name="labeText" type="java.lang.String" value="Size"/>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Ch&#x1ecd;n ch&#x1ea5;t li&#x1ec7;u"/>
+              </StringArray>
+            </Property>
+            <Property name="labeText" type="java.lang.String" value="Ch&#x1ea5;t li&#x1ec7;u"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_filter_sizeActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_filter_chatlieuActionPerformed"/>
           </Events>
         </Component>
         <Component class="swing.Combobox" name="cb_filter_mausac">
