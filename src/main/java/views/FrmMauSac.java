@@ -26,7 +26,7 @@ public class FrmMauSac extends javax.swing.JPanel {
     private SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 
     private Page pg = new Page();
-    Integer limit = 5;
+    Integer limit = 2;
     Integer totalData = 0;
 
     /**
@@ -47,12 +47,12 @@ public class FrmMauSac extends javax.swing.JPanel {
         int totalPage = (int) Math.ceil(totalData.doubleValue() / limit);
         pg.setTotalPage(totalPage);
         pagination1.setPagegination(1, pg.getTotalPage());
-        loadToTable(iMauSacService.pagination1(1, limit, ten));
+        loadToTable(iMauSacService.pagination(1, limit, ten));
         clear();
         pagination1.addEventPagination(new EventPagination() {
             @Override
             public void pageChanged(int page) {
-                loadToTable(iMauSacService.pagination1(page, limit, ten));
+                loadToTable(iMauSacService.pagination(page, limit, ten));
             }
         });
     }

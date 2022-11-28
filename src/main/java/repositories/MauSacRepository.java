@@ -66,23 +66,13 @@ public class MauSacRepository {
         return n;
     }
 
-    public List<MauSac> pagination1(int pageNumber, int pageSize, String ten) {
+    public List<MauSac> pagination(int pageNumber, int pageSize, String ten) {
         Query query = session.createQuery("SELECT n FROM MauSac n WHERE n.ten like :ten");
         int pageIndex = pageNumber - 1 < 0 ? 0 : pageNumber - 1;
         int fromRecordIndex = pageIndex * pageSize;
         query.setFirstResult(fromRecordIndex);
         query.setMaxResults(pageSize);
         query.setParameter("ten", "%" + ten + "%");
-        List<MauSac> list = query.getResultList();
-        return list;
-    }
-
-    public List<MauSac> pagination(int pageNumber, int pageSize) {
-        Query query = session.createQuery("SELECT n FROM MauSac n");
-        int pageIndex = pageNumber - 1 < 0 ? 0 : pageNumber - 1;
-        int fromRecordIndex = pageIndex * pageSize;
-        query.setFirstResult(fromRecordIndex);
-        query.setMaxResults(pageSize);
         List<MauSac> list = query.getResultList();
         return list;
     }
