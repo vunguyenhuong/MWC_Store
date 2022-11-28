@@ -77,7 +77,6 @@ public class FrmSize extends javax.swing.JPanel {
                 s.getTrangThai() == 0 ? "Đang kinh doanh" : "Ngừng kinh doanh"
             });
         }
-        lbl_Total.setText("Total: " + list.size());
     }
 
     public boolean check() {
