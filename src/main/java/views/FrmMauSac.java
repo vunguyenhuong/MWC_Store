@@ -48,11 +48,11 @@ public class FrmMauSac extends javax.swing.JPanel {
         pg.setTotalPage(totalPage);
         pagination1.setPagegination(1, pg.getTotalPage());
         loadToTable(iMauSacService.pagination1(1, limit, ten));
+        clear();
         pagination1.addEventPagination(new EventPagination() {
             @Override
             public void pageChanged(int page) {
                 loadToTable(iMauSacService.pagination1(page, limit, ten));
-                clear();
             }
         });
     }
