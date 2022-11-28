@@ -120,9 +120,9 @@ public class Pagination extends JPanel {
         boolean next = current < max;
         List<Object> items = new ArrayList<>();
         items.add(1);
-        if (current == 1 && max == 2) {
-            return new Page(current, prev, next, items, max);
-        }
+//        if (current == 1 && max == 2) {
+//            return new Page(current, prev, next, items, max);
+//        }
         int r = 2;
         int r1 = current - r;
         int r2 = current + r;
