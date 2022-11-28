@@ -74,7 +74,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
 
     private int checkSearchCT = 0;
 
-    Integer limit = 5;
+    Integer limit = 2;
     Integer totalData = 0;
 
     public FrmChiTietDep() {
@@ -96,12 +96,18 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         String tenChatLieuFilter = cb_filter_chatlieu.getSelectedItem().toString();
         String tenLoaiDepFilter = cb_filter_loaidep.getSelectedItem().toString();
         String tenMauSacFilter = cb_filter_mausac.getSelectedItem().toString();
-        loadData(iChiTietDepService.pagination(pg.getCurrent(), limit, txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter));
-        totalData = iChiTietDepService.getAll().size();
+        totalData = iChiTietDepService.filter(txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter).size();
         int totalPage = (int) Math.ceil(totalData.doubleValue() / limit);
         pg.setTotalPage(totalPage);
         pagination1.setPagegination(1, pg.getTotalPage());
-        loadData(iChiTietDepService.pagination(1, limit, txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter));
+        if (pg.getTotalPage() < pg.getCurrent()) {
+            pagination1.setPagegination(pg.getTotalPage(), pg.getTotalPage());
+            loadData(iChiTietDepService.pagination(pg.getTotalPage(), limit, txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter));
+        } else {
+            pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
+            loadData(iChiTietDepService.pagination(pg.getCurrent(), limit, txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter));
+
+        }
 
         System.out.println(totalPage);
         pagination1.addEventPagination(new EventPagination() {
@@ -109,7 +115,6 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             public void pageChanged(int page) {
                 loadData(iChiTietDepService.pagination(page, limit, txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter));
                 pg.setCurrent(page);
-                pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
                 clearForm();
             }
         });

@@ -105,4 +105,9 @@ public class ChiTietDepService implements IChiTietDepService {
     public List<ChiTietDep> pagination(int pageNumber, int pageSize, String tenDep, String tenLoaiDep, String tenMauSac, String tenChatLieu) {
         return repo.pagination(pageNumber, pageSize, tenDep, tenLoaiDep, tenMauSac, tenChatLieu);
     }
+
+    @Override
+    public List<ChiTietDep> filter(String tenDep, String tenLoaiDep, String tenMauSac, String tenChatLieu) {
+        return repo.filter(tenDep, tenLoaiDep, tenMauSac, tenChatLieu);
+    }
 }
