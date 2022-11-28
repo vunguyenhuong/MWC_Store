@@ -96,18 +96,18 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         String tenChatLieuFilter = cb_filter_chatlieu.getSelectedItem().toString();
         String tenLoaiDepFilter = cb_filter_loaidep.getSelectedItem().toString();
         String tenMauSacFilter = cb_filter_mausac.getSelectedItem().toString();
-        loadData(iChiTietDepService.test(pg.getCurrent(), limit, txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter));
+        loadData(iChiTietDepService.pagination(pg.getCurrent(), limit, txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter));
         totalData = iChiTietDepService.getAll().size();
         int totalPage = (int) Math.ceil(totalData.doubleValue() / limit);
         pg.setTotalPage(totalPage);
         pagination1.setPagegination(1, pg.getTotalPage());
-        loadData(iChiTietDepService.test(1, limit, txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter));
+        loadData(iChiTietDepService.pagination(1, limit, txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter));
 
         System.out.println(totalPage);
         pagination1.addEventPagination(new EventPagination() {
             @Override
             public void pageChanged(int page) {
-                loadData(iChiTietDepService.test(page, limit, txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter));
+                loadData(iChiTietDepService.pagination(page, limit, txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter));
                 pg.setCurrent(page);
                 pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
                 clearForm();
@@ -652,7 +652,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             panel.showNotification();
         } else {
             if (helper.confirm(this, "Xác nhận cập nhật")) {
-                ChiTietDep ctd = iChiTietDepService.test(pg.getCurrent(), limit, txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter).get(row);
+                ChiTietDep ctd = iChiTietDepService.pagination(pg.getCurrent(), limit, txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter).get(row);
                 capNhat(ctd);
                 MousePressed(ctd);
                 NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công");
@@ -746,7 +746,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             panel.showNotification();
         } else {
             if (helper.confirm(this, "Xác nhận xóa")) {
-                ChiTietDep ctd = iChiTietDepService.test(pg.getCurrent(), limit, txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter).get(row);
+                ChiTietDep ctd = iChiTietDepService.pagination(pg.getCurrent(), limit, txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter).get(row);
                 iChiTietDepService.delete(ctd);
                 pagination();
                 NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Xóa thành công");
@@ -784,7 +784,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         String tenMauSacFilter = cb_filter_mausac.getSelectedItem().toString();
         tb_table.setRowSelectionAllowed(true);
         int row = tb_table.getSelectedRow();
-        ChiTietDep ctd = iChiTietDepService.test(pg.getCurrent(), limit, txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter).get(row);
+        ChiTietDep ctd = iChiTietDepService.pagination(pg.getCurrent(), limit, txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter).get(row);
         MousePressed(ctd);
     }//GEN-LAST:event_tb_tableMousePressed
     public void MousePressed(ChiTietDep ctd) {

@@ -102,7 +102,7 @@ public class ChiTietDepService implements IChiTietDepService {
     }
 
     @Override
-    public List<ChiTietDep> test(int pageNumber, int pageSize, String tenDep, String tenLoaiDep, String tenMauSac, String tenChatLieu) {
-        return repo.test(pageNumber, pageSize, tenDep, tenLoaiDep, tenMauSac, tenChatLieu);
+    public List<ChiTietDep> pagination(int pageNumber, int pageSize, String tenDep, String tenLoaiDep, String tenMauSac, String tenChatLieu) {
+        return repo.pagination(pageNumber, pageSize, tenDep, tenLoaiDep, tenMauSac, tenChatLieu);
     }
 }

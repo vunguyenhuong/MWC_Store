@@ -129,7 +129,7 @@ public class ChiTietDepRepository {
         return list;
     }
 
-    public List<ChiTietDep> test(int pageNumber, int pageSize, String tenDep, String tenLoaiDep, String tenMauSac, String tenChatLieu) {
+    public List<ChiTietDep> pagination(int pageNumber, int pageSize, String tenDep, String tenLoaiDep, String tenMauSac, String tenChatLieu) {
         Query query = session.createQuery("SELECT c FROM ChiTietDep c "
                 + " WHERE (c.dep.ten = :tenDep or :tenDep is null or :tenDep = '')"
                 + " AND (c.mauSac.ten = :tenMauSac or :tenMauSac is null or :tenMauSac = '')"
@@ -150,7 +150,7 @@ public class ChiTietDepRepository {
     public static void main(String[] args) {
         ChiTietDepRepository ctdr = new ChiTietDepRepository();
         try {
-            System.out.println(ctdr.test(1, 1000, "", "", "","").size());
+            System.out.println(ctdr.pagination(1, 1000, "", "", "","").size());
         } catch (Exception e) {
         }
     }
