@@ -59,8 +59,8 @@ public class ChiTietDepRepository {
 
     public List<ChiTietDep> filter(String tenDep, String tenMauSac) {
         Query query = session.createQuery("SELECT c FROM ChiTietDep c "
-                + " WHERE (c.dep.ten = :tenDep or :tenDep is null or :tenDep = '' )"
-                + " AND (c.mauSac.ten = :tenMauSac or :tenMauSac is null or :tenMauSac = '' )");
+                + " WHERE (c.dep.ten = :tenDep or :tenDep is null or :tenDep = '')"
+                + " AND (c.mauSac.ten = :tenMauSac or :tenMauSac is null or :tenMauSac = '')");
         query.setParameter("tenDep", tenDep);
         query.setParameter("tenMauSac", tenMauSac);
         List<ChiTietDep> list = query.getResultList();

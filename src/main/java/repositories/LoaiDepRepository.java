@@ -63,9 +63,10 @@ public class LoaiDepRepository {
         }
         return ld;
     }
-    
-    public List<LoaiDep> pagination(int pageNumber, int pageSize){
-        Query query = session.createQuery(" SELECT ld FROM LoaiDep ld  ");
+
+    public List<LoaiDep> pagination(int pageNumber, int pageSize, String ten) {
+        Query query = session.createQuery(" SELECT ld FROM LoaiDep ld WHERE ld.ten LIKE :ten");
+        query.setParameter("ten", "%" + ten + "%");
         int pageIndex = pageNumber - 1 < 0 ? 0 : pageNumber - 1;
         int fromRecordIndex = pageIndex * pageSize;
         query.setFirstResult(fromRecordIndex);
