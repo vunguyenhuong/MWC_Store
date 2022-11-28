@@ -91,6 +91,11 @@ public class FrmDep extends javax.swing.JPanel {
 
         String ten = txtTen.getText().trim();
         int trangthai;
+        
+        if (ten.equals("")) {
+            helper.alert(this, "Tên không được để trống");
+            return null;
+        }
 
         String result;
         for (int i = 0; i < iDepService.getList().size() + 1; i++) {
@@ -109,6 +114,7 @@ public class FrmDep extends javax.swing.JPanel {
         } else {
             trangthai = 1;
         }
+       
 
         if (fileName == null) {
             fileName = tblDep.getValueAt(index, 2).toString();
@@ -137,6 +143,8 @@ public class FrmDep extends javax.swing.JPanel {
         txtMa.setText("");
         txtTen.setText("");
         rdoDangkinhdoanh.setSelected(true);
+        lblHinhAnh.setIcon(null);
+        fileName = null;
     }
 
     /**
