@@ -47,4 +47,9 @@ public class KhachHangService implements IKhachHangService{
         return repo.findByName(ten);
     }
     
+    @Override
+    public List<KhachHang> pagination(int pageNumber, int pageSize, String ten) {
+        return repo.pagination(pageNumber, pageSize, ten);
+    }
+    
 }

@@ -1,9 +1,12 @@
 package repositories;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Query;
 import models.ChiTietDep;
 import models.HoaDonChiTiet;
@@ -119,10 +122,28 @@ public class HoaDonCTRepository {
         return list;
     }
 
+    public List<ChiTietDep> sptheothang(Date date) {
+        Query query = session.createQuery("SELECT c FROM ChiTietDep c WHERE c.id IN"
+                + "(SELECT h.ctdep.id FROM HoaDonChiTiet h WHERE h.hoaDon.id IN"
+                + "(SELECT hd FROM HoaDon hd WHERE hd.ngayThanhToan LIKE :ngayThanhToan))");
+        query.setParameter("ngayThanhToan", date+"%");
+        List<ChiTietDep> list = query.getResultList();
+        return list;
+    }
+
     public static void main(String[] args) {
         HoaDonCTRepository hdctr = new HoaDonCTRepository();
         IChiTietDepService iChiTietDepService = new ChiTietDepService();
-
+        String dateString = "2022-11";
+        Date date = null;
+        try {
+            date = new SimpleDateFormat("yyyy-MM").parse(dateString);
+        } catch (ParseException ex) {
+            Logger.getLogger(HoaDonCTRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for (ChiTietDep x: hdctr.sptheothang(date)) {
+            System.out.println(x);
+        }
 //        System.out.println(hdctr.findSP(1));
     }
 }

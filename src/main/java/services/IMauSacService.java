@@ -19,7 +19,5 @@ public interface IMauSacService {
 
     List<MauSac> findByName(String ten);
 
-    List<MauSac> pagination(int pageNumber, int pageSize);
-    
-    List<MauSac> pagination1(int pageNumber, int pageSize, String ten);
+    List<MauSac> pagination(int pageNumber, int pageSize, String ten);
 }

@@ -34,8 +34,8 @@ public class SizeService implements ISizeService {
     }
 
     @Override
-    public List<Size> findByName(String ten) {
-        return repo.getSearch(ten);
+    public List<Size> findByName(Float ten) {
+        return repo.findByName(ten);
     }
 
     @Override
