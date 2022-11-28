@@ -293,11 +293,6 @@ public class FrmLoaiDep extends javax.swing.JPanel {
         loai.setNgaySuaCuoi(loaidep.getNgaySuaCuoi());
         loai.setTrangThai(loaidep.getTrangThai());
         this.loaidepSV.save(loai);
-        if (checkSearchCT == 0) {
-            loai = loaidepSV.pagination( pg.getCurrent(), limit,txt_search.getText()).get(row);
-        } else {
-            loai = loaidepSV.findByName(txt_search.getText()).get(row);
-        }
         pagination(txt_search.getText());
         NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công");
         panel.showNotification();
