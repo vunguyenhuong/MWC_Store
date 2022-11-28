@@ -66,7 +66,7 @@ public class DepRepository {
     }
     
     public List<Dep> pagination(int pageNumber, int pageSize){
-        Query query = session.createQuery(" SELECT d FROM Dep d  ");
+        Query query = session.createQuery(" SELECT d FROM Dep d");
         int pageIndex = pageNumber - 1 < 0 ? 0 : pageNumber - 1;
         int fromRecordIndex = pageIndex * pageSize;
         query.setFirstResult(fromRecordIndex);

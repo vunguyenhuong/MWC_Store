@@ -19,5 +19,5 @@ public interface ILoaiDepService {
 
     List<LoaiDep> findByName(String ten);
     
-    List<LoaiDep> pagination(int pageNumber, int pageSize);
+    List<LoaiDep> pagination(int pageNumber, int pageSize, String ten);
 }

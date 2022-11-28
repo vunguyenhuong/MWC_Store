@@ -30,7 +30,7 @@ public class FrmLoaiDep extends javax.swing.JPanel {
     private Page pg = new Page();
     private int checkSearchCT = 0;
 
-    Integer limit = 5;
+    Integer limit = 2;
     Integer totalData = 0;
 
     /**
@@ -40,14 +40,14 @@ public class FrmLoaiDep extends javax.swing.JPanel {
         initComponents();
         loaidepSV = new LoaiDepService();
         helper = new Helper();
-        pagination();
+        pagination(txt_search.getText());
         pagination1.setPagegination(1, pg.getTotalPage());
         pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
         Table.apply(jScrollPane1, Table.TableType.MULTI_LINE);
     }
     
-    public void pagination() {
-        LoadTabale(loaidepSV.pagination( pg.getCurrent(), limit));
+    public void pagination(String ten) {
+        LoadTabale(loaidepSV.pagination( pg.getCurrent(), limit,ten));
         totalData = loaidepSV.getAll().size();
         int totalPage = (int) Math.ceil(totalData.doubleValue() / limit);
         pg.setTotalPage(totalPage);
@@ -55,7 +55,7 @@ public class FrmLoaiDep extends javax.swing.JPanel {
         pagination1.addEventPagination(new EventPagination() {
             @Override
             public void pageChanged(int page) {
-                LoadTabale(loaidepSV.pagination( page, limit));
+                LoadTabale(loaidepSV.pagination( page, limit, ten));
                 pg.setCurrent(page);
                 pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
             }
@@ -292,11 +292,11 @@ public class FrmLoaiDep extends javax.swing.JPanel {
         loai.setTrangThai(loaidep.getTrangThai());
         this.loaidepSV.save(loai);
         if (checkSearchCT == 0) {
-            loai = loaidepSV.pagination( pg.getCurrent(), limit).get(row);
+            loai = loaidepSV.pagination( pg.getCurrent(), limit,txt_search.getText()).get(row);
         } else {
             loai = loaidepSV.findByName(txt_search.getText()).get(row);
         }
-        pagination();
+        pagination(txt_search.getText());
         NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công");
         panel.showNotification();
     }//GEN-LAST:event_btn_updateActionPerformed
@@ -308,14 +308,13 @@ public class FrmLoaiDep extends javax.swing.JPanel {
         }
         LoaiDep loaidep = getForm();
         this.loaidepSV.save(loaidep);
-        pagination();
+        pagination(txt_search.getText());
         NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Thêm thành công");
         panel.showNotification();
     }//GEN-LAST:event_btn_addActionPerformed
 
     private void txt_searchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_searchCaretUpdate
-        // TODO add your handling code here:
-        LoadTabale(loaidepSV.findByName(txt_search.getText()));
+        pagination(txt_search.getText());
     }//GEN-LAST:event_txt_searchCaretUpdate
 
     private void tb_TableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_TableMouseClicked
