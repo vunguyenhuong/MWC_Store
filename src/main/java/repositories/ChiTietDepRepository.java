@@ -104,6 +104,20 @@ public class ChiTietDepRepository {
         List<ChiTietDep> list = query.getResultList();
         return list;
     }
+    
+    public List<ChiTietDep> filter(String tenDep, String tenLoaiDep, String tenMauSac, String tenChatLieu) {
+        Query query = session.createQuery("SELECT c FROM ChiTietDep c "
+                + " WHERE (c.dep.ten = :tenDep or :tenDep is null or :tenDep = '')"
+                + " AND (c.mauSac.ten = :tenMauSac or :tenMauSac is null or :tenMauSac = '')"
+                + " AND (c.chatLieu.ten = :tenChatLieu or :tenChatLieu is null or :tenChatLieu = '')"
+                + " AND (c.loaiDep.ten = :tenLoaiDep or :tenLoaiDep is null or :tenLoaiDep = '')");
+        query.setParameter("tenDep", tenDep);
+        query.setParameter("tenMauSac", tenMauSac);
+        query.setParameter("tenChatLieu", tenChatLieu);
+        query.setParameter("tenLoaiDep", tenLoaiDep);
+        List<ChiTietDep> list = query.getResultList();
+        return list;
+    }
 
     public List<ChiTietDep> pagination(int pageNumber, int pageSize, String tenDep, String tenLoaiDep, String tenMauSac, String tenChatLieu) {
         Query query = session.createQuery("SELECT c FROM ChiTietDep c "
