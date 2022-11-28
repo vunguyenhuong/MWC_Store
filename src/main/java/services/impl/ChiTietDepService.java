@@ -39,11 +39,10 @@ public class ChiTietDepService implements IChiTietDepService {
         return repo.getObjById(id);
     }
 
-    @Override
-    public List<ChiTietDep> findByName(String ten) {
-        return repo.findByName(ten);
-    }
-
+//    @Override
+//    public List<ChiTietDep> findByName(String ten) {
+//        return repo.findByName(ten);
+//    }
     @Override
     public List<Dep> getAllDep() {
         return depRepo.getAll();
@@ -79,11 +78,10 @@ public class ChiTietDepService implements IChiTietDepService {
         return repo.findByTT(trangThai, ten);
     }
 
-    @Override
-    public List<ChiTietDep> pagination(int pageNumber, int pageSize) {
-        return repo.pagination(pageNumber, pageSize);
-    }
-
+//    @Override
+//    public List<ChiTietDep> pagination(int pageNumber, int pageSize) {
+//        return repo.pagination(pageNumber, pageSize);
+//    }
     @Override
     public ChiTietDep getObjByProperties(int idDep, int idLoaiDep, int idMauSac, int idChatLieu, int idNSX, int idSize) {
         return repo.checkDuplicate(idDep, idLoaiDep, idMauSac, idChatLieu, idNSX, idSize);
@@ -94,13 +92,22 @@ public class ChiTietDepService implements IChiTietDepService {
         return repo.findSLSPLess(soLuong);
     }
 
+//    @Override
+//    public List<ChiTietDep> filter(String tenDep, String tenMauSac) {
+//        return repo.filter(tenDep, tenMauSac);
+//    }
     @Override
-    public List<ChiTietDep> filter(String tenDep, String tenMauSac) {
-        return repo.filter(tenDep, tenMauSac);
+    public List<ChiTietDep> topSPBanChay(int firstResult, int maxResult) {
+        return repo.topSPBanChay(firstResult, maxResult);
     }
 
     @Override
-    public List<ChiTietDep> topSPBanChay(int firstResult,int maxResult) {
-        return repo.topSPBanChay(firstResult, maxResult);
+    public List<ChiTietDep> pagination(int pageNumber, int pageSize, String tenDep, String tenLoaiDep, String tenMauSac, String tenChatLieu) {
+        return repo.pagination(pageNumber, pageSize, tenDep, tenLoaiDep, tenMauSac, tenChatLieu);
+    }
+
+    @Override
+    public List<ChiTietDep> filter(String tenDep, String tenLoaiDep, String tenMauSac, String tenChatLieu) {
+        return repo.filter(tenDep, tenLoaiDep, tenMauSac, tenChatLieu);
     }
 }
