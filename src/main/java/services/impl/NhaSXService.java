@@ -9,8 +9,9 @@ import services.INhaSXService;
  *
  * @author pc
  */
-public class NhaSXService implements INhaSXService{
-     private NhaSXRepository repo = new NhaSXRepository();
+public class NhaSXService implements INhaSXService {
+
+    private NhaSXRepository repo = new NhaSXRepository();
 
     @Override
     public List<NhaSX> getAll() {
@@ -43,7 +44,7 @@ public class NhaSXService implements INhaSXService{
     }
 
     @Override
-    public List<NhaSX> pagination(int pageNumber, int pageSize) {
-        return repo.pagination(pageNumber, pageSize);
+    public List<NhaSX> pagination1(int pageNumber, int pageSize, String ten) {
+        return repo.pagination1(pageNumber, pageSize, ten);
     }
 }
