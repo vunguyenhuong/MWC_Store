@@ -818,8 +818,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="tableScrollButton1" pref="523" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
-                                  <Component id="txt_hd_timkiem" min="-2" pref="341" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="347" max="-2" attributes="0"/>
                                   <Component id="cb_trangthai" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -833,10 +832,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="tableScrollButton1" pref="139" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="cb_trangthai" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txt_hd_timkiem" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="cb_trangthai" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -931,11 +927,9 @@
                       <Color blue="66" green="66" red="66" type="rgb"/>
                     </Property>
                   </Properties>
-                </Component>
-                <Component class="swing.TextField" name="txt_hd_timkiem">
-                  <Properties>
-                    <Property name="labelText" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m h&#xf3;a &#x111;&#x1a1;n"/>
-                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_trangthaiActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
