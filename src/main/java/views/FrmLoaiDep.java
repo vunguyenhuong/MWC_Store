@@ -30,7 +30,7 @@ public class FrmLoaiDep extends javax.swing.JPanel {
     private Page pg = new Page();
     private int checkSearchCT = 0;
 
-    Integer limit = 5;
+    Integer limit = 2;
     Integer totalData = 0;
 
     /**
@@ -40,22 +40,24 @@ public class FrmLoaiDep extends javax.swing.JPanel {
         initComponents();
         loaidepSV = new LoaiDepService();
         helper = new Helper();
-        pagination();
+        pagination(txt_search.getText());
         pagination1.setPagegination(1, pg.getTotalPage());
         pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
         Table.apply(jScrollPane1, Table.TableType.MULTI_LINE);
     }
     
-    public void pagination() {
-        LoadTabale(loaidepSV.pagination( pg.getCurrent(), limit));
-        totalData = loaidepSV.getAll().size();
+    public void pagination(String ten) {
+        LoadTabale(loaidepSV.pagination( pg.getCurrent(), limit,ten));
+        totalData = loaidepSV.findByName(ten).size();
         int totalPage = (int) Math.ceil(totalData.doubleValue() / limit);
+        System.out.println(totalPage);
         pg.setTotalPage(totalPage);
-        pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
+        pagination1.setPagegination(1, pg.getTotalPage());
+        LoadTabale(loaidepSV.pagination( 1, limit, ten));
         pagination1.addEventPagination(new EventPagination() {
             @Override
             public void pageChanged(int page) {
-                LoadTabale(loaidepSV.pagination( page, limit));
+                LoadTabale(loaidepSV.pagination( page, limit, ten));
                 pg.setCurrent(page);
                 pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
             }
@@ -208,13 +210,13 @@ public class FrmLoaiDep extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(183, 183, 183)
-                .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(228, 228, 228)
+                .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pagination1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -291,12 +293,7 @@ public class FrmLoaiDep extends javax.swing.JPanel {
         loai.setNgaySuaCuoi(loaidep.getNgaySuaCuoi());
         loai.setTrangThai(loaidep.getTrangThai());
         this.loaidepSV.save(loai);
-        if (checkSearchCT == 0) {
-            loai = loaidepSV.pagination( pg.getCurrent(), limit).get(row);
-        } else {
-            loai = loaidepSV.findByName(txt_search.getText()).get(row);
-        }
-        pagination();
+        pagination(txt_search.getText());
         NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công");
         panel.showNotification();
     }//GEN-LAST:event_btn_updateActionPerformed
@@ -308,14 +305,13 @@ public class FrmLoaiDep extends javax.swing.JPanel {
         }
         LoaiDep loaidep = getForm();
         this.loaidepSV.save(loaidep);
-        pagination();
+        pagination(txt_search.getText());
         NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Thêm thành công");
         panel.showNotification();
     }//GEN-LAST:event_btn_addActionPerformed
 
     private void txt_searchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_searchCaretUpdate
-        // TODO add your handling code here:
-        LoadTabale(loaidepSV.findByName(txt_search.getText()));
+        pagination(txt_search.getText());
     }//GEN-LAST:event_txt_searchCaretUpdate
 
     private void tb_TableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_TableMouseClicked

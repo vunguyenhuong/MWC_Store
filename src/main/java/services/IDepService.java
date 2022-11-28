@@ -19,8 +19,6 @@ public interface IDepService {
 
     public Dep getObjById(int id);
 
-    List<Dep> pagination(int pageNumber, int pageSize);
-
-    List<Dep> pagination1(int pageNumber, int pageSize, String ten);
+    List<Dep> pagination(int pageNumber, int pageSize, String ten);
 
 }

@@ -54,12 +54,12 @@ public class FrmDep extends javax.swing.JPanel {
         int totalPage = (int) Math.ceil(totalData.doubleValue() / limit);
         pg.setTotalPage(totalPage);
         pagination1.setPagegination(1, pg.getTotalPage());
-        loadDataToTable(iDepService.pagination1(1, limit, ten));
+        loadDataToTable(iDepService.pagination(1, limit, ten));
+        clear();
         pagination1.addEventPagination(new EventPagination() {
             @Override
             public void pageChanged(int page) {
-                loadDataToTable(iDepService.pagination1(page, limit, ten));
-                clear();
+                loadDataToTable(iDepService.pagination(page, limit, ten));
             }
         });
     }
@@ -386,11 +386,6 @@ public class FrmDep extends javax.swing.JPanel {
         d.setNgaySuaCuoi(date);
         d.setTrangThai(dep.getTrangThai());
         this.iDepService.save(d);
-        if (checkSearchCT == 0) {
-            d = iDepService.pagination( pg.getCurrent(), limit).get(index);
-        } else {
-            d = iDepService.getObjByName(txtTimKiem.getText()).get(index);
-        }
         pagination(txtTimKiem.getText());
         
         NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công!");

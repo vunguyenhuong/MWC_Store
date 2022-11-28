@@ -65,23 +65,13 @@ public class DepRepository {
         return d;
     }
     
-     public List<Dep> pagination1(int pageNumber, int pageSize, String ten) {
+     public List<Dep> pagination(int pageNumber, int pageSize, String ten) {
         Query query = session.createQuery("SELECT n FROM Dep n WHERE n.ten like :ten");
         int pageIndex = pageNumber - 1 < 0 ? 0 : pageNumber - 1;
         int fromRecordIndex = pageIndex * pageSize;
         query.setFirstResult(fromRecordIndex);
         query.setMaxResults(pageSize);
         query.setParameter("ten", "%" + ten + "%");
-        List<Dep> list = query.getResultList();
-        return list;
-    }
-
-    public List<Dep> pagination(int pageNumber, int pageSize) {
-        Query query = session.createQuery("SELECT n FROM Dep n");
-        int pageIndex = pageNumber - 1 < 0 ? 0 : pageNumber - 1;
-        int fromRecordIndex = pageIndex * pageSize;
-        query.setFirstResult(fromRecordIndex);
-        query.setMaxResults(pageSize);
         List<Dep> list = query.getResultList();
         return list;
     }

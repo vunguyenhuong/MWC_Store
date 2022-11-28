@@ -43,13 +43,8 @@ public class DepService implements IDepService {
     }
 
     @Override
-    public List<Dep> pagination(int pageNumber, int pageSize) {
-        return depRepository.pagination(pageNumber, pageSize);
-    }
-
-    @Override
-    public List<Dep> pagination1(int pageNumber, int pageSize, String ten) {
-        return depRepository.pagination1(pageNumber, pageSize, ten);
+    public List<Dep> pagination(int pageNumber, int pageSize, String ten) {
+        return depRepository.pagination(pageNumber, pageSize, ten);
     }
 
 }
