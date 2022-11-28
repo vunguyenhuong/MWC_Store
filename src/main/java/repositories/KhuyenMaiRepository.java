@@ -77,7 +77,16 @@ public class KhuyenMaiRepository {
         }
         return km;
     }
-
+    public List<KhuyenMai> pagination(int pageNumber, int pageSize, String ten) {
+        Query query = session.createQuery("SELECT n FROM KhuyenMai n WHERE n.ten like :ten");
+        int pageIndex = pageNumber - 1 < 0 ? 0 : pageNumber - 1;
+        int fromRecordIndex = pageIndex * pageSize;
+        query.setFirstResult(fromRecordIndex);
+        query.setMaxResults(pageSize);
+        query.setParameter("ten", "%" + ten + "%");
+        List<KhuyenMai> list = query.getResultList();
+        return list;
+    }
     public static void main(String[] args) {
         KhuyenMaiRepository kmr = new KhuyenMaiRepository();
         for (KhuyenMai khuyenMai : kmr.getAll()) {

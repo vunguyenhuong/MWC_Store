@@ -24,4 +24,6 @@ public interface IKhuyenMaiService {
     KhuyenMai getObjectById(int id);
 
     List<KhuyenMai> findByName(String ten);
+
+    List<KhuyenMai> pagination(int pageNumber, int pageSize, String ten);
 }

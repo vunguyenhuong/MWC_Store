@@ -106,6 +106,8 @@ public class FrmMauSac extends javax.swing.JPanel {
         buttonGroup1.add(rd_NgungKinhDoanh);
         rd_NgungKinhDoanh.setText("Ngừng kinh doanh");
 
+        btn_update.setBackground(new java.awt.Color(102, 102, 102));
+        btn_update.setForeground(new java.awt.Color(255, 255, 255));
         btn_update.setText("Cập nhật");
         btn_update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,6 +115,8 @@ public class FrmMauSac extends javax.swing.JPanel {
             }
         });
 
+        btn_add.setBackground(new java.awt.Color(102, 102, 102));
+        btn_add.setForeground(new java.awt.Color(255, 255, 255));
         btn_add.setText("Thêm");
         btn_add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
