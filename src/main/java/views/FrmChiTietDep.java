@@ -100,11 +100,12 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         pagination1.addEventPagination(new EventPagination() {
             @Override
             public void pageChanged(int page) {
+                cb_filter_dep.setSelectedIndex(0);
+                cb_filter_mausac.setSelectedIndex(0);
                 loadData(iChiTietDepService.pagination(page, limit));
                 pg.setCurrent(page);
                 pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
-                cb_filter_dep.setSelectedIndex(0);
-                cb_filter_mausac.setSelectedIndex(0);
+                clearForm();
             }
         });
     }
@@ -203,6 +204,20 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                 comboNSX.addElement(x);
             }
         }
+    }
+
+    private void clearForm() {
+        tb_table.setRowSelectionAllowed(false);
+        cb_dep.setSelectedIndex(0);
+        cb_loaidep.setSelectedIndex(0);
+        cb_mausac.setSelectedIndex(0);
+        cb_chatlieu.setSelectedIndex(0);
+        cb_nsx.setSelectedIndex(0);
+        cb_size.setSelectedIndex(0);
+        txt_mota.setText("");
+        txt_gianhap.setText("");
+        txt_giaban.setText("");
+        sp_SoLuong.setValue(0);
     }
 
     @SuppressWarnings("unchecked")
@@ -385,9 +400,9 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(153, 153, 153));
         jLabel1.setText("Số lượng :");
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 255));
+        jPanel1.setBackground(new java.awt.Color(153, 51, 255));
 
-        pagination1.setBackground(new java.awt.Color(0, 0, 255));
+        pagination1.setBackground(new java.awt.Color(153, 51, 255));
         pagination1.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -395,15 +410,16 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(410, 410, 410)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -569,10 +585,10 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                         .addComponent(btn_exportExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+                .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 0, 0))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cb_chatlieu, cb_dep, cb_loaidep, cb_mausac, cb_nsx, cb_size});
@@ -623,36 +639,47 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Vui lòng chọn dòng sản phẩm cần cập nhật");
             panel.showNotification();
         } else {
-            ChiTietDep ctd;
-//            if (checkSearchCT == 0) {
-//                ctd = iChiTietDepService.pagination(pg.getCurrent(), limit).get(row);
-//            } else {
-            ctd = iChiTietDepService.filter(cb_filter_dep.getSelectedItem().toString(), cb_filter_mausac.getSelectedItem().toString()).get(row);
-//            }
-            ctd.setDep((Dep) comboDep.getSelectedItem());
-            ctd.setLoaiDep((LoaiDep) comboLoaiDep.getSelectedItem());
-            ctd.setMauSac((MauSac) comboMauSac.getSelectedItem());
-            ctd.setChatLieu((ChatLieu) comboChatLieu.getSelectedItem());
-            ctd.setNhaSX((NhaSX) comboNSX.getSelectedItem());
-            ctd.setSize((Size) comboSize.getSelectedItem());
-            ctd.setMoTa(txt_mota.getText());
-            ctd.setSoLuong((int) sp_SoLuong.getValue());
-            ctd.setGiaNhap(helper.convertToDecimal(txt_gianhap, "Error!"));
-            ctd.setGiaBan(helper.convertToDecimal(txt_giaban, "Error!"));
-            ctd.setNgaySuaCuoi(new Date());
-            if (rd_ct_dangkd.isSelected()) {
-                ctd.setTrangThai(0);
-            } else {
-                ctd.setTrangThai(1);
+            if (helper.confirm(this, "Xác nhận cập nhật")) {
+                if (cb_filter_dep.getSelectedIndex() == 0 && cb_filter_mausac.getSelectedIndex() == 0) {
+                    ChiTietDep ctd = iChiTietDepService.pagination(pg.getCurrent(), limit).get(row);
+//                    MousePressed(ctd);
+                    capNhat(ctd);
+                } else {
+                    ChiTietDep ctd = iChiTietDepService.filter(cb_filter_dep.getSelectedItem().toString(), cb_filter_mausac.getSelectedItem().toString()).get(row);
+                    MousePressed(ctd);
+                    capNhat(ctd);
+                }
+                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công");
+                panel.showNotification();
             }
-            iChiTietDepService.save(ctd);
-            pagination();
-            checkSearchCT = 0;
-            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công");
-            panel.showNotification();
         }
     }//GEN-LAST:event_btn_ctd_capnhatActionPerformed
-
+    private void capNhat(ChiTietDep ctd) {
+        MousePressed(ctd);
+        ctd.setDep((Dep) comboDep.getSelectedItem());
+        ctd.setLoaiDep((LoaiDep) comboLoaiDep.getSelectedItem());
+        ctd.setMauSac((MauSac) comboMauSac.getSelectedItem());
+        ctd.setChatLieu((ChatLieu) comboChatLieu.getSelectedItem());
+        ctd.setNhaSX((NhaSX) comboNSX.getSelectedItem());
+        ctd.setSize((Size) comboSize.getSelectedItem());
+        ctd.setMoTa(txt_mota.getText());
+        int soluong = (int) sp_SoLuong.getValue();
+        if (soluong < 0) {
+            helper.alert(this, "Số lượng không hợp lệ");
+            return;
+        }
+        ctd.setSoLuong(soluong);
+        ctd.setGiaNhap(helper.convertToDecimal(txt_gianhap, "Error!"));
+        ctd.setGiaBan(helper.convertToDecimal(txt_giaban, "Error!"));
+        ctd.setNgaySuaCuoi(new Date());
+        if (rd_ct_dangkd.isSelected()) {
+            ctd.setTrangThai(0);
+        } else {
+            ctd.setTrangThai(1);
+        }
+        iChiTietDepService.save(ctd);
+        pagination();
+    }
     private void txt_timkiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_timkiemCaretUpdate
         loadData(iChiTietDepService.findByName(txt_timkiem.getText()));
         if (iChiTietDepService.findByName(txt_timkiem.getText()).size() == iChiTietDepService.getAll().size()) {
@@ -716,19 +743,25 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Vui lòng chọn dòng sản phẩm để xóa !");
             panel.showNotification();
         } else {
-            ChiTietDep ctd;
-            ctd = ctd = iChiTietDepService.filter(cb_filter_dep.getSelectedItem().toString(), cb_filter_mausac.getSelectedItem().toString()).get(row);
             if (helper.confirm(this, "Xác nhận xóa")) {
-                iChiTietDepService.delete(ctd);
-                List<ChiTietDep> c = iChiTietDepService.pagination(pg.getCurrent(), limit);
-                int r = c.size();
-                if (r == 0) {
-                    pagination();
-                    pagination1.setPagegination(pg.getCurrent(), (pg.getTotalPage()) + 1);
+                if (cb_filter_dep.getSelectedIndex() == 0 && cb_filter_mausac.getSelectedIndex() == 0) {
+                    ChiTietDep ctd = iChiTietDepService.pagination(pg.getCurrent(), limit).get(row);
+                    MousePressed(ctd);
+                    iChiTietDepService.delete(ctd);
+                    List<ChiTietDep> c = iChiTietDepService.pagination(pg.getCurrent(), limit);
+                    int r = c.size();
+                    if (r == 0) {
+                        pagination();
+                        pagination1.setPagegination(pg.getCurrent(), (pg.getTotalPage()) + 1);
+                    } else {
+                        pagination();
+                    }
                 } else {
+                    ChiTietDep ctd = iChiTietDepService.filter(cb_filter_dep.getSelectedItem().toString(), cb_filter_mausac.getSelectedItem().toString()).get(row);
+                    MousePressed(ctd);
+                    iChiTietDepService.delete(ctd);
                     pagination();
                 }
-                checkSearchCT = 0;
                 NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Xóa thành công");
                 panel.showNotification();
             }
@@ -760,8 +793,17 @@ public class FrmChiTietDep extends javax.swing.JPanel {
 
     private void tb_tableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_tableMousePressed
         // TODO add your handling code here:
+        tb_table.setRowSelectionAllowed(true);
         int row = tb_table.getSelectedRow();
-        ChiTietDep ctd = ctd = iChiTietDepService.filter(cb_filter_dep.getSelectedItem().toString(), cb_filter_mausac.getSelectedItem().toString()).get(row);
+        if (cb_filter_dep.getSelectedIndex() == 0 && cb_filter_mausac.getSelectedIndex() == 0) {
+            ChiTietDep ctd = iChiTietDepService.pagination(pg.getCurrent(), limit).get(row);
+            MousePressed(ctd);
+        } else {
+            ChiTietDep ctd = iChiTietDepService.filter(cb_filter_dep.getSelectedItem().toString(), cb_filter_mausac.getSelectedItem().toString()).get(row);
+            MousePressed(ctd);
+        }
+    }//GEN-LAST:event_tb_tableMousePressed
+    public void MousePressed(ChiTietDep ctd) {
         comboDep.setSelectedItem(ctd.getDep());
         comboLoaiDep.setSelectedItem(ctd.getLoaiDep());
         comboChatLieu.setSelectedItem(ctd.getChatLieu());
@@ -778,9 +820,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             rd_ct_ngungkd.setSelected(true);
         }
         lbl_image.setIcon(imageUltil.resizeIcon(new ImageIcon("images/products/" + ctd.getDep().getHinhAnh()), lbl_image.getWidth(), lbl_image.getHeight()));
-        System.out.println(ctd.getDep().getHinhAnh());
-    }//GEN-LAST:event_tb_tableMousePressed
-
+    }
     private void cb_filter_depActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_filter_depActionPerformed
         loadData(iChiTietDepService.filter(cb_filter_dep.getSelectedItem().toString(), cb_filter_mausac.getSelectedItem().toString()));
     }//GEN-LAST:event_cb_filter_depActionPerformed
