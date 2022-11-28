@@ -28,7 +28,7 @@ public class FrmSize extends javax.swing.JPanel {
     private SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
     
     private Page pg = new Page();
-    private int checkSearchCT = 0;
+//    private int checkSearchCT = 0;
 
     Integer limit = 5;
     Integer totalData = 0;
@@ -42,23 +42,23 @@ public class FrmSize extends javax.swing.JPanel {
         tb_DanhSach.getTableHeader().setReorderingAllowed(false);
         group.add(rd_DangKinhDoanh);
         group.add(rd_NgungKinhDoanh);
-        pagination();
+        pagination(txt_search.getText());
         pagination1.setPagegination(1, pg.getTotalPage());
         pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
         helper = new Helper();
         Table.apply(jScrollPane1, Table.TableType.MULTI_LINE);
     }
     
-    public void pagination() {
-        loadData(sizeService.pagination( pg.getCurrent(), limit));
-        totalData = sizeService.getListSize().size();
+    public void pagination(String ten) {
+        loadData(sizeService.pagination1( 1, limit, ten));
+        totalData = sizeService.findByName(ten).size();
         int totalPage = (int) Math.ceil(totalData.doubleValue() / limit);
         pg.setTotalPage(totalPage);
-        pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
+        pagination1.setPagegination(1, pg.getTotalPage());
         pagination1.addEventPagination(new EventPagination() {
             @Override
             public void pageChanged(int page) {
-                loadData(sizeService.pagination( page, limit));
+                loadData(sizeService.pagination1( page, limit, ten));
                 pg.setCurrent(page);
                 pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
             }
@@ -290,12 +290,12 @@ public class FrmSize extends javax.swing.JPanel {
             size.setTrangThai(1);
         }
         sizeService.save(size);
-        if (checkSearchCT == 0) {
-            size = sizeService.pagination( pg.getCurrent(), limit).get(row);
-        } else {
-            size = sizeService.findByName(txt_search.getText()).get(row);
-        }
-        pagination();
+//        if (checkSearchCT == 0) {
+//            size = sizeService.pagination( pg.getCurrent(), limit).get(row);
+//        } else {
+//            size = sizeService.findByName(txt_search.getText()).get(row);
+//        }
+        pagination(txt_search.getText());
         NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công");
         panel.showNotification();
         clear();
@@ -326,7 +326,7 @@ public class FrmSize extends javax.swing.JPanel {
             size.setTrangThai(1);
         }
         sizeService.save(size);
-        pagination();
+        pagination(txt_search.getText());
         NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Thêm thành công");
         panel.showNotification();
         clear();
@@ -335,7 +335,7 @@ public class FrmSize extends javax.swing.JPanel {
     private void txt_searchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_searchCaretUpdate
         // TODO add your handling code here:
         clear();
-        loadData(sizeService.findByName(txt_search.getText()));
+        pagination(txt_search.getText());
     }//GEN-LAST:event_txt_searchCaretUpdate
 
     private void tb_DanhSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_DanhSachMouseClicked
