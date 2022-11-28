@@ -42,25 +42,24 @@ public class FrmDep extends javax.swing.JPanel {
         this.dtm = new DefaultTableModel();
         this.iDepService = new DepService();
         initComponents();
-        pagination();
+        pagination(txtTimKiem.getText());
         pagination1.setPagegination(1, pg.getTotalPage());
         pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
         tblDep.getTableHeader().setReorderingAllowed(false);
         Table.apply(jScrollPane1, Table.TableType.MULTI_LINE);
     }
     
-    public void pagination() {
-        loadDataToTable(iDepService.pagination( pg.getCurrent(), limit));
-        totalData = iDepService.getList().size();
+    public void pagination(String ten) {
+        totalData = iDepService.getObjByName(ten).size();
         int totalPage = (int) Math.ceil(totalData.doubleValue() / limit);
         pg.setTotalPage(totalPage);
-        pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
+        pagination1.setPagegination(1, pg.getTotalPage());
+        loadDataToTable(iDepService.pagination1(1, limit, ten));
         pagination1.addEventPagination(new EventPagination() {
             @Override
             public void pageChanged(int page) {
-                loadDataToTable(iDepService.pagination( page, limit));
-                pg.setCurrent(page);
-                pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
+                loadDataToTable(iDepService.pagination1(page, limit, ten));
+                clear();
             }
         });
     }
@@ -132,6 +131,12 @@ public class FrmDep extends javax.swing.JPanel {
         dep.setTrangThai(trangthai);
 
         return dep;
+    }
+    
+    private void clear() {
+        txtMa.setText("");
+        txtTen.setText("");
+        rdoDangkinhdoanh.setSelected(true);
     }
 
     /**
@@ -314,7 +319,7 @@ public class FrmDep extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtTimKiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimKiemCaretUpdate
-        loadDataToTable(iDepService.getObjByName(txtTimKiem.getText()));
+        pagination(txtTimKiem.getText());
     }//GEN-LAST:event_txtTimKiemCaretUpdate
 
     private void tblDepMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDepMouseClicked
@@ -359,8 +364,9 @@ public class FrmDep extends javax.swing.JPanel {
             return;
         }
         this.iDepService.save(dep);
-        pagination();
-        NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Thêm thành công");
+        pagination(txtTimKiem.getText());
+        
+        NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Thêm thành công!");
         panel.showNotification();
     }//GEN-LAST:event_btnThemActionPerformed
 
@@ -385,8 +391,9 @@ public class FrmDep extends javax.swing.JPanel {
         } else {
             d = iDepService.getObjByName(txtTimKiem.getText()).get(index);
         }
-        pagination();
-        NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Đã cập nhật thành công");
+        pagination(txtTimKiem.getText());
+        
+        NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công!");
         panel.showNotification();
     }//GEN-LAST:event_btnSuaActionPerformed
 

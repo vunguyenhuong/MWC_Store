@@ -14,11 +14,13 @@ public interface IDepService {
     boolean save(Dep dep);
 
     Dep getObj(String ma);
-    
+
     List<Dep> getObjByName(String ten);
-    
+
     public Dep getObjById(int id);
-    
+
     List<Dep> pagination(int pageNumber, int pageSize);
-    
+
+    List<Dep> pagination1(int pageNumber, int pageSize, String ten);
+
 }
