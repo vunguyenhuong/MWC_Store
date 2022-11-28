@@ -24,7 +24,7 @@ public class FrmNhaSanXuat extends javax.swing.JPanel {
     private INhaSXService iNhaSXService;
     private Helper helper;
     private SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-    
+
     private Page pg = new Page();
     private int checkSearchCT = 0;
 
@@ -37,25 +37,25 @@ public class FrmNhaSanXuat extends javax.swing.JPanel {
     public FrmNhaSanXuat() {
         initComponents();
         iNhaSXService = new NhaSXService();
-        pagination();
+        pagination(txt_Timkiem.getText());
         pagination1.setPagegination(1, pg.getTotalPage());
         pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
         helper = new Helper();
         Table.apply(jScrollPane1, Table.TableType.MULTI_LINE);
     }
-    
-    public void pagination() {
-        loadToTable(iNhaSXService.pagination( pg.getCurrent(), limit));
-        totalData = iNhaSXService.getAll().size();
+
+    public void pagination(String ten) {
+        totalData = iNhaSXService.findByName(ten).size();
         int totalPage = (int) Math.ceil(totalData.doubleValue() / limit);
         pg.setTotalPage(totalPage);
-        pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
+        pagination1.setPagegination(1, pg.getTotalPage());
+        loadToTable(iNhaSXService.pagination1(1, limit, ten));
+        clear();
         pagination1.addEventPagination(new EventPagination() {
             @Override
             public void pageChanged(int page) {
-                loadToTable(iNhaSXService.pagination( page, limit));
-                pg.setCurrent(page);
-                pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
+                loadToTable(iNhaSXService.pagination1(page, limit, ten));
+
             }
         });
     }
@@ -205,7 +205,14 @@ public class FrmNhaSanXuat extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txt_Timkiem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -217,15 +224,9 @@ public class FrmNhaSanXuat extends javax.swing.JPanel {
                             .addComponent(rd_Dangnhap, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbl_Total))
                         .addGap(18, 18, 18)
-                        .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -278,12 +279,8 @@ public class FrmNhaSanXuat extends javax.swing.JPanel {
             n.setTrangThai(1);
         }
         iNhaSXService.save(n);
-         if (checkSearchCT == 0) {
-            n = iNhaSXService.pagination( pg.getCurrent(), limit).get(row);
-        } else {
-            n = iNhaSXService.findByName(txt_Timkiem.getText()).get(row);
-        }
-        pagination();
+
+        pagination(txt_Timkiem.getText());
         NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công");
         panel.showNotification();
         clear();
@@ -314,7 +311,7 @@ public class FrmNhaSanXuat extends javax.swing.JPanel {
             n.setTrangThai(1);
         }
         iNhaSXService.save(n);
-        pagination();
+        pagination(txt_Timkiem.getText());
         NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Thêm thành công!");
         panel.showNotification();
 
@@ -322,8 +319,7 @@ public class FrmNhaSanXuat extends javax.swing.JPanel {
 
     private void txt_TimkiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_TimkiemCaretUpdate
         // TODO add your handling code here:
-        clear();
-        loadToTable(iNhaSXService.findByName(txt_Timkiem.getText()));
+        pagination(txt_Timkiem.getText());
     }//GEN-LAST:event_txt_TimkiemCaretUpdate
 
     private void tblBangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBangMouseClicked
