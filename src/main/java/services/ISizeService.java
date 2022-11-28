@@ -21,4 +21,6 @@ public interface ISizeService {
     Size getObjById(int id);
     
     List<Size> pagination(int pageNumber, int pageSize);
+
+    List<Size> pagination1(int pageNumber, int pageSize, String ten);
 }
