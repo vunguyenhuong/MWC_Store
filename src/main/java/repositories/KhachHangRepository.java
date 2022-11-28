@@ -84,6 +84,17 @@ public class KhachHangRepository {
         List<KhachHang> list = query.getResultList();
         return list;
     }
+    
+    public List<KhachHang> pagination(int pageNumber, int pageSize, String ten) {
+        Query query = session.createQuery("SELECT n FROM KhachHang n WHERE n.ten like :ten");
+        int pageIndex = pageNumber - 1 < 0 ? 0 : pageNumber - 1;
+        int fromRecordIndex = pageIndex * pageSize;
+        query.setFirstResult(fromRecordIndex);
+        query.setMaxResults(pageSize);
+        query.setParameter("ten", "%" + ten + "%");
+        List<KhachHang> list = query.getResultList();
+        return list;
+    }
 
     public static void main(String[] args) {
         KhachHangRepository khr = new KhachHangRepository();

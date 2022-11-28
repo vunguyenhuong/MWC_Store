@@ -8,7 +8,10 @@ import models.KhachHang;
 import services.IKhachHangService;
 import services.impl.KhachHangService;
 import swing.Table;
+import ui.EventPagination;
 import ui.NotificationMess;
+import ui.Page;
+import ui.PaginationItemRenderStyle1;
 import utilities.Helper;
 
 /**
@@ -20,6 +23,12 @@ public class FrmKhachHang extends java.awt.Dialog {
     private IKhachHangService iKhachHangService;
     private DefaultTableModel dtm = new DefaultTableModel();
     private Helper helper;
+    
+    private Page pg = new Page();
+    private int checkSearchCT = 0;
+
+    Integer limit = 5;
+    Integer totalData = 0;
 
     private KhachHang khachHang = null;
 
@@ -29,8 +38,10 @@ public class FrmKhachHang extends java.awt.Dialog {
         setTitle("Danh sách khách hàng");
         setLocationRelativeTo(null);
         this.iKhachHangService = new KhachHangService();
-        loadDataToTabel(iKhachHangService.getAll());
         this.helper = new Helper();
+        pagination(txt_Search.getText());
+        pagination10.setPagegination(1, pg.getTotalPage());
+        pagination10.setPaginationItemRender(new PaginationItemRenderStyle1());
         Table.apply(jScrollPane1, Table.TableType.MULTI_LINE);
     }
 
@@ -51,7 +62,6 @@ public class FrmKhachHang extends java.awt.Dialog {
             };
             dtm.addRow(rowData);
         }
-        lbl_Total.setText("Total:" + list.size());
     }
 
     private boolean checkNull() {
@@ -97,6 +107,29 @@ public class FrmKhachHang extends java.awt.Dialog {
 
         return kh;
     }
+    
+    public void pagination(String ten) {
+        totalData = iKhachHangService.findByName(ten).size();
+        int totalPage = (int) Math.ceil(totalData.doubleValue() / limit);
+        pg.setTotalPage(totalPage);
+        pagination10.setPagegination(1, pg.getTotalPage());
+        loadDataToTabel(iKhachHangService.pagination(1, limit, ten));
+        clear();
+        pagination10.addEventPagination(new EventPagination() {
+            @Override
+            public void pageChanged(int page) {
+                loadDataToTabel(iKhachHangService.pagination(page, limit, ten));
+            }
+        });
+    }
+    
+    private void clear() {
+        txt_Ma.setText("");
+        txt_TenKH.setText("");
+        txt_Diachi.setText("");
+        txt_Sodienthoai.setText("");
+        txt_Diemtichluy.setText("");
+    }
 
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -112,13 +145,14 @@ public class FrmKhachHang extends java.awt.Dialog {
         tableScrollButton1 = new swing.TableScrollButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_KhachHang = new javax.swing.JTable();
-        lbl_Total = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txt_Ma = new swing.TextField();
         btn_Chon = new swing.Button();
         txt_Sodienthoai = new swing.TextField();
         txt_Search = new swing.TextField();
         txt_Diemtichluy = new swing.TextField();
+        jPanel11 = new javax.swing.JPanel();
+        pagination10 = new swing.Pagination();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -179,10 +213,6 @@ public class FrmKhachHang extends java.awt.Dialog {
 
         tableScrollButton1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        lbl_Total.setForeground(new java.awt.Color(255, 0, 51));
-        lbl_Total.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lbl_Total.setText("Total: 0");
-
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("KHÁCH HÀNG");
 
@@ -207,14 +237,29 @@ public class FrmKhachHang extends java.awt.Dialog {
                 txt_SearchCaretUpdate(evt);
             }
         });
-        txt_Search.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_SearchActionPerformed(evt);
-            }
-        });
 
         txt_Diemtichluy.setEditable(false);
         txt_Diemtichluy.setLabelText("Điểm tích lũy : ");
+
+        jPanel11.setBackground(new java.awt.Color(0, 0, 255));
+
+        pagination10.setBackground(new java.awt.Color(0, 0, 255));
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(122, 122, 122)
+                .addComponent(pagination10, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addComponent(pagination10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -232,18 +277,16 @@ public class FrmKhachHang extends java.awt.Dialog {
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(txt_Diemtichluy, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txt_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbl_Total))))
-                    .addComponent(btn_Chon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txt_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)))
+                    .addComponent(btn_Chon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txt_Diemtichluy, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -255,8 +298,7 @@ public class FrmKhachHang extends java.awt.Dialog {
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_Search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_Total))
+                    .addComponent(txt_Search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -264,19 +306,21 @@ public class FrmKhachHang extends java.awt.Dialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txt_TenKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(7, 7, 7)
-                        .addComponent(txt_Diachi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(tableScrollButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(7, 7, 7)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txt_Sodienthoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txt_Diemtichluy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_Diachi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(7, 7, 7)
+                        .addComponent(txt_Sodienthoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(tableScrollButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_Diemtichluy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addComponent(btn_Chon, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -313,8 +357,7 @@ public class FrmKhachHang extends java.awt.Dialog {
 
     private void txt_SearchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_SearchCaretUpdate
         // TODO add your handling code here:
-        String ten = txt_Search.getText().trim();
-        loadDataToTabel(this.iKhachHangService.findByName(ten));
+        pagination(txt_Search.getText());
     }//GEN-LAST:event_txt_SearchCaretUpdate
 
     private void btn_ChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ChonActionPerformed
@@ -329,10 +372,6 @@ public class FrmKhachHang extends java.awt.Dialog {
         }
     }//GEN-LAST:event_btn_ChonActionPerformed
 
-    private void txt_SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_SearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_SearchActionPerformed
-
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
         // TODO add your handling code here:
         int row = tbl_KhachHang.getSelectedRow();
@@ -346,7 +385,11 @@ public class FrmKhachHang extends java.awt.Dialog {
         khach.setDiaChi(kh.getDiaChi());
         khach.setSoDt(kh.getSoDt());
         this.iKhachHangService.save(khach);
-        loadDataToTabel(iKhachHangService.getAll());
+        pagination(txt_Search.getText());
+        
+//        NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Thêm thành công!");
+//        panel.showNotification();
+ 
         helper.alert(this, "Sửa thành công");
     }//GEN-LAST:event_btn_updateActionPerformed
 
@@ -356,7 +399,10 @@ public class FrmKhachHang extends java.awt.Dialog {
         }
         KhachHang kh = this.getDataFromInput();
         this.iKhachHangService.save(kh);
-        this.loadDataToTabel(this.iKhachHangService.getAll());
+        pagination(txt_Search.getText());
+        
+//        NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Thêm thành công!");
+//        panel.showNotification();
         helper.alert(this, "Thêm thành công");
     }//GEN-LAST:event_btn_addActionPerformed
 
@@ -381,10 +427,29 @@ public class FrmKhachHang extends java.awt.Dialog {
     private swing.Button btn_update;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JLabel lbl_Total;
+    private swing.Pagination pagination1;
+    private swing.Pagination pagination10;
+    private swing.Pagination pagination2;
+    private swing.Pagination pagination3;
+    private swing.Pagination pagination4;
+    private swing.Pagination pagination5;
+    private swing.Pagination pagination6;
+    private swing.Pagination pagination7;
+    private swing.Pagination pagination8;
+    private swing.Pagination pagination9;
     private swing.TableScrollButton tableScrollButton1;
     private javax.swing.JTable tbl_KhachHang;
     private swing.TextField txt_Diachi;
