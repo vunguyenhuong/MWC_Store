@@ -239,8 +239,16 @@ public class FrmThongKe extends javax.swing.JPanel {
         } catch (Exception e) {
 
         }
-        loadData(iChiTietDepService.findSLSPLess(soLuong), tb_spsaphethang);
-        spngungkd.setData(new ModelCard("Sản phẩm sắp hết hàng", iChiTietDepService.findSLSPLess(soLuong).size(), null));
+        List<ChiTietDep> list = iChiTietDepService.findSLSPLess(soLuong);
+        loadData(list, tb_spsaphethang);
+        if(list.size()>0){
+            for (int i = 0; i < tb_spsaphethang.getRowCount(); i++) {
+                if(Integer.parseInt(tb_spsaphethang.getValueAt(i,3).toString()) < 30){
+                    tb_spsaphethang.getRowHeight(i).setBackground(Color.red);
+                    System.out.println(tb_spsaphethang.getValueAt(i,3));
+                }
+            }
+        }
     }//GEN-LAST:event_txt_soluongCaretUpdate
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
