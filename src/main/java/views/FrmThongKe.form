@@ -160,6 +160,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Export Excel"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_exportTop5ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
@@ -197,7 +200,7 @@
                         <Column editable="true" title="Lo&#x1ea1;i d&#xe9;p" type="java.lang.Object"/>
                         <Column editable="true" title="Size" type="java.lang.Object"/>
                         <Column editable="true" title="S&#x1ed1; l&#x1b0;&#x1ee3;ng t&#x1ed3;n" type="java.lang.Object"/>
-                        <Column editable="true" title="Gi&#xe1; b&#xe1;n" type="java.lang.Object"/>
+                        <Column editable="true" title="Gi&#xe1; b&#xe1;n hi&#x1ec7;n t&#x1ea1;i" type="java.lang.Object"/>
                         <Column editable="true" title="M&#xf4; t&#x1ea3;" type="java.lang.Object"/>
                         <Column editable="true" title="S&#x1ed1; l&#x1b0;&#x1ee3;ng b&#xe1;n ra" type="java.lang.Object"/>
                       </Table>
@@ -339,7 +342,7 @@
                         <Column editable="true" title="Lo&#x1ea1;i d&#xe9;p" type="java.lang.Object"/>
                         <Column editable="true" title="Size" type="java.lang.Object"/>
                         <Column editable="true" title="S&#x1ed1; l&#x1b0;&#x1ee3;ng t&#x1ed3;n" type="java.lang.Object"/>
-                        <Column editable="true" title="Gi&#xe1; b&#xe1;n" type="java.lang.Object"/>
+                        <Column editable="true" title="Gi&#xe1; b&#xe1;n hi&#x1ec7;n t&#x1ea1;i" type="java.lang.Object"/>
                         <Column editable="true" title="M&#xf4; t&#x1ea3;" type="java.lang.Object"/>
                         <Column editable="true" title="S&#x1ed1; l&#x1b0;&#x1ee3;ng b&#xe1;n ra" type="java.lang.Object"/>
                       </Table>
@@ -422,6 +425,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Export Excel"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_exportSapHetHangActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

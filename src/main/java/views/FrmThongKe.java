@@ -1,27 +1,30 @@
 package views;
 
-import java.awt.Color;
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JTable;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import models.ChiTietDep;
-import models.Dep;
 import models.HoaDonChiTiet;
 import services.IChiTietDepService;
 import services.IHoaDonCTService;
 import services.impl.ChiTietDepService;
 import services.impl.HoaDonCTService;
-import swing.ModelPieChart;
-import swing.PieChart;
 import swing.Table;
 import ui.ModelCard;
+import ui.NotificationMess;
+import utilities.ExportSP;
+import utilities.Helper;
 
 public class FrmThongKe extends javax.swing.JPanel {
 
     private IChiTietDepService iChiTietDepService = new ChiTietDepService();
     private IHoaDonCTService iHoaDonCTService = new HoaDonCTService();
+    private Helper helper = new Helper();
 
     private DefaultTableModel defaultTableModel;
     private int soLuong = 0;
@@ -47,7 +50,6 @@ public class FrmThongKe extends javax.swing.JPanel {
         spsaphethang.setData(new ModelCard("Sản phẩm đang kinh doanh", iChiTietDepService.findByTT(0, "").size(), new ImageIcon(getClass().getResource("/icons/unpacking.png"))));
         spngungkd.setData(new ModelCard("Sản phẩm sắp hết hàng", 0, new ImageIcon(getClass().getResource("/icons/box.png"))));
         spdangkd.setData(new ModelCard("Sản phẩm ngừng kinh doanh", iChiTietDepService.findByTT(1, "").size(), new ImageIcon(getClass().getResource("/icons/stop.png"))));
-
         loadData(iChiTietDepService.topSPBanChay(0, 5), tb_top5sp);
     }
 
@@ -105,6 +107,11 @@ public class FrmThongKe extends javax.swing.JPanel {
         btn_exportTop5.setForeground(new java.awt.Color(255, 255, 255));
         btn_exportTop5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/excel.png"))); // NOI18N
         btn_exportTop5.setText("Export Excel");
+        btn_exportTop5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_exportTop5ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(java.awt.Color.blue);
@@ -116,7 +123,7 @@ public class FrmThongKe extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Tên dép", "Loại dép", "Size", "Số lượng tồn", "Giá bán", "Mô tả", "Số lượng bán ra"
+                "Tên dép", "Loại dép", "Size", "Số lượng tồn", "Giá bán hiện tại", "Mô tả", "Số lượng bán ra"
             }
         ));
         jScrollPane1.setViewportView(tb_top5sp);
@@ -173,7 +180,7 @@ public class FrmThongKe extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Tên dép", "Loại dép", "Size", "Số lượng tồn", "Giá bán", "Mô tả", "Số lượng bán ra"
+                "Tên dép", "Loại dép", "Size", "Số lượng tồn", "Giá bán hiện tại", "Mô tả", "Số lượng bán ra"
             }
         ));
         jScrollPane2.setViewportView(tb_spsaphethang);
@@ -195,6 +202,11 @@ public class FrmThongKe extends javax.swing.JPanel {
         btn_exportSapHetHang.setForeground(new java.awt.Color(255, 255, 255));
         btn_exportSapHetHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/excel.png"))); // NOI18N
         btn_exportSapHetHang.setText("Export Excel");
+        btn_exportSapHetHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_exportSapHetHangActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -282,6 +294,52 @@ public class FrmThongKe extends javax.swing.JPanel {
         Chart chart = new Chart(null, true);
         chart.setVisible(true);
     }//GEN-LAST:event_btn_xembieudotop5ActionPerformed
+
+    private void btn_exportTop5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_exportTop5ActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(".xlsx", "xlsx");
+        fileChooser.setFileFilter(filter);
+        fileChooser.setDialogTitle("Export Excel");
+        int result = fileChooser.showSaveDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File fileToSave = fileChooser.getSelectedFile();
+            try {
+                if (helper.confirm(this, "File Path: " + fileToSave.getAbsolutePath() + filter.getDescription() + ". Xác nhận xuất file ?")) {
+                    ExportSP.writeExcel(iChiTietDepService.topSPBanChay(0, 5), fileToSave.getAbsolutePath() + filter.getDescription());
+                    NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Xuất File Excel thành công");
+                    panel.showNotification();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Xuất File Excel thất bại");
+                panel.showNotification();
+            }
+            System.out.println("Save as file: " + fileToSave.getAbsolutePath() + filter.getDescription());
+        }
+    }//GEN-LAST:event_btn_exportTop5ActionPerformed
+
+    private void btn_exportSapHetHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_exportSapHetHangActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(".xlsx", "xlsx");
+        fileChooser.setFileFilter(filter);
+        fileChooser.setDialogTitle("Export Excel");
+        int result = fileChooser.showSaveDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File fileToSave = fileChooser.getSelectedFile();
+            try {
+                if (helper.confirm(this, "File Path: " + fileToSave.getAbsolutePath() + filter.getDescription() + ". Xác nhận xuất file ?")) {
+                    ExportSP.writeExcel(iChiTietDepService.findSLSPLess(soLuong), fileToSave.getAbsolutePath() + filter.getDescription());
+                    NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Xuất File Excel thành công");
+                    panel.showNotification();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Xuất File Excel thất bại");
+                panel.showNotification();
+            }
+            System.out.println("Save as file: " + fileToSave.getAbsolutePath() + filter.getDescription());
+        }
+    }//GEN-LAST:event_btn_exportSapHetHangActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private swing.Button btn_exportSapHetHang;
