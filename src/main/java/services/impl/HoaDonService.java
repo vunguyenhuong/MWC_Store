@@ -1,9 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package services.impl;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import models.HoaDon;
@@ -53,7 +50,6 @@ public class HoaDonService implements IHoaDonService {
         return hoadonRepo.getObjByMaAndKH(ten);
     }
 
-
     @Override
     public List<HoaDon> getKH(String type) {
         return hoadonRepo.getHDByKH(type);
@@ -67,6 +63,16 @@ public class HoaDonService implements IHoaDonService {
     @Override
     public List<HoaDon> getByTT(int trangThai) {
         return hoadonRepo.getByTT(trangThai);
+    }
+
+    @Override
+    public BigDecimal doanhThuTheoThang(int thang, int nam) {
+        return hoadonRepo.doanhThuTheoThang(thang, nam);
+    }
+
+    @Override
+    public BigDecimal doanhThuTheoNgay(int ngay, int thang, int nam) {
+        return hoadonRepo.doanhThuTheoNgay(ngay, thang, nam);
     }
 
 }

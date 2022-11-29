@@ -1,9 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
+
 package services;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import models.HoaDon;
@@ -32,4 +30,8 @@ public interface IHoaDonService {
     List<HoaDon> getHDByCombo(int trangthai, String type);
     
     List<HoaDon> getByTT(int trangThai);
+    
+    BigDecimal doanhThuTheoThang(int thang, int nam);
+    
+    BigDecimal doanhThuTheoNgay(int ngay, int thang, int nam);
 }

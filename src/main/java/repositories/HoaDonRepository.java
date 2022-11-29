@@ -1,11 +1,14 @@
 package repositories;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.TemporalType;
 import models.HoaDon;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import utilities.HibernateUtil;
 
@@ -111,5 +114,28 @@ public class HoaDonRepository {
         return list;
     }
 
+    public BigDecimal doanhThuTheoThang(int thang, int nam) {
+        String sql = "SELECT CAST(SUM(TongTien) AS DECIMAL(20,0)) FROM HOADON\n"
+                + "WHERE YEAR(NGAYTHANHTOAN) = ? AND MONTH(NgayThanhToan) = ?";
+        NativeQuery query = session.createNativeQuery(sql);
+        query.setParameter(1, nam);
+        query.setParameter(2, thang);
+        return (BigDecimal) query.getSingleResult();
+    }
 
+    public BigDecimal doanhThuTheoNgay(int ngay, int thang, int nam) {
+        String sql = "SELECT CAST(SUM(TongTien) AS DECIMAL(20,0)) FROM HOADON\n"
+                + "WHERE YEAR(NGAYTHANHTOAN) = ? AND MONTH(NGAYTHANHTOAN) = ? AND DAY(NGAYTHANHTOAN) = ?";
+        NativeQuery query = session.createNativeQuery(sql);
+        query.setParameter(1, nam);
+        query.setParameter(2, thang);
+        query.setParameter(3, ngay);
+        return (BigDecimal) query.getSingleResult();
+    }
+
+    public static void main(String[] args) {
+        HoaDonRepository hdr = new HoaDonRepository();
+        BigDecimal bigDecimal = hdr.doanhThuTheoNgay(29, 11, 2022);
+        System.out.println(bigDecimal);
+    }
 }

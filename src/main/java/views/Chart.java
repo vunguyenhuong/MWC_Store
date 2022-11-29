@@ -27,7 +27,7 @@ public class Chart extends java.awt.Dialog {
         super(parent, modal);
         initComponents();
         ChartPanel chartPanel = new ChartPanel(createChart());
-        chartPanel.setPreferredSize(new java.awt.Dimension(560, 367));
+        chartPanel.setPreferredSize(new java.awt.Dimension(960, 467));
         chart.add(chartPanel);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -47,8 +47,8 @@ public class Chart extends java.awt.Dialog {
         List<ChiTietDep> listCTD = iChiTietDepService.topSPBanChay(0, 5);
         try {
             for (int i = 0; i < listCTD.size(); i++) {
-                Dep dep = listCTD.get(i).getDep();
-                dataset.addValue(listCTD.get(i).getSoLuongBanRa(), "Số lượng", dep.getTen());
+                ChiTietDep ctd = listCTD.get(i);
+                dataset.addValue(listCTD.get(i).getSoLuongBanRa(), "Số lượng", i+1+ ". "+ctd.getDep().getTen()+" - "+ctd.getSize().getKichCo());
             }
         } catch (Exception e) {
         }
@@ -74,16 +74,16 @@ public class Chart extends java.awt.Dialog {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)
+                .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 1072, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
+                .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -91,9 +91,7 @@ public class Chart extends java.awt.Dialog {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
