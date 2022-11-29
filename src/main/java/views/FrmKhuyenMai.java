@@ -467,7 +467,7 @@ public class FrmKhuyenMai extends java.awt.Dialog {
 
     private void btn_ChonKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ChonKhuyenMaiActionPerformed
         int row = tb_danhSach.getSelectedRow();
-        KhuyenMai km = iKhuyenMaiService.getObj(tb_danhSach.getValueAt(row, 0).toString());
+        KhuyenMai km = iKhuyenMaiService.getObj(tb_danhSach.getValueAt(row, 1).toString());
         if (row == -1) {
             helper.error(this, "Vui lòng chọn khuyến mãi!");
             return;
@@ -491,7 +491,7 @@ public class FrmKhuyenMai extends java.awt.Dialog {
         if (km.getSoLuong() == 0) {
             helper.error(this, "Đã hết mã khuyến mãi!");
         } else {
-            String tenKM = (String) tb_danhSach.getValueAt(row, 0);
+            String tenKM = (String) tb_danhSach.getValueAt(row, 1);
             khuyenMai = km;
             NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Thêm thành công khuyến mãi " + tenKM);
             panel.showNotification();
