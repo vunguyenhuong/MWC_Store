@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Random;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import services.IHoaDonCTService;
 import services.IHoaDonService;
 import services.impl.HoaDonCTService;
@@ -29,8 +31,8 @@ public class FrmThongKeDoanhThu extends javax.swing.JPanel {
 
     public FrmThongKeDoanhThu() {
         initComponents();
-        chuatt.setData(new ModelCard("HD chưa thanh toán", iHoaDonService.getByTT(0).size(), null));
-        datt.setData(new ModelCard("HD đã thanh toán", iHoaDonService.getByTT(1).size(), null));
+        chuatt.setData(new ModelCard("HD chưa thanh toán", iHoaDonService.getByTT(0).size(), new ImageIcon(getClass().getResource("/icons/bill.png"))));
+        datt.setData(new ModelCard("HD đã thanh toán", iHoaDonService.getByTT(1).size(), new ImageIcon(getClass().getResource("/icons/paidbill.png"))));
         addYear();
         chartDoanhThu();
         lbl_tenbieudo.setText("BIỂU ĐỒ CƠ CẤU DOANH THU NĂM " + calendar.get(Calendar.YEAR));
@@ -71,12 +73,12 @@ public class FrmThongKeDoanhThu extends javax.swing.JPanel {
         BigDecimal doanhThuThang = iHoaDonService.doanhThuTheoThang(thang, nam);
         Double doanhThuNam = 0.0;
         BigDecimal doanhThu12Thang = null;
-        doanhthungay.setData(new ModelCard("Doanh thu ngày " + date, doanhthuNgay == null ? 0 : doanhthuNgay.doubleValue(), null));
-        doanhthuthang.setData(new ModelCard("Doanh thu tháng " + thang + "/" + nam, doanhThuThang == null ? 0 : doanhThuThang.doubleValue(), null));
+        doanhthungay.setData(new ModelCard("Doanh thu ngày " + date, doanhthuNgay == null ? 0 : doanhthuNgay.doubleValue(), new ImageIcon(getClass().getResource("/icons/day.png"))));
+        doanhthuthang.setData(new ModelCard("Doanh thu tháng " + thang + "/" + nam, doanhThuThang == null ? 0 : doanhThuThang.doubleValue(), new ImageIcon(getClass().getResource("/icons/month.png"))));
         for (int i = 1; i <= 12; i++) {
             doanhThu12Thang = iHoaDonService.doanhThuTheoThang(i, Integer.parseInt(comboNam.getSelectedItem().toString()));
             doanhThuNam += doanhThu12Thang == null ? 0 : doanhThu12Thang.doubleValue();
-            doanhthunam.setData(new ModelCard("Doanh thu năm " + nam, doanhThuNam == null ? 0 : doanhThuNam.doubleValue(), null));
+            doanhthunam.setData(new ModelCard("Doanh thu năm " + nam, doanhThuNam == null ? 0 : doanhThuNam.doubleValue(), new ImageIcon(getClass().getResource("/icons/year.png"))));
         }
     }
 

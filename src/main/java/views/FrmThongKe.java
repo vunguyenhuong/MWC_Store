@@ -3,6 +3,7 @@ package views;
 import java.awt.Color;
 import java.util.Date;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import models.ChiTietDep;
@@ -43,9 +44,9 @@ public class FrmThongKe extends javax.swing.JPanel {
 //        } catch (Exception e) {
 //        }
 //        doanhthungay.setData(new ModelCard("Doanh thu ngày", doanhThuNgay, null));
-        spsaphethang.setData(new ModelCard("Sản phẩm đang kinh doanh", iChiTietDepService.findByTT(0, "").size(), null));
-        spngungkd.setData(new ModelCard("Sản phẩm sắp hết hàng", 0, null));
-        spdangkd.setData(new ModelCard("Sản phẩm ngừng kinh doanh", iChiTietDepService.findByTT(1, "").size(), null));
+        spsaphethang.setData(new ModelCard("Sản phẩm đang kinh doanh", iChiTietDepService.findByTT(0, "").size(), new ImageIcon(getClass().getResource("/icons/unpacking.png"))));
+        spngungkd.setData(new ModelCard("Sản phẩm sắp hết hàng", 0, new ImageIcon(getClass().getResource("/icons/box.png"))));
+        spdangkd.setData(new ModelCard("Sản phẩm ngừng kinh doanh", iChiTietDepService.findByTT(1, "").size(), new ImageIcon(getClass().getResource("/icons/stop.png"))));
 
         loadData(iChiTietDepService.topSPBanChay(0, 5), tb_top5sp);
     }
@@ -273,7 +274,7 @@ public class FrmThongKe extends javax.swing.JPanel {
 
         }
         List<ChiTietDep> list = iChiTietDepService.findSLSPLess(soLuong);
-        spngungkd.setData(new ModelCard("Sản phẩm sắp hết hàng", list.size(), null));
+        spngungkd.setData(new ModelCard("Sản phẩm sắp hết hàng", list.size(), new ImageIcon(getClass().getResource("/icons/box.png"))));
         loadData(list, tb_spsaphethang);
     }//GEN-LAST:event_txt_soluongCaretUpdate
 
