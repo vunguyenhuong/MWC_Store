@@ -3,6 +3,7 @@ package views;
 import java.awt.Color;
 import java.math.BigDecimal;
 import java.util.Calendar;
+import java.util.Random;
 import javax.swing.DefaultComboBoxModel;
 import services.IHoaDonCTService;
 import services.IHoaDonService;
@@ -24,6 +25,7 @@ public class FrmThongKeDoanhThu extends javax.swing.JPanel {
     private DefaultComboBoxModel comboThang;
     private DefaultComboBoxModel comboNam;
     private Calendar calendar = Calendar.getInstance();
+    Random obj = new Random();
 
     public FrmThongKeDoanhThu() {
         initComponents();
@@ -53,8 +55,10 @@ public class FrmThongKeDoanhThu extends javax.swing.JPanel {
         pieChart1.clearData();
         pieChart1.setChartType(PieChart.PeiChartType.DEFAULT);
         for (int i = 1; i <= 12; i++) {
+            int rand_num = obj.nextInt(0xffffff + 1);
+            String colorCode = String.format("#%06x", rand_num);
             bd = iHoaDonService.doanhThuTheoThang(i, Integer.parseInt(comboNam.getSelectedItem().toString()));
-            pieChart1.addData(new ModelPieChart("Tháng " + i, bd == null ? 0 : bd.doubleValue(), new Color(23 + i * 10, 126 + i * 5, 238 - i * 3)));
+            pieChart1.addData(new ModelPieChart("Tháng " + i, bd == null ? 0 : bd.doubleValue(), Color.decode(colorCode)));
         }
     }
 
