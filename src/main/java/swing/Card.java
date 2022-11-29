@@ -43,11 +43,11 @@ public class Card extends javax.swing.JPanel {
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        lbTitle.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        lbTitle.setFont(new java.awt.Font("sansserif", 1, 16)); // NOI18N
         lbTitle.setForeground(new java.awt.Color(225, 225, 225));
         lbTitle.setText("Title");
 
-        lbValues.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        lbValues.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         lbValues.setForeground(new java.awt.Color(225, 225, 225));
         lbValues.setText("Values");
 
@@ -60,7 +60,7 @@ public class Card extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lbValues)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbIcon, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+                .addComponent(lbIcon, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
                 .addContainerGap())
             .addComponent(lbTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
