@@ -21,5 +21,5 @@ public interface INguoiDungService {
 
     NguoiDung getObj(String ma);
     
-    List<NguoiDung> pagination(String ma, int pageNumber, int pageSize);
+    List<NguoiDung> pagination(String ma, int pageNumber, int pageSize, String ten);
 }

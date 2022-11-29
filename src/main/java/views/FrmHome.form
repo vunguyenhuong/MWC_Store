@@ -170,15 +170,9 @@
                               <Component id="btn_thanhtoan" max="32767" attributes="0"/>
                               <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txt_makh" alignment="0" min="-2" pref="201" max="-2" attributes="0"/>
-                                      <Component id="txt_tenkh" alignment="0" min="-2" pref="201" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="txt_tenkh" min="-2" pref="201" max="-2" attributes="0"/>
                                   <EmptySpace min="100" pref="151" max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="btn_khLe" max="32767" attributes="0"/>
-                                      <Component id="btn_themKH" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="btn_khLe" min="-2" pref="125" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
@@ -213,6 +207,11 @@
                                           <Component id="lbl_removekm" min="-2" pref="38" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="txt_makh" min="-2" pref="201" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="btn_themKH" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>

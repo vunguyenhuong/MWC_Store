@@ -21,5 +21,5 @@ public interface INhaSXService {
 
     NhaSX getObjById(int id);
 
-    List<NhaSX> pagination1(int pageNumber, int pageSize, String ten);
+    List<NhaSX> pagination(int pageNumber, int pageSize, String ten);
 }

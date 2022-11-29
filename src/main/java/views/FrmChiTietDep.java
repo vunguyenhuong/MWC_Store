@@ -96,12 +96,18 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         String tenChatLieuFilter = cb_filter_chatlieu.getSelectedItem().toString();
         String tenLoaiDepFilter = cb_filter_loaidep.getSelectedItem().toString();
         String tenMauSacFilter = cb_filter_mausac.getSelectedItem().toString();
-        loadData(iChiTietDepService.pagination(pg.getCurrent(), limit, txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter));
-        totalData = iChiTietDepService.getAll().size();
+        totalData = iChiTietDepService.filter(txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter).size();
         int totalPage = (int) Math.ceil(totalData.doubleValue() / limit);
         pg.setTotalPage(totalPage);
         pagination1.setPagegination(1, pg.getTotalPage());
-        loadData(iChiTietDepService.pagination(1, limit, txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter));
+        if (pg.getTotalPage() < pg.getCurrent()) {
+            pagination1.setPagegination(pg.getTotalPage(), pg.getTotalPage());
+            loadData(iChiTietDepService.pagination(pg.getTotalPage(), limit, txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter));
+        } else {
+            pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
+            loadData(iChiTietDepService.pagination(pg.getCurrent(), limit, txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter));
+
+        }
 
         System.out.println(totalPage);
         pagination1.addEventPagination(new EventPagination() {
@@ -109,7 +115,6 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             public void pageChanged(int page) {
                 loadData(iChiTietDepService.pagination(page, limit, txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter));
                 pg.setCurrent(page);
-                pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
                 clearForm();
             }
         });
@@ -297,7 +302,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("THÔNG TIN SẢN PHẨM");
 
-        btn_ctd_capnhat.setBackground(new java.awt.Color(153, 153, 153));
+        btn_ctd_capnhat.setBackground(new java.awt.Color(102, 102, 102));
         btn_ctd_capnhat.setForeground(new java.awt.Color(255, 255, 255));
         btn_ctd_capnhat.setText("Cập nhật");
         btn_ctd_capnhat.setFocusPainted(false);
@@ -323,7 +328,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         txt_giaban.setLabelText("Giá bán");
         txt_giaban.setLineColor(new java.awt.Color(102, 102, 102));
 
-        btn_ctd_them.setBackground(new java.awt.Color(153, 153, 153));
+        btn_ctd_them.setBackground(new java.awt.Color(102, 102, 102));
         btn_ctd_them.setForeground(new java.awt.Color(255, 255, 255));
         btn_ctd_them.setText("Thêm");
         btn_ctd_them.setFocusPainted(false);
@@ -346,7 +351,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         txt_gianhap.setLabelText("Giá nhập");
         txt_gianhap.setLineColor(new java.awt.Color(102, 102, 102));
 
-        btn_ctd_xoa.setBackground(new java.awt.Color(153, 153, 153));
+        btn_ctd_xoa.setBackground(new java.awt.Color(102, 102, 102));
         btn_ctd_xoa.setForeground(new java.awt.Color(255, 255, 255));
         btn_ctd_xoa.setText("Xóa");
         btn_ctd_xoa.setFocusPainted(false);
@@ -594,10 +599,10 @@ public class FrmChiTietDep extends javax.swing.JPanel {
                         .addComponent(btn_exportExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                .addComponent(tableScrollButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cb_chatlieu, cb_dep, cb_loaidep, cb_mausac, cb_nsx, cb_size});

@@ -49,5 +49,7 @@ public interface IChiTietDepService {
     
 //    List<ChiTietDep> filter(String tenDep, String tenMauSac);
     
+    List<ChiTietDep> filter(String tenDep, String tenLoaiDep, String tenMauSac, String tenChatLieu);
+    
     List<ChiTietDep> pagination(int pageNumber, int pageSize, String tenDep, String tenLoaiDep, String tenMauSac, String tenChatLieu);
 }

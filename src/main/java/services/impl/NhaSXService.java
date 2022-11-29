@@ -44,7 +44,7 @@ public class NhaSXService implements INhaSXService {
     }
 
     @Override
-    public List<NhaSX> pagination1(int pageNumber, int pageSize, String ten) {
-        return repo.pagination1(pageNumber, pageSize, ten);
+    public List<NhaSX> pagination(int pageNumber, int pageSize, String ten) {
+        return repo.pagination(pageNumber, pageSize, ten);
     }
 }

@@ -46,13 +46,19 @@ public class FrmMauSac extends javax.swing.JPanel {
         totalData = iMauSacService.findByName(ten).size();
         int totalPage = (int) Math.ceil(totalData.doubleValue() / limit);
         pg.setTotalPage(totalPage);
-        pagination1.setPagegination(1, pg.getTotalPage());
-        loadToTable(iMauSacService.pagination(1, limit, ten));
+        if (pg.getTotalPage() < pg.getCurrent()) {
+            pagination1.setPagegination(pg.getTotalPage(), pg.getTotalPage());
+            loadTable(iMauSacService.pagination(pg.getTotalPage(), limit, ten));
+        } else {
+            pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
+            loadTable(iMauSacService.pagination(pg.getCurrent(), limit, ten));
+        }
         clear();
         pagination1.addEventPagination(new EventPagination() {
             @Override
             public void pageChanged(int page) {
-                loadToTable(iMauSacService.pagination(page, limit, ten));
+                loadTable(iMauSacService.pagination(page, limit, ten));
+                pg.setCurrent(page);
             }
         });
     }
@@ -100,6 +106,8 @@ public class FrmMauSac extends javax.swing.JPanel {
         buttonGroup1.add(rd_NgungKinhDoanh);
         rd_NgungKinhDoanh.setText("Ngừng kinh doanh");
 
+        btn_update.setBackground(new java.awt.Color(102, 102, 102));
+        btn_update.setForeground(new java.awt.Color(255, 255, 255));
         btn_update.setText("Cập nhật");
         btn_update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,6 +115,8 @@ public class FrmMauSac extends javax.swing.JPanel {
             }
         });
 
+        btn_add.setBackground(new java.awt.Color(102, 102, 102));
+        btn_add.setForeground(new java.awt.Color(255, 255, 255));
         btn_add.setText("Thêm");
         btn_add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -223,7 +233,7 @@ public class FrmMauSac extends javax.swing.JPanel {
                     .addComponent(tableScrollButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -317,7 +327,7 @@ public class FrmMauSac extends javax.swing.JPanel {
     private swing.TextField txt_Ten;
     private swing.TextField txt_search;
     // End of variables declaration//GEN-END:variables
-    private void loadToTable(List<MauSac> list) {
+    private void loadTable(List<MauSac> list) {
         dtm = (DefaultTableModel) tblBang.getModel();
         dtm.setRowCount(0);
         for (MauSac x : list) {

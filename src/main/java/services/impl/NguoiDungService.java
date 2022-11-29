@@ -44,10 +44,8 @@ public class NguoiDungService implements INguoiDungService {
     }
 
     @Override
-    public List<NguoiDung> pagination(String ma, int pageNumber, int pageSize) {
-        return repo.pagination(ma, pageNumber, pageSize);
+    public List<NguoiDung> pagination(String ma, int pageNumber, int pageSize, String ten) {
+        return repo.pagination(ma, pageNumber, pageSize, ten);
     }
-
-   
 
 }
