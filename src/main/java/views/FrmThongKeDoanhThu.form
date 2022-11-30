@@ -58,7 +58,7 @@
                       <Component id="cb_nam" linkSize="1" min="-2" pref="108" max="-2" attributes="0"/>
                   </Group>
                   <Component id="tableScrollButton1" alignment="0" pref="0" max="32767" attributes="0"/>
-                  <Component id="jLabel2" alignment="1" max="32767" attributes="0"/>
+                  <Component id="lbl_chitietdoanhthu" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -93,7 +93,7 @@
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_chitietdoanhthu" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="tableScrollButton1" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -305,13 +305,13 @@
         </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="lbl_chitietdoanhthu">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="14" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Chi ti&#x1ebf;t doanh thu"/>
+        <Property name="text" type="java.lang.String" value="Chi ti&#x1ebf;t doanh thu n&#x103;m 2022"/>
       </Properties>
     </Component>
   </SubComponents>

@@ -116,7 +116,7 @@ public class FrmThongKeDoanhThu extends javax.swing.JPanel {
         tableScrollButton1 = new swing.TableScrollButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_chitietdoanhthu = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
+        lbl_chitietdoanhthu = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -183,9 +183,9 @@ public class FrmThongKeDoanhThu extends javax.swing.JPanel {
 
         tableScrollButton1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Chi tiết doanh thu");
+        lbl_chitietdoanhthu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbl_chitietdoanhthu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_chitietdoanhthu.setText("Chi tiết doanh thu năm 2022");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -221,7 +221,7 @@ public class FrmThongKeDoanhThu extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cb_nam, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(tableScrollButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lbl_chitietdoanhthu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -252,7 +252,7 @@ public class FrmThongKeDoanhThu extends javax.swing.JPanel {
                         .addComponent(pieChart1, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
+                        .addComponent(lbl_chitietdoanhthu)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tableScrollButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -270,6 +270,7 @@ public class FrmThongKeDoanhThu extends javax.swing.JPanel {
         }
         showDoanhThu();
         loadDoanhThu();
+        lbl_chitietdoanhthu.setText("Chi tiết doanh thu năm "+cb_nam.getSelectedItem());
     }//GEN-LAST:event_cb_namItemStateChanged
 
     private void cb_ngayItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_ngayItemStateChanged
@@ -295,8 +296,8 @@ public class FrmThongKeDoanhThu extends javax.swing.JPanel {
     private swing.Card doanhthungay;
     private swing.Card doanhthuthang;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbl_chitietdoanhthu;
     private javax.swing.JLabel lbl_tenbieudo;
     private swing.PieChart pieChart1;
     private swing.TableScrollButton tableScrollButton1;
