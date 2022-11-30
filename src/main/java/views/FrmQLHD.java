@@ -356,6 +356,7 @@ public class FrmQLHD extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_TimkiemActionPerformed
 
     private void txt_TimkiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_TimkiemCaretUpdate
+        chk_Khachhangle.setSelected(false);
         String maAndTen = txt_Timkiem.getText().trim();
         loadDataToHD(this.iHoaDonService.findByMaAndTen(maAndTen));
     }//GEN-LAST:event_txt_TimkiemCaretUpdate
