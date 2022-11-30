@@ -139,7 +139,12 @@ public class FrmQLHD extends javax.swing.JPanel {
 
         lblKhuyenmai.setText(String.valueOf(khuyenmai));
 
-        lblThanhtoan.setText(String.valueOf(tongTien));
+        if (hd.getTrangThai() == 1) {
+            lblThanhtoan.setText(String.valueOf(tongTien));
+        } else {
+            lblThanhtoan.setText("0.0");
+        }
+        
 
     }
 
