@@ -30,19 +30,15 @@
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lbl_tenbieudo" alignment="0" pref="462" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="chuatt" pref="150" max="32767" attributes="0"/>
+                              <Component id="chuatt" pref="208" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="datt" pref="150" max="32767" attributes="0"/>
+                              <Component id="datt" pref="209" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-<<<<<<< HEAD
-                              <Component id="doanhthungay" min="-2" pref="129" max="-2" attributes="0"/>
-=======
-                              <Component id="doanhthungay" pref="150" max="32767" attributes="0"/>
->>>>>>> 8f37533625ff4b9515245d2762d581b6aa70d775
+                              <Component id="doanhthungay" pref="208" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="pieChart1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="lbl_tenbieudo" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -54,14 +50,16 @@
                       <Component id="doanhthunam" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="button1" linkSize="1" min="-2" pref="107" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="cb_ngay" linkSize="1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="cb_thang" linkSize="1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cb_nam" linkSize="1" min="-2" pref="108" max="-2" attributes="0"/>
+                      <Component id="cb_nam" linkSize="1" min="-2" pref="70" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="tableScrollButton1" alignment="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="tableScrollButton1" alignment="0" pref="491" max="32767" attributes="0"/>
                   <Component id="lbl_chitietdoanhthu" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -82,25 +80,25 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="doanhthuthang" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="cb_ngay" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cb_thang" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cb_nam" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl_tenbieudo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="cb_ngay" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cb_thang" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cb_nam" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="button1" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="lbl_tenbieudo" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                      <Component id="pieChart1" pref="405" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="lbl_chitietdoanhthu" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="tableScrollButton1" pref="0" max="32767" attributes="0"/>
+                      <Component id="tableScrollButton1" pref="372" max="32767" attributes="0"/>
                   </Group>
+                  <Component id="jPanel1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -156,12 +154,6 @@
         </Property>
       </Properties>
     </Component>
-    <Container class="swing.PieChart" name="pieChart1">
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-        <Property name="useNullLayout" type="boolean" value="true"/>
-      </Layout>
-    </Container>
     <Component class="swing.Combobox" name="cb_nam">
       <Properties>
         <Property name="labeText" type="java.lang.String" value="N&#x103;m"/>
@@ -181,9 +173,6 @@
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="BI&#x1ec2;U &#x110;&#x1ed2; C&#x1a0; C&#x1ea4;U DOANH THU N&#x102;M "/>
       </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbl_tenbieudoMouseClicked"/>
-      </Events>
     </Component>
     <Component class="swing.Combobox" name="cb_thang">
       <Properties>
@@ -318,5 +307,47 @@
         <Property name="text" type="java.lang.String" value="Chi ti&#x1ebf;t doanh thu n&#x103;m 2022"/>
       </Properties>
     </Component>
+    <Component class="swing.Button" name="button1">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="66" green="66" red="0" type="rgb"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Bi&#x1ec3;u &#x111;&#x1ed3; c&#x1ed9;t"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button1ActionPerformed"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JPanel" name="jPanel1">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Component id="pieChart1" alignment="0" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Component id="pieChart1" alignment="0" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Container class="swing.PieChart" name="pieChart1">
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+            <Property name="useNullLayout" type="boolean" value="true"/>
+          </Layout>
+        </Container>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>

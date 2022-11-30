@@ -16,25 +16,25 @@ import services.impl.ChiTietDepService;
  *
  * @author VU NGUYEN HUONG
  */
-public class Chart extends java.awt.Dialog {
+public class ChartSanPham extends java.awt.Dialog {
 
-    public static IChiTietDepService iChiTietDepService = new ChiTietDepService();
+    private static IChiTietDepService iChiTietDepService = new ChiTietDepService();
 
     /**
      * Creates new form Chart
      */
-    public Chart(java.awt.Frame parent, boolean modal) {
+    public ChartSanPham(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         ChartPanel chartPanel = new ChartPanel(createChart());
-        chartPanel.setPreferredSize(new java.awt.Dimension(960, 467));
+        chartPanel.setPreferredSize(new java.awt.Dimension(chart.getWidth(), chart.getHeight()));
         chart.add(chartPanel);
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Biểu đồ Top 5 sản phẩm bán chạy nhất");
     }
 
-    public static JFreeChart createChart() {
+    private static JFreeChart createChart() {
         JFreeChart barChart = ChartFactory.createBarChart(
                 "BIỂU ĐỒ TOP 5 SẢN PHẨM",
                 "Tên sản phẩm", "Số lượng",
@@ -76,14 +76,14 @@ public class Chart extends java.awt.Dialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 1072, Short.MAX_VALUE)
+                .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 1094, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
+                .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 487, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -115,7 +115,7 @@ public class Chart extends java.awt.Dialog {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Chart dialog = new Chart(new java.awt.Frame(), true);
+                ChartSanPham dialog = new ChartSanPham(new java.awt.Frame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);

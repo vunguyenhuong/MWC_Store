@@ -105,7 +105,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         Table.apply(jScrollPane2, Table.TableType.MULTI_LINE);
         Table.apply(jScrollPane3, Table.TableType.MULTI_LINE);
         loadSP(iChiTietDepService.findByTT(0, ""));
-        loadHD(iHoaDonService.getAll());
+        loadHD(iHoaDonService.getByTT(0));
     }
 
     public FrmHome() {
@@ -121,6 +121,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         Table.apply(jScrollPane2, Table.TableType.MULTI_LINE);
         Table.apply(jScrollPane3, Table.TableType.MULTI_LINE);
         loadSP(iChiTietDepService.findByTT(0, ""));
+        loadHD(iHoaDonService.getByTT(0));
     }
 
     private void init() {
@@ -421,7 +422,6 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         tb_giohang.clearSelection();
         tb_hoadon.clearSelection();
         tb_sanpham.clearSelection();
-        cb_trangthai.setSelectedIndex(0);
         khachHang = null;
         khuyenMai = null;
         txt_makh.setText("");
@@ -485,7 +485,6 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         tableScrollButton1 = new swing.TableScrollButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_hoadon = new javax.swing.JTable();
-        cb_trangthai = new swing.Combobox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MWC_Store");
@@ -907,36 +906,21 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
 
         tableScrollButton1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        cb_trangthai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tất cả", "Chưa thanh toán", "Đã thanh toán" }));
-        cb_trangthai.setLabeText("Trạng thái");
-        cb_trangthai.setLineColor(new java.awt.Color(102, 102, 102));
-        cb_trangthai.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb_trangthaiActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(347, 347, 347)
-                        .addComponent(cb_trangthai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cb_trangthai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7))
+                .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -1053,7 +1037,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             hd.setNguoiDung(nguoiDung);
             hd.setKhachHang(khachHang);
             iHoaDonService.save(hd);
-            loadHD(iHoaDonService.getAll());
+            loadHD(iHoaDonService.getByTT(0));
             txt_giamgia.setText("0");
             NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Tạo hóa đơn thành công !");
             panel.showNotification();
@@ -1180,11 +1164,11 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                     hd.setTongTien(BigDecimal.valueOf(phaiTra));
                     for (HoaDonChiTiet x : listHDCT) {
                         ChiTietDep ctd = x.getCtdep();
-                        ctd.setSoLuongBanRa(ctd.getSoLuongBanRa()+x.getSoLuong());
+                        ctd.setSoLuongBanRa(ctd.getSoLuongBanRa() + x.getSoLuong());
                         iChiTietDepService.save(ctd);
                     }
                     iHoaDonService.save(hd);
-                    loadHD(iHoaDonService.getAll());
+                    loadHD(iHoaDonService.getByTT(0));
                     iKhachHangService.save(khachHang);
                     iKhuyenMaiService.save(khuyenMai);
                     NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Thanh toán thành công ! ");
@@ -1400,18 +1384,6 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         tongTien();
     }//GEN-LAST:event_tb_hoadonMousePressed
 
-    private void cb_trangthaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_trangthaiActionPerformed
-
-        if (cb_trangthai.getSelectedIndex() == -1 || cb_trangthai.getSelectedIndex() == 0) {
-            loadHD(iHoaDonService.getAll());
-        } else if (cb_trangthai.getSelectedIndex() == 1) {
-            loadHD(iHoaDonService.getByTT(0));
-        } else {
-            loadHD(iHoaDonService.getByTT(1));
-        }
-       
-    }//GEN-LAST:event_cb_trangthaiActionPerformed
-
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -1442,7 +1414,6 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
     private swing.ButtonLG btn_thanhtoan;
     private swing.Button btn_themKH;
     private swing.Button btn_themkm;
-    private swing.Combobox cb_trangthai;
     private swing.JCheckBoxCustom chk_tichluy;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

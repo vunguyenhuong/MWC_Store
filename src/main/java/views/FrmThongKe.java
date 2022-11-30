@@ -291,7 +291,7 @@ public class FrmThongKe extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_soluongCaretUpdate
 
     private void btn_xembieudotop5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xembieudotop5ActionPerformed
-        Chart chart = new Chart(null, true);
+        ChartSanPham chart = new ChartSanPham(null, true);
         chart.setVisible(true);
     }//GEN-LAST:event_btn_xembieudotop5ActionPerformed
 

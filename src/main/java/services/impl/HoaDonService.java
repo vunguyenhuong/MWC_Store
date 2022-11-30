@@ -41,26 +41,6 @@ public class HoaDonService implements IHoaDonService {
     }
 
     @Override
-    public List<HoaDon> findByName(String ma) {
-        return hoadonRepo.findByName(ma);
-    }
-
-    @Override
-    public List<HoaDon> findByMaAndTen(String ten) {
-        return hoadonRepo.getObjByMaAndKH(ten);
-    }
-
-    @Override
-    public List<HoaDon> getKH(String type) {
-        return hoadonRepo.getHDByKH(type);
-    }
-
-    @Override
-    public List<HoaDon> getHDByCombo(int trangthai, String type) {
-        return hoadonRepo.getHDCombo(trangthai, type);
-    }
-
-    @Override
     public List<HoaDon> getByTT(int trangThai) {
         return hoadonRepo.getByTT(trangThai);
     }
@@ -73,6 +53,11 @@ public class HoaDonService implements IHoaDonService {
     @Override
     public BigDecimal doanhThuTheoNgay(int ngay, int thang, int nam) {
         return hoadonRepo.doanhThuTheoNgay(ngay, thang, nam);
+    }
+
+    @Override
+    public List<HoaDon> filter(String tenNguoiDung, Date from, Date to, int trangThai) {
+        return hoadonRepo.filter(tenNguoiDung, from, to, trangThai);
     }
 
 }
