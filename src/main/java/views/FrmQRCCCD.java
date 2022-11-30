@@ -193,8 +193,6 @@ public class FrmQRCCCD extends java.awt.Dialog implements Runnable, ThreadFactor
                             nguoiDung.setHinhAnh("defaultavt.jpg");
                             nguoiDung.setMatKhau(UUID.randomUUID().toString().substring(0, 8));
                             iNguoiDungService.save(nguoiDung);
-                            webcam.close();
-                            this.dispose();
                             NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Thêm thành công!");
                             panel.showNotification();
 //                            }

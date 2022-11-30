@@ -24,19 +24,19 @@ import utilities.Helper;
  *
  */
 public class FrmNhanVien extends javax.swing.JPanel {
-
+    
     private DefaultTableModel defaultTableModel;
     private INguoiDungService nguoidungSV;
     private IChucVuService iChucVuService;
     private Helper helper;
     private String filename;
-
+    
     private Page pg = new Page();
     private int checkSearchCT = 0;
-
+    
     Integer limit = 5;
     Integer totalData = 0;
-
+    
     public FrmNhanVien() {
         initComponents();
         nguoidungSV = new NguoiDungService();
@@ -46,9 +46,9 @@ public class FrmNhanVien extends javax.swing.JPanel {
         pagination(txt_timkiem.getText());
         pagination1.setPagegination(1, pg.getTotalPage());
         pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
-
+        
     }
-
+    
     public void pagination(String ten) {
         totalData = nguoidungSV.findByName("CV2", ten).size();
         int totalPage = (int) Math.ceil(totalData.doubleValue() / limit);
@@ -68,7 +68,19 @@ public class FrmNhanVien extends javax.swing.JPanel {
             }
         });
     }
-
+    
+    public void clearForm() {
+        txt_ma.setText("");
+        txt_ten.setText("");
+        txt_diachi.setText("");
+        txt_email.setText("");
+        txt_sdt.setText("");
+        txt_matkhau.setText("");
+        cb_trangthai.setSelectedIndex(0);
+        rd_nam.setSelected(true);
+        lblHinhAnh.setIcon(null);
+    }
+    
     public void LoadData(List<NguoiDung> list) {
         defaultTableModel = (DefaultTableModel) tb_nhanvien.getModel();
         defaultTableModel.setRowCount(0);
@@ -82,7 +94,7 @@ public class FrmNhanVien extends javax.swing.JPanel {
             });
         }
     }
-
+    
     public NguoiDung getForm() {
         NguoiDung nguoidung = new NguoiDung();
         nguoidung.setMa(txt_ma.getText());
@@ -109,7 +121,7 @@ public class FrmNhanVien extends javax.swing.JPanel {
         nguoidung.setHinhAnh("defaultavt.jpg");
         return nguoidung;
     }
-
+    
     private boolean checkNull() {
         if (helper.checkNull(txt_ma, "Mã") || helper.checkNull(txt_ten, "Tên") || helper.checkNull(txt_email, "Email") || helper.checkNull(txt_sdt, "Số điện thoại") || helper.checkNull(txt_matkhau, "Mật khẩu")
                 || helper.checkRegex(txt_ten, "(\\S+ )*\\S+", "Tên không hợp lệ!")) {
@@ -130,9 +142,9 @@ public class FrmNhanVien extends javax.swing.JPanel {
             return true;
         }
         return false;
-
+        
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -398,17 +410,7 @@ public class FrmNhanVien extends javax.swing.JPanel {
         System.out.println("Đã quét xong");
         LoadData(nguoidungSV.getListNhanVien("CV2"));
     }//GEN-LAST:event_btn_scanqrActionPerformed
-    public void clearForm() {
-        tb_nhanvien.setRowSelectionAllowed(false);
-        txt_ma.setText("");
-        txt_ten.setText("");
-        txt_email.setText("");
-        txt_sdt.setText("");
-        txt_diachi.setText("");
-        txt_matkhau.setText("");
-        rd_nam.setSelected(true);
-        cb_trangthai.setSelectedIndex(0);
-    }
+
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
         if (checkNull()) {
             return;
@@ -416,6 +418,7 @@ public class FrmNhanVien extends javax.swing.JPanel {
         if (nguoidungSV.getObj(txt_ma.getText()) == null) {
             this.nguoidungSV.save(getForm());
             pagination(txt_timkiem.getText());
+            clearForm();
             NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Thêm thành công");
             panel.showNotification();
         } else {
@@ -452,6 +455,7 @@ public class FrmNhanVien extends javax.swing.JPanel {
         nd.setMatKhau(txt_matkhau.getText());
         this.nguoidungSV.save(nd);
         pagination(txt_timkiem.getText());
+        clearForm();
         NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công");
         panel.showNotification();
     }//GEN-LAST:event_btn_suaActionPerformed
@@ -467,6 +471,7 @@ public class FrmNhanVien extends javax.swing.JPanel {
             if (helper.confirm(this, "Xác nhận xóa")) {
                 nguoidungSV.delete(nguoiDung);
                 pagination(txt_timkiem.getText());
+                clearForm();
                 NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Xóa thành công");
                 panel.showNotification();
             }
