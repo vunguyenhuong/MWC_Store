@@ -3,7 +3,10 @@ package views;
 import java.awt.Color;
 import java.math.BigDecimal;
 import java.util.Calendar;
+import java.util.Random;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import services.IHoaDonCTService;
 import services.IHoaDonService;
 import services.impl.HoaDonCTService;
@@ -16,7 +19,7 @@ import ui.ModelCard;
  *
  * @author VU NGUYEN HUONG
  */
-public class FrmThongKeHoaDon extends javax.swing.JPanel {
+public class FrmThongKeDoanhThu extends javax.swing.JPanel {
 
     private IHoaDonService iHoaDonService = new HoaDonService();
     private IHoaDonCTService iHoaDonCTService = new HoaDonCTService();
@@ -24,11 +27,12 @@ public class FrmThongKeHoaDon extends javax.swing.JPanel {
     private DefaultComboBoxModel comboThang;
     private DefaultComboBoxModel comboNam;
     private Calendar calendar = Calendar.getInstance();
+    Random obj = new Random();
 
-    public FrmThongKeHoaDon() {
+    public FrmThongKeDoanhThu() {
         initComponents();
-        chuatt.setData(new ModelCard("Chưa thanh toán", iHoaDonService.getByTT(0).size(), null));
-        datt.setData(new ModelCard("Đã thanh toán", iHoaDonService.getByTT(1).size(), null));
+        chuatt.setData(new ModelCard("HD chưa thanh toán", iHoaDonService.getByTT(0).size(), new ImageIcon(getClass().getResource("/icons/bill.png"))));
+        datt.setData(new ModelCard("HD đã thanh toán", iHoaDonService.getByTT(1).size(), new ImageIcon(getClass().getResource("/icons/paidbill.png"))));
         addYear();
         chartDoanhThu();
         lbl_tenbieudo.setText("BIỂU ĐỒ CƠ CẤU DOANH THU NĂM " + calendar.get(Calendar.YEAR));
@@ -53,8 +57,10 @@ public class FrmThongKeHoaDon extends javax.swing.JPanel {
         pieChart1.clearData();
         pieChart1.setChartType(PieChart.PeiChartType.DEFAULT);
         for (int i = 1; i <= 12; i++) {
+            int rand_num = obj.nextInt(0xffffff + 1);
+            String colorCode = String.format("#%06x", rand_num);
             bd = iHoaDonService.doanhThuTheoThang(i, Integer.parseInt(comboNam.getSelectedItem().toString()));
-            pieChart1.addData(new ModelPieChart("Tháng " + i, bd == null ? 0 : bd.doubleValue(), new Color(23 + i * 10, 126 + i * 5, 238 - i * 3)));
+            pieChart1.addData(new ModelPieChart("Tháng " + i, bd == null ? 0 : bd.doubleValue(), Color.decode(colorCode)));
         }
     }
 
@@ -67,12 +73,12 @@ public class FrmThongKeHoaDon extends javax.swing.JPanel {
         BigDecimal doanhThuThang = iHoaDonService.doanhThuTheoThang(thang, nam);
         Double doanhThuNam = 0.0;
         BigDecimal doanhThu12Thang = null;
-        doanhthungay.setData(new ModelCard("Doanh thu ngày " + date, doanhthuNgay == null ? 0 : doanhthuNgay.doubleValue(), null));
-        doanhthuthang.setData(new ModelCard("Doanh thu tháng " + thang + "/" + nam, doanhThuThang == null ? 0 : doanhThuThang.doubleValue(), null));
+        doanhthungay.setData(new ModelCard("Doanh thu ngày " + date, doanhthuNgay == null ? 0 : doanhthuNgay.doubleValue(), new ImageIcon(getClass().getResource("/icons/day.png"))));
+        doanhthuthang.setData(new ModelCard("Doanh thu tháng " + thang + "/" + nam, doanhThuThang == null ? 0 : doanhThuThang.doubleValue(), new ImageIcon(getClass().getResource("/icons/month.png"))));
         for (int i = 1; i <= 12; i++) {
             doanhThu12Thang = iHoaDonService.doanhThuTheoThang(i, Integer.parseInt(comboNam.getSelectedItem().toString()));
             doanhThuNam += doanhThu12Thang == null ? 0 : doanhThu12Thang.doubleValue();
-            doanhthunam.setData(new ModelCard("Doanh thu năm " + nam, doanhThuNam == null ? 0 : doanhThuNam.doubleValue(), null));
+            doanhthunam.setData(new ModelCard("Doanh thu năm " + nam, doanhThuNam == null ? 0 : doanhThuNam.doubleValue(), new ImageIcon(getClass().getResource("/icons/year.png"))));
         }
     }
 
@@ -101,7 +107,7 @@ public class FrmThongKeHoaDon extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(4, 72, 210));
-        jLabel1.setText("Thống kê / Hóa đơn");
+        jLabel1.setText("Thống kê / Doanh thu");
 
         chuatt.setBackground(new java.awt.Color(10, 30, 214));
         chuatt.setColorGradient(new java.awt.Color(0, 153, 255));
@@ -157,28 +163,26 @@ public class FrmThongKeHoaDon extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_tenbieudo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl_tenbieudo, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(chuatt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(chuatt, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(datt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(datt, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(doanhthungay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(doanhthungay, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))
                             .addComponent(pieChart1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(doanhthuthang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(doanhthuthang, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(doanhthunam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(doanhthunam, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(cb_ngay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cb_thang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cb_nam, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(cb_nam, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
