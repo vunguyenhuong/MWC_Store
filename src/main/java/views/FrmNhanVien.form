@@ -35,9 +35,7 @@
                               <Component id="btn_them" linkSize="2" min="-2" pref="93" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btn_sua" linkSize="2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btn_xoa" linkSize="2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
                               <Component id="txt_timkiem" min="-2" pref="234" max="-2" attributes="0"/>
                               <EmptySpace pref="45" max="32767" attributes="0"/>
                               <Component id="btn_scanqr" min="-2" max="-2" attributes="0"/>
@@ -55,12 +53,8 @@
                                           <Component id="txt_sdt" linkSize="4" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="txt_diachi" max="32767" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="txt_diachi" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="cb_trangthai" linkSize="4" min="-2" pref="113" max="-2" attributes="0"/>
                                   <Component id="txt_matkhau" linkSize="4" min="-2" pref="89" max="-2" attributes="0"/>
@@ -115,7 +109,6 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="btn_them" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="btn_sua" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btn_xoa" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txt_timkiem" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="btn_scanqr" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -334,20 +327,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_suaActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="swing.Button" name="btn_xoa">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="66" green="66" red="66" type="rgb"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_xoaActionPerformed"/>
       </Events>
     </Component>
     <Component class="swing.TextField" name="txt_timkiem">
