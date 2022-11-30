@@ -44,7 +44,7 @@ public class Card extends javax.swing.JPanel {
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        lbTitle.setFont(new java.awt.Font("sansserif", 1, 16)); // NOI18N
+        lbTitle.setFont(new java.awt.Font("sansserif", 1, 15)); // NOI18N
         lbTitle.setForeground(new java.awt.Color(225, 225, 225));
         lbTitle.setText("Title");
 

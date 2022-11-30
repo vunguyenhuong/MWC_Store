@@ -55,7 +55,7 @@
     <Component class="javax.swing.JLabel" name="lbTitle">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="sansserif" size="16" style="1"/>
+          <Font name="sansserif" size="15" style="1"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="e1" green="e1" red="e1" type="rgb"/>
