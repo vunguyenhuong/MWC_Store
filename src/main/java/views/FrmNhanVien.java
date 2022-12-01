@@ -24,19 +24,19 @@ import utilities.Helper;
  *
  */
 public class FrmNhanVien extends javax.swing.JPanel {
-    
+
     private DefaultTableModel defaultTableModel;
     private INguoiDungService nguoidungSV;
     private IChucVuService iChucVuService;
     private Helper helper;
     private String filename;
-    
+
     private Page pg = new Page();
     private int checkSearchCT = 0;
-    
+
     Integer limit = 5;
     Integer totalData = 0;
-    
+
     public FrmNhanVien() {
         initComponents();
         nguoidungSV = new NguoiDungService();
@@ -46,9 +46,9 @@ public class FrmNhanVien extends javax.swing.JPanel {
         pagination(txt_timkiem.getText());
         pagination1.setPagegination(1, pg.getTotalPage());
         pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
-        
+
     }
-    
+
     public void pagination(String ten) {
         totalData = nguoidungSV.findByName("CV2", ten).size();
         int totalPage = (int) Math.ceil(totalData.doubleValue() / limit);
@@ -68,7 +68,7 @@ public class FrmNhanVien extends javax.swing.JPanel {
             }
         });
     }
-    
+
     public void clearForm() {
         txt_ma.setText("");
         txt_ten.setText("");
@@ -80,7 +80,7 @@ public class FrmNhanVien extends javax.swing.JPanel {
         rd_nam.setSelected(true);
         lblHinhAnh.setIcon(null);
     }
-    
+
     public void LoadData(List<NguoiDung> list) {
         defaultTableModel = (DefaultTableModel) tb_nhanvien.getModel();
         defaultTableModel.setRowCount(0);
@@ -94,7 +94,7 @@ public class FrmNhanVien extends javax.swing.JPanel {
             });
         }
     }
-    
+
     public NguoiDung getForm() {
         NguoiDung nguoidung = new NguoiDung();
         nguoidung.setMa(txt_ma.getText());
@@ -121,7 +121,7 @@ public class FrmNhanVien extends javax.swing.JPanel {
         nguoidung.setHinhAnh("defaultavt.jpg");
         return nguoidung;
     }
-    
+
     private boolean checkNull() {
         if (helper.checkNull(txt_ma, "Mã") || helper.checkNull(txt_ten, "Tên") || helper.checkNull(txt_email, "Email") || helper.checkNull(txt_sdt, "Số điện thoại") || helper.checkNull(txt_matkhau, "Mật khẩu")
                 || helper.checkRegex(txt_ten, "(\\S+ )*\\S+", "Tên không hợp lệ!")) {
@@ -142,9 +142,9 @@ public class FrmNhanVien extends javax.swing.JPanel {
             return true;
         }
         return false;
-        
+
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -421,27 +421,35 @@ public class FrmNhanVien extends javax.swing.JPanel {
         if (checkNull()) {
             return;
         }
-        NguoiDung nd = nguoidungSV.getObj(tb_nhanvien.getValueAt(row, 1).toString());
-        nd.setTen(txt_ten.getText());
-        nd.setDiaChi(txt_diachi.getText());
-        nd.setEmail(txt_email.getText());
-        nd.setSdt(txt_sdt.getText());
-        if (rd_nam.isSelected()) {
-            nd.setGioiTinh(0);
+
+        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có muốn cập nhât không ?", "Confirm", JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            NguoiDung nd = nguoidungSV.getObj(tb_nhanvien.getValueAt(row, 1).toString());
+            nd.setTen(txt_ten.getText());
+            nd.setDiaChi(txt_diachi.getText());
+            nd.setEmail(txt_email.getText());
+            nd.setSdt(txt_sdt.getText());
+            if (rd_nam.isSelected()) {
+                nd.setGioiTinh(0);
+            } else {
+                nd.setGioiTinh(1);
+            }
+            if (cb_trangthai.getSelectedItem().equals("Đang làm")) {
+                nd.setTrangThai(0);
+            } else {
+                nd.setTrangThai(1);
+            }
+            nd.setMatKhau(txt_matkhau.getText());
+            this.nguoidungSV.save(nd);
+            pagination(txt_timkiem.getText());
+            clearForm();
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công");
+            panel.showNotification();
         } else {
-            nd.setGioiTinh(1);
+            return;
         }
-        if (cb_trangthai.getSelectedItem().equals("Đang làm")) {
-            nd.setTrangThai(0);
-        } else {
-            nd.setTrangThai(1);
-        }
-        nd.setMatKhau(txt_matkhau.getText());
-        this.nguoidungSV.save(nd);
-        pagination(txt_timkiem.getText());
-        clearForm();
-        NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công");
-        panel.showNotification();
+
     }//GEN-LAST:event_btn_suaActionPerformed
 
     private void txt_timkiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_timkiemCaretUpdate

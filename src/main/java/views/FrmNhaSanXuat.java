@@ -3,6 +3,7 @@ package views;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.NhaSX;
 import services.INhaSXService;
@@ -273,19 +274,27 @@ public class FrmNhaSanXuat extends javax.swing.JPanel {
         if (checkNull()) {
             return;
         }
-        n.setTen(txt_Ten.getText());
-        n.setNgaySuaCuoi(new Date());
-        if (rd_Dangnhap.isSelected()) {
-            n.setTrangThai(0);
-        } else {
-            n.setTrangThai(1);
-        }
-        iNhaSXService.save(n);
 
-        pagination(txt_Timkiem.getText());
-        NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công");
-        panel.showNotification();
-        clear();
+        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có muốn cập nhật không ?", "Confirm", JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            n.setTen(txt_Ten.getText());
+            n.setNgaySuaCuoi(new Date());
+            if (rd_Dangnhap.isSelected()) {
+                n.setTrangThai(0);
+            } else {
+                n.setTrangThai(1);
+            }
+            iNhaSXService.save(n);
+
+            pagination(txt_Timkiem.getText());
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công");
+            panel.showNotification();
+            clear();
+        } else {
+            return;
+        }
+
     }//GEN-LAST:event_btn_updateActionPerformed
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed

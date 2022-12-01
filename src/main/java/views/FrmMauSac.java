@@ -3,6 +3,7 @@ package views;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.MauSac;
 import services.IMauSacService;
@@ -249,17 +250,25 @@ public class FrmMauSac extends javax.swing.JPanel {
         if (checkNull()) {
             return;
         }
-        m.setTen(txt_Ten.getText());
-        m.setNgaySuaCuoi(new Date());
-        if (rd_DangKinhDoanh.isSelected()) {
-            m.setTrangThai(0);
+
+        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có muốn cập nhật không ?", "Confirm", JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            m.setTen(txt_Ten.getText());
+            m.setNgaySuaCuoi(new Date());
+            if (rd_DangKinhDoanh.isSelected()) {
+                m.setTrangThai(0);
+            } else {
+                m.setTrangThai(1);
+            }
+            iMauSacService.save(m);
+            pagination(txt_search.getText());
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công!");
+            panel.showNotification();
         } else {
-            m.setTrangThai(1);
+            return;
         }
-        iMauSacService.save(m);
-        pagination(txt_search.getText());
-        NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công!");
-        panel.showNotification();
+
     }//GEN-LAST:event_btn_updateActionPerformed
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed

@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.Size;
 import services.ISizeService;
@@ -26,7 +27,7 @@ public class FrmSize extends javax.swing.JPanel {
     private DefaultTableModel tableModel = new DefaultTableModel();
     private ButtonGroup group = new ButtonGroup();
     private SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-    
+
     private Page pg = new Page();
     Integer limit = 2;
     Integer totalData = 0;
@@ -46,7 +47,7 @@ public class FrmSize extends javax.swing.JPanel {
         helper = new Helper();
         Table.apply(jScrollPane1, Table.TableType.MULTI_LINE);
     }
-    
+
     public void pagination() {
         totalData = sizeService.getListSize().size();
         int totalPage = (int) Math.ceil(totalData.doubleValue() / limit);
@@ -272,17 +273,25 @@ public class FrmSize extends javax.swing.JPanel {
         if (check()) {
             return;
         }
-        size.setKichCo(Float.valueOf(txt_KichCo.getText()));
-        size.setNgaySuaCuoi(new Date());
-        if (rd_DangKinhDoanh.isSelected()) {
-            size.setTrangThai(0);
+
+        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có muốn cập nhật không ?", "Confirm", JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            size.setKichCo(Float.valueOf(txt_KichCo.getText()));
+            size.setNgaySuaCuoi(new Date());
+            if (rd_DangKinhDoanh.isSelected()) {
+                size.setTrangThai(0);
+            } else {
+                size.setTrangThai(1);
+            }
+            sizeService.save(size);
+            pagination();
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công");
+            panel.showNotification();
         } else {
-            size.setTrangThai(1);
+            return;
         }
-        sizeService.save(size);
-        pagination();
-        NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công");
-        panel.showNotification();
+
     }//GEN-LAST:event_btn_updateActionPerformed
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
