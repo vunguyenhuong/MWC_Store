@@ -19,7 +19,7 @@ public class MauSacRepository {
     private Transaction transaction = session.getTransaction();
 
     public List<MauSac> getAll() {
-        Query query = session.createQuery("SELECT m FROM MauSac m");
+        Query query = session.createQuery("SELECT m FROM MauSac m ORDER BY m.ngaySuaCuoi DESC");
         List<MauSac> list = query.getResultList();
         return list;
     }
