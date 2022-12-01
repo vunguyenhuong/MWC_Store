@@ -60,6 +60,7 @@ import services.impl.HoaDonService;
 import services.impl.KhachHangService;
 import services.impl.KhuyenMaiService;
 import swing.Table;
+import utilities.ExportWord;
 import utilities.Helper;
 
 /**
@@ -91,6 +92,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
     private IKhuyenMaiService iKhuyenMaiService = new KhuyenMaiService();
     private CardLayout cardLayout;
     private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    private ExportWord exportWord = new ExportWord();
     
     public FrmHome(NguoiDung nd) {
         initComponents();
@@ -1203,6 +1205,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                     iKhuyenMaiService.save(khuyenMai);
                     modelGioHang = (DefaultTableModel) tb_giohang.getModel();
                     modelGioHang.setRowCount(0);
+                    exportWord.ExportToWord(hd, Double.parseDouble(txt_giamgia.getText()), Double.parseDouble(txt_tienkhachdua.getText()), Double.parseDouble(txt_tienthua.getText()));
                     NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Thanh toán thành công ! ");
                     panel.showNotification();
                     clearForm();
