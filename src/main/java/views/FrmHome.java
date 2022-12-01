@@ -389,6 +389,12 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 panel.showNotification();
                 return;
             }
+            if(ctd.getSoLuong()==0){
+                tb_sanpham.clearSelection();
+                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Sản phẩm này đã hết hàng");
+                panel.showNotification();
+                return;
+            }
             inPutSL = helper.input(this, "Vui lòng nhập số lượng: ", "Số lượng");
             try {
                 soLuongNhap = Integer.parseInt(inPutSL);
