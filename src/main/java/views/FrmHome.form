@@ -30,7 +30,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="pn_main" alignment="0" max="32767" attributes="0"/>
+          <Component id="pn_main" alignment="0" pref="738" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -60,7 +60,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="736" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="738" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -268,7 +268,7 @@
                               <Component id="btn_themkm" max="32767" attributes="0"/>
                               <Component id="txt_tienthua" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="164" max="32767" attributes="0"/>
+                          <EmptySpace pref="166" max="32767" attributes="0"/>
                           <Component id="btn_thanhtoan" min="-2" pref="35" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -686,11 +686,11 @@
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="txt_sp_timkiem" min="-2" pref="46" max="-2" attributes="0"/>
                               <Component id="cb_loc_soLuong" max="32767" attributes="0"/>
-                              <Component id="txt_sp_timkiem" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="tableScrollButton3" min="-2" pref="217" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>

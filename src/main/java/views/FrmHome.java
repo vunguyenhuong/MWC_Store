@@ -60,6 +60,7 @@ import services.impl.HoaDonService;
 import services.impl.KhachHangService;
 import services.impl.KhuyenMaiService;
 import swing.Table;
+import utilities.ExportWord;
 import utilities.Helper;
 
 /**
@@ -91,6 +92,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
     private IKhuyenMaiService iKhuyenMaiService = new KhuyenMaiService();
     private CardLayout cardLayout;
     private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    private ExportWord exportWord = new ExportWord();
     
     public FrmHome(NguoiDung nd) {
         initComponents();
@@ -522,7 +524,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 736, Short.MAX_VALUE)
+            .addGap(0, 738, Short.MAX_VALUE)
         );
 
         pn_main.add(bg, "general");
@@ -747,7 +749,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                     .addComponent(lbl_removekm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_themkm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txt_tienthua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
                 .addComponent(btn_thanhtoan, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -902,11 +904,11 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cb_loc_soLuong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txt_sp_timkiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(tableScrollButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_sp_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_loc_soLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tableScrollButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1004,7 +1006,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pn_main, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pn_main, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
         );
 
         pack();
@@ -1203,6 +1205,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                     iKhuyenMaiService.save(khuyenMai);
                     modelGioHang = (DefaultTableModel) tb_giohang.getModel();
                     modelGioHang.setRowCount(0);
+                    exportWord.ExportToWord(hd, Double.parseDouble(txt_giamgia.getText()), Double.parseDouble(txt_tienkhachdua.getText()), Double.parseDouble(txt_tienthua.getText()));
                     NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Thanh toán thành công ! ");
                     panel.showNotification();
                     clearForm();
