@@ -1,6 +1,7 @@
 package views;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.KhachHang;
 import services.IKhachHangService;
@@ -251,13 +252,21 @@ public class FrmQLKH extends javax.swing.JPanel {
         if (row == -1) {
             NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Chọn dòng ");
             panel.showNotification();
-        } else {
+        }
+
+        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không ?", "Confirm", JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
             KhachHang kh = iKhachHangService.getObj((String) tbl_Khachhang.getValueAt(row, 1));
             iKhachHangService.delete(kh);
             pagination(txt_Search.getText());
             NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Xóa thành công");
             panel.showNotification();
+        } else {
+            return;
         }
+
+
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
@@ -266,15 +275,23 @@ public class FrmQLKH extends javax.swing.JPanel {
             helper.error(this, "Chọn 1 dòng khách hàng");
             return;
         }
-        KhachHang kh = this.getDataFromInput();
-        KhachHang khach = iKhachHangService.getObj(txt_Ma.getText().trim());
-        khach.setTen(kh.getTen());
-        khach.setDiaChi(kh.getDiaChi());
-        khach.setSoDt(kh.getSoDt());
-        this.iKhachHangService.save(khach);
-        pagination(txt_Search.getText());
-        NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công");
-        panel.showNotification();
+        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có muốn cập nhật không ?", "Confirm", JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            KhachHang kh = this.getDataFromInput();
+            KhachHang khach = iKhachHangService.getObj(txt_Ma.getText().trim());
+            khach.setTen(kh.getTen());
+            khach.setDiaChi(kh.getDiaChi());
+            khach.setSoDt(kh.getSoDt());
+            this.iKhachHangService.save(khach);
+            pagination(txt_Search.getText());
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công");
+            panel.showNotification();
+        } else {
+            return;
+        }
+
+
     }//GEN-LAST:event_btn_updateActionPerformed
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed

@@ -3,6 +3,7 @@ package views;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.ChatLieu;
 import services.IChatLieuService;
@@ -281,14 +282,22 @@ public class FrmChatLieu extends javax.swing.JPanel {
             panel.showNotification();
             return;
         }
-        ChatLieu cl = chatLieuService.getObject(ma);
-        cl.setTen(chatLieu.getTen());
-        cl.setTrangThai(chatLieu.getTrangThai());
-        cl.setNgaySuaCuoi(chatLieu.getNgaySuaCuoi());
-        chatLieuService.save(cl);
-        pagination(txt_search.getText());
-        NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập Nhật Thành Công !");
-        panel.showNotification();
+
+        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có muốn cập nhật không ?", "Confirm", JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            ChatLieu cl = chatLieuService.getObject(ma);
+            cl.setTen(chatLieu.getTen());
+            cl.setTrangThai(chatLieu.getTrangThai());
+            cl.setNgaySuaCuoi(chatLieu.getNgaySuaCuoi());
+            chatLieuService.save(cl);
+            pagination(txt_search.getText());
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập Nhật Thành Công !");
+            panel.showNotification();
+        } else {
+            return;
+        }
+
 
     }//GEN-LAST:event_btn_updateActionPerformed
 
