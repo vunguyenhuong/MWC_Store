@@ -28,4 +28,6 @@ public interface IHoaDonService {
     BigDecimal doanhThuTheoThang(int thang, int nam);
     
     BigDecimal doanhThuTheoNgay(int ngay, int thang, int nam);
+    
+    List<HoaDon> pagination(int pageNumber, int pageSize, String tenNguoiDung, Date from, Date to, int trangThai);
 }
