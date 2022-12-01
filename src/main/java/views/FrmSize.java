@@ -29,7 +29,7 @@ public class FrmSize extends javax.swing.JPanel {
     private SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 
     private Page pg = new Page();
-    Integer limit = 2;
+    Integer limit = 5;
     Integer totalData = 0;
 
     /**
