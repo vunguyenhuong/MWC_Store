@@ -1,37 +1,38 @@
 package views;
 
 import java.text.DateFormat;
-import java.text.ParseException;
+
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
+
 import javax.swing.table.DefaultTableModel;
 import models.ChiTietDep;
-import models.Dep;
+
 import models.HoaDon;
 import models.HoaDonChiTiet;
-import models.KhachHang;
-import models.KhuyenMai;
+
 import services.IChiTietDepService;
-import services.IDepService;
+
 import services.IHoaDonCTService;
 import services.IHoaDonService;
 import services.IKhuyenMaiService;
 import services.impl.ChiTietDepService;
-import services.impl.DepService;
+
 import services.impl.HoaDonCTService;
 import services.impl.HoaDonService;
 import services.impl.KhuyenMaiService;
 import swing.Table;
+import ui.EventPagination;
 import ui.NotificationMess;
+import ui.Page;
+import ui.PaginationItemRenderStyle1;
 import utilities.Helper;
 
 /**
@@ -48,6 +49,11 @@ public class FrmQLHD extends javax.swing.JPanel {
     private Helper helper = new Helper();
     private IKhuyenMaiService iKhuyenMaiService;
     private IChiTietDepService iChiTietDepService = new ChiTietDepService();
+
+    private Page pg = new Page();
+
+    Integer limit = 5;
+    Integer totalData = 0;
 
     /**
      * Creates new form FrmQLHD
@@ -68,9 +74,10 @@ public class FrmQLHD extends javax.swing.JPanel {
         }
 
         loadComboboxTrangThai();
-        loadDataToHD(iHoaDonService.getAll());
-//        loadDataKH();
-//        locTrangThai();
+
+        pagination(txt_Timkiem.getText(), null, null, 0);
+        pagination1.setPagegination(1, pg.getTotalPage());
+        pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
 
     }
 
@@ -81,6 +88,27 @@ public class FrmQLHD extends javax.swing.JPanel {
         comboHD.addElement("Chưa thanh toán");
         comboHD.addElement("Đã thanh toán");
         comboHD.addElement("Đã hủy");
+    }
+
+    public void pagination(String ten, Date from, Date to, int trangthai) {
+        totalData = iHoaDonService.filter(ten, from, to, trangthai).size();
+        int totalPage = (int) Math.ceil(totalData.doubleValue() / limit);
+        pg.setTotalPage(totalPage);
+        if (pg.getTotalPage() < pg.getCurrent()) {
+            pagination1.setPagegination(pg.getTotalPage(), pg.getTotalPage());
+            loadDataToHD(iHoaDonService.pagination(pg.getTotalPage(), limit, ten, from, to, trangthai));
+        } else {
+            pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
+            loadDataToHD(iHoaDonService.pagination(pg.getCurrent(), limit, ten, from, to, trangthai));
+        }
+
+        pagination1.addEventPagination(new EventPagination() {
+            @Override
+            public void pageChanged(int page) {
+                loadDataToHD(iHoaDonService.pagination(page, limit, ten, from, to, trangthai));
+                pg.setCurrent(page);
+            }
+        });
     }
 
     private String checkTrangThai(int trangThai) {
@@ -141,29 +169,25 @@ public class FrmQLHD extends javax.swing.JPanel {
         } catch (Exception e) {
         }
 
-        if (jdate_from.getDate() == null || jdate_to.getDate() == null) {
-            if (index == -1 || index == 0) {
-                loadDataToHD(iHoaDonService.getAll());
-            } else if (index == 1) {
-                loadDataToHD(iHoaDonService.getByTT(0));
-            } else if (index == 2) {
-                loadDataToHD(iHoaDonService.getByTT(1));
-            } else {
-                loadDataToHD(iHoaDonService.getByTT(2));
-            }
-        } else if (index == 0) {
-
-            loadDataToHD(iHoaDonService.filter(txt_Timkiem.getText(), dateFrom, dateTo, -1));
-
+//        if (jdate_from.getDate() == null || jdate_to.getDate() == null) {
+//            if (index == -1 || index == 0) {
+//                loadDataToHD(iHoaDonService.getAll());
+//            } else if (index == 1) {
+//                loadDataToHD(iHoaDonService.getByTT(0));
+//            } else if (index == 2) {
+//                loadDataToHD(iHoaDonService.getByTT(1));
+//            } else {
+//                loadDataToHD(iHoaDonService.getByTT(2));
+//            }
+//        } else 
+        if (index == 0) {
+            pagination(txt_Timkiem.getText(), dateFrom, dateTo, -1);
         } else if (index == 1) {
-            loadDataToHD(iHoaDonService.filter(txt_Timkiem.getText(), dateFrom, dateTo, 0));
-
+            pagination(txt_Timkiem.getText(), dateFrom, dateTo, 0);
         } else if (index == 2) {
-            loadDataToHD(iHoaDonService.filter(txt_Timkiem.getText(), dateFrom, dateTo, 1));
-
+            pagination(txt_Timkiem.getText(), dateFrom, dateTo, 1);
         } else {
-            loadDataToHD(iHoaDonService.filter(txt_Timkiem.getText(), dateFrom, dateTo, 2));
-
+            pagination(txt_Timkiem.getText(), dateFrom, dateTo, 2);
         }
 
     }
@@ -227,6 +251,8 @@ public class FrmQLHD extends javax.swing.JPanel {
         lbl_Change = new javax.swing.JLabel();
         lblKhuyenmai = new javax.swing.JLabel();
         lblThanhtoan = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        pagination1 = new swing.Pagination();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -336,8 +362,7 @@ public class FrmQLHD extends javax.swing.JPanel {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel5)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(tableScrollButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -396,6 +421,27 @@ public class FrmQLHD extends javax.swing.JPanel {
         lblThanhtoan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblThanhtoan.setText("0");
 
+        jPanel3.setBackground(new java.awt.Color(153, 51, 255));
+
+        pagination1.setBackground(new java.awt.Color(153, 51, 255));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pagination1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -420,7 +466,8 @@ public class FrmQLHD extends javax.swing.JPanel {
                                 .addComponent(lbl_Change)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblThanhtoan)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -430,6 +477,8 @@ public class FrmQLHD extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -528,6 +577,7 @@ public class FrmQLHD extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private com.toedter.calendar.JDateChooser jdate_from;
@@ -537,6 +587,7 @@ public class FrmQLHD extends javax.swing.JPanel {
     private javax.swing.JLabel lblTongtien;
     private javax.swing.JLabel lbl_Change;
     private javax.swing.JLabel lbl_voucher;
+    private swing.Pagination pagination1;
     private swing.TableScrollButton tableScrollButton1;
     private swing.TableScrollButton tableScrollButton2;
     private javax.swing.JTable tb_HDCT;

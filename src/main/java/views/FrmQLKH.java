@@ -23,9 +23,8 @@ public class FrmQLKH extends javax.swing.JPanel {
     private DefaultTableModel dtm = new DefaultTableModel();
     private Helper helper;
 
-    private Page pg = new Page();
     private int checkSearchCT = 0;
-
+    private Page pg = new Page();
     Integer limit = 5;
     Integer totalData = 0;
 
