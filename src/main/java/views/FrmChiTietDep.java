@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import models.ChatLieu;
 import models.ChiTietDep;
 import models.Dep;
+import models.HoaDonChiTiet;
 import models.LoaiDep;
 import models.MauSac;
 import models.NhaSX;
@@ -19,6 +20,7 @@ import models.Size;
 import services.IChatLieuService;
 import services.IChiTietDepService;
 import services.IDepService;
+import services.IHoaDonCTService;
 import services.ILoaiDepService;
 import services.IMauSacService;
 import services.INhaSXService;
@@ -26,6 +28,7 @@ import services.ISizeService;
 import services.impl.ChatLieuService;
 import services.impl.ChiTietDepService;
 import services.impl.DepService;
+import services.impl.HoaDonCTService;
 import services.impl.LoaiDepService;
 import services.impl.MauSacService;
 import services.impl.NhaSXService;
@@ -70,6 +73,8 @@ public class FrmChiTietDep extends javax.swing.JPanel {
     private IChatLieuService iChatLieuService = new ChatLieuService();
     private INhaSXService iNhaSXService = new NhaSXService();
     private ISizeService iSizeService = new SizeService();
+    private IHoaDonCTService iHoaDonCTService = new HoaDonCTService();
+
     private Page pg = new Page();
 
     private int checkSearchCT = 0;
@@ -752,10 +757,15 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         } else {
             if (helper.confirm(this, "Xác nhận xóa")) {
                 ChiTietDep ctd = iChiTietDepService.pagination(pg.getCurrent(), limit, txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter).get(row);
-                iChiTietDepService.delete(ctd);
-                pagination();
-                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Xóa thành công");
-                panel.showNotification();
+                List<HoaDonChiTiet> listHDCT = iHoaDonCTService.getListHoaDonCT();
+                if (iChiTietDepService.delete(ctd)) {
+                    pagination();
+                    NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Xóa thành công");
+                    panel.showNotification();
+                } else {
+                    NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Xóa thất bại!");
+                    panel.showNotification();
+                }
             }
         }
     }//GEN-LAST:event_btn_ctd_xoaActionPerformed

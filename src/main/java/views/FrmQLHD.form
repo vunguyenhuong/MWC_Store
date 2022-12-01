@@ -70,18 +70,20 @@
               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               <Component id="jPanel2" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblTongtien" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                      <Component id="lbl_voucher" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblKhuyenmai" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_Change" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblThanhtoan" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lbl_voucher1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblDiemtichluy" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" alignment="3" groupAlignment="3" attributes="0">
-                          <Component id="lbl_voucher" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblKhuyenmai" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl_Change" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblThanhtoan" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                  </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblTongtien" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -143,7 +145,7 @@
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="0" pref="13" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="14" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="cbo_Trangthai" alignment="1" max="32767" attributes="0"/>
                               <Component id="btn_HuyHD" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -467,7 +469,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Khuy&#x1ebf;n m&#xe3;i :"/>
+        <Property name="text" type="java.lang.String" value="Gi&#x1ea3;m gi&#xe1;:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbl_Change">

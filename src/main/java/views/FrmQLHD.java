@@ -351,7 +351,7 @@ public class FrmQLHD extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 13, Short.MAX_VALUE)
+                        .addGap(0, 14, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(cbo_Trangthai, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btn_HuyHD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -413,7 +413,7 @@ public class FrmQLHD extends javax.swing.JPanel {
 
         lbl_voucher.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_voucher.setForeground(new java.awt.Color(255, 0, 0));
-        lbl_voucher.setText("Khuyến mãi :");
+        lbl_voucher.setText("Giảm giá:");
 
         lbl_Change.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_Change.setForeground(new java.awt.Color(255, 0, 0));
@@ -496,17 +496,18 @@ public class FrmQLHD extends javax.swing.JPanel {
                 .addGap(12, 12, 12)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(lblTongtien)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lbl_voucher)
+                        .addComponent(lblKhuyenmai)
+                        .addComponent(lbl_Change)
+                        .addComponent(lblThanhtoan))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lbl_voucher1)
-                        .addComponent(lblDiemtichluy)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbl_voucher)
-                            .addComponent(lblKhuyenmai)
-                            .addComponent(lbl_Change)
-                            .addComponent(lblThanhtoan))))
+                        .addComponent(lblDiemtichluy))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(lblTongtien)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
