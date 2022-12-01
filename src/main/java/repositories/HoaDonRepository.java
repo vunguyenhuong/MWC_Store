@@ -1,10 +1,13 @@
 package repositories;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.TemporalType;
 import models.HoaDon;
+import models.KhachHang;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -76,40 +79,49 @@ public class HoaDonRepository {
         return hd;
     }
 
-    public List<HoaDon> findByName(String ma) {
-        Query query = session.createQuery(" SELECT hd FROM HoaDon hd WHERE hd.ma like :ma ");
-        query.setParameter("ma", "%" + ma + "%");
-        List<HoaDon> list1 = query.getResultList();
-        return list1;
-    }
-
-    public List<HoaDon> getObjByMaAndKH(String ten) {
-        Query query = session.createQuery("SELECT h FROM HoaDon h WHERE h.khachHang.ten LIKE :ten or h.nguoiDung.ten like :ten");
-        query.setParameter("ten", "%" + ten + "%");
+    public List<HoaDon> filter(String tenNguoiDung, Date from, Date to, int trangThai) {
+        String hql;
+        if (trangThai == -1) {
+            hql = "SELECT h FROM HoaDon h WHERE h.nguoiDung.ten LIKE :tenNguoiDung AND h.ngayTao BETWEEN :from AND :to ";
+        } else {
+            hql = "SELECT h FROM HoaDon h WHERE h.nguoiDung.ten LIKE :tenNguoiDung AND h.ngayTao BETWEEN :from AND :to AND h.trangThai = :trangThai";
+        }
+        Query query = session.createQuery(hql);
+        query.setParameter("tenNguoiDung", "%" + tenNguoiDung + "%");
+        query.setParameter("from", from);
+        query.setParameter("to", to);
+        if (trangThai == 0 || trangThai == 1 || trangThai == 2) {
+            query.setParameter("trangThai", trangThai);
+        }
         List<HoaDon> list = query.getResultList();
-
+        return list;
+    }
+    
+    public List<HoaDon> pagination(int pageNumber, int pageSize, String tenNguoiDung, Date from, Date to, int trangThai) {
+        String hql;
+        int pageIndex = pageNumber - 1 < 0 ? 0 : pageNumber - 1;
+        int fromRecordIndex = pageIndex * pageSize;
+        if (trangThai == -1) {
+            hql = "SELECT h FROM HoaDon h WHERE h.nguoiDung.ten LIKE :tenNguoiDung AND h.ngayTao BETWEEN :from AND :to ";
+        } else {
+            hql = "SELECT h FROM HoaDon h WHERE h.nguoiDung.ten LIKE :tenNguoiDung AND h.ngayTao BETWEEN :from AND :to AND h.trangThai = :trangThai";
+        }
+        Query query = session.createQuery(hql);
+        query.setParameter("tenNguoiDung", "%" + tenNguoiDung + "%");
+        query.setParameter("from", from);
+        query.setParameter("to", to);
+        query.setFirstResult(fromRecordIndex);
+        query.setMaxResults(pageSize);
+        if (trangThai == 0 || trangThai == 1 || trangThai == 2) {
+            query.setParameter("trangThai", trangThai);
+        }
+        List<HoaDon> list = query.getResultList();
         return list;
     }
 
-    public List<HoaDon> getHDByKH(String type) {
-        Query query = session.createQuery(" SELECT h FROM HoaDon h WHERE h.khachHang" + type);
-        List<HoaDon> listHD = query.getResultList();
-
-        return listHD;
-    }
-
-    public List<HoaDon> getHDCombo(int trangthai, String typeKH) {
-        Query query = session.createQuery(" SELECT h FROM HoaDon h WHERE h.trangThai = :trangthai AND h.khachHang " + typeKH);
-        query.setParameter("trangthai", trangthai);
-        List<HoaDon> listHD = query.getResultList();
-
-        return listHD;
-    }
-
     public List<HoaDon> getByTT(int trangThai) {
-        Query query = session.createQuery(" SELECT h FROM HoaDon h WHERE h.trangThai = :trangThai");
-        query.setParameter("trangThai", trangThai
-        );
+        Query query = session.createQuery(" SELECT h FROM HoaDon h WHERE h.trangThai = :trangThai ORDER BY h.id DESC");
+        query.setParameter("trangThai", trangThai);
         List<HoaDon> list = query.getResultList();
         return list;
     }
@@ -132,10 +144,17 @@ public class HoaDonRepository {
         query.setParameter(3, ngay);
         return (BigDecimal) query.getSingleResult();
     }
+    
+    
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         HoaDonRepository hdr = new HoaDonRepository();
         BigDecimal bigDecimal = hdr.doanhThuTheoNgay(29, 11, 2022);
-        System.out.println(bigDecimal);
+        Date from = new SimpleDateFormat("yyyy-MM-dd").parse("2021-11-30");
+        Date to = new SimpleDateFormat("yyyy-MM-dd").parse("2022-11-30");
+        for (HoaDon hoaDon : hdr.filter("", from, to,0)) {
+            System.out.println(hoaDon);
+        }
+        System.out.println(hdr.filter("", from, to,0).size());
     }
 }

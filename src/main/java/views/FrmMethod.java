@@ -186,6 +186,10 @@ public class FrmMethod extends javax.swing.JFrame {
         if (nd == null) {
             showMessage(Message.MessageType.ERROR, "Tên đăng nhập không tồn tại!");
         } else {
+            if (nd.getTrangThai() == 1) {
+                showMessage(Message.MessageType.ERROR, "Bạn đã nghỉ làm không thể đăng nhập vào hệ thống !");
+                return;
+            }
             if (nd.getEmail().equals(email)) {
                 if (!txt_reset_capcha.equals(lbl_reset_capcha)) {
                     showMessage(Message.MessageType.ERROR, "Mã capcha không chính xác!");

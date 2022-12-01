@@ -50,8 +50,8 @@ public class ChiTietDepRepository {
         }
     }
 
-    public List<ChiTietDep> findByTT(int trangThai, String ten) {
-        Query query = session.createQuery("SELECT c FROM ChiTietDep c WHERE c.trangThai = :trangThai AND c.dep.ten LIKE :ten");
+    public List<ChiTietDep> findByTT(int trangThai, String ten, String typeOderBy) {
+        Query query = session.createQuery("SELECT c FROM ChiTietDep c WHERE c.trangThai = :trangThai AND c.dep.ten LIKE :ten ORDER BY c.soLuong "+typeOderBy);
         query.setParameter("trangThai", trangThai);
         query.setParameter("ten", "%" + ten + "%");
         List<ChiTietDep> list = query.getResultList();
@@ -70,6 +70,17 @@ public class ChiTietDepRepository {
         try {
             Query query = session.createQuery("SELECT c FROM ChiTietDep c WHERE c.id = :id");
             query.setParameter("id", id);
+            ctd = (ChiTietDep) query.getSingleResult();
+        } catch (Exception e) {
+        }
+        return ctd;
+    }
+    
+    public ChiTietDep getObjByMa(String ma) {
+        ChiTietDep ctd = null;
+        try {
+            Query query = session.createQuery("SELECT c FROM ChiTietDep c WHERE c.dep.ma = :ma");
+            query.setParameter("ma", ma);
             ctd = (ChiTietDep) query.getSingleResult();
         } catch (Exception e) {
         }

@@ -47,9 +47,9 @@ public class FrmThongKe extends javax.swing.JPanel {
 //        } catch (Exception e) {
 //        }
 //        doanhthungay.setData(new ModelCard("Doanh thu ngày", doanhThuNgay, null));
-        spsaphethang.setData(new ModelCard("Sản phẩm đang kinh doanh", iChiTietDepService.findByTT(0, "").size(), new ImageIcon(getClass().getResource("/icons/unpacking.png"))));
+        spsaphethang.setData(new ModelCard("Sản phẩm đang kinh doanh", iChiTietDepService.findByTT(0, "","DESC").size(), new ImageIcon(getClass().getResource("/icons/unpacking.png"))));
         spngungkd.setData(new ModelCard("Sản phẩm sắp hết hàng", 0, new ImageIcon(getClass().getResource("/icons/box.png"))));
-        spdangkd.setData(new ModelCard("Sản phẩm ngừng kinh doanh", iChiTietDepService.findByTT(1, "").size(), new ImageIcon(getClass().getResource("/icons/stop.png"))));
+        spdangkd.setData(new ModelCard("Sản phẩm ngừng kinh doanh", iChiTietDepService.findByTT(1, "","DESC").size(), new ImageIcon(getClass().getResource("/icons/stop.png"))));
         loadData(iChiTietDepService.topSPBanChay(0, 5), tb_top5sp);
     }
 
@@ -291,7 +291,7 @@ public class FrmThongKe extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_soluongCaretUpdate
 
     private void btn_xembieudotop5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xembieudotop5ActionPerformed
-        Chart chart = new Chart(null, true);
+        ChartSanPham chart = new ChartSanPham(null, true);
         chart.setVisible(true);
     }//GEN-LAST:event_btn_xembieudotop5ActionPerformed
 

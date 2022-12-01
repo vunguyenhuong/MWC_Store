@@ -21,17 +21,13 @@ public interface IHoaDonService {
     
     HoaDon getObjById(int id);
     
-    List<HoaDon> findByName(String ma);
-    
-    List<HoaDon> findByMaAndTen(String ten); 
-    
-    List<HoaDon> getKH(String type);
-    
-    List<HoaDon> getHDByCombo(int trangthai, String type);
-    
     List<HoaDon> getByTT(int trangThai);
+    
+    List<HoaDon> filter(String tenNguoiDung, Date from, Date to, int trangThai);
     
     BigDecimal doanhThuTheoThang(int thang, int nam);
     
     BigDecimal doanhThuTheoNgay(int ngay, int thang, int nam);
+    
+    List<HoaDon> pagination(int pageNumber, int pageSize, String tenNguoiDung, Date from, Date to, int trangThai);
 }
