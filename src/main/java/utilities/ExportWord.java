@@ -92,14 +92,13 @@ public class ExportWord {
         XWPFRun runNgay = ParagraphLeft.createRun();
         runNgay.setFontSize(14);
         runNgay.setFontFamily("Times New Roman");
-        String ngayTao = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(new Date());
+        String ngayTao = new SimpleDateFormat("dd/MM/yyyy  HH:mm:ss").format(new Date());
         runNgay.setText("Ngày mua:     ");
         runNgay.setText(ngayTao);
         runNgay.addTab();
         runNgay.addTab();
-        runNgay.addTab();
         String tenNhanVien = hd.getNguoiDungTT().getTen();
-        runNgay.setText("Thu ngân:  ");
+        runNgay.setText("       Thu ngân:  ");
         runNgay.setText(tenNhanVien);
         runNgay.addBreak();
 
@@ -133,7 +132,7 @@ public class ExportWord {
         colum.addBreak();
         XWPFRun ke1 = ParagraphLeft.createRun();
         ke1.setFontSize(20);
-        ke1.setText("______________________________________________");
+        ke1.setText("____________________________________________");
         ke1.addBreak();
         XWPFRun sp = ParagraphLeft.createRun();
         sp.setFontFamily("Calibri");
@@ -159,7 +158,7 @@ public class ExportWord {
         }
         XWPFRun ke = ParagraphLeft.createRun();
         ke.setFontSize(15);
-        ke.setText("______________________________________________________________");
+        ke.setText("____________________________________________________________");
         ke.addBreak();
         ke.setText("Tổng tiền:");
         ke.addTab();
