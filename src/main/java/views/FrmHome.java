@@ -215,6 +215,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                         }
                     }
                     loadSP(iChiTietDepService.findByTT(0, ""));
+                    loadHD(iHoaDonService.getByTT(0));
                     loadGioHang(txt_mahd.getText());
                     initWebcam(pn_webcam);
                 }
@@ -896,11 +897,11 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
 
             },
             new String [] {
-                "Mã", "Nhân viên", "Khách hàng", "Ngày tạo", "Trạng thái", "NV thanh toán"
+                "Mã", "Nhân viên", "Khách hàng", "Ngày tạo", "Trạng thái"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
