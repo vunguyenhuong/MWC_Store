@@ -24,9 +24,9 @@ import swing.TextField;
  * @author homna
  */
 public class ExportWord {
-    
+
     public static IHoaDonService hoaDonService = new HoaDonService();
-    
+
     public void ExportToWord(HoaDon hd, Double giamGia, Double khachDua, Double traKhach) {
         DecimalFormat df = new DecimalFormat("###,###,###");
         // Create Blank document
@@ -51,7 +51,7 @@ public class ExportWord {
         runLogo.setFontFamily("Sitka Small");
         runLogo.setText("MWC STORE");
         runLogo.addBreak();
-        
+
         XWPFRun Unicode1 = ParagraphTitle.createRun();
         Unicode1.setFontFamily("Wingdings");
         Unicode1.setText("");
@@ -60,7 +60,7 @@ public class ExportWord {
         runDiaChi.setFontFamily("sansserif");
         runDiaChi.setText("phố Trịnh Văn Bô, phường Phương Canh, quận Nam Từ Liêm, TP.Hà Nội");
         runDiaChi.addBreak();
-        
+
         XWPFRun Unicode2 = ParagraphTitle.createRun();
         Unicode2.setFontFamily("Wingdings");
         Unicode2.setText("");
@@ -69,7 +69,7 @@ public class ExportWord {
         runEmail.setFontFamily("sansserif");
         runEmail.setText("E-mail: reset.mwcstore@gmail.com");
         runEmail.addBreak();
-        
+
         XWPFRun Unicode3 = ParagraphTitle.createRun();
         Unicode3.setFontFamily("Wingdings");
         Unicode3.setText("");
@@ -79,7 +79,7 @@ public class ExportWord {
         runTel.setText("Tel: 0348 079 278");
         runTel.addBreak();
         runTel.addBreak();
-        
+
         XWPFRun runTile = ParagraphTitle.createRun();
         runTile.setFontSize(26);
         runTile.setBold(true);
@@ -98,11 +98,11 @@ public class ExportWord {
         runNgay.addTab();
         runNgay.addTab();
         runNgay.addTab();
-        String tenNhanVien = hd.getNguoiDung().getTen();
+        String tenNhanVien = hd.getNguoiDungTT().getTen();
         runNgay.setText("Thu ngân:  ");
         runNgay.setText(tenNhanVien);
         runNgay.addBreak();
-        
+
         runNgay.setText("Khách hàng:  ");
         String tenKh = hd.getKhachHang() == null ? "Khách lẻ" : hd.getKhachHang().getTen();
         runNgay.setText(tenKh);
@@ -113,7 +113,7 @@ public class ExportWord {
         runNgay.addTab();
         runNgay.setText("Mã HĐ:     " + maHd);
         runNgay.addBreak();
-        
+
         XWPFRun colum = ParagraphLeft.createRun();
         colum.setBold(true);
         colum.setFontFamily("Calibri");
@@ -224,7 +224,7 @@ public class ExportWord {
         cuoitrang.addTab();
         cuoitrang.addTab();
         cuoitrang.setText(String.valueOf(df.format(traKhach)));
-        
+
         XWPFParagraph ParagraphCamOn = document.createParagraph();
         ParagraphCamOn.setAlignment(ParagraphAlignment.CENTER);
         XWPFRun Camon = ParagraphCamOn.createRun();
@@ -247,6 +247,6 @@ public class ExportWord {
             System.out.println("Lỗi bình thường nhưng nhân 2");
             ex.printStackTrace();
         }
-        
+
     }
 }
