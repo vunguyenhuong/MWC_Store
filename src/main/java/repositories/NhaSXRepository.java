@@ -14,7 +14,7 @@ public class NhaSXRepository {
     private Transaction tra = se.getTransaction();
 
     public List<NhaSX> getAll() {
-        Query query = se.createQuery("SELECT n FROM NhaSX n");
+        Query query = se.createQuery("SELECT n FROM NhaSX n ORDER BY n.ngaySuaCuoi DESC");
         List<NhaSX> list = query.getResultList();
         return list;
     }
@@ -75,7 +75,7 @@ public class NhaSXRepository {
     }
 
     public List<NhaSX> pagination(int pageNumber, int pageSize, String ten) {
-        Query query = se.createQuery("SELECT n FROM NhaSX n WHERE n.ten like :ten");
+        Query query = se.createQuery("SELECT n FROM NhaSX n WHERE n.ten like :ten ORDER BY n.ngaySuaCuoi DESC");
         int pageIndex = pageNumber - 1 < 0 ? 0 : pageNumber - 1;
         int fromRecordIndex = pageIndex * pageSize;
         query.setFirstResult(fromRecordIndex);

@@ -132,7 +132,7 @@ public class ExportWord {
         colum.addBreak();
         XWPFRun ke1 = ParagraphLeft.createRun();
         ke1.setFontSize(20);
-        ke1.setText("____________________________________________");
+        ke1.setText("_____________________________________________");
         ke1.addBreak();
         XWPFRun sp = ParagraphLeft.createRun();
         sp.setFontFamily("Calibri");
@@ -189,6 +189,7 @@ public class ExportWord {
         thanhtoan.setFontFamily("Mongolian Baiti");
         thanhtoan.setBold(true);
         thanhtoan.setText("Tiền thanh toán:");
+        thanhtoan.addTab();
         thanhtoan.addTab();
         thanhtoan.addTab();
         thanhtoan.addTab();

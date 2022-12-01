@@ -214,6 +214,8 @@ public class FrmQLHD extends javax.swing.JPanel {
 
         tongTien = tongTien - khuyenmai - giamGia;
 
+        lblDiemtichluy.setText(String.valueOf(hd.getDiemTichLuy()));
+        
         lblKhuyenmai.setText(String.valueOf(khuyenmai + giamGia));
 
         if (hd.getTrangThai() == 1) {
@@ -253,6 +255,8 @@ public class FrmQLHD extends javax.swing.JPanel {
         lblThanhtoan = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         pagination1 = new swing.Pagination();
+        lbl_voucher1 = new javax.swing.JLabel();
+        lblDiemtichluy = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -347,7 +351,7 @@ public class FrmQLHD extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 13, Short.MAX_VALUE)
+                        .addGap(0, 14, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(cbo_Trangthai, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btn_HuyHD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -409,7 +413,7 @@ public class FrmQLHD extends javax.swing.JPanel {
 
         lbl_voucher.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_voucher.setForeground(new java.awt.Color(255, 0, 0));
-        lbl_voucher.setText("Khuyến mãi :");
+        lbl_voucher.setText("Giảm giá:");
 
         lbl_Change.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_Change.setForeground(new java.awt.Color(255, 0, 0));
@@ -442,6 +446,13 @@ public class FrmQLHD extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        lbl_voucher1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbl_voucher1.setForeground(new java.awt.Color(255, 0, 0));
+        lbl_voucher1.setText("Ðiểm tích lũy sử dụng :");
+
+        lblDiemtichluy.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblDiemtichluy.setText("0");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -451,6 +462,7 @@ public class FrmQLHD extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -458,7 +470,11 @@ public class FrmQLHD extends javax.swing.JPanel {
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblTongtien)
+                                .addGap(18, 18, 18)
+                                .addComponent(lbl_voucher1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblDiemtichluy)
+                                .addGap(18, 18, 18)
                                 .addComponent(lbl_voucher)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblKhuyenmai)
@@ -466,8 +482,7 @@ public class FrmQLHD extends javax.swing.JPanel {
                                 .addComponent(lbl_Change)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblThanhtoan)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -481,13 +496,18 @@ public class FrmQLHD extends javax.swing.JPanel {
                 .addGap(12, 12, 12)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(lblTongtien)
-                    .addComponent(lbl_voucher)
-                    .addComponent(lblKhuyenmai)
-                    .addComponent(lbl_Change)
-                    .addComponent(lblThanhtoan))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lbl_voucher)
+                        .addComponent(lblKhuyenmai)
+                        .addComponent(lbl_Change)
+                        .addComponent(lblThanhtoan))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lbl_voucher1)
+                        .addComponent(lblDiemtichluy))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(lblTongtien)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -582,11 +602,13 @@ public class FrmQLHD extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private com.toedter.calendar.JDateChooser jdate_from;
     private com.toedter.calendar.JDateChooser jdate_to;
+    private javax.swing.JLabel lblDiemtichluy;
     private javax.swing.JLabel lblKhuyenmai;
     private javax.swing.JLabel lblThanhtoan;
     private javax.swing.JLabel lblTongtien;
     private javax.swing.JLabel lbl_Change;
     private javax.swing.JLabel lbl_voucher;
+    private javax.swing.JLabel lbl_voucher1;
     private swing.Pagination pagination1;
     private swing.TableScrollButton tableScrollButton1;
     private swing.TableScrollButton tableScrollButton2;

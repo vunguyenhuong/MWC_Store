@@ -25,7 +25,7 @@ public class HoaDonRepository {
     private Transaction transaction = session.getTransaction();
 
     public List<HoaDon> getAll() {
-        Query query = session.createQuery("SELECT h FROM HoaDon h ORDER BY h.id DESC");
+        Query query = session.createQuery("SELECT h FROM HoaDon h ORDER BY h.ngayTao DESC");
         List<HoaDon> list = query.getResultList();
         return list;
     }
@@ -82,9 +82,9 @@ public class HoaDonRepository {
     public List<HoaDon> filter(String tenNguoiDung, Date from, Date to, int trangThai) {
         String hql;
         if (trangThai == -1) {
-            hql = "SELECT h FROM HoaDon h WHERE h.nguoiDung.ten LIKE :tenNguoiDung AND h.ngayTao BETWEEN :from AND :to ";
+            hql = "SELECT h FROM HoaDon h WHERE h.nguoiDung.ten LIKE :tenNguoiDung AND h.ngayTao BETWEEN :from AND :to ORDER BY h.ngayTao DESC";
         } else {
-            hql = "SELECT h FROM HoaDon h WHERE h.nguoiDung.ten LIKE :tenNguoiDung AND h.ngayTao BETWEEN :from AND :to AND h.trangThai = :trangThai";
+            hql = "SELECT h FROM HoaDon h WHERE h.nguoiDung.ten LIKE :tenNguoiDung AND h.ngayTao BETWEEN :from AND :to AND h.trangThai = :trangThai ORDER BY h.ngayTao DESC";
         }
         Query query = session.createQuery(hql);
         query.setParameter("tenNguoiDung", "%" + tenNguoiDung + "%");
@@ -102,9 +102,9 @@ public class HoaDonRepository {
         int pageIndex = pageNumber - 1 < 0 ? 0 : pageNumber - 1;
         int fromRecordIndex = pageIndex * pageSize;
         if (trangThai == -1) {
-            hql = "SELECT h FROM HoaDon h WHERE h.nguoiDung.ten LIKE :tenNguoiDung AND h.ngayTao BETWEEN :from AND :to ";
+            hql = "SELECT h FROM HoaDon h WHERE h.nguoiDung.ten LIKE :tenNguoiDung AND h.ngayTao BETWEEN :from AND :to ORDER BY h.ngayTao DESC";
         } else {
-            hql = "SELECT h FROM HoaDon h WHERE h.nguoiDung.ten LIKE :tenNguoiDung AND h.ngayTao BETWEEN :from AND :to AND h.trangThai = :trangThai";
+            hql = "SELECT h FROM HoaDon h WHERE h.nguoiDung.ten LIKE :tenNguoiDung AND h.ngayTao BETWEEN :from AND :to AND h.trangThai = :trangThai ORDER BY h.ngayTao DESC";
         }
         Query query = session.createQuery(hql);
         query.setParameter("tenNguoiDung", "%" + tenNguoiDung + "%");
