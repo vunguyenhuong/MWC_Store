@@ -92,13 +92,13 @@ public class ExportWord {
         XWPFRun runNgay = ParagraphLeft.createRun();
         runNgay.setFontSize(14);
         runNgay.setFontFamily("Times New Roman");
-        String ngayTao = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(new Date());
+        String ngayTao = new SimpleDateFormat("dd/MM/yyyy  HH:mm:ss").format(new Date());
         runNgay.setText("Ngày mua:     ");
         runNgay.setText(ngayTao);
         runNgay.addTab();
         runNgay.addTab();
         String tenNhanVien = hd.getNguoiDungTT().getTen();
-        runNgay.setText("  Thu ngân:  ");
+        runNgay.setText("       Thu ngân:  ");
         runNgay.setText(tenNhanVien);
         runNgay.addBreak();
 
