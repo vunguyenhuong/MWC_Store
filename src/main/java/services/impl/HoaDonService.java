@@ -60,4 +60,11 @@ public class HoaDonService implements IHoaDonService {
         return hoadonRepo.filter(tenNguoiDung, from, to, trangThai);
     }
 
+    @Override
+    public List<HoaDon> pagination(int pageNumber, int pageSize, String tenNguoiDung, Date from, Date to, int trangThai) {
+        return hoadonRepo.pagination(pageNumber, pageSize, tenNguoiDung, from, to, trangThai);
+    }
+    
+    
+
 }

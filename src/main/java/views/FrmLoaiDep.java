@@ -293,15 +293,23 @@ public class FrmLoaiDep extends javax.swing.JPanel {
             panel.showNotification();
             return;
         }
-        LoaiDep loaidep = getForm();
-        LoaiDep loai = loaidepSV.getObj(txt_Ma.getText().trim());
-        loai.setTen(loaidep.getTen());
-        loai.setNgaySuaCuoi(loaidep.getNgaySuaCuoi());
-        loai.setTrangThai(loaidep.getTrangThai());
-        this.loaidepSV.save(loai);
-        pagination(txt_search.getText());
-        NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công");
-        panel.showNotification();
+
+        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có muốn cập nhật không ?", "Confirm", JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            LoaiDep loaidep = getForm();
+            LoaiDep loai = loaidepSV.getObj(txt_Ma.getText().trim());
+            loai.setTen(loaidep.getTen());
+            loai.setNgaySuaCuoi(loaidep.getNgaySuaCuoi());
+            loai.setTrangThai(loaidep.getTrangThai());
+            this.loaidepSV.save(loai);
+            pagination(txt_search.getText());
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công");
+            panel.showNotification();
+        } else {
+            return;
+        }
+
     }//GEN-LAST:event_btn_updateActionPerformed
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed

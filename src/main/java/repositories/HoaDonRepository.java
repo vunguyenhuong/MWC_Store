@@ -96,11 +96,32 @@ public class HoaDonRepository {
         List<HoaDon> list = query.getResultList();
         return list;
     }
+    
+    public List<HoaDon> pagination(int pageNumber, int pageSize, String tenNguoiDung, Date from, Date to, int trangThai) {
+        String hql;
+        int pageIndex = pageNumber - 1 < 0 ? 0 : pageNumber - 1;
+        int fromRecordIndex = pageIndex * pageSize;
+        if (trangThai == -1) {
+            hql = "SELECT h FROM HoaDon h WHERE h.nguoiDung.ten LIKE :tenNguoiDung AND h.ngayTao BETWEEN :from AND :to ";
+        } else {
+            hql = "SELECT h FROM HoaDon h WHERE h.nguoiDung.ten LIKE :tenNguoiDung AND h.ngayTao BETWEEN :from AND :to AND h.trangThai = :trangThai";
+        }
+        Query query = session.createQuery(hql);
+        query.setParameter("tenNguoiDung", "%" + tenNguoiDung + "%");
+        query.setParameter("from", from);
+        query.setParameter("to", to);
+        query.setFirstResult(fromRecordIndex);
+        query.setMaxResults(pageSize);
+        if (trangThai == 0 || trangThai == 1 || trangThai == 2) {
+            query.setParameter("trangThai", trangThai);
+        }
+        List<HoaDon> list = query.getResultList();
+        return list;
+    }
 
     public List<HoaDon> getByTT(int trangThai) {
-        Query query = session.createQuery(" SELECT h FROM HoaDon h WHERE h.trangThai = :trangThai");
-        query.setParameter("trangThai", trangThai
-        );
+        Query query = session.createQuery(" SELECT h FROM HoaDon h WHERE h.trangThai = :trangThai ORDER BY h.id DESC");
+        query.setParameter("trangThai", trangThai);
         List<HoaDon> list = query.getResultList();
         return list;
     }
@@ -123,6 +144,8 @@ public class HoaDonRepository {
         query.setParameter(3, ngay);
         return (BigDecimal) query.getSingleResult();
     }
+    
+    
 
     public static void main(String[] args) throws ParseException {
         HoaDonRepository hdr = new HoaDonRepository();

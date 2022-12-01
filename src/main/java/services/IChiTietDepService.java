@@ -36,20 +36,19 @@ public interface IChiTietDepService {
     ChiTietDep getObj(int id);
 
 //    List<ChiTietDep> findByName(String ten);
+    List<ChiTietDep> findByTT(int trangThai, String ten, String typeOderBy);
 
-    List<ChiTietDep> findByTT(int trangThai, String ten);
-    
+    ChiTietDep getObjByMa(String ma);
+
 //    List<ChiTietDep> pagination(int pageNumber, int pageSize);
-    
     ChiTietDep getObjByProperties(int idDep, int idLoaiDep, int idMauSac, int idChatLieu, int idNSX, int idSize);
-    
+
     List<ChiTietDep> findSLSPLess(int soLuong);
-    
-    List<ChiTietDep> topSPBanChay(int firstResult,int maxResult);
-    
+
+    List<ChiTietDep> topSPBanChay(int firstResult, int maxResult);
+
 //    List<ChiTietDep> filter(String tenDep, String tenMauSac);
-    
     List<ChiTietDep> filter(String tenDep, String tenLoaiDep, String tenMauSac, String tenChatLieu);
-    
+
     List<ChiTietDep> pagination(int pageNumber, int pageSize, String tenDep, String tenLoaiDep, String tenMauSac, String tenChatLieu);
 }

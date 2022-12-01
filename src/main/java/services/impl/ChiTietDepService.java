@@ -74,9 +74,16 @@ public class ChiTietDepService implements IChiTietDepService {
     }
 
     @Override
-    public List<ChiTietDep> findByTT(int trangThai, String ten) {
-        return repo.findByTT(trangThai, ten);
+    public List<ChiTietDep> findByTT(int trangThai, String ten,String typeOderBy) {
+        return repo.findByTT(trangThai, ten,typeOderBy);
     }
+
+    @Override
+    public ChiTietDep getObjByMa(String ma) {
+        return repo.getObjByMa(ma);
+    }
+    
+    
 
 //    @Override
 //    public List<ChiTietDep> pagination(int pageNumber, int pageSize) {
