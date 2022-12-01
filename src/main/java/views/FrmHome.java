@@ -200,13 +200,23 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 }
                 if (menuIndex == 5) {
                     cardLayout.show(pn_main, "banhang");
-                    loadSP(iChiTietDepService.getAll());
-                    initWebcam(pn_webcam);
-                    if (subMenuIndex == 0) {
-
-                    } else if (subMenuIndex == 1) {
-
+                    if (tb_giohang.getRowCount() > 0 && tb_sanpham.getRowCount() > 0) {
+                        HoaDon hd = iHoaDonService.getObj(txt_mahd.getText());
+                        List<HoaDonChiTiet> listHDCT = iHoaDonCTService.findByMa(hd.getMa());
+                        ChiTietDep ctd;
+                        if (hd.getTrangThai() == 0) {
+                            for (int i = 0; i < tb_giohang.getRowCount(); i++) {
+                                ctd = iChiTietDepService.getObj(listHDCT.get(i).getCtdep().getId());
+                                if (listHDCT.get(i).getDonGia() != ctd.getGiaBan()) {
+                                    listHDCT.get(i).setDonGia(ctd.getGiaBan());
+                                    iHoaDonCTService.save(listHDCT.get(i));
+                                }
+                            }
+                        }
                     }
+                    loadSP(iChiTietDepService.getAll());
+                    loadGioHang(txt_mahd.getText());
+                    initWebcam(pn_webcam);
                 }
                 if (menuIndex == 6) {
                     if (subMenuIndex == 0) {
