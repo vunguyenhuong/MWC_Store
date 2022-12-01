@@ -98,9 +98,8 @@ public class HoaDonRepository {
     }
 
     public List<HoaDon> getByTT(int trangThai) {
-        Query query = session.createQuery(" SELECT h FROM HoaDon h WHERE h.trangThai = :trangThai");
-        query.setParameter("trangThai", trangThai
-        );
+        Query query = session.createQuery(" SELECT h FROM HoaDon h WHERE h.trangThai = :trangThai ORDER BY h.id DESC");
+        query.setParameter("trangThai", trangThai);
         List<HoaDon> list = query.getResultList();
         return list;
     }
