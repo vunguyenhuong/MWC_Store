@@ -75,6 +75,17 @@ public class ChiTietDepRepository {
         }
         return ctd;
     }
+    
+    public ChiTietDep getObjByMa(String ma) {
+        ChiTietDep ctd = null;
+        try {
+            Query query = session.createQuery("SELECT c FROM ChiTietDep c WHERE c.dep.ma = :ma");
+            query.setParameter("ma", ma);
+            ctd = (ChiTietDep) query.getSingleResult();
+        } catch (Exception e) {
+        }
+        return ctd;
+    }
 
     public ChiTietDep checkDuplicate(int idDep, int idLoaiDep, int idMauSac, int idChatLieu, int idNSX, int idSize) {
         ChiTietDep ctd = null;
