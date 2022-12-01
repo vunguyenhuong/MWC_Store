@@ -214,15 +214,20 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                             }
                         }
                     }
-                    loadSP(iChiTietDepService.getAll());
+                    loadSP(iChiTietDepService.findByTT(0, ""));
                     loadGioHang(txt_mahd.getText());
                     initWebcam(pn_webcam);
                 }
                 if (menuIndex == 6) {
-                    if (subMenuIndex == 0) {
-                        main.showForm(new FrmThongKe());
-                    } else if (subMenuIndex == 1) {
-                        main.showForm(new FrmThongKeDoanhThu());
+                    if (nguoiDung.getChucVu().getTen().equals("Nhân viên")) {
+                        NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.CENTER, "Bạn không có quyền sử dụng chức năng này! ");
+                        panel.showNotification();
+                    } else {
+                        if (subMenuIndex == 0) {
+                            main.showForm(new FrmThongKe());
+                        } else if (subMenuIndex == 1) {
+                            main.showForm(new FrmThongKeDoanhThu());
+                        }
                     }
                 }
                 if (menuIndex == 7) {
@@ -376,12 +381,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             panel.showNotification();
         } else {
             HoaDon hd = iHoaDonService.getObj((String) tb_hoadon.getValueAt(rowHD, 0));
-            ChiTietDep ctd;
-            if (checkSearchSP == 0) {
-                ctd = iChiTietDepService.getAll().get(row);
-            } else {
-                ctd = iChiTietDepService.findByTT(0, txt_sp_timkiem.getText()).get(row);
-            }
+            ChiTietDep ctd = iChiTietDepService.findByTT(0, txt_sp_timkiem.getText()).get(row);
             if (hd.getTrangThai() == 1) {
                 tb_sanpham.clearSelection();
                 NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Hóa đơn đã được thanh toán!");
@@ -422,7 +422,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 iChiTietDepService.save(ctd);
                 iHoaDonCTService.save(hdct);
             }
-            loadSP(iChiTietDepService.getAll());
+            loadSP(iChiTietDepService.findByTT(0, ""));
             loadGioHang(hd.getMa());
         }
         tongTien();
@@ -997,13 +997,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         }
     }//GEN-LAST:event_btn_returnActionPerformed
 
-    private int checkSearchSP = 0;
     private void txt_sp_timkiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_sp_timkiemCaretUpdate
-        if (iChiTietDepService.findByTT(0, txt_sp_timkiem.getText()).size() == iChiTietDepService.getAll().size()) {
-            checkSearchSP = 0;
-        } else {
-            checkSearchSP = 1;
-        }
         loadSP(iChiTietDepService.findByTT(0, txt_sp_timkiem.getText()));
     }//GEN-LAST:event_txt_sp_timkiemCaretUpdate
 
@@ -1067,7 +1061,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 iHoaDonCTService.delete(hdct);
                 iChiTietDepService.save(ctd);
                 loadGioHang(txt_mahd.getText());
-                loadSP(iChiTietDepService.getAll());
+                loadSP(iChiTietDepService.findByTT(0, ""));
                 NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Xóa thành công !");
                 panel.showNotification();
             }
@@ -1152,38 +1146,42 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
 
             if (tienKhachDua >= phaiTra) {
                 if (helper.confirm(this, "Trả lại khách " + (tienKhachDua - phaiTra) + ". Xác nhận thanh toán " + txt_phaitra.getText() + "?")) {
-                    hd.setNguoiDungTT(nguoiDung);
-                    hd.setTrangThai(1);
-                    hd.setNgayThanhToan(new Date());
-                    if (khachHang != null) {
-                        hd.setKhachHang(khachHang);
-                        if (chk_tichluy.isSelected()) {
-                            hd.setDiemTichLuy(khachHang.getDiemTichLuy());
-                            khachHang.setDiemTichLuy(1);
-                            khachHang.setTongDiemTichLuy(khachHang.getTongDiemTichLuy() + 1);
-                        } else {
-                            hd.setDiemTichLuy(0);
-                            khachHang.setDiemTichLuy(khachHang.getDiemTichLuy() + 1);
-                            khachHang.setTongDiemTichLuy(khachHang.getTongDiemTichLuy() + 1);
+                    if (helper.confirm(this, "Bạn có muốn in hóa đơn không ?")) {
+//                        Export File Word Here
+                    } else {
+                        hd.setNguoiDungTT(nguoiDung);
+                        hd.setTrangThai(1);
+                        hd.setNgayThanhToan(new Date());
+                        if (khachHang != null) {
+                            hd.setKhachHang(khachHang);
+                            if (chk_tichluy.isSelected()) {
+                                hd.setDiemTichLuy(khachHang.getDiemTichLuy());
+                                khachHang.setDiemTichLuy(1);
+                                khachHang.setTongDiemTichLuy(khachHang.getTongDiemTichLuy() + 1);
+                            } else {
+                                hd.setDiemTichLuy(0);
+                                khachHang.setDiemTichLuy(khachHang.getDiemTichLuy() + 1);
+                                khachHang.setTongDiemTichLuy(khachHang.getTongDiemTichLuy() + 1);
+                            }
                         }
+                        if (khuyenMai != null) {
+                            hd.setKhuyenMai(khuyenMai);
+                            khuyenMai.setSoLuong(khuyenMai.getSoLuong() - 1);
+                        }
+                        hd.setTongTien(BigDecimal.valueOf(phaiTra));
+                        for (HoaDonChiTiet x : listHDCT) {
+                            ChiTietDep ctd = x.getCtdep();
+                            ctd.setSoLuongBanRa(ctd.getSoLuongBanRa() + x.getSoLuong());
+                            iChiTietDepService.save(ctd);
+                        }
+                        iHoaDonService.save(hd);
+                        loadHD(iHoaDonService.getByTT(0));
+                        iKhachHangService.save(khachHang);
+                        iKhuyenMaiService.save(khuyenMai);
+                        NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Thanh toán thành công ! ");
+                        panel.showNotification();
+                        clearForm();
                     }
-                    if (khuyenMai != null) {
-                        hd.setKhuyenMai(khuyenMai);
-                        khuyenMai.setSoLuong(khuyenMai.getSoLuong() - 1);
-                    }
-                    hd.setTongTien(BigDecimal.valueOf(phaiTra));
-                    for (HoaDonChiTiet x : listHDCT) {
-                        ChiTietDep ctd = x.getCtdep();
-                        ctd.setSoLuongBanRa(ctd.getSoLuongBanRa() + x.getSoLuong());
-                        iChiTietDepService.save(ctd);
-                    }
-                    iHoaDonService.save(hd);
-                    loadHD(iHoaDonService.getByTT(0));
-                    iKhachHangService.save(khachHang);
-                    iKhuyenMaiService.save(khuyenMai);
-                    NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Thanh toán thành công ! ");
-                    panel.showNotification();
-                    clearForm();
                 }
             } else {
                 NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Khách chưa đưa đủ tiền!");
@@ -1244,7 +1242,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                     iHoaDonCTService.delete(hdct);
                     iChiTietDepService.save(ctd);
                     loadGioHang(txt_mahd.getText());
-                    loadSP(iChiTietDepService.getAll());
+                    loadSP(iChiTietDepService.findByTT(0, ""));
                     tongTien();
                     txt_tienkhachdua.setText("");
                     NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Xóa thành công ! ");
@@ -1259,8 +1257,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 hdct.setSoLuong(soLuong);
                 iHoaDonCTService.save(hdct);
                 loadGioHang(hd.getMa());
-                loadSP(iChiTietDepService.getAll());
-                checkSearchSP = 0;
+                loadSP(iChiTietDepService.findByTT(0, ""));
                 tongTien();
                 txt_tienkhachdua.setText("");
                 NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công! ");
@@ -1333,7 +1330,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                             iChiTietDepService.save(ctd);
                             iHoaDonCTService.delete(x);
                         }
-                        loadSP(iChiTietDepService.getAll());
+                        loadSP(iChiTietDepService.findByTT(0, ""));
                         loadGioHang(hd.getMa());
                         txt_tongtien.setText("0");
                         txt_giamgia.setText("0");
