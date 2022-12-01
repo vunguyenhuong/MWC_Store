@@ -36,7 +36,7 @@ public interface IChiTietDepService {
     ChiTietDep getObj(int id);
 
 //    List<ChiTietDep> findByName(String ten);
-    List<ChiTietDep> findByTT(int trangThai, String ten);
+    List<ChiTietDep> findByTT(int trangThai, String ten, String typeOderBy);
 
     ChiTietDep getObjByMa(String ma);
 
