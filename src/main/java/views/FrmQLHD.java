@@ -461,57 +461,40 @@ public class FrmQLHD extends javax.swing.JPanel {
     }//GEN-LAST:event_tb_hoadonMousePressed
 
     private void btn_HuyHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_HuyHDActionPerformed
+        NotificationMess panel;
         int index = tb_hoadon.getSelectedRow();
-
         if (index == -1) {
             helper.alert(this, "Hãy chọn 1 Hóa đơn");
-            return;
-        }
-
-        if (tb_hoadon.getValueAt(index, 8).equals("Đã thanh toán")) {
-            helper.alert(this, "Hóa đơn đã thanh toán. Không thể Hủy !");
-            return;
-        }
-
-        if (tb_hoadon.getValueAt(index, 8).equals("Đã hủy")) {
-            helper.alert(this, "Hóa đơn đã huỷ. Không thể Hủy !");
-            return;
-        }
-
-        if (tb_HDCT.getRowCount() == 0) {
-            helper.alert(this, "Hóa đơn trống. Không thể Hủy !");
-            return;
-        }
-
-        int choice = JOptionPane.showConfirmDialog(this, "Bạn có muốn hủy hóa đơn không ?", "Confirm", JOptionPane.YES_OPTION);
-
-        if (choice == JOptionPane.YES_OPTION) {
-            HoaDon hd = iHoaDonService.getObj(tb_hoadon.getValueAt(index, 1).toString());
-
-            hd.setTrangThai(2);
-            this.iHoaDonService.save(hd);
-            
-            List<HoaDonChiTiet> list = iHoaDonCTService.findByMa(hd.getMa());
-            
-            ChiTietDep ctd;
-            
-            for (int i = 0; i < tb_HDCT.getRowCount(); i++) {
-                list.get(i).getSoLuong();
-                
-                ctd = iChiTietDepService.getObj(list.get(i).getCtdep().getId());
-                
-                ctd.setSoLuong(ctd.getSoLuong() + list.get(i).getSoLuong());
-                
-                iChiTietDepService.save(ctd);
-            }
-
-            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công!");
-            panel.showNotification();
-
-            locTrangThai();
         } else {
-            return;
+            if (tb_hoadon.getValueAt(index, 8).equals("Đã thanh toán")) {
+                panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Hóa đơn đã thanh toán. Không thể hủy !");
+                panel.showNotification();
+            } else if (tb_hoadon.getValueAt(index, 8).equals("Đã hủy")) {
+                panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Hóa đơn đã hủy. Không thể hủy !");
+                panel.showNotification();
+            } else if (tb_HDCT.getRowCount() == 0) {
+                panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Hóa đơn đã trống. Không thể hủy !");
+            } else {
+                if (helper.confirm(this, "Bạn có muốn hủy hóa đơn không ?")) {
+                    HoaDon hd = iHoaDonService.getObj(tb_hoadon.getValueAt(index, 1).toString());
+                    hd.setTrangThai(2);
+                    this.iHoaDonService.save(hd);
+                    List<HoaDonChiTiet> list = iHoaDonCTService.findByMa(hd.getMa());
+                    ChiTietDep ctd;
+                    for (int i = 0; i < tb_HDCT.getRowCount(); i++) {
+                        list.get(i).getSoLuong();
+                        ctd = iChiTietDepService.getObj(list.get(i).getCtdep().getId());
+                        ctd.setSoLuong(ctd.getSoLuong() + list.get(i).getSoLuong());
+                        iChiTietDepService.save(ctd);
+                    }
+                    panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Cập nhật thành công!");
+                    panel.showNotification();
+                    locTrangThai();
+                }
+            }
         }
+
+
     }//GEN-LAST:event_btn_HuyHDActionPerformed
 
     private void jdate_fromPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdate_fromPropertyChange
