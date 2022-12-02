@@ -257,12 +257,15 @@ public class FrmQLKH extends javax.swing.JPanel {
 
         if (confirm == JOptionPane.YES_OPTION) {
             KhachHang kh = iKhachHangService.getObj((String) tbl_Khachhang.getValueAt(row, 1));
-            iKhachHangService.delete(kh);
-            pagination(txt_Search.getText());
-            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Xóa thành công");
-            panel.showNotification();
-        } else {
-            return;
+            if (iKhachHangService.delete(kh)) {
+                pagination(txt_Search.getText());
+                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Xóa thành công");
+                panel.showNotification();
+            } else {
+                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Xóa thất bại");
+                panel.showNotification();
+            }
+
         }
 
 
