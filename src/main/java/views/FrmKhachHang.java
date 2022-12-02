@@ -41,6 +41,7 @@ public class FrmKhachHang extends java.awt.Dialog {
         this.helper = new Helper();
         pagination(txt_Search.getText());
         pagination1.setPagegination(1, pg.getTotalPage());
+        pg.setCurrent(1);
         pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
         Table.apply(jScrollPane1, Table.TableType.MULTI_LINE);
     }

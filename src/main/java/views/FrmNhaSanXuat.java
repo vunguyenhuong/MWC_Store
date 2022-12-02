@@ -40,6 +40,7 @@ public class FrmNhaSanXuat extends javax.swing.JPanel {
         iNhaSXService = new NhaSXService();
         pagination(txt_Timkiem.getText());
         pagination1.setPagegination(1, pg.getTotalPage());
+        pg.setCurrent(1);
         pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
         helper = new Helper();
         Table.apply(jScrollPane1, Table.TableType.MULTI_LINE);

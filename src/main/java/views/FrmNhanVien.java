@@ -45,6 +45,7 @@ public class FrmNhanVien extends javax.swing.JPanel {
         helper = new Helper();
         pagination(txt_timkiem.getText());
         pagination1.setPagegination(1, pg.getTotalPage());
+        pg.setCurrent(1);
         pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
 
     }

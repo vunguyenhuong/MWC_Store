@@ -51,7 +51,7 @@ public class ChiTietDepRepository {
     }
 
     public List<ChiTietDep> findByTT(int trangThai, String ten, String typeOderBy) {
-        Query query = session.createQuery("SELECT c FROM ChiTietDep c WHERE c.trangThai = :trangThai AND c.dep.ten LIKE :ten ORDER BY c.soLuong "+typeOderBy);
+        Query query = session.createQuery("SELECT c FROM ChiTietDep c WHERE c.trangThai = :trangThai AND c.dep.ten LIKE :ten ORDER BY c.soLuong " + typeOderBy);
         query.setParameter("trangThai", trangThai);
         query.setParameter("ten", "%" + ten + "%");
         List<ChiTietDep> list = query.getResultList();
@@ -75,7 +75,7 @@ public class ChiTietDepRepository {
         }
         return ctd;
     }
-    
+
     public ChiTietDep getObjByMa(String ma) {
         ChiTietDep ctd = null;
         try {
@@ -115,14 +115,14 @@ public class ChiTietDepRepository {
         List<ChiTietDep> list = query.getResultList();
         return list;
     }
-    
+
     public List<ChiTietDep> filter(String tenDep, String tenLoaiDep, String tenMauSac, String tenChatLieu) {
         Query query = session.createQuery("SELECT c FROM ChiTietDep c "
-                + " WHERE (c.dep.ten = :tenDep or :tenDep is null or :tenDep = '')"
+                + " WHERE (c.dep.ten LIKE :tenDep or :tenDep is null or :tenDep = '')"
                 + " AND (c.mauSac.ten = :tenMauSac or :tenMauSac is null or :tenMauSac = '')"
                 + " AND (c.chatLieu.ten = :tenChatLieu or :tenChatLieu is null or :tenChatLieu = '')"
                 + " AND (c.loaiDep.ten = :tenLoaiDep or :tenLoaiDep is null or :tenLoaiDep = '')");
-        query.setParameter("tenDep", tenDep);
+        query.setParameter("tenDep", "%" + tenDep + "%");
         query.setParameter("tenMauSac", tenMauSac);
         query.setParameter("tenChatLieu", tenChatLieu);
         query.setParameter("tenLoaiDep", tenLoaiDep);
@@ -132,11 +132,11 @@ public class ChiTietDepRepository {
 
     public List<ChiTietDep> pagination(int pageNumber, int pageSize, String tenDep, String tenLoaiDep, String tenMauSac, String tenChatLieu) {
         Query query = session.createQuery("SELECT c FROM ChiTietDep c "
-                + " WHERE (c.dep.ten = :tenDep or :tenDep is null or :tenDep = '')"
+                + " WHERE (c.dep.ten LIKE :tenDep or :tenDep is null or :tenDep = '')"
                 + " AND (c.mauSac.ten = :tenMauSac or :tenMauSac is null or :tenMauSac = '')"
                 + " AND (c.chatLieu.ten = :tenChatLieu or :tenChatLieu is null or :tenChatLieu = '')"
                 + " AND (c.loaiDep.ten = :tenLoaiDep or :tenLoaiDep is null or :tenLoaiDep = '')");
-        query.setParameter("tenDep", tenDep);
+        query.setParameter("tenDep", "%" + tenDep + "%");
         query.setParameter("tenMauSac", tenMauSac);
         query.setParameter("tenChatLieu", tenChatLieu);
         query.setParameter("tenLoaiDep", tenLoaiDep);
@@ -151,7 +151,7 @@ public class ChiTietDepRepository {
     public static void main(String[] args) {
         ChiTietDepRepository ctdr = new ChiTietDepRepository();
         try {
-            System.out.println(ctdr.pagination(1, 1000, "", "", "","").size());
+            System.out.println(ctdr.pagination(1, 1000, "", "", "", "").size());
         } catch (Exception e) {
         }
     }

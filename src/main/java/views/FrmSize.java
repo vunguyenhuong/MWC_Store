@@ -43,6 +43,7 @@ public class FrmSize extends javax.swing.JPanel {
         group.add(rd_NgungKinhDoanh);
         pagination();
         pagination1.setPagegination(1, pg.getTotalPage());
+        pg.setCurrent(1);
         pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
         helper = new Helper();
         Table.apply(jScrollPane1, Table.TableType.MULTI_LINE);

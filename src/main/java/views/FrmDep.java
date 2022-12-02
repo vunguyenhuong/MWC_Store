@@ -42,6 +42,7 @@ public class FrmDep extends javax.swing.JPanel {
         initComponents();
         pagination(txtTimKiem.getText());
         pagination1.setPagegination(1, pg.getTotalPage());
+        pg.setCurrent(1);
         pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
         tblDep.getTableHeader().setReorderingAllowed(false);
         Table.apply(jScrollPane1, Table.TableType.MULTI_LINE);

@@ -37,6 +37,7 @@ public class FrmChatLieu extends javax.swing.JPanel {
         initComponents();
         pagination(txt_search.getText());
         pagination1.setPagegination(1, pg.getTotalPage());
+        pg.setCurrent(1);
         pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
         Table.apply(jScrollPane1, Table.TableType.MULTI_LINE);
     }
