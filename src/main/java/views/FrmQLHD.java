@@ -77,6 +77,7 @@ public class FrmQLHD extends javax.swing.JPanel {
 
         pagination(txt_Timkiem.getText(), null, null, 0);
         pagination1.setPagegination(1, pg.getTotalPage());
+        pg.setCurrent(1);
         pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
 
     }

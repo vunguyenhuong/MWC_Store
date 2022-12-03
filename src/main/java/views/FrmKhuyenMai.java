@@ -52,6 +52,7 @@ public class FrmKhuyenMai extends java.awt.Dialog {
         setTitle("Danh sách khuyến mãi");
         pagination(txt_Search.getText());
         pagination1.setPagegination(1, pg.getTotalPage());
+        pg.setCurrent(1);
         pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
     }
 
