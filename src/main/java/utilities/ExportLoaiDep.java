@@ -7,8 +7,10 @@ package utilities;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.List;
-import models.NguoiDung;
+import models.KhachHang;
+import models.LoaiDep;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
@@ -25,27 +27,22 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author KimChi
  */
-public class ExportNV {
-    
+public class ExportLoaiDep {
+
     public static final int COLUMN_MA = 0;
     public static final int COLUMN_TEN = 1;
-    public static final int COLUMN_EMAIL = 2;
-    public static final int COLUMN_SDT = 3;
-    public static final int COLUMN_DIACHI = 4;
-    public static final int COLUMN_GIOITINH = 5;
-    public static final int COLUMN_MATKHAU = 6;
-    public static final int COLUMN_TRANGTHAI = 7;
-    public static final int COLUMN_HINHANH = 8;
-    public static final int COLUMN_CV = 9;
-    
-    public static void writeExcel(List<NguoiDung> list, String excelFilePath) throws IOException {
+    public static final int COLUMN_NGAYTHEM = 2;
+    public static final int COLUMN_NGAYSUACUOI = 3;
+    public static final int COLUMN_TRANGTHAI = 4;
+
+    public static void writeExcel(List<LoaiDep> list, String excelFilePath) throws IOException {
         Workbook workbook = getWorkbook(excelFilePath);
         Sheet sheet = workbook.createSheet("Khách hàng ");
         int rowIndex = 0;
         writeHeader(sheet, rowIndex);
         rowIndex++;
 
-        for (NguoiDung x : list) {
+        for (LoaiDep x : list) {
             Row row = sheet.createRow(rowIndex);
             writeBook(x, row);
             rowIndex++;
@@ -80,87 +77,49 @@ public class ExportNV {
 
         Cell cell = row.createCell(COLUMN_MA);
         cell.setCellStyle(cellStyle);
-        cell.setCellValue("Mã người dùng");
+        cell.setCellValue("Mã ");
 
         cell = row.createCell(COLUMN_TEN);
         cell.setCellStyle(cellStyle);
-        cell.setCellValue("Tên người dùng");
-        
-        cell = row.createCell(COLUMN_EMAIL);
-        cell.setCellStyle(cellStyle);
-        cell.setCellValue("Email");
-        
-        cell = row.createCell(COLUMN_SDT);
-        cell.setCellStyle(cellStyle);
-        cell.setCellValue("Số điện thoại");
-        
-        
-        cell = row.createCell(COLUMN_DIACHI);
-        cell.setCellStyle(cellStyle);
-        cell.setCellValue("Địa chỉ");
+        cell.setCellValue("Tên loại dép");
 
-        cell = row.createCell(COLUMN_GIOITINH);
+        cell = row.createCell(COLUMN_NGAYTHEM);
         cell.setCellStyle(cellStyle);
-        cell.setCellValue("Giới tính");
-        
-        cell = row.createCell(COLUMN_MATKHAU);
+        cell.setCellValue("Ngày thêm");
+
+        cell = row.createCell(COLUMN_NGAYSUACUOI);
         cell.setCellStyle(cellStyle);
-        cell.setCellValue("Mật khẩu");
-        
+        cell.setCellValue("Ngày sửa cuối");
+
         cell = row.createCell(COLUMN_TRANGTHAI);
         cell.setCellStyle(cellStyle);
         cell.setCellValue("Trạng thái");
-        
-        cell = row.createCell(COLUMN_HINHANH);
-        cell.setCellStyle(cellStyle);
-        cell.setCellValue("Hình ảnh");
-        
-        cell = row.createCell(COLUMN_CV);
-        cell.setCellStyle(cellStyle);
-        cell.setCellValue("Chức vụ");
 
     }
 
-    private static void writeBook(NguoiDung n, Row row) {
+    private static void writeBook(LoaiDep d, Row row) {
 
-        
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+
         Cell cell = row.createCell(COLUMN_MA);
-        cell.setCellValue(n.getMa());
+        cell.setCellValue(d.getMa());
 
         cell = row.createCell(COLUMN_TEN);
-        cell.setCellValue(n.getTen());
-        
-        cell = row.createCell(COLUMN_EMAIL);
-        cell.setCellValue(n.getEmail());
-        
-        cell = row.createCell(COLUMN_SDT);
-        cell.setCellValue(n.getSdt());
+        cell.setCellValue(d.getTen());
 
-        cell = row.createCell(COLUMN_DIACHI);
-        cell.setCellValue(n.getDiaChi());
+        cell = row.createCell(COLUMN_NGAYTHEM);
+        cell.setCellValue(d.getNgayThem());
 
-        cell = row.createCell(COLUMN_GIOITINH);
-       if (n.getGioiTinh() == 0) {
-            cell.setCellValue("Nam");
-        } else {
-            cell.setCellValue("Nữ");
-        }
+        cell = row.createCell(COLUMN_NGAYSUACUOI);
+        cell.setCellValue(d.getNgaySuaCuoi());
 
-        cell = row.createCell(COLUMN_MATKHAU);
-        cell.setCellValue(n.getMatKhau());
-        
         cell = row.createCell(COLUMN_TRANGTHAI);
-         if (n.getGioiTinh() == 0) {
-            cell.setCellValue("Đang làm");
+        cell.setCellValue("Ngày sửa cuối");
+        if (d.getTrangThai() == 0) {
+            cell.setCellValue("Đang kinh doanh");
         } else {
-            cell.setCellValue("Nghỉ làm");
+            cell.setCellValue("Ngừng kinh doanh");
         }
-         
-        cell = row.createCell(COLUMN_HINHANH);
-        cell.setCellValue(n.getHinhAnh()); 
-        
-        cell = row.createCell(COLUMN_CV);
-        cell.setCellValue(n.getChucVu().getTen());
 
     }
 
@@ -194,5 +153,3 @@ public class ExportNV {
         }
     }
 }
-
-
