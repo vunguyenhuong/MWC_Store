@@ -1,7 +1,10 @@
 package views;
 
+import java.io.File;
 import java.util.List;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import models.KhachHang;
 import services.IKhachHangService;
@@ -11,7 +14,9 @@ import ui.EventPagination;
 import ui.NotificationMess;
 import ui.Page;
 import ui.PaginationItemRenderStyle1;
+import utilities.ExportKH;
 import utilities.Helper;
+import utilities.ImportKH;
 
 /**
  *
@@ -92,6 +97,8 @@ public class FrmQLKH extends javax.swing.JPanel {
         tbl_Khachhang = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         pagination1 = new swing.Pagination();
+        btn_importExcel = new swing.Button();
+        btn_exportExcel = new swing.Button();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -184,6 +191,28 @@ public class FrmQLKH extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btn_importExcel.setBackground(new java.awt.Color(0, 102, 0));
+        btn_importExcel.setForeground(new java.awt.Color(255, 255, 255));
+        btn_importExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/excel.png"))); // NOI18N
+        btn_importExcel.setText("Import Excel");
+        btn_importExcel.setFocusPainted(false);
+        btn_importExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_importExcelActionPerformed(evt);
+            }
+        });
+
+        btn_exportExcel.setBackground(new java.awt.Color(0, 102, 0));
+        btn_exportExcel.setForeground(new java.awt.Color(255, 255, 255));
+        btn_exportExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/excel.png"))); // NOI18N
+        btn_exportExcel.setText("Export Excel");
+        btn_exportExcel.setFocusPainted(false);
+        btn_exportExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_exportExcelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -205,6 +234,10 @@ public class FrmQLKH extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txt_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(btn_importExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(btn_exportExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -222,7 +255,9 @@ public class FrmQLKH extends javax.swing.JPanel {
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_Ma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_Search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_importExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_exportExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -318,10 +353,70 @@ public class FrmQLKH extends javax.swing.JPanel {
         txt_DiaChi.setText(kh.getDiaChi());
     }//GEN-LAST:event_tbl_KhachhangMousePressed
 
+    private void btn_importExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_importExcelActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(".xlsx", "xlsx");
+        fileChooser.setFileFilter(filter);
+        fileChooser.setDialogTitle("Import Excel");
+        int result = fileChooser.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File fileOpen = fileChooser.getSelectedFile();
+            try {
+                List<KhachHang> list = ImportKH.readExcel(fileOpen.getAbsolutePath());
+
+                if (helper.confirm(this, "Xác nhận thêm " + list.size() + " khách hàng ?")) {
+                    for (KhachHang x : list) {
+                         KhachHang kh = iKhachHangService.getObj(x.getMa());
+                        if (kh != null) {
+                            
+                            continue;
+                        } else {
+                            iKhachHangService.save(x);
+                        }
+
+                    }
+                    pagination(txt_Search.getText());
+                    NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Import File Excel thành công");
+                    panel.showNotification();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Import File Excel thất bại");
+                panel.showNotification();
+            }
+            System.out.println("Save as file: " + fileOpen.getAbsolutePath());
+        }
+    }//GEN-LAST:event_btn_importExcelActionPerformed
+
+    private void btn_exportExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_exportExcelActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(".xlsx", "xlsx");
+        fileChooser.setFileFilter(filter);
+        fileChooser.setDialogTitle("Export Excel");
+        int result = fileChooser.showSaveDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File fileToSave = fileChooser.getSelectedFile();
+            try {
+                if (helper.confirm(this, "File Path: " + fileToSave.getAbsolutePath() + filter.getDescription() + ". Xác nhận xuất file ?")) {
+                    ExportKH.writeExcel(iKhachHangService.getAll(), fileToSave.getAbsolutePath() + filter.getDescription());
+                    NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Xuất File Excel thành công");
+                    panel.showNotification();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Xuất File Excel thất bại");
+                panel.showNotification();
+            }
+            System.out.println("Save as file: " + fileToSave.getAbsolutePath() + filter.getDescription());
+        }
+    }//GEN-LAST:event_btn_exportExcelActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private swing.Button btn_add;
     private swing.Button btn_delete;
+    private swing.Button btn_exportExcel;
+    private swing.Button btn_importExcel;
     private swing.Button btn_update;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
