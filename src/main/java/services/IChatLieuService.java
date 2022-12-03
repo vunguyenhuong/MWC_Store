@@ -8,7 +8,7 @@ import models.ChatLieu;
  * @author cvdoa
  */
 public interface IChatLieuService {
-    List<ChatLieu> getListSize();
+    List<ChatLieu> getAll();
     
     boolean save(ChatLieu cl);
     
