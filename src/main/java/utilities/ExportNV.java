@@ -40,7 +40,7 @@ public class ExportNV {
     
     public static void writeExcel(List<NguoiDung> list, String excelFilePath) throws IOException {
         Workbook workbook = getWorkbook(excelFilePath);
-        Sheet sheet = workbook.createSheet("Khách hàng ");
+        Sheet sheet = workbook.createSheet("Nhân viên ");
         int rowIndex = 0;
         writeHeader(sheet, rowIndex);
         rowIndex++;

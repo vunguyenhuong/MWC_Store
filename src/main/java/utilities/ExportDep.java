@@ -9,8 +9,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import models.KhachHang;
-import models.LoaiDep;
+import models.Dep;
+import models.MauSac;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
@@ -27,22 +27,22 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author KimChi
  */
-public class ExportLoaiDep {
-
-    public static final int COLUMN_MA = 0;
+public class ExportDep {
+     public static final int COLUMN_MA = 0;
     public static final int COLUMN_TEN = 1;
-    public static final int COLUMN_NGAYTHEM = 2;
-    public static final int COLUMN_NGAYSUACUOI = 3;
-    public static final int COLUMN_TRANGTHAI = 4;
+    public static final int COLUMN_HINHANH = 2;
+    public static final int COLUMN_NGAYTHEM = 3;
+    public static final int COLUMN_NGAYSUACUOI = 4;
+    public static final int COLUMN_TRANGTHAI = 5;
 
-    public static void writeExcel(List<LoaiDep> list, String excelFilePath) throws IOException {
+    public static void writeExcel(List<Dep> list, String excelFilePath) throws IOException {
         Workbook workbook = getWorkbook(excelFilePath);
-        Sheet sheet = workbook.createSheet("Loại dép ");
+        Sheet sheet = workbook.createSheet("Dép ");
         int rowIndex = 0;
         writeHeader(sheet, rowIndex);
         rowIndex++;
 
-        for (LoaiDep x : list) {
+        for (Dep x : list) {
             Row row = sheet.createRow(rowIndex);
             writeBook(x, row);
             rowIndex++;
@@ -81,7 +81,11 @@ public class ExportLoaiDep {
 
         cell = row.createCell(COLUMN_TEN);
         cell.setCellStyle(cellStyle);
-        cell.setCellValue("Tên loại dép");
+        cell.setCellValue("Tên màu sắc");
+        
+        cell = row.createCell(COLUMN_HINHANH);
+        cell.setCellStyle(cellStyle);
+        cell.setCellValue("Hình ảnh");
 
         cell = row.createCell(COLUMN_NGAYTHEM);
         cell.setCellStyle(cellStyle);
@@ -97,7 +101,7 @@ public class ExportLoaiDep {
 
     }
 
-    private static void writeBook(LoaiDep d, Row row) {
+    private static void writeBook(Dep d, Row row) {
 
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 
@@ -106,6 +110,9 @@ public class ExportLoaiDep {
 
         cell = row.createCell(COLUMN_TEN);
         cell.setCellValue(d.getTen());
+        
+        cell = row.createCell(COLUMN_HINHANH);
+        cell.setCellValue(d.getHinhAnh());
 
         cell = row.createCell(COLUMN_NGAYTHEM);
         cell.setCellValue(d.getNgayThem());

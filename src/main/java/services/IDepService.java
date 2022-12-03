@@ -21,4 +21,6 @@ public interface IDepService {
 
     List<Dep> pagination(int pageNumber, int pageSize, String ten);
 
+  
+
 }

@@ -9,8 +9,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import models.KhachHang;
-import models.LoaiDep;
+import models.MauSac;
+import models.Size;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
@@ -27,22 +27,21 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author KimChi
  */
-public class ExportLoaiDep {
-
-    public static final int COLUMN_MA = 0;
-    public static final int COLUMN_TEN = 1;
+public class ExportSize {
+     public static final int COLUMN_MA = 0;
+    public static final int COLUMN_KICHCO = 1;
     public static final int COLUMN_NGAYTHEM = 2;
     public static final int COLUMN_NGAYSUACUOI = 3;
     public static final int COLUMN_TRANGTHAI = 4;
 
-    public static void writeExcel(List<LoaiDep> list, String excelFilePath) throws IOException {
+    public static void writeExcel(List<Size> list, String excelFilePath) throws IOException {
         Workbook workbook = getWorkbook(excelFilePath);
-        Sheet sheet = workbook.createSheet("Loại dép ");
+        Sheet sheet = workbook.createSheet("Size ");
         int rowIndex = 0;
         writeHeader(sheet, rowIndex);
         rowIndex++;
 
-        for (LoaiDep x : list) {
+        for (Size x : list) {
             Row row = sheet.createRow(rowIndex);
             writeBook(x, row);
             rowIndex++;
@@ -79,9 +78,9 @@ public class ExportLoaiDep {
         cell.setCellStyle(cellStyle);
         cell.setCellValue("Mã ");
 
-        cell = row.createCell(COLUMN_TEN);
+        cell = row.createCell(COLUMN_KICHCO);
         cell.setCellStyle(cellStyle);
-        cell.setCellValue("Tên loại dép");
+        cell.setCellValue("Kích cỡ");
 
         cell = row.createCell(COLUMN_NGAYTHEM);
         cell.setCellStyle(cellStyle);
@@ -97,15 +96,15 @@ public class ExportLoaiDep {
 
     }
 
-    private static void writeBook(LoaiDep d, Row row) {
+    private static void writeBook(Size d, Row row) {
 
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 
         Cell cell = row.createCell(COLUMN_MA);
         cell.setCellValue(d.getMa());
 
-        cell = row.createCell(COLUMN_TEN);
-        cell.setCellValue(d.getTen());
+        cell = row.createCell(COLUMN_KICHCO);
+        cell.setCellValue(d.getKichCo());
 
         cell = row.createCell(COLUMN_NGAYTHEM);
         cell.setCellValue(d.getNgayThem());

@@ -36,7 +36,7 @@ public class ExportMauSac {
 
     public static void writeExcel(List<MauSac> list, String excelFilePath) throws IOException {
         Workbook workbook = getWorkbook(excelFilePath);
-        Sheet sheet = workbook.createSheet("Khách hàng ");
+        Sheet sheet = workbook.createSheet("Màu sắc ");
         int rowIndex = 0;
         writeHeader(sheet, rowIndex);
         rowIndex++;

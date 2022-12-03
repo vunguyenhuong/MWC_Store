@@ -36,7 +36,7 @@ public class ExportNSX {
 
     public static void writeExcel(List<NhaSX> list, String excelFilePath) throws IOException {
         Workbook workbook = getWorkbook(excelFilePath);
-        Sheet sheet = workbook.createSheet("Khách hàng ");
+        Sheet sheet = workbook.createSheet("Nhà sản xuất ");
         int rowIndex = 0;
         writeHeader(sheet, rowIndex);
         rowIndex++;
