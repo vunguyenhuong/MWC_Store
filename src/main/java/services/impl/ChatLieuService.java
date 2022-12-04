@@ -14,7 +14,7 @@ public class ChatLieuService implements IChatLieuService {
     private ChatLieuRepository repo = new ChatLieuRepository();
 
     @Override
-    public List<ChatLieu> getListSize() {
+    public List<ChatLieu> getAll() {
         return repo.getAll();
     }
 

@@ -1,8 +1,11 @@
 package views;
 
 import java.awt.Frame;
+import java.io.File;
 import java.util.List;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import models.KhachHang;
 import services.IKhachHangService;
@@ -13,6 +16,8 @@ import ui.NotificationMess;
 import ui.Page;
 import ui.PaginationItemRenderStyle1;
 import utilities.Helper;
+import utilities.ImportKH;
+import utilities.ImportSP;
 
 /**
  *

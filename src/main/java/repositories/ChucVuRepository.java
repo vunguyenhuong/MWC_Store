@@ -21,4 +21,14 @@ public class ChucVuRepository {
         List<ChucVu> list = query.getResultList();
         return list;
     }
+    public ChucVu getObjById(int id) {
+        ChucVu d = null;
+        try {
+            Query query = session.createQuery("SELECT d FROM ChucVu d WHERE d.id = :id");
+            query.setParameter("id", id);
+            d = (ChucVu) query.getSingleResult();
+        } catch (Exception e) {
+        }
+        return d;
+    }
 }

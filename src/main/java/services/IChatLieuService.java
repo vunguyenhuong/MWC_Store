@@ -9,7 +9,7 @@ import models.ChatLieu;
  */
 public interface IChatLieuService {
 
-    List<ChatLieu> getListSize();
+    List<ChatLieu> getAll();
 
     boolean save(ChatLieu cl);
 
