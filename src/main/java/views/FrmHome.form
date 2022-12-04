@@ -25,12 +25,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="pn_main" alignment="0" max="32767" attributes="0"/>
+          <Component id="pn_main" alignment="0" pref="1322" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="pn_main" alignment="0" pref="738" max="32767" attributes="0"/>
+          <Component id="pn_main" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -55,12 +55,12 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1336" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="1322" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="738" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="759" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -171,7 +171,7 @@
                               <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="txt_tenkh" min="-2" pref="201" max="-2" attributes="0"/>
-                                  <EmptySpace min="100" pref="151" max="32767" attributes="0"/>
+                                  <EmptySpace min="100" max="32767" attributes="0"/>
                                   <Component id="btn_khLe" min="-2" pref="125" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
@@ -268,7 +268,7 @@
                               <Component id="btn_themkm" max="32767" attributes="0"/>
                               <Component id="txt_tienthua" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="166" max="32767" attributes="0"/>
+                          <EmptySpace pref="156" max="32767" attributes="0"/>
                           <Component id="btn_thanhtoan" min="-2" pref="35" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -686,12 +686,12 @@
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txt_sp_timkiem" min="-2" pref="46" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="cb_loc_soLuong" max="32767" attributes="0"/>
+                              <Component id="txt_sp_timkiem" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="tableScrollButton3" min="-2" pref="217" max="-2" attributes="0"/>
+                          <Component id="tableScrollButton3" pref="0" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
