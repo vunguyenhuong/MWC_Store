@@ -1537,12 +1537,25 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             }
             
             if (result != null) {
+                String typeOderBy = "ASC";
+                if (cb_loc_soLuong.getSelectedIndex() == 1) {
+                    typeOderBy = "ASC";
+                }else{
+                    typeOderBy = "DESC";
+                }
+                ChiTietDep  ctd;
                 try {
-                    String maSP = result.getText().replace("MWCSTORES", "");
+                    int idQR = -1;
+                    String idString = result.getText().replace("MWCSTORES", "");
+                    try {
+                        idQR = Integer.parseInt(idString);
+                    } catch (Exception e) {
+                    }
                     for (int i = 0; i < tb_sanpham.getRowCount(); i++) {
-                        if (tb_sanpham.getValueAt(i, 1).equals(maSP)) {
+                        ctd = iChiTietDepService.findByTT(0, txt_sp_timkiem.getText(), typeOderBy).get(i);
+                        if (ctd.getId()== idQR) {
                             tb_sanpham.setRowSelectionInterval(i, i);
-                            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.INFO, NotificationMess.Location.TOP_CENTER, "Đã tìm thấy" + maSP);
+                            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.INFO, NotificationMess.Location.TOP_CENTER, "Đã tìm thấy" + ctd.getDep().getTen());
                             panel.showNotification();
                             addSpToGH();
                         }
