@@ -132,7 +132,7 @@ public class FrmKhuyenMai extends java.awt.Dialog {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        txt_Ma.setToolTipText("");
+        txt_Ma.setToolTipText("u");
         txt_Ma.setLabelText("Mã :");
 
         txt_TenKM.setToolTipText("");
@@ -404,8 +404,20 @@ public class FrmKhuyenMai extends java.awt.Dialog {
         if (helper.checkRegex(txt_Ma, "[a-zA-Z0-9]*", "Mã không được chứa ký hiệu đặc biệt")) {
             return false;
         }
+        if (txt_Ma.getText().length() > 10) {
+            helper.error(this, "Mã chỉ chữa tối đã 10 ký tự");
+            return false;
+        }
         try {
-            float f = Float.parseFloat(txt_PhanTramGiam.getText().trim());
+            Float f = Float.parseFloat(txt_PhanTramGiam.getText());
+            if (Float.parseFloat(txt_PhanTramGiam.getText()) > 100) {
+                helper.error(this, "% giảm vượt quá 100%");
+                return false;
+            }
+            if (Float.parseFloat(txt_PhanTramGiam.getText()) <= 0) {
+                helper.error(this, "% giảm phải >0%");
+                return false;
+            }
         } catch (NumberFormatException e) {
             helper.error(this, "Phần trăm giảm không chứa chữ !");
             return false;
@@ -425,6 +437,10 @@ public class FrmKhuyenMai extends java.awt.Dialog {
             long getHienTai = date1.getTime() - date3.getTime();
             if (getHienTai < 0) {
                 helper.error(this, "Ngày bắt đầu phải >= ngày hiện tại");
+                return false;
+            }
+            if (getDiff < 0) {
+                helper.error(this, "Ngày kết thúc phải >= ngày bắt đầu");
                 return false;
             }
         } catch (Exception e) {
@@ -476,16 +492,25 @@ public class FrmKhuyenMai extends java.awt.Dialog {
         Date currentDate = new Date();
         Date date1 = null;
         Date date2 = null;
+        Date date3 = null;
         try {
             String ketThuc = sdf.format(km.getNgayKetThuc());
             String hienTai = sdf.format(currentDate);
+            String batDau = sdf.format(km.getNgayBatDau());
             date1 = sdf.parse(ketThuc);
             date2 = sdf.parse(hienTai);
+            date3 = sdf.parse(batDau);
             long getDiff = date1.getTime() - date2.getTime();
+            long getTG = date2.getTime() - date3.getTime();
             if (getDiff < 0) {
-                helper.error(this, "Khuyến mại đã hết hạn");
+                helper.error(this, "Khuyến mại đã hết hạn vào ngày: " + sdf.format(km.getNgayKetThuc()));
                 return;
             }
+            if (getTG < 0) {
+                helper.error(this, sdf.format(km.getNgayBatDau()) + ": mới bắt đầu sử dụng khuyến mãi");
+                return;
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
