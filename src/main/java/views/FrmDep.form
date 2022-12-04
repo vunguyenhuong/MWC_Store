@@ -47,18 +47,18 @@
                                       <Component id="btnSua" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btn_exportExcel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="rdoDangkinhdoanh" min="-2" pref="134" max="-2" attributes="0"/>
-                                  <Component id="rdoNgungkinhdoanh" min="-2" pref="134" max="-2" attributes="0"/>
-                                  <Component id="btn_importExcel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="rdoDangkinhdoanh" pref="134" max="32767" attributes="0"/>
+                                  <Component id="rdoNgungkinhdoanh" pref="134" max="32767" attributes="0"/>
+                                  <Component id="btn_importExcel" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btn_exportExcel" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="lblHinhAnh" min="-2" pref="203" max="-2" attributes="0"/>
-                      <EmptySpace pref="50" max="32767" attributes="0"/>
+                      <EmptySpace pref="56" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -95,7 +95,7 @@
                           </Group>
                           <Component id="btn_importExcel" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btnThem" alignment="3" min="-2" max="-2" attributes="0"/>

@@ -35,16 +35,16 @@
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="btn_add" min="-2" pref="56" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btn_update" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="rd_NgungKinhDoanh" min="-2" max="-2" attributes="0"/>
-                  <Component id="rd_DangKinhDoanh" min="-2" pref="121" max="-2" attributes="0"/>
-                  <Component id="btn_importExcel" min="-2" max="-2" attributes="0"/>
-                  <Component id="btn_exportExcel" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="rd_NgungKinhDoanh" max="32767" attributes="0"/>
+                  <Component id="rd_DangKinhDoanh" max="32767" attributes="0"/>
+                  <Component id="btn_importExcel" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btn_exportExcel" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -73,14 +73,14 @@
                           <Component id="txt_Ma" max="32767" attributes="0"/>
                           <Component id="rd_DangKinhDoanh" min="-2" pref="46" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="txt_KichCo" max="32767" attributes="0"/>
                           <Component id="rd_NgungKinhDoanh" min="-2" pref="46" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btn_importExcel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btn_add" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btn_update" alignment="3" min="-2" max="-2" attributes="0"/>
