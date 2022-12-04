@@ -86,7 +86,7 @@ public class KhachHangRepository {
     }
     
     public List<KhachHang> pagination(int pageNumber, int pageSize, String ten) {
-        Query query = session.createQuery("SELECT n FROM KhachHang n WHERE n.ten like :ten");
+        Query query = session.createQuery("SELECT n FROM KhachHang n WHERE n.ten like :ten ORDER BY n.diemTichLuy DESC");
         int pageIndex = pageNumber - 1 < 0 ? 0 : pageNumber - 1;
         int fromRecordIndex = pageIndex * pageSize;
         query.setFirstResult(fromRecordIndex);

@@ -68,12 +68,12 @@ import utilities.Helper;
  * @author KenTizz
  */
 public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFactory {
-    
+
     private static final long serialVersionUID = 6441489157408381878L;
     private Executor executor = Executors.newSingleThreadExecutor(this);
     private Webcam webcam = null;
     private WebcamPanel panel = null;
-    
+
     private Helper helper = new Helper();
     private MigLayout layout;
     private Menu menu;
@@ -93,7 +93,11 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
     private CardLayout cardLayout;
     private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     private ExportWord exportWord = new ExportWord();
-    
+    private Date currentDate = new Date();
+    private Date date1 = null;
+    private Date date2 = null;
+    private Date date3 = null;
+
     public FrmHome(NguoiDung nd) {
         initComponents();
         Image icon = Toolkit.getDefaultToolkit().getImage("images/suportUI/logo.png");
@@ -110,7 +114,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         loadSP(iChiTietDepService.findByTT(0, txt_sp_timkiem.getText(), "DESC"));
         loadHD(iHoaDonService.getByTT(0));
     }
-    
+
     public FrmHome() {
         initComponents();
         Image icon = Toolkit.getDefaultToolkit().getImage("images/suportUI/logo.png");
@@ -126,7 +130,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         loadSP(iChiTietDepService.findByTT(0, txt_sp_timkiem.getText(), "DESC"));
         loadHD(iHoaDonService.getByTT(0));
     }
-    
+
     private void init() {
         layout = new MigLayout("fill", "0[]0[100%, fill]0", "0[fill, top]0");
         bg.setLayout(layout);
@@ -190,7 +194,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                     } else if (subMenuIndex == 6) {
 // NSX
                         main.showForm(new FrmNhaSanXuat());
-                        
+
                     }
                 }
                 if (menuIndex == 4) {
@@ -279,13 +283,13 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 layout.setComponentConstraints(menu, "w " + width + "!, spany2");
                 menu.revalidate();
             }
-            
+
             @Override
             public void end() {
                 menu.setShowMenu(!menu.isShowMenu());
                 menu.setEnableMenu(true);
             }
-            
+
         };
         animator = new Animator(500, target);
         animator.setResolution(0);
@@ -307,7 +311,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         //  Start with this form
         main.showForm(new FrmTrangChu());
     }
-    
+
     private void loadSP(List<ChiTietDep> list) {
         int stt = 1;
         defaultTableModel = (DefaultTableModel) tb_sanpham.getModel();
@@ -318,7 +322,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             });
         }
     }
-    
+
     private void loadHD(List<HoaDon> list) {
         defaultTableModel = (DefaultTableModel) tb_hoadon.getModel();
         defaultTableModel.setRowCount(0);
@@ -332,7 +336,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             });
         }
     }
-    
+
     private void loadGioHang(String maHD) {
         int stt = 1;
         defaultTableModel = (DefaultTableModel) tb_giohang.getModel();
@@ -343,7 +347,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             });
         }
     }
-    
+
     private void tongTien() {
         int row = tb_giohang.getRowCount();
         if (row > 0) {
@@ -356,7 +360,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 txt_giamgia.setText("0");
             }
             giamGia = tongTien - Double.parseDouble(txt_giamgia.getText());
-            
+
             txt_tongtien.setText(String.valueOf(tongTien));
             txt_phaitra.setText(String.valueOf(giamGia));
         } else {
@@ -373,7 +377,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
 //        } catch (Exception e) {
 //        }
     }
-    
+
     private void addSpToGH() {
         int row = tb_sanpham.getSelectedRow();
         int rowHD = tb_hoadon.getSelectedRow();
@@ -437,7 +441,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         }
         tongTien();
     }
-    
+
     private void clearForm() {
         tb_giohang.clearSelection();
         tb_hoadon.clearSelection();
@@ -457,7 +461,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         txt_tienkhachdua.setText("");
         txt_tienthua.setText("");
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -524,7 +528,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 759, Short.MAX_VALUE)
+            .addGap(0, 653, Short.MAX_VALUE)
         );
 
         pn_main.add(bg, "general");
@@ -749,7 +753,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                     .addComponent(lbl_removekm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_themkm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txt_tienthua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addComponent(btn_thanhtoan, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -809,10 +813,10 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tableScrollButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(tableScrollButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btn_gh_xoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -829,10 +833,9 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                         .addComponent(btn_gh_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bnt_gh_xoatatca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 91, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(tableScrollButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addGap(0, 85, Short.MAX_VALUE))
+                    .addComponent(tableScrollButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -888,20 +891,20 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tableScrollButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tableScrollButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 813, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(txt_sp_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cb_loc_soLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -963,13 +966,14 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pn_webcam, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(pn_webcam, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(7, 7, 7)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -991,7 +995,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                             .addComponent(pn_webcam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -1002,7 +1006,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pn_main, javax.swing.GroupLayout.DEFAULT_SIZE, 1322, Short.MAX_VALUE)
+            .addComponent(pn_main, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1171,7 +1175,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 }
             } catch (Exception e) {
             }
-            
+
             if (tienKhachDua >= phaiTra) {
                 if (helper.confirm(this, "Trả lại khách " + (tienKhachDua - phaiTra) + ". Xác nhận thanh toán " + txt_phaitra.getText() + "?")) {
                     hd.setNguoiDungTT(nguoiDung);
@@ -1262,7 +1266,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 panel.showNotification();
                 return;
             }
-            
+
             if (soLuong == 0) {
                 if (helper.confirm(this, "Xác nhận xóa " + hdct.getCtdep().getDep().getTen() + " khỏi giỏ hàng ?")) {
                     ctd.setSoLuong(ctd.getSoLuong() + hdct.getSoLuong());
@@ -1320,10 +1324,6 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                         Double phaiTra = Double.parseDouble(txt_tongtien.getText()) - giamGia;
                         txt_giamgia.setText(giamGia.toString());
                         txt_phaitra.setText(phaiTra.toString());
-                    } else {
-                        NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Đã hết khuyến mại!");
-                        panel.showNotification();
-                        return;
                     }
                 } else {
                     NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Hóa đơn đã được thanh toán!");
@@ -1384,8 +1384,17 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             txt_tenkm.setText("");
             NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Đã xóa khuyến mại!");
             panel.showNotification();
+        } else if (!txt_makm.getText().isBlank()) {
+            khuyenMai = null;
+            chk_tichluy.setSelected(false);
+            txt_giamgia.setText("0");
+            txt_phaitra.setText(txt_tongtien.getText());
+            txt_makm.setText("");
+            txt_tenkm.setText("");
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Đã xóa khuyến mại!");
+            panel.showNotification();
         } else {
-            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Bạn chưa chọn khuyến mại!");
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Bạn chưase chọn khuyến mại!");
             panel.showNotification();
         }
     }//GEN-LAST:event_lbl_removekmMouseClicked
@@ -1425,7 +1434,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             loadSP(iChiTietDepService.findByTT(0, txt_sp_timkiem.getText(), "DESC"));
         }
     }//GEN-LAST:event_cb_loc_soLuongItemStateChanged
-    
+
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -1437,7 +1446,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -1497,17 +1506,17 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         Dimension size = WebcamResolution.QVGA.getSize();
         webcam = Webcam.getWebcams().get(0); //0 is default webcam
         webcam.setViewSize(size);
-        
+
         panel = new WebcamPanel(webcam);
         panel.setPreferredSize(size);
         panel.setFPSDisplayed(true);
         panel.setMirrored(true);
-        
+
         panelShow.add(panel, new AbsoluteConstraints(0, 0, panelShow.getWidth(), panelShow.getHeight()));
-        
+
         executor.execute(this);
     }
-    
+
     @Override
     public void run() {
         while (true) {
@@ -1516,26 +1525,26 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            
+
             Result result = null;
             BufferedImage image = null;
-            
+
             if (webcam.isOpen()) {
-                
+
                 if ((image = webcam.getImage()) == null) {
                     continue;
                 }
-                
+
                 LuminanceSource source = new BufferedImageLuminanceSource(image);
                 BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-                
+
                 try {
                     result = new MultiFormatReader().decode(bitmap);
                 } catch (NotFoundException e) {
                     // fall thru, it means there is no QR code in image
                 }
             }
-            
+
             if (result != null) {
                 String typeOderBy = "ASC";
                 if (cb_loc_soLuong.getSelectedIndex() == 1) {
@@ -1563,7 +1572,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                
+
                 try {
                     HoaDon hd = iHoaDonService.getObj(txt_mahd.getText());
                     String maKhuyenMai = result.getText().replace("MWCSTORES", "");
@@ -1571,23 +1580,6 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                     for (int i = 0; i < listKM.size(); i++) {
                         if (listKM.get(i).getMa().equals(maKhuyenMai)) {
                             khuyenMai = iKhuyenMaiService.getObj(maKhuyenMai);
-                            Date currentDate = new Date();
-                            Date date1 = null;
-                            Date date2 = null;
-                            try {
-                                String ketThuc = sdf.format(khuyenMai.getNgayKetThuc());
-                                String hienTai = sdf.format(currentDate);
-                                date1 = sdf.parse(ketThuc);
-                                date2 = sdf.parse(hienTai);
-                                long getDiff = date1.getTime() - date2.getTime();
-                                if (getDiff < 0) {
-                                    NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Mã khuyến mại đã hết hạn !");
-                                    panel.showNotification();
-                                    break;
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
                             if (khuyenMai.getSoLuong() == 0) {
                                 NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Đã hết mã khuyến mại !");
                                 panel.showNotification();
@@ -1621,6 +1613,31 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                                     }
                                 }
                             }
+                        } else {
+                            khuyenMai = iKhuyenMaiService.getObj(maKhuyenMai);
+                            try {
+                                String ketThuc = sdf.format(khuyenMai.getNgayKetThuc());
+                                String batDau = sdf.format(khuyenMai.getNgayBatDau());
+                                String hienTai = sdf.format(currentDate);
+                                date1 = sdf.parse(ketThuc);
+                                date2 = sdf.parse(hienTai);
+                                date3 = sdf.parse(batDau);
+                                long getDiff = date1.getTime() - date2.getTime();
+                                long getTG = date2.getTime() - date3.getTime();
+                                System.out.println(getTG);
+                                if (getDiff < 0) {
+                                    NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, " Mã khuyến mãi đã hết hạn vào ngày: " + sdf.format(khuyenMai.getNgayKetThuc()));
+                                    panel.showNotification();
+                                    break;
+                                }
+                                if (getTG < 0) {
+                                    NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, sdf.format(khuyenMai.getNgayBatDau()) + ": mới bắt đầu sử dụng mã khuyến mãi");
+                                    panel.showNotification();
+                                    break;
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                     System.out.println(maKhuyenMai);
@@ -1630,7 +1647,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             }
         }
     }
-    
+
     @Override
     public Thread newThread(Runnable r) {
         Thread t = new Thread(r, "example-runner");
