@@ -107,10 +107,10 @@ public class ExportSize {
         cell.setCellValue(d.getKichCo());
 
         cell = row.createCell(COLUMN_NGAYTHEM);
-        cell.setCellValue(d.getNgayThem());
+        cell.setCellValue(format.format(d.getNgayThem()));
 
         cell = row.createCell(COLUMN_NGAYSUACUOI);
-        cell.setCellValue(d.getNgaySuaCuoi());
+        cell.setCellValue(format.format(d.getNgaySuaCuoi()));
 
         cell = row.createCell(COLUMN_TRANGTHAI);
         cell.setCellValue("Ngày sửa cuối");
