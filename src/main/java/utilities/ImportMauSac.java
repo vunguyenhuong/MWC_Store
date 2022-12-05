@@ -127,7 +127,6 @@ public class ImportMauSac {
                     case COLUMN_TRANGTHAI:
                         d.setTrangThai(new BigDecimal((double) cellValue).intValue());
                         break;
-
                     default:
                         break;
                 }

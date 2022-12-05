@@ -284,6 +284,14 @@ public class FrmMauSac extends javax.swing.JPanel {
         if (checkNull()) {
             return;
         }
+        
+        for (MauSac ms : iMauSacService.getAll()) {
+            if (txt_Ten.getText().equalsIgnoreCase(ms.getTen())) {
+                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Màu sắc đã tồn tại!");
+                panel.showNotification();
+                return;
+            }
+        }
 
         int confirm = JOptionPane.showConfirmDialog(this, "Bạn có muốn cập nhật không ?", "Confirm", JOptionPane.YES_NO_OPTION);
 
@@ -310,6 +318,14 @@ public class FrmMauSac extends javax.swing.JPanel {
         MauSac m = new MauSac();
         if (checkNull()) {
             return;
+        }
+
+        for (MauSac ms : iMauSacService.getAll()) {
+            if (txt_Ten.getText().equalsIgnoreCase(ms.getTen())) {
+                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Màu sắc đã tồn tại!");
+                panel.showNotification();
+                return;
+            }
         }
         String result;
         for (int i = 0; i < iMauSacService.getAll().size() + 1; i++) {

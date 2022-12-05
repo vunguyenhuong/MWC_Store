@@ -91,6 +91,7 @@ public class FrmNhaSanXuat extends javax.swing.JPanel {
                 || helper.checkRegex(txt_Ten, "(\\S+ )*\\S+", "Tên không hợp lệ!")) {
             return true;
         }
+        
         return false;
 
     }
@@ -309,6 +310,14 @@ public class FrmNhaSanXuat extends javax.swing.JPanel {
         if (checkNull()) {
             return;
         }
+        
+        for (NhaSX nsx : iNhaSXService.getAll()) {
+            if (txt_Ten.getText().equalsIgnoreCase(nsx.getTen())) {
+                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Nhà sản xuất đã tồn tại!");
+                panel.showNotification();
+                return;
+            }
+        }
 
         int confirm = JOptionPane.showConfirmDialog(this, "Bạn có muốn cập nhật không ?", "Confirm", JOptionPane.YES_NO_OPTION);
 
@@ -337,6 +346,14 @@ public class FrmNhaSanXuat extends javax.swing.JPanel {
         NhaSX n = new NhaSX();
         if (checkNull()) {
             return;
+        }
+        
+        for (NhaSX nsx : iNhaSXService.getAll()) {
+            if (txt_Ten.getText().equalsIgnoreCase(nsx.getTen())) {
+                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Nhà sản xuất đã tồn tại!");
+                panel.showNotification();
+                return;
+            }
         }
         String result;
         for (int i = 0; i < iNhaSXService.getAll().size() + 1; i++) {
