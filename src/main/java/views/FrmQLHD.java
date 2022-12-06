@@ -1,30 +1,18 @@
 package views;
 
-import java.text.DateFormat;
-
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-
 import javax.swing.DefaultComboBoxModel;
-
 import javax.swing.table.DefaultTableModel;
 import models.ChiTietDep;
-
 import models.HoaDon;
 import models.HoaDonChiTiet;
-
 import services.IChiTietDepService;
-
 import services.IHoaDonCTService;
 import services.IHoaDonService;
 import services.IKhuyenMaiService;
 import services.impl.ChiTietDepService;
-
 import services.impl.HoaDonCTService;
 import services.impl.HoaDonService;
 import services.impl.KhuyenMaiService;
@@ -68,18 +56,11 @@ public class FrmQLHD extends javax.swing.JPanel {
         this.iHoaDonService = new HoaDonService();
         this.iKhuyenMaiService = new KhuyenMaiService();
 
-        if (jdate_from.getDate() == null || jdate_to.getDate() == null) {
-            jdate_from.setDate(new Date());
-            jdate_to.setDate(new Date());
-        }
-
         loadComboboxTrangThai();
-
-        pagination(txt_Timkiem.getText(), null, null, 0);
         pagination1.setPagegination(1, pg.getTotalPage());
         pg.setCurrent(1);
         pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
-
+        locTrangThai();
     }
 
     public void loadComboboxTrangThai() {
@@ -108,8 +89,18 @@ public class FrmQLHD extends javax.swing.JPanel {
             public void pageChanged(int page) {
                 loadDataToHD(iHoaDonService.pagination(page, limit, ten, from, to, trangthai));
                 pg.setCurrent(page);
+                clear();
             }
         });
+    }
+
+    private void clear() {
+        dtm = (DefaultTableModel) tb_HDCT.getModel();
+        dtm.setRowCount(0);
+        lblTongtien.setText("0");
+        lblDiemtichluy.setText("0");
+        lblKhuyenmai.setText("0");
+        lblThanhtoan.setText("0");
     }
 
     private String checkTrangThai(int trangThai) {
@@ -150,37 +141,10 @@ public class FrmQLHD extends javax.swing.JPanel {
     }
 
     public void locTrangThai() {
+        clear();
         int index = cbo_Trangthai.getSelectedIndex();
-        String fromString;
-        String toString;
-        Date dateFrom = new Date();
-        Date dateTo = new Date();
-
-        DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-        try {
-            fromString = format.format(jdate_from.getDate());
-            toString = format.format(jdate_to.getDate());
-
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd", Locale.ENGLISH);
-            LocalDate date1 = LocalDate.parse(fromString, formatter);
-            LocalDate date2 = LocalDate.parse(toString, formatter);
-
-            dateFrom = java.sql.Date.valueOf(date1);
-            dateTo = java.sql.Date.valueOf(date2);
-        } catch (Exception e) {
-        }
-
-//        if (jdate_from.getDate() == null || jdate_to.getDate() == null) {
-//            if (index == -1 || index == 0) {
-//                loadDataToHD(iHoaDonService.getAll());
-//            } else if (index == 1) {
-//                loadDataToHD(iHoaDonService.getByTT(0));
-//            } else if (index == 2) {
-//                loadDataToHD(iHoaDonService.getByTT(1));
-//            } else {
-//                loadDataToHD(iHoaDonService.getByTT(2));
-//            }
-//        } else 
+        Date dateFrom = java.sql.Date.valueOf(jdate_from.getText());
+        Date dateTo = java.sql.Date.valueOf(jdate_to.getText());
         if (index == 0) {
             pagination(txt_Timkiem.getText(), dateFrom, dateTo, -1);
         } else if (index == 1) {
@@ -216,7 +180,7 @@ public class FrmQLHD extends javax.swing.JPanel {
         tongTien = tongTien - khuyenmai - giamGia;
 
         lblDiemtichluy.setText(String.valueOf(hd.getDiemTichLuy()));
-        
+
         lblKhuyenmai.setText(String.valueOf(khuyenmai + giamGia));
 
         if (hd.getTrangThai() == 1) {
@@ -232,6 +196,8 @@ public class FrmQLHD extends javax.swing.JPanel {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        dateChooser1 = new datechooser.DateChooser();
+        dateChooser2 = new datechooser.DateChooser();
         jPanel1 = new javax.swing.JPanel();
         txt_Timkiem = new swing.TextField();
         cbo_Trangthai = new swing.Combobox();
@@ -239,10 +205,8 @@ public class FrmQLHD extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_hoadon = new javax.swing.JTable();
         btn_HuyHD = new swing.Button();
-        jLabel3 = new javax.swing.JLabel();
-        jdate_from = new com.toedter.calendar.JDateChooser();
-        jdate_to = new com.toedter.calendar.JDateChooser();
-        jLabel5 = new javax.swing.JLabel();
+        jdate_from = new swing.TextField();
+        jdate_to = new swing.TextField();
         jPanel2 = new javax.swing.JPanel();
         tableScrollButton2 = new swing.TableScrollButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -259,12 +223,18 @@ public class FrmQLHD extends javax.swing.JPanel {
         lbl_voucher1 = new javax.swing.JLabel();
         lblDiemtichluy = new javax.swing.JLabel();
 
+        dateChooser1.setDateFormat("yyyy-MM-dd");
+        dateChooser1.setTextRefernce(jdate_from);
+
+        dateChooser2.setDateFormat("yyyy-MM-dd");
+        dateChooser2.setTextRefernce(jdate_to);
+
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Hóa đơn"));
 
-        txt_Timkiem.setLabelText("Tìm kiếm hóa đơn");
+        txt_Timkiem.setLabelText("Tìm kiếm người tạo hóa đơn");
         txt_Timkiem.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 txt_TimkiemCaretUpdate(evt);
@@ -304,23 +274,19 @@ public class FrmQLHD extends javax.swing.JPanel {
             }
         });
 
-        jLabel3.setText("Từ ngày");
-
-        jdate_from.setDateFormatString("yyyy-MM-dd");
-        jdate_from.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jdate_fromPropertyChange(evt);
+        jdate_from.setLabelText("Từ ngày:");
+        jdate_from.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                jdate_fromCaretUpdate(evt);
             }
         });
 
-        jdate_to.setDateFormatString("yyyy-MM-dd");
-        jdate_to.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jdate_toPropertyChange(evt);
+        jdate_to.setLabelText("Đến ngày:");
+        jdate_to.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                jdate_toCaretUpdate(evt);
             }
         });
-
-        jLabel5.setText("đến");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -332,16 +298,12 @@ public class FrmQLHD extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txt_Timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbo_Trangthai, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbo_Trangthai, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jdate_from, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jdate_from, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jdate_to, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(jdate_to, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
                         .addComponent(btn_HuyHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -349,22 +311,14 @@ public class FrmQLHD extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel5))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cbo_Trangthai, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_HuyHD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_Timkiem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jdate_to, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-                            .addComponent(jdate_from, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(13, 13, 13)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_HuyHD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_Timkiem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jdate_from, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jdate_to, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbo_Trangthai, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tableScrollButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -391,14 +345,14 @@ public class FrmQLHD extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tableScrollButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 824, Short.MAX_VALUE)
+                .addComponent(tableScrollButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tableScrollButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                .addComponent(tableScrollButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -462,7 +416,6 @@ public class FrmQLHD extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -483,7 +436,8 @@ public class FrmQLHD extends javax.swing.JPanel {
                                 .addComponent(lbl_Change)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblThanhtoan)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -567,15 +521,15 @@ public class FrmQLHD extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btn_HuyHDActionPerformed
 
-    private void jdate_fromPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdate_fromPropertyChange
+    private void jdate_toCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jdate_toCaretUpdate
         // TODO add your handling code here:
         locTrangThai();
-    }//GEN-LAST:event_jdate_fromPropertyChange
+    }//GEN-LAST:event_jdate_toCaretUpdate
 
-    private void jdate_toPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdate_toPropertyChange
+    private void jdate_fromCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jdate_fromCaretUpdate
         // TODO add your handling code here:
         locTrangThai();
-    }//GEN-LAST:event_jdate_toPropertyChange
+    }//GEN-LAST:event_jdate_fromCaretUpdate
 
     private void loadHoaDonCT(String maHD) {
         int stt = 1;
@@ -592,17 +546,17 @@ public class FrmQLHD extends javax.swing.JPanel {
     private swing.Button btn_HuyHD;
     private javax.swing.ButtonGroup buttonGroup1;
     private swing.Combobox cbo_Trangthai;
+    private datechooser.DateChooser dateChooser1;
+    private datechooser.DateChooser dateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private com.toedter.calendar.JDateChooser jdate_from;
-    private com.toedter.calendar.JDateChooser jdate_to;
+    private swing.TextField jdate_from;
+    private swing.TextField jdate_to;
     private javax.swing.JLabel lblDiemtichluy;
     private javax.swing.JLabel lblKhuyenmai;
     private javax.swing.JLabel lblThanhtoan;
