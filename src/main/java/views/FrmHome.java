@@ -1636,7 +1636,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                                     break;
                                 }
                             } catch (Exception e) {
-                                e.printStackTrace();
+//                                e.printStackTrace();
                             }
                         }
                     }
