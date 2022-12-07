@@ -1,14 +1,10 @@
 package views;
 
 import java.awt.Color;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.category.DefaultCategoryDataset;
+import java.math.BigDecimal;
 import services.IHoaDonService;
 import services.impl.HoaDonService;
+import swing.chart.ModelChart;
 
 /**
  *
@@ -17,34 +13,25 @@ import services.impl.HoaDonService;
 public class ChartDoanhThu extends javax.swing.JFrame {
 
     private static IHoaDonService iHoaDonService = new HoaDonService();
-private boolean gained = false;
+    private boolean gained = false;
+
     public ChartDoanhThu(int nam) {
         initComponents();
-        ChartPanel chartPanel = new ChartPanel(createChart(nam));
-        chartPanel.setPreferredSize(new java.awt.Dimension(chart.getWidth(), chart.getHeight()));
-        chartPanel.setBackground(Color.WHITE);
-        chart.add(chartPanel);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-    }
-
-    private static JFreeChart createChart(int nam) {
-        JFreeChart barChart = ChartFactory.createBarChart(
-                "BIỂU ĐỒ THỂ HIỆN DOANH THU NĂM " + nam,
-                "Tháng", "Doanh thu (VNĐ)",
-                createDataset(nam), PlotOrientation.VERTICAL, false, false, false);
-        return barChart;
-    }
-
-    private static CategoryDataset createDataset(int nam) {
-        final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        chart1.addLegend("Doanh thu tháng", new Color(189, 135, 245));
+        lbl_title.setText("BIỂU ĐỒ THỂ HIỆN DOANH THU NĂM " + nam);
+        BigDecimal doanhThu = null;
         try {
             for (int i = 1; i <= 12; i++) {
-                dataset.addValue(iHoaDonService.doanhThuTheoThang(i, nam), "Doanh thu", i);
+                doanhThu = iHoaDonService.doanhThuTheoThang(i, nam);
+                chart1.addData(new ModelChart("Tháng " + i, new double[]{doanhThu == null ? 0 : doanhThu.doubleValue()}));
             }
         } catch (Exception e) {
         }
-        return dataset;
+        chart1.start();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setResizable(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -52,7 +39,8 @@ private boolean gained = false;
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        chart = new javax.swing.JPanel();
+        lbl_title = new javax.swing.JLabel();
+        chart1 = new swing.chart.Chart();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addFocusListener(new java.awt.event.FocusAdapter() {
@@ -66,32 +54,43 @@ private boolean gained = false;
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        lbl_title.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbl_title.setForeground(java.awt.Color.red);
+        lbl_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_title.setText("BIỂU ĐỒ THỂ HIỆN DOANH THU NĂM");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(chart1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(lbl_title)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chart1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -102,7 +101,7 @@ private boolean gained = false;
     }//GEN-LAST:event_formFocusGained
 
     private void formFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusLost
-        if(gained){
+        if (gained) {
             this.dispose();
         }
     }//GEN-LAST:event_formFocusLost
@@ -143,7 +142,8 @@ private boolean gained = false;
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel chart;
+    private swing.chart.Chart chart1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lbl_title;
     // End of variables declaration//GEN-END:variables
 }

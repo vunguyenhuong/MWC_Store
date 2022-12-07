@@ -173,7 +173,7 @@ public class FrmThongKeDoanhThu extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Tháng", "Doanh thu"
+                "Tháng", "Doanh thu (VNĐ)"
             }
         ));
         jScrollPane1.setViewportView(tb_chitietdoanhthu);
@@ -182,7 +182,7 @@ public class FrmThongKeDoanhThu extends javax.swing.JPanel {
 
         lbl_chitietdoanhthu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_chitietdoanhthu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_chitietdoanhthu.setText("Chi tiết doanh thu năm 2022");
+        lbl_chitietdoanhthu.setText("Doanh thu từng tháng năm 2022");
 
         button1.setBackground(new java.awt.Color(0, 102, 102));
         button1.setForeground(new java.awt.Color(255, 255, 255));
@@ -320,7 +320,7 @@ public class FrmThongKeDoanhThu extends javax.swing.JPanel {
     }//GEN-LAST:event_cb_thangItemStateChanged
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-        new ChartDoanhThu1(Integer.parseInt(cb_nam.getSelectedItem().toString())).setVisible(true);
+        new ChartDoanhThu(Integer.parseInt(cb_nam.getSelectedItem().toString())).setVisible(true);
     }//GEN-LAST:event_button1ActionPerformed
 
 

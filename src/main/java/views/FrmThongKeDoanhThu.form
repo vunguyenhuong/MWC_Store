@@ -261,7 +261,7 @@
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="2" rowCount="0">
                     <Column editable="true" title="Th&#xe1;ng" type="java.lang.Object"/>
-                    <Column editable="true" title="Doanh thu" type="java.lang.Object"/>
+                    <Column editable="true" title="Doanh thu (VN&#x110;)" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -293,7 +293,7 @@
           <Font name="Segoe UI" size="14" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Chi ti&#x1ebf;t doanh thu n&#x103;m 2022"/>
+        <Property name="text" type="java.lang.String" value="Doanh thu t&#x1eeb;ng th&#xe1;ng n&#x103;m 2022"/>
       </Properties>
     </Component>
     <Component class="swing.Button" name="button1">
