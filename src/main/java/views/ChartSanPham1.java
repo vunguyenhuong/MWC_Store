@@ -24,7 +24,7 @@ public class ChartSanPham1 extends javax.swing.JFrame {
         try {
             for (int i = 0; i < listCTD.size(); i++) {
                 ChiTietDep ctd = listCTD.get(i);
-                chart.addData(new ModelChart(ctd.getDep().getTen(), new double[]{listCTD.get(i).getSoLuongBanRa()}));
+                chart.addData(new ModelChart(i+1+ ". "+ctd.getDep().getTen()+" - "+ctd.getSize().getKichCo(), new double[]{listCTD.get(i).getSoLuongBanRa()}));
             }
         } catch (Exception e) {
         }
@@ -56,11 +56,17 @@ public class ChartSanPham1 extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(chart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

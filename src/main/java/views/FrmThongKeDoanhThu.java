@@ -320,7 +320,7 @@ public class FrmThongKeDoanhThu extends javax.swing.JPanel {
     }//GEN-LAST:event_cb_thangItemStateChanged
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-        new ChartDoanhThu(Integer.parseInt(cb_nam.getSelectedItem().toString())).setVisible(true);
+        new ChartDoanhThu1(Integer.parseInt(cb_nam.getSelectedItem().toString())).setVisible(true);
     }//GEN-LAST:event_button1ActionPerformed
 
 
