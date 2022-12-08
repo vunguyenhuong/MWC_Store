@@ -3,16 +3,15 @@ package views;
 import java.awt.Color;
 import java.math.BigDecimal;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Random;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import services.IHoaDonCTService;
 import services.IHoaDonService;
 import services.impl.HoaDonCTService;
 import services.impl.HoaDonService;
+import swing.ModelChart;
 import swing.ModelPieChart;
 import swing.PieChart;
 import swing.Table;
@@ -32,14 +31,12 @@ public class FrmThongKeDoanhThu extends javax.swing.JPanel {
     private DefaultComboBoxModel comboNam;
     private Calendar calendar = Calendar.getInstance();
     Random obj = new Random();
-    
+
     public FrmThongKeDoanhThu() {
         initComponents();
         chuatt.setData(new ModelCard("HD chưa thanh toán", iHoaDonService.getByTT(0).size(), new ImageIcon(getClass().getResource("/icons/bill.png"))));
         datt.setData(new ModelCard("HD đã thanh toán", iHoaDonService.getByTT(1).size(), new ImageIcon(getClass().getResource("/icons/paidbill.png"))));
         addYear();
-        chartDoanhThu();
-        lbl_tenbieudo.setText("BIỂU ĐỒ CƠ CẤU DOANH THU NĂM " + calendar.get(Calendar.YEAR));
         comboNam = (DefaultComboBoxModel) cb_nam.getModel();
         comboThang = (DefaultComboBoxModel) cb_thang.getModel();
         comboNgay = (DefaultComboBoxModel) cb_ngay.getModel();
@@ -48,6 +45,12 @@ public class FrmThongKeDoanhThu extends javax.swing.JPanel {
         comboNam.setSelectedItem(calendar.get(Calendar.YEAR));
         Table.apply(jScrollPane1, Table.TableType.DEFAULT);
         loadDoanhThu();
+        curveLineChart1.setTitle("Chi tiết doanh thu theo năm");
+        curveLineChart1.addLegend(String.valueOf(calendar.get(Calendar.YEAR) - 2), Color.decode("#0099F7"), Color.decode("#F11712"));
+        curveLineChart1.addLegend(String.valueOf(calendar.get(Calendar.YEAR) - 1), Color.decode("#e65c00"), Color.decode("#F9D423"));
+        curveLineChart1.addLegend(String.valueOf(calendar.get(Calendar.YEAR)), Color.decode("#7b4397"), Color.decode("#dc2430"));
+        chartDoanhThu();
+        curveLineChart1.start();
     }
 
     private void addYear() {
@@ -59,14 +62,15 @@ public class FrmThongKeDoanhThu extends javax.swing.JPanel {
     }
 
     private void chartDoanhThu() {
-        BigDecimal bd = null;
-        pieChart1.clearData();
-        pieChart1.setChartType(PieChart.PeiChartType.DEFAULT);
+        BigDecimal year = null;
+        BigDecimal currentYear = null;
+        BigDecimal currentYear1 = null;
+        curveLineChart1.clear();
         for (int i = 1; i <= 12; i++) {
-            int rand_num = obj.nextInt(0xffffff + 1);
-            String colorCode = String.format("#%06x", rand_num);
-            bd = iHoaDonService.doanhThuTheoThang(i, Integer.parseInt(comboNam.getSelectedItem().toString()));
-            pieChart1.addData(new ModelPieChart("Tháng " + i, bd == null ? 0 : bd.doubleValue(), Color.decode(colorCode)));
+            year = iHoaDonService.doanhThuTheoThang(i, calendar.get(Calendar.YEAR));
+            currentYear = iHoaDonService.doanhThuTheoThang(i, calendar.get(Calendar.YEAR) - 1);
+            currentYear1 = iHoaDonService.doanhThuTheoThang(i, calendar.get(Calendar.YEAR) - 2);
+            curveLineChart1.addData(new ModelChart("T " + i, new double[]{currentYear1 == null ? 0.0 : currentYear1.doubleValue(), currentYear == null ? 0.0 : currentYear.doubleValue(), year == null ? 0.0 : year.doubleValue()}));
         }
     }
 
@@ -109,7 +113,6 @@ public class FrmThongKeDoanhThu extends javax.swing.JPanel {
         chuatt = new swing.Card();
         datt = new swing.Card();
         cb_nam = new swing.Combobox();
-        lbl_tenbieudo = new javax.swing.JLabel();
         cb_thang = new swing.Combobox();
         cb_ngay = new swing.Combobox();
         doanhthuthang = new swing.Card();
@@ -119,7 +122,8 @@ public class FrmThongKeDoanhThu extends javax.swing.JPanel {
         lbl_chitietdoanhthu = new javax.swing.JLabel();
         button1 = new swing.Button();
         jPanel1 = new javax.swing.JPanel();
-        pieChart1 = new swing.PieChart();
+        panelShadow1 = new swing.PanelShadow();
+        curveLineChart1 = new swing.CurveLineChart();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -145,11 +149,6 @@ public class FrmThongKeDoanhThu extends javax.swing.JPanel {
             }
         });
 
-        lbl_tenbieudo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lbl_tenbieudo.setForeground(java.awt.Color.red);
-        lbl_tenbieudo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_tenbieudo.setText("BIỂU ĐỒ CƠ CẤU DOANH THU NĂM ");
-
         cb_thang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
         cb_thang.setLabeText("Tháng");
         cb_thang.addItemListener(new java.awt.event.ItemListener() {
@@ -174,7 +173,7 @@ public class FrmThongKeDoanhThu extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Tháng", "Doanh thu"
+                "Tháng", "Doanh thu (VNĐ)"
             }
         ));
         jScrollPane1.setViewportView(tb_chitietdoanhthu);
@@ -183,7 +182,7 @@ public class FrmThongKeDoanhThu extends javax.swing.JPanel {
 
         lbl_chitietdoanhthu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_chitietdoanhthu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_chitietdoanhthu.setText("Chi tiết doanh thu năm 2022");
+        lbl_chitietdoanhthu.setText("Doanh thu từng tháng năm 2022");
 
         button1.setBackground(new java.awt.Color(0, 102, 102));
         button1.setForeground(new java.awt.Color(255, 255, 255));
@@ -196,15 +195,37 @@ public class FrmThongKeDoanhThu extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        panelShadow1.setBackground(new java.awt.Color(34, 59, 69));
+        panelShadow1.setColorGradient(new java.awt.Color(17, 38, 47));
+
+        curveLineChart1.setForeground(new java.awt.Color(237, 237, 237));
+
+        javax.swing.GroupLayout panelShadow1Layout = new javax.swing.GroupLayout(panelShadow1);
+        panelShadow1.setLayout(panelShadow1Layout);
+        panelShadow1Layout.setHorizontalGroup(
+            panelShadow1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelShadow1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(curveLineChart1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelShadow1Layout.setVerticalGroup(
+            panelShadow1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelShadow1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(curveLineChart1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pieChart1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelShadow1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pieChart1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelShadow1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -225,7 +246,6 @@ public class FrmThongKeDoanhThu extends javax.swing.JPanel {
                                 .addComponent(datt, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(doanhthungay, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE))
-                            .addComponent(lbl_tenbieudo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,27 +276,28 @@ public class FrmThongKeDoanhThu extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(doanhthunam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(datt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chuatt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(doanhthungay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(doanhthuthang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(doanhthunam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(doanhthuthang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(cb_ngay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cb_thang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cb_nam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(cb_ngay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cb_thang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cb_nam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lbl_tenbieudo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(lbl_chitietdoanhthu)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tableScrollButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(datt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(chuatt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(doanhthungay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -285,14 +306,9 @@ public class FrmThongKeDoanhThu extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cb_namItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_namItemStateChanged
-        chartDoanhThu();
-        lbl_tenbieudo.setText("BIỂU ĐỒ CƠ CẤU DOANH THU NĂM " + comboNam.getSelectedItem());
-        for (int i = 1; i <= 31; i++) {
-            System.out.print(i + ",");
-        }
         showDoanhThu();
         loadDoanhThu();
-        lbl_chitietdoanhthu.setText("Chi tiết doanh thu năm " + cb_nam.getSelectedItem());
+        lbl_chitietdoanhthu.setText("Doanh thu từng tháng năm " + cb_nam.getSelectedItem());
     }//GEN-LAST:event_cb_namItemStateChanged
 
     private void cb_ngayItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_ngayItemStateChanged
@@ -314,6 +330,7 @@ public class FrmThongKeDoanhThu extends javax.swing.JPanel {
     private swing.Combobox cb_ngay;
     private swing.Combobox cb_thang;
     private swing.Card chuatt;
+    private swing.CurveLineChart curveLineChart1;
     private swing.Card datt;
     private swing.Card doanhthunam;
     private swing.Card doanhthungay;
@@ -322,8 +339,7 @@ public class FrmThongKeDoanhThu extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_chitietdoanhthu;
-    private javax.swing.JLabel lbl_tenbieudo;
-    private swing.PieChart pieChart1;
+    private swing.PanelShadow panelShadow1;
     private swing.TableScrollButton tableScrollButton1;
     private javax.swing.JTable tb_chitietdoanhthu;
     // End of variables declaration//GEN-END:variables

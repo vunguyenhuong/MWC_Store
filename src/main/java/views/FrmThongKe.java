@@ -1,5 +1,6 @@
 package views;
 
+import java.awt.Color;
 import java.io.File;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +16,7 @@ import services.IHoaDonCTService;
 import services.impl.ChiTietDepService;
 import services.impl.HoaDonCTService;
 import swing.Table;
+import swing.chart.ModelChart;
 import ui.ModelCard;
 import ui.NotificationMess;
 import utilities.ExportSP;
@@ -290,11 +292,6 @@ public class FrmThongKe extends javax.swing.JPanel {
         loadData(list, tb_spsaphethang);
     }//GEN-LAST:event_txt_soluongCaretUpdate
 
-    private void btn_xembieudotop5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xembieudotop5ActionPerformed
-        ChartSanPham chart = new ChartSanPham(null, true);
-        chart.setVisible(true);
-    }//GEN-LAST:event_btn_xembieudotop5ActionPerformed
-
     private void btn_exportTop5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_exportTop5ActionPerformed
         JFileChooser fileChooser = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter(".xlsx", "xlsx");
@@ -340,6 +337,11 @@ public class FrmThongKe extends javax.swing.JPanel {
             System.out.println("Save as file: " + fileToSave.getAbsolutePath() + filter.getDescription());
         }
     }//GEN-LAST:event_btn_exportSapHetHangActionPerformed
+
+    private void btn_xembieudotop5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xembieudotop5ActionPerformed
+        ChartSanPham chart = new ChartSanPham();
+        chart.setVisible(true);
+    }//GEN-LAST:event_btn_xembieudotop5ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private swing.Button btn_exportSapHetHang;

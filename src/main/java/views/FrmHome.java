@@ -224,6 +224,8 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                     loadSP(iChiTietDepService.findByTT(0, txt_sp_timkiem.getText(), "DESC"));
                     loadHD(iHoaDonService.getByTT(0));
                     loadGioHang(txt_mahd.getText());
+                    tb_hoadon.clearSelection();
+                    tb_giohang.clearSelection();
                     initWebcam(pn_webcam);
                 }
                 if (menuIndex == 6) {
@@ -1202,6 +1204,8 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                         ChiTietDep ctd = x.getCtdep();
                         ctd.setSoLuongBanRa(ctd.getSoLuongBanRa() + x.getSoLuong());
                         iChiTietDepService.save(ctd);
+                        x.setTrangThai(1);
+                        iHoaDonCTService.save(x);
                     }
                     iHoaDonService.save(hd);
                     loadHD(iHoaDonService.getByTT(0));
@@ -1636,7 +1640,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                                     break;
                                 }
                             } catch (Exception e) {
-                                e.printStackTrace();
+//                                e.printStackTrace();
                             }
                         }
                     }

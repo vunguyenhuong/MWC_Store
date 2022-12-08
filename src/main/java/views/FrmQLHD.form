@@ -4,6 +4,22 @@
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
     </Component>
+    <Component class="datechooser.DateChooser" name="dateChooser1">
+      <Properties>
+        <Property name="dateFormat" type="java.lang.String" value="yyyy-MM-dd"/>
+        <Property name="textRefernce" type="javax.swing.JTextField" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="jdate_from"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="datechooser.DateChooser" name="dateChooser2">
+      <Properties>
+        <Property name="dateFormat" type="java.lang.String" value="yyyy-MM-dd"/>
+        <Property name="textRefernce" type="javax.swing.JTextField" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="jdate_to"/>
+        </Property>
+      </Properties>
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -29,7 +45,6 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jPanel3" alignment="1" max="32767" attributes="0"/>
                   <Component id="jPanel2" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -54,6 +69,7 @@
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
+                  <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -119,17 +135,12 @@
                       <Group type="102" attributes="0">
                           <Component id="txt_Timkiem" min="-2" pref="186" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="cbo_Trangthai" min="-2" pref="182" max="-2" attributes="0"/>
+                          <Component id="cbo_Trangthai" min="-2" pref="140" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jdate_from" pref="148" max="32767" attributes="0"/>
-                              <Component id="jLabel3" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="jdate_from" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jdate_to" min="-2" pref="148" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="32767" attributes="0"/>
+                          <Component id="jdate_to" min="-2" pref="100" max="-2" attributes="0"/>
+                          <EmptySpace pref="182" max="32767" attributes="0"/>
                           <Component id="btn_HuyHD" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="tableScrollButton1" max="32767" attributes="0"/>
@@ -141,27 +152,15 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="btn_HuyHD" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="txt_Timkiem" alignment="1" max="32767" attributes="0"/>
+                      <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                          <Component id="jdate_from" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jdate_to" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="cbo_Trangthai" alignment="1" max="32767" attributes="0"/>
-                              <Component id="btn_HuyHD" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="txt_Timkiem" alignment="1" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="jLabel3" min="-2" pref="16" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jdate_to" alignment="1" pref="37" max="32767" attributes="0"/>
-                              <Component id="jdate_from" alignment="1" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <Component id="cbo_Trangthai" alignment="1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="tableScrollButton1" min="-2" pref="185" max="-2" attributes="0"/>
@@ -173,7 +172,7 @@
       <SubComponents>
         <Component class="swing.TextField" name="txt_Timkiem">
           <Properties>
-            <Property name="labelText" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m h&#xf3;a &#x111;&#x1a1;n"/>
+            <Property name="labelText" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m ng&#x1b0;&#x1edd;i t&#x1ea1;o h&#xf3;a &#x111;&#x1a1;n"/>
           </Properties>
           <Events>
             <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="txt_TimkiemCaretUpdate"/>
@@ -293,31 +292,21 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_HuyHDActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel3">
+        <Component class="swing.TextField" name="jdate_from">
           <Properties>
-            <Property name="text" type="java.lang.String" value="T&#x1eeb; ng&#xe0;y"/>
-          </Properties>
-        </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="jdate_from">
-          <Properties>
-            <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
+            <Property name="labelText" type="java.lang.String" value="T&#x1eeb; ng&#xe0;y:"/>
           </Properties>
           <Events>
-            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jdate_fromPropertyChange"/>
+            <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="jdate_fromCaretUpdate"/>
           </Events>
         </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="jdate_to">
+        <Component class="swing.TextField" name="jdate_to">
           <Properties>
-            <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
+            <Property name="labelText" type="java.lang.String" value="&#x110;&#x1ebf;n ng&#xe0;y:"/>
           </Properties>
           <Events>
-            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jdate_toPropertyChange"/>
+            <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="jdate_toCaretUpdate"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel5">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="&#x111;&#x1ebf;n"/>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>
@@ -344,7 +333,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="tableScrollButton2" pref="824" max="32767" attributes="0"/>
+                  <Component id="tableScrollButton2" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -353,7 +342,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="tableScrollButton2" pref="195" max="32767" attributes="0"/>
+                  <Component id="tableScrollButton2" pref="203" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>

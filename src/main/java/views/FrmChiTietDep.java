@@ -48,25 +48,25 @@ import utilities.ImportSP;
  * @author VU NGUYEN HUONG
  */
 public class FrmChiTietDep extends javax.swing.JPanel {
-    
+
     private Helper helper = new Helper();
     private ImageUltil imageUltil = new ImageUltil();
     private SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-    
+
     private DefaultTableModel defaultTableModel;
     private IChiTietDepService iChiTietDepService;
-    
+
     private DefaultComboBoxModel<Dep> comboDep = new DefaultComboBoxModel<>();
     private DefaultComboBoxModel<LoaiDep> comboLoaiDep = new DefaultComboBoxModel<>();
     private DefaultComboBoxModel<ChatLieu> comboChatLieu = new DefaultComboBoxModel<>();
     private DefaultComboBoxModel<MauSac> comboMauSac = new DefaultComboBoxModel<>();
     private DefaultComboBoxModel<Size> comboSize = new DefaultComboBoxModel<>();
     private DefaultComboBoxModel<NhaSX> comboNSX = new DefaultComboBoxModel<>();
-    
+
     private DefaultComboBoxModel<LoaiDep> comboFilterLoaiDep = new DefaultComboBoxModel<>();
     private DefaultComboBoxModel<ChatLieu> comboFilterChatLieu = new DefaultComboBoxModel<>();
     private DefaultComboBoxModel<MauSac> comboFilterMauSac = new DefaultComboBoxModel<>();
-    
+
     private IDepService iDepService = new DepService();
     private ILoaiDepService iLoaiDepService = new LoaiDepService();
     private IMauSacService iMauSacService = new MauSacService();
@@ -74,14 +74,14 @@ public class FrmChiTietDep extends javax.swing.JPanel {
     private INhaSXService iNhaSXService = new NhaSXService();
     private ISizeService iSizeService = new SizeService();
     private IHoaDonCTService iHoaDonCTService = new HoaDonCTService();
-    
+
     private Page pg = new Page();
-    
+
     private int checkSearchCT = 0;
-    
+
     Integer limit = 5;
     Integer totalData = 0;
-    
+
     public FrmChiTietDep() {
         initComponents();
         iChiTietDepService = new ChiTietDepService();
@@ -97,7 +97,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         pg.setCurrent(1);
         pagination1.setPaginationItemRender(new PaginationItemRenderStyle1());
     }
-    
+
     public void pagination() {
         String tenChatLieuFilter = cb_filter_chatlieu.getSelectedItem().toString();
         String tenLoaiDepFilter = cb_filter_loaidep.getSelectedItem().toString();
@@ -112,9 +112,9 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         } else {
             pagination1.setPagegination(pg.getCurrent(), pg.getTotalPage());
             loadData(iChiTietDepService.pagination(pg.getCurrent(), limit, txt_timkiem.getText(), tenLoaiDepFilter, tenMauSacFilter, tenChatLieuFilter));
-            
+
         }
-        
+
         System.out.println(totalPage);
         pagination1.addEventPagination(new EventPagination() {
             @Override
@@ -125,7 +125,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             }
         });
     }
-    
+
     private void loadData(List<ChiTietDep> list) {
         int stt = 1;
         defaultTableModel = (DefaultTableModel) tb_table.getModel();
@@ -136,10 +136,10 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             });
         }
     }
-    
+
     private void addCbDep() {
         cb_dep.setModel((DefaultComboBoxModel) comboDep);
-        
+
         cb_dep.removeAllItems();
         cb_filter_loaidep.addItem("");
         cb_filter_loaidep.setSelectedIndex(0);
@@ -151,7 +151,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             }
         }
     }
-    
+
     private void addCbLoaiDep() {
         cb_loaidep.setModel((DefaultComboBoxModel) comboLoaiDep);
         cb_filter_loaidep.setModel((DefaultComboBoxModel) comboFilterLoaiDep);
@@ -167,7 +167,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             }
         }
     }
-    
+
     private void addCbChatLieu() {
         cb_chatlieu.setModel((DefaultComboBoxModel) comboChatLieu);
         cb_filter_chatlieu.setModel((DefaultComboBoxModel) comboFilterChatLieu);
@@ -183,7 +183,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             }
         }
     }
-    
+
     private void addCbMauSac() {
         cb_mausac.setModel((DefaultComboBoxModel) comboMauSac);
         cb_filter_mausac.setModel((DefaultComboBoxModel) comboFilterMauSac);
@@ -200,7 +200,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             }
         }
     }
-    
+
     private void addCbSize() {
         cb_size.setModel((DefaultComboBoxModel) comboSize);
         cb_size.removeAllItems();
@@ -212,7 +212,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             }
         }
     }
-    
+
     private void addCbNhaSX() {
         cb_nsx.setModel((DefaultComboBoxModel) comboNSX);
         cb_nsx.removeAllItems();
@@ -224,7 +224,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             }
         }
     }
-    
+
     private void clearForm() {
         tb_table.setRowSelectionAllowed(false);
         cb_dep.setSelectedIndex(0);
@@ -238,7 +238,7 @@ public class FrmChiTietDep extends javax.swing.JPanel {
         txt_giaban.setText("");
         sp_SoLuong.setValue(0);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -630,18 +630,21 @@ public class FrmChiTietDep extends javax.swing.JPanel {
             File fileOpen = fileChooser.getSelectedFile();
             try {
                 List<ChiTietDep> list = ImportSP.readExcel(fileOpen.getAbsolutePath());
-                
+
                 if (helper.confirm(this, "Xác nhận thêm " + list.size() + " sản phẩm ?")) {
                     for (ChiTietDep x : list) {
-                        ChiTietDep ctd = iChiTietDepService.getObjByProperties(x.getDep().getId(), x.getLoaiDep().getId(), x.getMauSac().getId(), x.getChatLieu().getId(), x.getNhaSX().getId(), x.getSize().getId());
-                        if (ctd != null) {
-                            ctd.setSoLuong(ctd.getSoLuong() + x.getSoLuong());
-                            iChiTietDepService.save(ctd);
-                            continue;
-                        } else {
-                            iChiTietDepService.save(x);
+                        try {
+                            ChiTietDep ctd = iChiTietDepService.getObjByProperties(x.getDep().getId(), x.getLoaiDep().getId(), x.getMauSac().getId(), x.getChatLieu().getId(), x.getNhaSX().getId(), x.getSize().getId());
+                            if (ctd != null) {
+                                ctd.setSoLuong(ctd.getSoLuong() + x.getSoLuong());
+                                iChiTietDepService.save(ctd);
+                                continue;
+                            } else {
+                                iChiTietDepService.save(x);
+                            }
+                        } catch (Exception e) {
                         }
-                        
+
                     }
                     pagination();
                     NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Import File Excel thành công");
