@@ -55,7 +55,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1322" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="1365" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -83,18 +83,16 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" max="-2" attributes="0"/>
-                                  <Component id="pn_webcam" min="-2" pref="283" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jPanel4" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jPanel5" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="pn_webcam" min="-2" pref="283" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jPanel3" max="32767" attributes="0"/>
+                          <Component id="jPanel4" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jPanel1" max="32767" attributes="0"/>
                           <Component id="btn_return" max="32767" attributes="0"/>
                       </Group>
@@ -167,53 +165,56 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="btn_thanhtoan" max="32767" attributes="0"/>
-                              <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="txt_tenkh" min="-2" pref="201" max="-2" attributes="0"/>
-                                  <EmptySpace min="100" max="32767" attributes="0"/>
-                                  <Component id="btn_khLe" min="-2" pref="125" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="txt_mahd" linkSize="1" min="-2" pref="207" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="txt_tongtien" linkSize="1" min="-2" pref="206" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="btn_taohd" alignment="1" max="32767" attributes="0"/>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txt_phaitra" linkSize="1" min="-2" pref="206" max="-2" attributes="0"/>
-                                      <Component id="txt_giamgia" linkSize="1" alignment="0" min="-2" pref="201" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="lbl_diemtichluy" alignment="0" pref="207" max="32767" attributes="0"/>
-                                      <Component id="chk_tichluy" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txt_makm" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txt_tienkhachdua" linkSize="1" max="32767" attributes="0"/>
-                                      <Component id="txt_tienthua" alignment="0" min="-2" pref="207" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txt_tenkm" min="-2" pref="207" max="-2" attributes="0"/>
-                                      <Group type="102" attributes="0">
-                                          <Component id="btn_themkm" min="-2" pref="165" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jLabel3" alignment="1" max="32767" attributes="0"/>
+                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="jSeparator1" max="32767" attributes="0"/>
+                                      <Component id="btn_taohd" alignment="1" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="txt_mahd" linkSize="1" alignment="0" min="-2" pref="207" max="-2" attributes="0"/>
+                                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                                  <Component id="txt_phaitra" linkSize="1" min="-2" pref="206" max="-2" attributes="0"/>
+                                                  <Component id="txt_giamgia" linkSize="1" alignment="0" min="-2" pref="201" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                                  <Component id="txt_tienkhachdua" linkSize="1" max="32767" attributes="0"/>
+                                                  <Component id="txt_tienthua" alignment="0" min="-2" pref="207" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="lbl_removekm" min="-2" pref="38" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                                  <Component id="txt_tenkm" min="-2" pref="207" max="-2" attributes="0"/>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="btn_themkm" min="-2" pref="165" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="lbl_removekm" min="-2" pref="38" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <Component id="txt_tongtien" linkSize="1" alignment="1" min="-2" pref="206" max="-2" attributes="0"/>
+                                              <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="lbl_diemtichluy" alignment="0" pref="207" max="32767" attributes="0"/>
+                                                  <Component id="chk_tichluy" alignment="1" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="txt_makm" alignment="0" max="32767" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                      <Component id="btn_thanhtoan" alignment="1" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="txt_tenkh" alignment="0" min="-2" pref="201" max="-2" attributes="0"/>
+                                          <Component id="txt_makh" alignment="0" min="-2" pref="201" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="btn_themKH" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btn_khLe" alignment="1" min="-2" pref="125" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="txt_makh" min="-2" pref="201" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="btn_themKH" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -234,41 +235,45 @@
                               <Component id="txt_tenkh" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btn_khLe" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="jSeparator1" min="-2" pref="4" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btn_taohd" min="-2" pref="52" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txt_mahd" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txt_tongtien" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="lbl_diemtichluy" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_tongtien" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="chk_tichluy" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <Component id="txt_giamgia" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="lbl_diemtichluy" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="chk_tichluy" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                                          <Component id="txt_makm" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="txt_tenkm" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="txt_phaitra" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txt_makm" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="lbl_removekm" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="btn_themkm" pref="46" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txt_tenkm" min="-2" max="-2" attributes="0"/>
-                              <Component id="txt_tienkhachdua" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="lbl_removekm" alignment="0" max="32767" attributes="0"/>
-                              <Component id="btn_themkm" max="32767" attributes="0"/>
-                              <Component id="txt_tienthua" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="txt_mahd" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txt_giamgia" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txt_phaitra" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="txt_tienkhachdua" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txt_tienthua" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace pref="50" max="32767" attributes="0"/>
                           <Component id="btn_thanhtoan" min="-2" pref="35" max="-2" attributes="0"/>
@@ -664,7 +669,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="tableScrollButton3" pref="813" max="32767" attributes="0"/>
+                              <Component id="tableScrollButton3" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel2" min="-2" pref="153" max="-2" attributes="0"/>
@@ -835,7 +840,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="tableScrollButton1" pref="523" max="32767" attributes="0"/>
+                          <Component id="tableScrollButton1" pref="570" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
