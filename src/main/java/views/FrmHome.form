@@ -25,7 +25,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="pn_main" alignment="0" pref="1298" max="32767" attributes="0"/>
+          <Component id="pn_main" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -173,16 +173,16 @@
                                       <Component id="jSeparator1" max="32767" attributes="0"/>
                                       <Component id="btn_taohd" alignment="1" max="32767" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="txt_mahd" linkSize="1" alignment="0" min="-2" pref="207" max="-2" attributes="0"/>
-                                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                                  <Component id="txt_phaitra" linkSize="1" min="-2" pref="206" max="-2" attributes="0"/>
-                                                  <Component id="txt_giamgia" linkSize="1" alignment="0" min="-2" pref="201" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="1" attributes="0">
+                                                  <Component id="txt_mahd" linkSize="1" alignment="0" min="-2" pref="207" max="-2" attributes="0"/>
+                                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                                      <Component id="txt_phaitra" linkSize="1" min="-2" pref="206" max="-2" attributes="0"/>
+                                                      <Component id="txt_giamgia" linkSize="1" alignment="0" min="-2" pref="201" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Component id="txt_tienkhachdua" linkSize="1" alignment="1" max="32767" attributes="0"/>
                                               </Group>
-                                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                                  <Component id="txt_tienkhachdua" linkSize="1" max="32767" attributes="0"/>
-                                                  <Component id="txt_tienthua" alignment="0" min="-2" pref="207" max="-2" attributes="0"/>
-                                              </Group>
+                                              <Component id="txt_tienthua" alignment="0" min="-2" pref="207" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="1" attributes="0">
@@ -242,7 +242,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="txt_tongtien" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_tongtien" linkSize="3" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
@@ -252,27 +252,27 @@
                                       </Group>
                                       <Group type="102" attributes="0">
                                           <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                                          <Component id="txt_makm" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txt_makm" linkSize="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="txt_tenkm" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_tenkm" linkSize="3" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="lbl_removekm" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="btn_themkm" pref="46" max="32767" attributes="0"/>
+                                      <Component id="lbl_removekm" linkSize="3" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="btn_themkm" linkSize="3" pref="46" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" attributes="0">
-                                  <Component id="txt_mahd" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_mahd" linkSize="3" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txt_giamgia" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_giamgia" linkSize="3" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txt_phaitra" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_phaitra" linkSize="3" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="txt_tienkhachdua" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_tienkhachdua" linkSize="3" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txt_tienthua" max="32767" attributes="0"/>
+                                  <Component id="txt_tienthua" linkSize="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace pref="50" max="32767" attributes="0"/>
