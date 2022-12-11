@@ -12,8 +12,6 @@ import services.IHoaDonService;
 import services.impl.HoaDonCTService;
 import services.impl.HoaDonService;
 import swing.ModelChart;
-import swing.ModelPieChart;
-import swing.PieChart;
 import swing.Table;
 import ui.ModelCard;
 
@@ -46,9 +44,9 @@ public class FrmThongKeDoanhThu extends javax.swing.JPanel {
         Table.apply(jScrollPane1, Table.TableType.DEFAULT);
         loadDoanhThu();
         curveLineChart1.setTitle("Chi tiết doanh thu theo năm");
-        curveLineChart1.addLegend(String.valueOf(calendar.get(Calendar.YEAR) - 2), Color.decode("#0099F7"), Color.decode("#F11712"));
-        curveLineChart1.addLegend(String.valueOf(calendar.get(Calendar.YEAR) - 1), Color.decode("#e65c00"), Color.decode("#F9D423"));
         curveLineChart1.addLegend(String.valueOf(calendar.get(Calendar.YEAR)), Color.decode("#7b4397"), Color.decode("#dc2430"));
+        curveLineChart1.addLegend(String.valueOf(calendar.get(Calendar.YEAR) - 1), Color.decode("#e65c00"), Color.decode("#F9D423"));
+        curveLineChart1.addLegend(String.valueOf(calendar.get(Calendar.YEAR) - 2), Color.decode("#0099F7"), Color.decode("#F11712"));
         chartDoanhThu();
         curveLineChart1.start();
     }
@@ -70,7 +68,7 @@ public class FrmThongKeDoanhThu extends javax.swing.JPanel {
             year = iHoaDonService.doanhThuTheoThang(i, calendar.get(Calendar.YEAR));
             currentYear = iHoaDonService.doanhThuTheoThang(i, calendar.get(Calendar.YEAR) - 1);
             currentYear1 = iHoaDonService.doanhThuTheoThang(i, calendar.get(Calendar.YEAR) - 2);
-            curveLineChart1.addData(new ModelChart("T " + i, new double[]{currentYear1 == null ? 0.0 : currentYear1.doubleValue(), currentYear == null ? 0.0 : currentYear.doubleValue(), year == null ? 0.0 : year.doubleValue()}));
+            curveLineChart1.addData(new ModelChart("T " + i, new double[]{year == null ? 0.0 : year.doubleValue(), currentYear == null ? 0.0 : currentYear.doubleValue(), currentYear1 == null ? 0.0 : currentYear1.doubleValue()}));
         }
     }
 
