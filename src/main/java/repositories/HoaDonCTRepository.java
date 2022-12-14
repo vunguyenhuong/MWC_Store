@@ -88,6 +88,13 @@ public class HoaDonCTRepository {
         }
         return hdct;
     }
+    
+    public List<HoaDonChiTiet> findByTTHDCT(int trangThaiHDCT){
+        Query query = session.createQuery("SELECT h FROM HoaDonChiTiet h WHERE h.trangThai = :trangThai");
+        query.setParameter("trangThai", trangThaiHDCT);
+        List<HoaDonChiTiet> list = query.getResultList();
+        return list;
+    }
 
     public List<HoaDonChiTiet> getDoanhThu(int trangThai, Date ngayThanhToan) {
         Query query = session.createQuery("SELECT h FROM HoaDonChiTiet h WHERE h.hoaDon.trangThai= :trangThai AND h.hoaDon.ngayThanhToan LIKE :ngayThanhToan");

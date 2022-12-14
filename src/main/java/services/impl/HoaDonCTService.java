@@ -71,4 +71,9 @@ public class HoaDonCTService implements IHoaDonCTService {
         return repo.findByTT(trangThaiHD);
     }
 
+    @Override
+    public List<HoaDonChiTiet> findByTTHDCT(int trangThaiHDCT) {
+        return repo.findByTTHDCT(trangThaiHDCT);
+    }
+
 }

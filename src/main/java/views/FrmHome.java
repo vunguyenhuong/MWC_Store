@@ -30,6 +30,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -207,25 +208,34 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 }
                 if (menuIndex == 5) {
                     cardLayout.show(pn_main, "banhang");
-                    if (tb_giohang.getRowCount() > 0 && tb_sanpham.getRowCount() > 0) {
-                        HoaDon hd = iHoaDonService.getObj(txt_mahd.getText());
-                        List<HoaDonChiTiet> listHDCT = iHoaDonCTService.findByMa(hd.getMa());
-                        ChiTietDep ctd;
-                        if (hd.getTrangThai() == 0) {
-                            for (int i = 0; i < tb_giohang.getRowCount(); i++) {
-                                ctd = iChiTietDepService.getObj(listHDCT.get(i).getCtdep().getId());
-                                if (listHDCT.get(i).getDonGia() != ctd.getGiaBan()) {
-                                    listHDCT.get(i).setDonGia(ctd.getGiaBan());
-                                    iHoaDonCTService.save(listHDCT.get(i));
-                                }
-                            }
+                    clearForm();
+                    List<HoaDonChiTiet> list = iHoaDonCTService.findByTTHDCT(0);
+                    ChiTietDep ctd = null;
+                    for (HoaDonChiTiet x : list) {
+                        ctd = iChiTietDepService.getObj(x.getCtdep().getId());
+                        if (x.getDonGia() != ctd.getGiaBan()) {
+                            x.setDonGia(ctd.getGiaBan());
+                            iHoaDonCTService.save(x);
                         }
                     }
                     loadSP(iChiTietDepService.findByTT(0, txt_sp_timkiem.getText(), "DESC"));
                     loadHD(iHoaDonService.getByTT(0));
                     loadGioHang(txt_mahd.getText());
-                    tb_hoadon.clearSelection();
                     tb_giohang.clearSelection();
+//                    if (tb_giohang.getRowCount() > 0 && tb_sanpham.getRowCount() > 0) {
+//                        HoaDon hd = iHoaDonService.getObj(txt_mahd.getText());
+//                        List<HoaDonChiTiet> listHDCT = iHoaDonCTService.findByMa(hd.getMa());
+//                        ChiTietDep ctd;
+//                        if (hd.getTrangThai() == 0) {
+//                            for (int i = 0; i < tb_giohang.getRowCount(); i++) {
+//                                ctd = iChiTietDepService.getObj(listHDCT.get(i).getCtdep().getId());
+//                                if (listHDCT.get(i).getDonGia() != ctd.getGiaBan()) {
+//                                    listHDCT.get(i).setDonGia(ctd.getGiaBan());
+//                                    iHoaDonCTService.save(listHDCT.get(i));
+//                                }
+//                            }
+//                        }
+//                    }
                     initWebcam(pn_webcam);
                 }
                 if (menuIndex == 6) {
@@ -351,6 +361,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
     }
 
     private void tongTien() {
+        DecimalFormat x = new DecimalFormat("###,###,###");
         int row = tb_giohang.getRowCount();
         if (row > 0) {
             double tongTien = 0;
@@ -361,10 +372,10 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             if (txt_giamgia.getText().isEmpty()) {
                 txt_giamgia.setText("0");
             }
-            giamGia = tongTien - Double.parseDouble(txt_giamgia.getText());
+            giamGia = tongTien - Double.parseDouble(txt_giamgia.getText().replace(",", ""));
 
-            txt_tongtien.setText(String.valueOf(tongTien));
-            txt_phaitra.setText(String.valueOf(giamGia));
+            txt_tongtien.setText(x.format(tongTien));
+            txt_phaitra.setText(x.format(giamGia));
         } else {
             txt_tongtien.setText("0");
             txt_phaitra.setText("0");
@@ -1108,6 +1119,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
     }//GEN-LAST:event_btn_gh_xoaActionPerformed
 
     private void chk_tichluyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chk_tichluyActionPerformed
+        DecimalFormat format = new DecimalFormat("###,###,###");
         HoaDon hd = iHoaDonService.getObj(txt_mahd.getText());
         if (hd == null) {
             chk_tichluy.setSelected(false);
@@ -1118,34 +1130,40 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Hóa đơn đã được thanh toán!");
             panel.showNotification();
         } else {
-            Double giamGia = Double.parseDouble(txt_giamgia.getText());
-            Double phaiTra = 0.0;
-            if (chk_tichluy.isSelected()) {
-                if (giamGia == null) {
-                    giamGia = 0.0;
-                }
-                if (khachHang != null) {
-                    giamGia = giamGia + khachHang.getDiemTichLuy() * 1000;
-                    txt_giamgia.setText(giamGia.toString());
-                    phaiTra = Double.parseDouble(txt_tongtien.getText()) - giamGia;
-                    txt_phaitra.setText(phaiTra.toString());
-                }
+            if (hd.getKhachHang() == null) {
+                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Khách hàng lẻ không thể dùng điểm tích lũy!");
+                panel.showNotification();
+                chk_tichluy.setSelected(false);
             } else {
-                if (giamGia == null) {
-                    giamGia = 0.0;
+                Double giamGia = Double.parseDouble(txt_giamgia.getText().replace(",", ""));
+                Double phaiTra = 0.0;
+                if (chk_tichluy.isSelected()) {
+                    if (giamGia == null) {
+                        giamGia = 0.0;
+                    }
+                    if (khachHang != null) {
+                        giamGia = giamGia + khachHang.getDiemTichLuy() * 1000;
+                        txt_giamgia.setText(format.format(giamGia));
+                        phaiTra = Double.parseDouble(txt_tongtien.getText().replace(",", "")) - giamGia;
+                        txt_phaitra.setText(format.format(phaiTra));
+                    }
+                } else {
+                    if (giamGia == null) {
+                        giamGia = 0.0;
+                    }
+                    if (khachHang != null) {
+                        giamGia = giamGia - khachHang.getDiemTichLuy() * 1000;
+                        phaiTra = Double.parseDouble(txt_tongtien.getText().replace(",", "")) - giamGia;
+                        txt_giamgia.setText(format.format(giamGia));
+                    }
                 }
-                if (khachHang != null) {
-                    giamGia = giamGia - khachHang.getDiemTichLuy() * 1000;
-                    phaiTra = Double.parseDouble(txt_tongtien.getText()) - giamGia;
-                    txt_giamgia.setText(giamGia.toString());
-                    txt_phaitra.setText(phaiTra.toString());
-                }
+                tongTien();
             }
-            tongTien();
         }
     }//GEN-LAST:event_chk_tichluyActionPerformed
 
     private void btn_thanhtoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_thanhtoanActionPerformed
+        DecimalFormat format = new DecimalFormat("###,###,###");
         int row = tb_hoadon.getSelectedRow();
         if (row == -1) {
             NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Vui lòng chọn hóa đơn cần thanh toán!");
@@ -1171,20 +1189,20 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                     panel.showNotification();
                     return;
                 } else {
-                    tienKhachDua = Double.parseDouble(txt_tienkhachdua.getText());
+                    tienKhachDua = Double.parseDouble(txt_tienkhachdua.getText().replace(",", ""));
                 }
                 if (txt_phaitra.getText().isEmpty()) {
                     NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Vui lòng chọn sản phẩm rồi thanh toán!");
                     panel.showNotification();
                     return;
                 } else {
-                    phaiTra = Double.parseDouble(txt_phaitra.getText());
+                    phaiTra = Double.parseDouble(txt_phaitra.getText().replace(",", ""));
                 }
             } catch (Exception e) {
             }
 
             if (tienKhachDua >= phaiTra) {
-                if (helper.confirm(this, "Trả lại khách " + (tienKhachDua - phaiTra) + ". Xác nhận thanh toán " + txt_phaitra.getText() + "?")) {
+                if (helper.confirm(this, "Trả lại khách " + format.format(tienKhachDua - phaiTra) + " VNĐ. Xác nhận thanh toán " + txt_phaitra.getText() + " VNĐ ?")) {
                     hd.setNguoiDungTT(nguoiDung);
                     hd.setTrangThai(1);
                     hd.setNgayThanhToan(new Date());
@@ -1218,7 +1236,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                     iKhuyenMaiService.save(khuyenMai);
                     modelGioHang = (DefaultTableModel) tb_giohang.getModel();
                     modelGioHang.setRowCount(0);
-                    exportWord.ExportToWord(hd, Double.parseDouble(txt_giamgia.getText()), Double.parseDouble(txt_tienkhachdua.getText()), Double.parseDouble(txt_tienthua.getText()));
+                    exportWord.ExportToWord(hd, Double.parseDouble(txt_giamgia.getText().replace(",", "")), Double.parseDouble(txt_tienkhachdua.getText().replace(",", "")), Double.parseDouble(txt_tienthua.getText().replace(",", "")));
                     NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Thanh toán thành công ! ");
                     panel.showNotification();
                     clearForm();
@@ -1231,15 +1249,19 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
     }//GEN-LAST:event_btn_thanhtoanActionPerformed
 
     private void txt_tienkhachduaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_tienkhachduaCaretUpdate
+        DecimalFormat x = new DecimalFormat("###,###,###");
         Double tongTien = null;
         Double tienKhachDua = null;
         try {
-            tongTien = Double.parseDouble(txt_phaitra.getText());
-            tienKhachDua = Double.parseDouble(txt_tienkhachdua.getText());
+            tongTien = Double.parseDouble(txt_phaitra.getText().replace(",", ""));
+            tienKhachDua = Double.parseDouble(txt_tienkhachdua.getText().replace(",", ""));
             Double tienThua = tienKhachDua - tongTien;
-            txt_tienthua.setText(tienThua.toString());
+            if (tienKhachDua < tongTien) {
+                tienThua = 0.0;
+            }
+            txt_tienthua.setText(x.format(tienThua));
         } catch (Exception e) {
-            txt_tienthua.setText("-" + tongTien);
+            txt_tienthua.setText("0");
         }
     }//GEN-LAST:event_txt_tienkhachduaCaretUpdate
 
@@ -1249,6 +1271,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         int rowHD = tb_hoadon.getSelectedRow();
         HoaDon hd = iHoaDonService.getObj((String) tb_hoadon.getValueAt(rowHD, 0));
         System.out.println(hd.getTrangThai());
+        int check = 0;
         if (hd.getTrangThai() == 1) {
             tb_giohang.clearSelection();
             NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Hóa đơn đã được thanh toán ");
@@ -1259,13 +1282,14 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             String inputSL = helper.input(this, "Cập nhật lại số lượng", "Nhập số lượng");
             try {
                 soLuong = Integer.parseInt(inputSL);
+                check = (hdct.getSoLuong() + ctd.getSoLuong()) - soLuong;
                 if (ctd.getSoLuong() == 0) {
                     if (soLuong > hdct.getSoLuong()) {
                         NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Quá số lượng cho phép! ");
                         panel.showNotification();
                         return;
                     }
-                } else if (soLuong > ctd.getSoLuong()) {
+                } else if (soLuong > ctd.getSoLuong() && check < 0) {
                     NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Quá số lượng cho phép ! ");
                     panel.showNotification();
                     return;
@@ -1307,6 +1331,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
     }//GEN-LAST:event_tb_giohangMouseClicked
 
     private void btn_themkmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themkmActionPerformed
+        DecimalFormat format = new DecimalFormat("###,###,###");
         HoaDon hd = iHoaDonService.getObj(txt_mahd.getText());
         FrmKhuyenMai fkm = new FrmKhuyenMai(this, true);
         fkm.setVisible(true);
@@ -1325,14 +1350,14 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                         chk_tichluy.setSelected(false);
                         txt_makm.setText(khuyenMai.getMa());
                         txt_tenkm.setText(khuyenMai.getTen());
-                        Double giamGia = Double.parseDouble(txt_giamgia.getText());
+                        Double giamGia = Double.parseDouble(txt_giamgia.getText().replace(",", ""));
                         if (giamGia == null) {
                             giamGia = 0.0;
                         }
-                        giamGia = giamGia + Double.parseDouble(txt_tongtien.getText()) / 100 * khuyenMai.getPhantramgiam();
-                        Double phaiTra = Double.parseDouble(txt_tongtien.getText()) - giamGia;
-                        txt_giamgia.setText(giamGia.toString());
-                        txt_phaitra.setText(phaiTra.toString());
+                        giamGia = giamGia + Double.parseDouble(txt_tongtien.getText().replace(",", "")) / 100 * khuyenMai.getPhantramgiam();
+                        Double phaiTra = Double.parseDouble(txt_tongtien.getText().replace(",", "")) - giamGia;
+                        txt_giamgia.setText(format.format(giamGia));
+                        txt_phaitra.setText(format.format(phaiTra));
                     }
                 } else {
                     NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Hóa đơn đã được thanh toán!");
@@ -1434,6 +1459,11 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
         }
         loadGioHang(hd.getMa());
         tongTien();
+        txt_tienthua.setText("0");
+        txt_tienkhachdua.setText("0");
+        txt_giamgia.setText("0");
+        chk_tichluy.setSelected(false);
+
     }//GEN-LAST:event_tb_hoadonMousePressed
 
     private void cb_loc_soLuongItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_loc_soLuongItemStateChanged
@@ -1558,10 +1588,10 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                 String typeOderBy = "ASC";
                 if (cb_loc_soLuong.getSelectedIndex() == 1) {
                     typeOderBy = "ASC";
-                }else{
+                } else {
                     typeOderBy = "DESC";
                 }
-                ChiTietDep  ctd;
+                ChiTietDep ctd;
                 try {
                     int idQR = -1;
                     String idString = result.getText().replace("MWCSTORES", "");
@@ -1571,7 +1601,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
                     }
                     for (int i = 0; i < tb_sanpham.getRowCount(); i++) {
                         ctd = iChiTietDepService.findByTT(0, txt_sp_timkiem.getText(), typeOderBy).get(i);
-                        if (ctd.getId()== idQR) {
+                        if (ctd.getId() == idQR) {
                             tb_sanpham.setRowSelectionInterval(i, i);
                             NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.INFO, NotificationMess.Location.TOP_CENTER, "Đã tìm thấy" + ctd.getDep().getTen());
                             panel.showNotification();
