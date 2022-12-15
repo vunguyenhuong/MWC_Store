@@ -33,11 +33,12 @@ public class ExportSP {
     public static final int COLUMN_SIZE = 5;
     public static final int COLUMN_MOTA = 6;
     public static final int COLUMN_SOLUONG = 7;
-    public static final int COLUMN_GIANHAP = 8;
-    public static final int COLUMN_GIABAN = 9;
-    public static final int COLUMN_NGAYTHEM = 10;
-    public static final int COLUMN_NGAYSUA = 11;
-    public static final int COLUMN_TRANGTHAI = 12;
+    public static final int COLUMN_SOLUONGBANRA = 8;
+    public static final int COLUMN_GIANHAP = 9;
+    public static final int COLUMN_GIABAN = 10;
+    public static final int COLUMN_NGAYTHEM = 11;
+    public static final int COLUMN_NGAYSUA = 12;
+    public static final int COLUMN_TRANGTHAI = 13;
 
     public static void writeExcel(List<ChiTietDep> list, String excelFilePath) throws IOException {
         Workbook workbook = getWorkbook(excelFilePath);
@@ -110,6 +111,10 @@ public class ExportSP {
         cell = row.createCell(COLUMN_SOLUONG);
         cell.setCellStyle(cellStyle);
         cell.setCellValue("Số lượng");
+        
+        cell = row.createCell(COLUMN_SOLUONGBANRA);
+        cell.setCellStyle(cellStyle);
+        cell.setCellValue("Số lượng bán ra");
 
         cell = row.createCell(COLUMN_GIANHAP);
         cell.setCellStyle(cellStyle);
@@ -160,6 +165,9 @@ public class ExportSP {
 
         cell = row.createCell(COLUMN_SOLUONG);
         cell.setCellValue(c.getSoLuong());
+        
+        cell = row.createCell(COLUMN_SOLUONGBANRA);
+        cell.setCellValue(c.getSoLuongBanRa());
 
         cell = row.createCell(COLUMN_GIANHAP);
         cell.setCellValue(c.getGiaNhap().doubleValue());

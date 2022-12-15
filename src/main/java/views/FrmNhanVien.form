@@ -102,21 +102,23 @@
                                   <Component id="txt_matkhau" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="txt_diachi" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                       <Component id="rd_nam" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="rd_nu" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <Component id="txt_diachi" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="btn_them" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btn_sua" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="txt_timkiem" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btn_exportExcel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btn_importExcel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btn_scanqr" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="btn_them" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btn_sua" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btn_exportExcel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btn_importExcel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btn_scanqr" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                           <Component id="lblHinhAnh" alignment="1" min="-2" pref="215" max="-2" attributes="0"/>

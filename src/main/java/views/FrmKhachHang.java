@@ -72,7 +72,7 @@ public class FrmKhachHang extends java.awt.Dialog {
 
     private boolean checkNull() {
         if (helper.checkNull(txt_TenKH, "Tên")
-                || helper.checkRegex(txt_TenKH, "(\\S+ )*\\S+", "Tên không hợp lệ!")) {
+                || helper.checkRegex(txt_TenKH,"(\\S+ )*\\S+", "Tên không hợp lệ!")) {
             return true;
         }
         if (helper.checkNull(txt_Diachi, "Ðịa chỉ")
@@ -102,7 +102,7 @@ public class FrmKhachHang extends java.awt.Dialog {
             }
         }
 
-        String tenKH = txt_TenKH.getText().trim();
+        String tenKH = txt_TenKH.getText().trim().replaceAll("[0-9+]", "");
         String diachi = txt_Diachi.getText().trim();
         String sdt = txt_Sodienthoai.getText().trim();
 

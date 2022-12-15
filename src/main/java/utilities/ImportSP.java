@@ -43,11 +43,12 @@ public class ImportSP {
     public static final int COLUMN_SIZE = 5;
     public static final int COLUMN_MOTA = 6;
     public static final int COLUMN_SOLUONG = 7;
-    public static final int COLUMN_GIANHAP = 8;
-    public static final int COLUMN_GIABAN = 9;
-    public static final int COLUMN_NGAYTHEM = 10;
-    public static final int COLUMN_NGAYSUA = 11;
-    public static final int COLUMN_TRANGTHAI = 12;
+    public static final int COLUMN_SOLUONGBANRA = 8;
+    public static final int COLUMN_GIANHAP = 9;
+    public static final int COLUMN_GIABAN = 10;
+    public static final int COLUMN_NGAYTHEM = 11;
+    public static final int COLUMN_NGAYSUA = 12;
+    public static final int COLUMN_TRANGTHAI = 13;
 
     private static ChiTietDepRepository repo = new ChiTietDepRepository();
     private static DepRepository depRepo = new DepRepository();
@@ -127,6 +128,9 @@ public class ImportSP {
                         break;
                     case COLUMN_SOLUONG:
                         ctd.setSoLuong(new BigDecimal((double) cellValue).intValue());
+                        break;
+                    case COLUMN_SOLUONGBANRA:
+                        ctd.setSoLuongBanRa(new BigDecimal((double) cellValue).intValue());
                         break;
                     case COLUMN_GIANHAP:
                         ctd.setGiaNhap(BigDecimal.valueOf((double) cellValue));

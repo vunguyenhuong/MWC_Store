@@ -1428,7 +1428,7 @@ public class FrmHome extends javax.swing.JFrame implements Runnable, ThreadFacto
             NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.SUCCESS, NotificationMess.Location.TOP_CENTER, "Đã xóa khuyến mại!");
             panel.showNotification();
         } else {
-            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Bạn chưase chọn khuyến mại!");
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Bạn chưa chọn khuyến mại!");
             panel.showNotification();
         }
     }//GEN-LAST:event_lbl_removekmMouseClicked
